@@ -1,3 +1,4 @@
+package(default_visibility = ["//visibility:public"])
 
 cc_library(
   name = "zlib-1.2.8",
