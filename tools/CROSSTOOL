@@ -23,43 +23,13 @@ default_toolchain {
   toolchain_identifier: "QNAP_armeabi-v7a"
 }
 default_toolchain {
-  cpu: "arm"
-  toolchain_identifier: "local_linux"
+  cpu: "i686"
+  toolchain_identifier: "QNAP_i686"
 }
-
-toolchain {
-  abi_version: "arm"
-  abi_libc_version: "armeabi-v7a"
-  builtin_sysroot: ""
-  compiler: "compiler"
-  host_system_name: "armeabi-v7a"
-  needsPic: true
-  supports_gold_linker: false
-  supports_incremental_linker: false
-  supports_fission: false
-  supports_interface_shared_objects: false
-  supports_normalizing_ar: false
-  supports_start_end_lib: false
-  supports_thin_archives: false
-  target_libc: "armeabi-v7a"
-  target_cpu: "armeabi-v7a"
-  target_system_name: "armeabi-v7a"
-  toolchain_identifier: "stub_armeabi-v7a"
-
-  tool_path { name: "ar" path: "/bin/false" }
-  tool_path { name: "compat-ld" path: "/bin/false" }
-  tool_path { name: "cpp" path: "/bin/false" }
-  tool_path { name: "dwp" path: "/bin/false" }
-  tool_path { name: "gcc" path: "/bin/false" }
-  tool_path { name: "gcov" path: "/bin/false" }
-  tool_path { name: "ld" path: "/bin/false" }
-
-  tool_path { name: "nm" path: "/bin/false" }
-  tool_path { name: "objcopy" path: "/bin/false" }
-  tool_path { name: "objdump" path: "/bin/false" }
-  tool_path { name: "strip" path: "/bin/false" }
+default_toolchain {
+  cpu: "x86_64"
+  toolchain_identifier: "QNAP_x86_64"
 }
-
 
 toolchain {
   abi_version: "armeabi-v7a"
@@ -92,6 +62,72 @@ toolchain {
   tool_path { name: "objcopy" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-objcopy" }
   tool_path { name: "objdump" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-objdump" }
   tool_path { name: "strip" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-strip" }
+}
+
+toolchain {
+  abi_version: "i686"
+  abi_libc_version: "i686"
+  builtin_sysroot: ""
+  compiler: "compiler"
+  host_system_name: "i686"
+  needsPic: true
+  supports_gold_linker: false
+  supports_incremental_linker: false
+  supports_fission: false
+  supports_interface_shared_objects: false
+  supports_normalizing_ar: false
+  supports_start_end_lib: false
+  supports_thin_archives: false
+  target_libc: "i686"
+  target_cpu: "i686"
+  target_system_name: "i686"
+  toolchain_identifier: "QNAP_i686"
+
+  tool_path { name: "ar" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-ar" }
+  tool_path { name: "compat-ld" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-ld" }
+  tool_path { name: "cpp" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-cpp" }
+  tool_path { name: "dwp" path: "/bin/false" }
+  tool_path { name: "gcc" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-gcc" }
+  tool_path { name: "gcov" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-gcov" }
+  tool_path { name: "ld" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-ld" }
+
+  tool_path { name: "nm" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-nm" }
+  tool_path { name: "objcopy" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-objcopy" }
+  tool_path { name: "objdump" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-objdump" }
+  tool_path { name: "strip" path: "CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-strip" }
+}
+
+toolchain {
+  abi_version: "x86_64"
+  abi_libc_version: "x86_64"
+  builtin_sysroot: ""
+  compiler: "compiler"
+  host_system_name: "x86_64"
+  needsPic: true
+  supports_gold_linker: false
+  supports_incremental_linker: false
+  supports_fission: false
+  supports_interface_shared_objects: false
+  supports_normalizing_ar: false
+  supports_start_end_lib: false
+  supports_thin_archives: false
+  target_libc: "x86_64"
+  target_cpu: "x86_64"
+  target_system_name: "x86_64"
+  toolchain_identifier: "QNAP_x86_64"
+
+  tool_path { name: "ar" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ar" }
+  tool_path { name: "compat-ld" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ld" }
+  tool_path { name: "cpp" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-cpp" }
+  tool_path { name: "dwp" path: "/bin/false" }
+  tool_path { name: "gcc" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-gcc" }
+  tool_path { name: "gcov" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-gcov" }
+  tool_path { name: "ld" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ld" }
+
+  tool_path { name: "nm" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-nm" }
+  tool_path { name: "objcopy" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-objcopy" }
+  tool_path { name: "objdump" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-objdump" }
+  tool_path { name: "strip" path: "CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-strip" }
 }
 
 toolchain {
