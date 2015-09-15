@@ -1,0 +1,1 @@
+bazel build --crosstool_top=//tools:toolchain --host_crosstool_top=//tools:toolchain --cpu=target_cpu //AAA/BBB:CCC
