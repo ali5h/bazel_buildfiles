@@ -104,7 +104,3 @@ cc_toolchain(
     supports_param_files = 0,
 )
 
-filegroup(
-    name = "srcs",
-    srcs = glob(["**"]),
-)
