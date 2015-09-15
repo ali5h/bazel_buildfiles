@@ -20,7 +20,7 @@ default_toolchain {
 }
 default_toolchain {
   cpu: "armeabi-v7a"
-  toolchain_identifier: "stub_armeabi-v7a"
+  toolchain_identifier: "QNAP_armeabi-v7a"
 }
 default_toolchain {
   cpu: "arm"
@@ -78,20 +78,20 @@ toolchain {
   target_libc: "armeabi-v7a"
   target_cpu: "armeabi-v7a"
   target_system_name: "armeabi-v7a"
-  toolchain_identifier: "stub_armeabi-v7a"
+  toolchain_identifier: "QNAP_armeabi-v7a"
 
-  tool_path { name: "ar" path: "/bin/false" }
-  tool_path { name: "compat-ld" path: "/bin/false" }
-  tool_path { name: "cpp" path: "/bin/false" }
+  tool_path { name: "ar" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-ar" }
+  tool_path { name: "compat-ld" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-ld" }
+  tool_path { name: "cpp" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-cpp" }
   tool_path { name: "dwp" path: "/bin/false" }
-  tool_path { name: "gcc" path: "/bin/false" }
-  tool_path { name: "gcov" path: "/bin/false" }
-  tool_path { name: "ld" path: "/bin/false" }
+  tool_path { name: "gcc" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-gcc" }
+  tool_path { name: "gcov" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-gcov" }
+  tool_path { name: "ld" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-ld" }
 
-  tool_path { name: "nm" path: "/bin/false" }
-  tool_path { name: "objcopy" path: "/bin/false" }
-  tool_path { name: "objdump" path: "/bin/false" }
-  tool_path { name: "strip" path: "/bin/false" }
+  tool_path { name: "nm" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-nm" }
+  tool_path { name: "objcopy" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-objcopy" }
+  tool_path { name: "objdump" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-objdump" }
+  tool_path { name: "strip" path: "CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-strip" }
 }
 
 toolchain {
