@@ -5,5 +5,5 @@ bind(
 new_local_repository(
     name = "zlib",
     path = "/root/NasX86/SysLib/zlib-1.2.8",
-    build_file = "zlib/BUILD",
+    build_file = "repo/zlib/BUILD",
 )
