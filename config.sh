@@ -3,6 +3,8 @@
 set -e
 
 # =======FAIL==========
+# cd /root/NasX86_config/SysLib/glib-2.24.2/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libxslt-1.1.22/ && echo david=${PWD} && ./configure
 
 
 # ======PASS==========
@@ -53,42 +55,40 @@ set -e
 # cd /root/NasX86_config/SysLib/librpcsecgss-0.19/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/gnupg-1.4.19/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/db-4.8.30/build_unix/ && echo david=${PWD} && ../dist/configure
-cd /root/NasX86_config/SysLib/openldap-2.4.7/ && echo david=${PWD} && ol_cv_bdb_major=5 ./configure
-cd /root/NasX86_config/SysLib/cyrus-sasl-2.1.22/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libusb-compat-0.1.4/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/freetype-2.3.7/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/ntfs-3g-1.2412/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/Linux-PAM-1.2.1/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/gd-2.0.34/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libnl-1.1.4/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libxml2-2.6.30/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/liboop-1.0/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libcsv-3.0.2/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/glib-2.24.2/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/nettle-2.7.1/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/ncurses-5.5/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/pcre-8.36/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libcommon-0.98.10.1/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libusb-1.0.9/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libidn-1.25/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libxslt-1.1.22/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/json-c-0.9/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/readline-5.2/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libffi-3.2.1/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libtasn1-1.6/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/krb5-1.13/src/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/sqlite-3.4.1/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libuuid-1.0.3/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/ImageMagick-6.6.1-5/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/flex-2.5.39/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libpng-1.2.15/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/acl-2.2.49/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libgssglue-0.4/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/gdbm-1.11/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysUtil/nut-2.2.2/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysUtil/wget-1.11.4/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysUtil/nut-2.6.5/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysUtil/neon-0.30.0/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/openldap-2.4.7/ && echo david=${PWD} && ol_cv_bdb_compat=yes ol_cv_bdb_major=4 ./configure
+# cd /root/NasX86_config/SysLib/cyrus-sasl-2.1.22/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libusb-compat-0.1.4/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/freetype-2.3.7/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/ntfs-3g-1.2412/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/Linux-PAM-1.2.1/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/gd-2.0.34/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libnl-1.1.4/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libxml2-2.6.30/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/liboop-1.0/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libcsv-3.0.2/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/nettle-2.7.1/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/ncurses-5.5/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/pcre-8.36/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libcommon-0.98.10.1/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libusb-1.0.9/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libidn-1.25/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/json-c-0.9/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/readline-5.2/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libffi-3.2.1/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libtasn1-1.6/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/krb5-1.13/src/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/sqlite-3.4.1/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libuuid-1.0.3/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/ImageMagick-6.6.1-5/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/flex-2.5.39/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libpng-1.2.15/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/acl-2.2.49/ && echo david=${PWD} && ac_cv_lib_attr_getxattr=yes ac_cv_header_attr_error_context_h=yes ac_cv_header_attr_xattr_h=yes ac_cv_path_XGETTEXT=yes ac_cv_path_MSGMERGE=yes ac_cv_path_MSGFMT=yes ./configure
+# cd /root/NasX86_config/SysLib/libgssglue-0.4/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/gdbm-1.11/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysUtil/nut-2.2.2/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysUtil/wget-1.11.4/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysUtil/nut-2.6.5/ && echo david=${PWD} && ./configure
+cd /root/NasX86_config/SysUtil/neon-0.30.0/ && echo david=${PWD} && ac_cv_header_expat_h=yes ./configure
 cd /root/NasX86_config/SysUtil/screen-4.0.3/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysUtil/thin-provisioning-tools-v0.4.1/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysUtil/nut-2.0.3/ && echo david=${PWD} && ./configure
