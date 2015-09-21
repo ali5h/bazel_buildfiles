@@ -2,6 +2,11 @@
 
 set -e
 
+# =======FAIL==========
+
+
+# ======PASS==========
+
 # cd /root/NasX86_config/SysLib/xmlrpc/ && echo david=${PWD} && ac_cv_header_expat_h=yes ac_cv_lib_expat_XML_ParserCreate=yes ./configure
 # cd /root/NasX86_config/SysLib/cups-1.4.4/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/gdbm-1.10/ && echo david=${PWD} && ./configure
@@ -36,19 +41,19 @@ set -e
 # cd /root/NasX86_config/SysLib/cups-filters-1.0.20/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/zlib-1.2.8/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/libgpg-error-1.6/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/attr-2.4.47/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/gnutls-2.6.2/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/e2fsprogs-1.42.5/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libtirpc-0.3.0/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/librpcsecgss-0.19/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/rlog-1.4/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libtool-1.5.24/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/popt-1.14/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/fuse-2.9.2/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/libgcrypt-1.4.3/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/gnupg-1.4.19/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/db-4.8.30/dist/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/openldap-2.4.7/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/attr-2.4.47/ && echo david=${PWD} && ac_cv_path_XGETTEXT=yes ac_cv_path_MSGFMT=yes ac_cv_path_MSGMERGE=yes ac_cv_path_MAKE=yes ./configure
+# cd /root/NasX86_config/SysLib/e2fsprogs-1.42.5/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libtirpc-0.3.0/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/rlog-1.4/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libtool-1.5.24/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/popt-1.14/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/fuse-2.9.2/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/libgcrypt-1.4.3/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/gnutls-2.6.2/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/librpcsecgss-0.19/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/gnupg-1.4.19/ && echo david=${PWD} && ./configure
+# cd /root/NasX86_config/SysLib/db-4.8.30/build_unix/ && echo david=${PWD} && ../dist/configure
+cd /root/NasX86_config/SysLib/openldap-2.4.7/ && echo david=${PWD} && ol_cv_bdb_major=5 ./configure
 cd /root/NasX86_config/SysLib/cyrus-sasl-2.1.22/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/libusb-compat-0.1.4/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/freetype-2.3.7/ && echo david=${PWD} && ./configure
