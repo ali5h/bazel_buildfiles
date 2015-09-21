@@ -2,12 +2,10 @@
 
 set -e
 
-cd /root/NasX86_config/SysLib/xmlrpc/ && echo david=${PWD} && ./configure
+cd /root/NasX86_config/SysLib/xmlrpc/ && echo david=${PWD} && ac_cv_header_expat_h=yes ac_cv_lib_expat_XML_ParserCreate=yes ./configure
 cd /root/NasX86_config/SysLib/cups-1.4.4/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/gdbm-1.10/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/lcms2-2.6/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/gcc-4.9.2-stdc++/libstdc++-v3/ && echo david=${PWD} && ./configure
-cd /root/NasX86_config/SysLib/gcc-4.9.2-stdc++/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/libusb-0.1.12/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/libnfsidmap-0.23/ && echo david=${PWD} && ./configure
 cd /root/NasX86_config/SysLib/jpeg-6b-src/ && echo david=${PWD} && ./configure
