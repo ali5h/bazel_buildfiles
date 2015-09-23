@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
   name = "z",
-  srcs = glob(["*.c"]),
+  srcs = glob(["*.c"], exclude = ["test*.c"]),
   hdrs = [
             "crc32.h",
             "deflate.h",
