@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
-  name = "zlib",
+  name = "z",
   srcs = glob(["*.c"]),
   hdrs = [
             "crc32.h",

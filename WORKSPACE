@@ -1,7 +1,7 @@
 # can be reference by //external:zlib-latest
 bind(
     name = "zlib-latest",
-    actual = "@zlib//:zlib",
+    actual = "@zlib//:z",
 )
 new_local_repository(
     name = "zlib",
@@ -20,7 +20,13 @@ new_local_repository(
 )
 
 new_local_repository(
-    name = "libid3tag",
+    name = "id3tag",
     path = "/root/NasX86/SysLib/libid3tag-0.15.1b",
-    build_file = "repo/libid3tag/BUILD",
+    build_file = "repo/id3tag/BUILD",
+)
+
+new_local_repository(
+    name = "json-c",
+    path = "/root/NasX86/SysLib/json-c-0.9",
+    build_file = "repo/json-c/BUILD",
 )
