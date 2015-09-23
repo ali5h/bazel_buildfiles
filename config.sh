@@ -3,15 +3,15 @@
 set -e
 
 # =======FAIL==========
+# cd /root/NasX86_config/SysLib/gd-1.8.4/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysUtil/dhcpv6-1.1.0/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysUtil/openvpn-2.3.6/ && echo david=${PWD} && ./configure --enable-password-save
-# cd /root/NasX86_config/SysLib/openssl-1.0.1p/ && echo david=${PWD} && ./Configure shared -DOPENSSL_NO_HEARTBEATS
-# cd /root/NasX86_config/SysLib/ffmpeg/ && echo david=${PWD} && ./configure --arch=x86_64 --enable-cross-compile --target-os=linux --cross-prefix=$(TARGET)- --disable-yasm --enable-gpl --disable-encoder=snow --disable-decoder=snow
-# cd /root/NasX86_config/SysLib/gd-1.8.4/ && echo david=${PWD} && ./configure
 
 
 # ======PASS==========
 
+# cd /root/NasX86_config/SysLib/ffmpeg/ && echo david=${PWD} && ./configure --arch=x86_64 --enable-cross-compile --target-os=linux --disable-yasm --enable-gpl --disable-encoder=snow --disable-decoder=snow
+# cd /root/NasX86_config/SysLib/openssl-1.0.1p/ && echo david=${PWD} && ./Configure shared -DOPENSSL_NO_HEARTBEATS linux-x86_64
 # cd /root/NasX86_config/SysLib/xmlrpc/ && echo david=${PWD} && ac_cv_header_expat_h=yes ac_cv_lib_expat_XML_ParserCreate=yes ./configure
 # cd /root/NasX86_config/SysLib/cups-1.4.4/ && echo david=${PWD} && ./configure --disable-gssapi --disable-pam --disable-ssl --disable-acl --disable-libusb --disable-dbus --disable-avahi
 # cd /root/NasX86_config/SysLib/gdbm-1.10/ && echo david=${PWD} && ./configure
@@ -39,7 +39,6 @@ set -e
 # cd /root/NasX86_config/SysLib/gdbm-1.8.3/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/libid3tag-0.15.1b/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/cups-1.6.4/ && echo david=${PWD} && ./configure
-# cd /root/NasX86_config/SysLib/cups-filters-1.0.20/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/zlib-1.2.8/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/libgpg-error-1.6/ && echo david=${PWD} && ./configure
 # cd /root/NasX86_config/SysLib/attr-2.4.47/ && echo david=${PWD} && ac_cv_path_XGETTEXT=yes ac_cv_path_MSGFMT=yes ac_cv_path_MSGMERGE=yes ac_cv_path_MAKE=yes ./configure
