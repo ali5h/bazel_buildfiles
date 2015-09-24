@@ -2,9 +2,10 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
   name = "sqlite3",
-  srcs = glob(["src/*.c"], exclude = ["test*.c"])+ glob(["src/*.h"]) + 
+  srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + glob(["src/*.h"]) + 
         [":sqlite3.h"] +
         [":opcodes.h"] + 
+        [":keywordhash.h"] + 
         [":parse.h"],
   hdrs = [
             ":sqlite3.h",
@@ -13,12 +14,6 @@ cc_library(
   copts = ["-DHAVE_CONFIG_H"],
 )
 
-genrule(
-    name = "sqlite3.h",
-    srcs = ["src/sqlite.h.in"],
-    outs = ["sqlite3.h"],
-    cmd = "sed -e s/--VERS--/3.4.1/ $< | sed -e s/--VERSION-NUMBER--/3004001/ >$@",
-)
 
 cc_binary(
     name = "lemon",
@@ -35,6 +30,13 @@ cc_binary(
     copts = [
             "-Wno-char-subscripts",
             ],
+)
+
+genrule(
+    name = "sqlite3.h",
+    srcs = ["src/sqlite.h.in"],
+    outs = ["sqlite3.h"],
+    cmd = "sed -e s/--VERS--/3.4.1/ $< | sed -e s/--VERSION-NUMBER--/3004001/ >$@",
 )
 
 genrule(
@@ -62,8 +64,8 @@ genrule(
 )
 
 genrule(
-    name = "mkkeywordhash.h",
-    outs = ["mkkeywordhash.h"],
+    name = "keywordhash.h",
+    outs = ["keywordhash.h"],
     tools = [":mkkeywordhash"],
     cmd = " $(location :mkkeywordhash) > $@",
 )
