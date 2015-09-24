@@ -30,3 +30,9 @@ new_local_repository(
     path = "/root/NasX86/SysLib/json-c-0.9",
     build_file = "repo/json-c/BUILD",
 )
+
+new_local_repository(
+    name = "sqlite3",
+    path = "/root/NasX86/SysLib/sqlite-3.4.1",
+    build_file = "repo/sqlite3/BUILD",
+)
