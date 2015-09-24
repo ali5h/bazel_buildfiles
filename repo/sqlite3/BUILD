@@ -2,13 +2,15 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
   name = "sqlite3",
-  srcs = glob(["*.c"], exclude = ["test*.c"]),
+  srcs = glob(["src/*.c"], exclude = ["test*.c"])+ glob(["src/*.h"]) + 
+        [":sqlite3.h"] +
+        [":opcodes.h"] + 
+        [":parse.h"],
   hdrs = [
-            "sss.h",
-            "bits.h",
+            ":sqlite3.h",
          ],
+  includes = ["."],
   copts = ["-DHAVE_CONFIG_H"],
-  deps = [":sqlite3.h"],
 )
 
 genrule(
@@ -24,6 +26,14 @@ cc_binary(
     copts = [
             "-Wno-maybe-uninitialized",
             "-Wno-implicit-function-declaration",
+            ],
+)
+
+cc_binary(
+    name = "mkkeywordhash",
+    srcs = ["tool/mkkeywordhash.c"],
+    copts = [
+            "-Wno-char-subscripts",
             ],
 )
 
@@ -50,3 +60,11 @@ genrule(
     outs = ["opcodes.c"],
     cmd = "sort -n -b -k 3 $(location :opcodes.h) | mawk -f $(location mkopcodec.awk) > $@",
 )
+
+genrule(
+    name = "mkkeywordhash.h",
+    outs = ["mkkeywordhash.h"],
+    tools = [":mkkeywordhash"],
+    cmd = " $(location :mkkeywordhash) > $@",
+)
+
