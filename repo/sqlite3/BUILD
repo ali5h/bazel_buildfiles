@@ -11,7 +11,6 @@ cc_library(
             ":sqlite3.h",
          ],
   includes = ["."],
-  copts = ["-DHAVE_CONFIG_H"],
 )
 
 
