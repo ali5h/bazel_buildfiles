@@ -2,15 +2,23 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
   name = "sqlite3",
-  srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + glob(["src/*.h"]) + 
-        [":sqlite3.h"] +
-        [":opcodes.h"] + 
-        [":keywordhash.h"] + 
-        [":parse.h"],
+  srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + 
+         glob(["src/*.h"]) + 
+         [":sqlite3.h"] +
+         [":opcodes.h"] + 
+         [":keywordhash.h"] + 
+         [":parse.h"],
   hdrs = [
             ":sqlite3.h",
          ],
   includes = ["."],
+)
+
+genrule(
+    name = "lempar",
+    srcs = ["tool/lempar.c"],
+    outs = ["lempar.c"],
+    cmd = "cat $< > $@",
 )
 
 
@@ -66,6 +74,6 @@ genrule(
     name = "keywordhash.h",
     outs = ["keywordhash.h"],
     tools = [":mkkeywordhash"],
-    cmd = " $(location :mkkeywordhash) > $@",
+    cmd = "$(location :mkkeywordhash) > $@",
 )
 
