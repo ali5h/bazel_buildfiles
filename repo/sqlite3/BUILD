@@ -15,9 +15,10 @@ cc_library(
 )
 
 genrule(
-    name = "lempar",
+    name = "mv_lempar",
     srcs = ["tool/lempar.c"],
     outs = ["lempar.c"],
+    output_to_bindir = 1,
     cmd = "cat $< > $@",
 )
 
@@ -48,10 +49,10 @@ genrule(
 
 genrule(
     name = "parse",
-    srcs = ["addopcodes.awk", "src/parse.y", "tool/lempar.c"],
-    tools = [":lemon"],
+    srcs = ["addopcodes.awk", "src/parse.y",],
+    tools = [":lemon", ":lempar.c"],
     outs = ["parse.h", "parse.c"],
-    cmd = "cp $(location tool/lempar.c) $$(dirname $(location :lemon)); $(location :lemon) $(location src/parse.y); mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h); cat $$(find . -name 'parse.c') > $(location parse.c);",
+    cmd = " $(location :lemon) $(location src/parse.y); mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h);find -L -name 'parse.h' -o -name 'addopcodes.awk'; cat $$(find . -name 'parse.c') > $(location parse.c);",
 )
 
 
