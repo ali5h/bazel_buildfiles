@@ -46,3 +46,9 @@ new_local_repository(
     path = "/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1",
     build_file = "repo/thin-provisioning-tools/BUILD",
 )
+
+new_local_repository(
+    name = "libaio-0.3.109",
+    path = "/root/NasX86/SysLib/libaio-0.3.109",
+    build_file = "repo/libaio-0.3.109.BUILD",
+)
