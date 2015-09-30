@@ -47,12 +47,13 @@ genrule(
     cmd = "sed -e s/--VERS--/3.4.1/ $< | sed -e s/--VERSION-NUMBER--/3004001/ >$@",
 )
 
+# FIX: donnot use find to get intermediate files
 genrule(
     name = "parse",
     srcs = ["addopcodes.awk", "src/parse.y",],
     tools = [":lemon", ":lempar.c"],
     outs = ["parse.h", "parse.c"],
-    cmd = " $(location :lemon) $(location src/parse.y); mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h);find -L -name 'parse.h' -o -name 'addopcodes.awk'; cat $$(find . -name 'parse.c') > $(location parse.c);",
+    cmd = " $(location :lemon) $(location src/parse.y); mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h); cat $$(find . -name 'parse.c') > $(location parse.c);",
 )
 
 
