@@ -38,5 +38,11 @@ new_local_repository(
     path = "/root/NasX86/SysLib/sqlite-3.4.1",
     build_file = "repo/sqlite3/BUILD",
 )
-
 #add_package(name = "sqlite3", path = "/root/NasX86/SysLib/sqlite-3.4.1", lib_name="sqlite3")
+
+
+new_local_repository(
+    name = "thin-provisioning-tools",
+    path = "/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1",
+    build_file = "repo/thin-provisioning-tools/BUILD",
+)
