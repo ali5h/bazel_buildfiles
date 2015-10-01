@@ -15,6 +15,11 @@ cc_binary(
          glob(["thin-provisioning/*"], exclude = ["thin-provisioning/create_xml_data", "thin-provisioning/thin_metadata_size.rb"] ) + 
          ["main.cc"],
   includes = ["."],
+  deps = [
+            "@boost_1_58_0//:variant",
+            "@boost_1_58_0//:smart_ptr",
+            "@boost_1_58_0//:static_assert",
+            ],
 )
 
 cc_binary(

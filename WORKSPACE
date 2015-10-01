@@ -59,6 +59,10 @@ new_local_repository(
 #     build_file = "repo/boost_1_53_0.BUILD",
 # )
 
+# bind(
+#     name = "boost-latest",
+#     actual = "@boost_1_58_0//",
+# )
 new_http_archive(
     name = "boost_1_58_0",
     url = "http://downloads.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.tar.gz",
