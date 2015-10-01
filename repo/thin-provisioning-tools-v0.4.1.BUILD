@@ -17,6 +17,7 @@ cc_binary(
   includes = ["."],
   deps = [
             "//external:libaio-latest",
+            "//external:expat-latest",
             "@boost_1_58_0//:crc",
             "@boost_1_58_0//:variant",
             "@boost_1_58_0//:smart_ptr",

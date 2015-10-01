@@ -59,8 +59,18 @@ new_local_repository(
 
 new_local_repository(
     name = "boost_1_58_0",
-    path = "/root/boost_1_58_0",
+    path = "/root/NasX86/SysLib/boost_1_58_0",
     build_file = "repo/boost_1_58_0.BUILD",
+)
+
+bind(
+    name = "expat-latest",
+    actual = "@expat-2.0.1//:expat",
+)
+new_local_repository(
+    name = "expat-2.0.1",
+    path = "/root/NasX86/SysLib/expat-2.0.1",
+    build_file = "repo/expat-2.0.1.BUILD",
 )
 
 # bind(
