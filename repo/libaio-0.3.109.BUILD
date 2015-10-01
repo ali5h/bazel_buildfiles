@@ -1,16 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_binary(
-  name = "libaio",
+cc_library(
+  name = "aio",
   srcs = glob(["src/*.c"]) +
-         ["src/vsys_def.h"] + 
-         glob(["persistent-data/*.cc"], exclude = ["persistent-data/*.tcc"]) + 
-         glob(["thin-provisioning/*"], exclude = ["thin-provisioning/create_xml_data", "thin-provisioning/thin_metadata_size.rb"] ) + 
-         ["main.cc"],
-  includes = ["."],
-)
-
-cc_binary(
-    name = "thintools_bsadapt",
-    srcs = ["wrapper/thintools_bsadapt.c"],
+         ["src/vsys_def.h"],
+  hdrs = ["src/libaio.h"],
+  # FIX: need to remove this one probably by genrule
+  linkopts = ["-Wl,--version-script=/root/NasX86/SysLib/libaio-0.3.109/src/libaio.map"],
+  includes = ["src"],
 )
