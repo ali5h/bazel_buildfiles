@@ -12,13 +12,14 @@ cc_binary(
          glob(["caching/*"], exclude = ["caching/metadata_disk_structures.cc"]) + 
          glob(["era/*"]) + 
          glob(["persistent-data/*.cc"], exclude = ["persistent-data/*.tcc"]) + 
-         glob(["thin-provisioning/*"], exclude = ["thin-provisioning/create_xml_data", "thin-provisioning/thin_metadata_size.rb"] ) + 
+         glob(["thin-provisioning/*"], exclude = ["thin-provisioning/main.cc", "thin-provisioning/create_xml_data", "thin-provisioning/thin_metadata_size.rb"] ) + 
          ["main.cc"],
   includes = ["."],
   deps = [
             "//external:libaio-latest",
             "//external:expat-latest",
             "@boost_1_58_0//:crc",
+            "@boost_1_58_0//:tuple",
             "@boost_1_58_0//:variant",
             "@boost_1_58_0//:smart_ptr",
             "@boost_1_58_0//:static_assert",

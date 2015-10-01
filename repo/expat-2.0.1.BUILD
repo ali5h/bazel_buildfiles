@@ -6,7 +6,7 @@ cc_library(
          glob(["lib/*.h"]) +
          glob(["expat_config.h"]),
   hdrs = ["lib/expat.h", "lib/expat_external.h"],
-  includes = ["."],
+  includes = [".", "lib"],
   copts = [
             "-Wmissing-prototypes",
             "-Wstrict-prototypes",
