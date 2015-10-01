@@ -47,6 +47,10 @@ new_local_repository(
     build_file = "repo/thin-provisioning-tools-v0.4.1.BUILD",
 )
 
+bind(
+    name = "libaio-latest",
+    actual = "@libaio-0.3.109//:aio",
+)
 new_local_repository(
     name = "libaio-0.3.109",
     path = "/root/NasX86/SysLib/libaio-0.3.109",
@@ -55,7 +59,7 @@ new_local_repository(
 
 new_local_repository(
     name = "boost_1_58_0",
-    path = "/root/NasX86/SysLib/boost_1_58_0",
+    path = "/root/boost_1_58_0",
     build_file = "repo/boost_1_58_0.BUILD",
 )
 

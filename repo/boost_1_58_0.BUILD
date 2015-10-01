@@ -31,6 +31,58 @@ cc_library(
 )
 
 cc_library(
+  name = "array",
+  visibility = ["//visibility:public"],
+  includes = [
+    "libs/array/include",
+  ],
+  hdrs = glob([
+    "libs/array/include/boost/*.h",
+  ]),
+)
+
+cc_library(
+  name = "numeric_conversion",
+  visibility = ["//visibility:public"],
+  includes = [
+    "libs/numeric_conversion/include",
+  ],
+  hdrs = glob([
+    "libs/numeric_conversion/include/boost/*.h",
+  ]),
+)
+
+cc_library(
+  name = "crc",
+  visibility = ["//visibility:public"],
+  includes = [
+    "libs/crc/include",
+  ],
+  hdrs = glob([
+    "libs/crc/include/boost/*.h",
+  ]),
+)
+
+cc_library(
+  name = "lexical_cast",
+  visibility = ["//visibility:public"],
+  includes = [
+    "libs/lexical_cast/include",
+  ],
+  hdrs = glob([
+    "libs/lexical_cast/include/boost/*.h",
+  ]),
+  srcs = [
+  ],
+  deps = [
+        ":numeric_conversion",
+        ":integer",
+        ":array",
+        ":container",
+  ],
+)
+
+cc_library(
   name = "bind",
   visibility = ["//visibility:public"],
   includes = [
@@ -448,6 +500,7 @@ cc_library(
   deps = [
     ":concept_check",
     ":optional",
+    ":iterator",
   ]
 )
 
@@ -509,6 +562,8 @@ cc_library(
     ":predef",
     ":throw_exception",
     ":utility",
+    ":config",
+    ":assert",
   ],
 )
 
@@ -571,6 +626,8 @@ cc_library(
   ],
   deps = [
     ":core",
+    ":functional",
+    ":type_traits",
   ]
 )
 
