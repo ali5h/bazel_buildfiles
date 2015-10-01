@@ -52,3 +52,17 @@ new_local_repository(
     path = "/root/NasX86/SysLib/libaio-0.3.109",
     build_file = "repo/libaio-0.3.109.BUILD",
 )
+
+# new_local_repository(
+#     name = "boost_1_53_0",
+#     path = "/root/NasX86/SysLib/boost_1_53_0",
+#     build_file = "repo/boost_1_53_0.BUILD",
+# )
+
+new_http_archive(
+    name = "boost_1_58_0",
+    url = "http://downloads.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.tar.gz",
+    sha256 = "a004d9b3fa95e956383693b86fce1b68805a6f71c2e68944fa813de0fb8c8102",
+    build_file = "repo/boost_1_58_0.BUILD",
+    strip_prefix = "boost_1_58_0",
+)
