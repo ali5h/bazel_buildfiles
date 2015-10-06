@@ -3,7 +3,7 @@
 # can be reference by //external:zlib-latest
 bind(
     name = "zlib-latest",
-    actual = "@zlib//:z",
+    actual = "@zlib-1.2.8//:z",
 )
 new_local_repository(
     name = "zlib-1.2.8",
@@ -13,7 +13,7 @@ new_local_repository(
 
 bind(
     name = "popt-latest",
-    actual = "@popt//:popt",
+    actual = "@popt-1.14//:popt",
 )
 new_local_repository(
     name = "popt-1.14",
@@ -57,10 +57,19 @@ new_local_repository(
     build_file = "repo/libaio-0.3.109.BUILD",
 )
 
+bind(
+    name = "boost-latest",
+    actual = "@boost_1_59_0//:boost",
+)
 new_local_repository(
     name = "boost_1_58_0",
     path = "/root/NasX86/SysLib/boost_1_58_0",
     build_file = "repo/boost_1_58_0.BUILD",
+)
+new_local_repository(
+    name = "boost_1_59_0",
+    path = "/root/NasX86/SysLib/boost_1_59_0",
+    build_file = "repo/boost_1_59_0.BUILD",
 )
 
 bind(
@@ -72,15 +81,3 @@ new_local_repository(
     path = "/root/NasX86/SysLib/expat-2.0.1",
     build_file = "repo/expat-2.0.1.BUILD",
 )
-
-# bind(
-#     name = "boost-latest",
-#     actual = "@boost_1_58_0//",
-# )
-# new_http_archive(
-#     name = "boost_1_58_0",
-#     url = "http://downloads.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.tar.gz",
-#     sha256 = "a004d9b3fa95e956383693b86fce1b68805a6f71c2e68944fa813de0fb8c8102",
-#     build_file = "repo/boost_1_58_0.BUILD",
-#     strip_prefix = "boost_1_58_0",
-# )
