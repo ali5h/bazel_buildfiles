@@ -81,3 +81,9 @@ new_local_repository(
     path = "/root/NasX86/SysLib/expat-2.0.1",
     build_file = "repo/expat-2.0.1.BUILD",
 )
+
+new_local_repository(
+    name = "fio-2.0.11",
+    path = "/root/NasX86/SysUtil/fio-2.0.11",
+    build_file = "repo/fio-2.0.11.BUILD",
+)
