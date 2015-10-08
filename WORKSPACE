@@ -107,8 +107,6 @@ new_local_repository(
 # LINUX_PAM = $(SYSLIB_DIR)/pam-0.99.7.1/Linux-PAM
 # LIBSTDCXX = $(SYSLIB_DIR)/libstdcxx
 # BERKELEY_DB = $(SYSLIB_DIR)/db-4.8.30
-# XMLRPC = $(SYSLIB_DIR)/xmlrpc
-# EXPAT = $(SYSLIB_DIR)/expat-2.0.0
 # LIBICONV = $(SYSLIB_DIR)/libiconv-1.12
 # EVENTLOG = $(SYSLIB_DIR)/eventlog-0.2.7
 # LIBGPG_ERROR = $(SYSLIB_DIR)/libgpg-error-1.6
@@ -117,11 +115,7 @@ new_local_repository(
 # RLOG = $(SYSLIB_DIR)/rlog-1.4
 # JPEG = $(SYSLIB_DIR)/jpeg-6b-src
 # GDBM = $(SYSLIB_DIR)/gdbm-1.11
-# LIBID3TAG = $(SYSLIB_DIR)/libid3tag-0.15.1b
-# ZLIB = $(SYSLIB_DIR)/zlib-1.2.8
 # FREETYPE = $(SYSLIB_DIR)/freetype-2.3.7
-# LIBXML2 = $(SYSLIB_DIR)/libxml2-2.6.30
-# LIBTOOL = $(SYSLIB_DIR)/libtool-1.5.24
 # NETTLE = $(SYSLIB_DIR)/nettle-2.7.1
 # LIBUPNP = $(SYSLIB_DIR)/libupnp-1.6.19
 # KRB5 = $(SYSLIB_DIR)/krb5-1.13
