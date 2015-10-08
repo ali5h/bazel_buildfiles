@@ -94,6 +94,12 @@ new_local_repository(
     build_file = "repo/xmlrpc.BUILD",
 )
 
+new_local_repository(
+    name = "libxml2-2.9.2",
+    path = "/root/NasX86/SysLib/libxml2-2.9.2",
+    build_file = "repo/libxml2-2.9.2.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
