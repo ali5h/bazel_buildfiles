@@ -88,6 +88,11 @@ new_local_repository(
     build_file = "repo/fio-2.0.11.BUILD",
 )
 
+new_local_repository(
+    name = "xmlrpc",
+    path = "/root/NasX86/SysLib/xmlrpc",
+    build_file = "repo/xmlrpc.BUILD",
+)
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
