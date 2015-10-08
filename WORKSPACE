@@ -112,6 +112,12 @@ new_local_repository(
     build_file = "repo/rlog-1.4.BUILD",
 )
 
+new_local_repository(
+    name = "jpeg-6b-src",
+    path = "/root/NasX86/SysLib/jpeg-6b-src",
+    build_file = "repo/jpeg-6b-src.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
@@ -123,7 +129,6 @@ new_local_repository(
 # LIBGPG_ERROR = $(SYSLIB_DIR)/libgpg-error-1.6
 # LIBGCRYPT = $(SYSLIB_DIR)/libgcrypt-1.4.3
 # GNUTLS = $(SYSLIB_DIR)/gnutls-2.6.2
-# JPEG = $(SYSLIB_DIR)/jpeg-6b-src
 # GDBM = $(SYSLIB_DIR)/gdbm-1.11
 # FREETYPE = $(SYSLIB_DIR)/freetype-2.3.7
 # NETTLE = $(SYSLIB_DIR)/nettle-2.7.1
