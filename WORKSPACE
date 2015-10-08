@@ -95,9 +95,6 @@ new_local_repository(
 # FLEX = $(SYSLIB_DIR)/flex-2.5.39
 # LINUX_PAM = $(SYSLIB_DIR)/pam-0.99.7.1/Linux-PAM
 # LIBSTDCXX = $(SYSLIB_DIR)/libstdcxx
-# POPT = $(SYSLIB_DIR)/popt-1.14
-# JSON = $(SYSLIB_DIR)/json-c-0.9
-# SQLITE = $(SYSLIB_DIR)/sqlite-3.4.1
 # BERKELEY_DB = $(SYSLIB_DIR)/db-4.8.30
 # XMLRPC = $(SYSLIB_DIR)/xmlrpc
 # EXPAT = $(SYSLIB_DIR)/expat-2.0.0
@@ -139,7 +136,6 @@ new_local_repository(
 # LIBUTIMENSAT = $(SYSLIB_DIR)/libutimensat-glibc-2.17
 # LIBAIO = $(SYSLIB_DIR)/libaio-0.3.109
 # IMAGEMAGICK = $(SYSLIB_DIR)/ImageMagick-6.6.1-5
-# BOOST = $(SYSLIB_DIR)/boost_1_53_0
 # ATTR = $(SYSLIB_DIR)/attr-2.4.47
 # ACL = $(SYSLIB_DIR)/acl-2.2.52
 # LIBRSYNC = $(SYSLIB_DIR)/librsync-0.9.7
@@ -301,7 +297,6 @@ new_local_repository(
 # DBUS = $(SYSUTIL_DIR)/dbus-1.4.16
 # AVAHI = $(SYSUTIL_DIR)/avahi-0.6.30
 # LSOF = $(SYSUTIL_DIR)/lsof_4.85
-# FIO = $(SYSUTIL_DIR)/fio-2.0.11
 # MULTIPATH_TOOL = $(SYSUTIL_DIR)/multipath-tools-0.4.9
 # IOSTAT = $(SYSUTIL_DIR)/iostat-2.2
 # DCRAW = $(SYSUTIL_DIR)/dcraw

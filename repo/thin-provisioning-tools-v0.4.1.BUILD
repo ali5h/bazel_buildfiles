@@ -71,20 +71,18 @@ cc_binary(
 	"thin-provisioning/thin_restore.cc",
 	"thin-provisioning/thin_rmap.cc",
 	"thin-provisioning/xml_format.cc",
-  ],
+  ] + glob(["**/*.h", "*.h"]),
   includes = ["."],
   deps = [
             "//external:libaio-latest",
             "//external:expat-latest",
             "//external:boost-latest",
          ],
-  copts = ["-DHAVE_CONFIG_H"],
   linkopts = ["-lstdc++", "-lm"],
 )
 
 cc_binary(
     name = "thintools_bsadapt",
     srcs = ["wrapper/thintools_bsadapt.c"],
-    copts = ["-DHAVE_CONFIG_H"],
 )
 
