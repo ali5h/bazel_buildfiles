@@ -72,13 +72,26 @@ cc_binary(
 	"thin-provisioning/thin_rmap.cc",
 	"thin-provisioning/xml_format.cc",
   ] + glob(["**/*.h", "*.h"]),
-  includes = ["."],
+  includes = ["."] + select ({
+                              ":bs_4096": ["bsize_4096"],
+                              ":bs_8192": ["bsize_8192"],
+  }),
   deps = [
             "//external:libaio-latest",
             "//external:expat-latest",
             "//external:boost-latest",
          ],
   linkopts = ["-lstdc++", "-lm"],
+)
+
+# bazel build --config=arm --define block_size=4096 @thin-prov.......
+config_setting(
+    name = "bs_4096",
+    values = { "define": "block_size=4096", },
+)
+config_setting(
+    name = "bs_8192",
+    values = {"define": "block_size=8192",},
 )
 
 cc_binary(
