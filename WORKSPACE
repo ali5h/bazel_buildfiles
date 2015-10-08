@@ -106,6 +106,12 @@ new_local_repository(
     build_file = "repo/eventlog-0.2.7.BUILD",
 )
 
+new_local_repository(
+    name = "rlog-1.4",
+    path = "/root/NasX86/SysLib/rlog-1.4",
+    build_file = "repo/rlog-1.4.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
@@ -114,11 +120,9 @@ new_local_repository(
 # LIBSTDCXX = $(SYSLIB_DIR)/libstdcxx
 # BERKELEY_DB = $(SYSLIB_DIR)/db-4.8.30
 # LIBICONV = $(SYSLIB_DIR)/libiconv-1.12
-# EVENTLOG = $(SYSLIB_DIR)/eventlog-0.2.7
 # LIBGPG_ERROR = $(SYSLIB_DIR)/libgpg-error-1.6
 # LIBGCRYPT = $(SYSLIB_DIR)/libgcrypt-1.4.3
 # GNUTLS = $(SYSLIB_DIR)/gnutls-2.6.2
-# RLOG = $(SYSLIB_DIR)/rlog-1.4
 # JPEG = $(SYSLIB_DIR)/jpeg-6b-src
 # GDBM = $(SYSLIB_DIR)/gdbm-1.11
 # FREETYPE = $(SYSLIB_DIR)/freetype-2.3.7
