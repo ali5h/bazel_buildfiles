@@ -118,6 +118,12 @@ new_local_repository(
     build_file = "repo/jpeg-6b-src.BUILD",
 )
 
+new_local_repository(
+    name = "libevent-1.4.12-stable",
+    path = "/root/NasX86/SysLib/libevent-1.4.12-stable",
+    build_file = "repo/libevent-1.4.12-stable.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
@@ -138,7 +144,6 @@ new_local_repository(
 # LIBNFSIDMAP = $(SYSLIB_DIR)/libnfsidmap-0.25
 # LIBGSSGLUE = $(SYSLIB_DIR)/libgssglue-0.4
 # LIBRPCSECGSS = $(SYSLIB_DIR)/librpcsecgss-0.19
-# LIBEVENT = $(SYSLIB_DIR)/libevent-1.4.12
 # LIBFFI = $(SYSLIB_DIR)/libffi-3.2.1
 # READLINE = $(SYSLIB_DIR)/readline-5.2
 # LIBUSB = $(SYSLIB_DIR)/libusb-1.0.9
