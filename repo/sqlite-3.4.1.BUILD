@@ -14,15 +14,6 @@ cc_library(
   includes = ["."],
 )
 
-genrule(
-    name = "mv_lempar",
-    srcs = ["tool/lempar.c"],
-    outs = ["lempar.c"],
-    output_to_bindir = 1,
-    cmd = "cat $< > $@",
-)
-
-
 cc_binary(
     name = "lemon",
     srcs = ["tool/lemon.c"],
@@ -47,15 +38,18 @@ genrule(
     cmd = "sed -e s/--VERS--/3.4.1/ $< | sed -e s/--VERSION-NUMBER--/3004001/ >$@",
 )
 
-# FIX: donnot use find to get intermediate files
 genrule(
     name = "parse",
-    srcs = ["addopcodes.awk", "src/parse.y",],
-    tools = [":lemon", ":lempar.c"],
+    srcs = ["addopcodes.awk", "src/parse.y", "tool/lempar.c"],
+    tools = [":lemon"],
     outs = ["parse.h", "parse.c"],
-    cmd = "$(location :lemon) $(location src/parse.y);"+
-          "mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h);"+
-          "cat $$(find . -name 'parse.c') > $(location parse.c);",
+    cmd = 
+          "TMPDIR=$$(mktemp -d);"+
+          "cp $(location :lemon) $(location src/parse.y) $(location tool/lempar.c) $$TMPDIR/;"+
+          "(cd $$TMPDIR && ./lemon parse.y);"+
+          "cp $$TMPDIR/parse.c $(location parse.c);"+
+          "mawk -f $(location addopcodes.awk) $$TMPDIR/parse.h > $(location parse.h);"+
+          "rm -fr $$TMPDIR;",
 )
 
 
