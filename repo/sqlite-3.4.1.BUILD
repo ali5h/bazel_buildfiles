@@ -53,7 +53,9 @@ genrule(
     srcs = ["addopcodes.awk", "src/parse.y",],
     tools = [":lemon", ":lempar.c"],
     outs = ["parse.h", "parse.c"],
-    cmd = " $(location :lemon) $(location src/parse.y); mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h); cat $$(find . -name 'parse.c') > $(location parse.c);",
+    cmd = "$(location :lemon) $(location src/parse.y);"+
+          "mawk -f $(location addopcodes.awk) $$(find . -name 'parse.h') > $(location parse.h);"+
+          "cat $$(find . -name 'parse.c') > $(location parse.c);",
 )
 
 
