@@ -33,5 +33,10 @@ genrule(
     name = "event-config",
     srcs = ["config.h"],
     outs = ["event-config.h"],
-    cmd = "echo '#ifndef _EVENT_CONFIG_H_' >> $@ && echo '#define _EVENT_CONFIG_H_' >> $@ && sed -e 's/#define /#define _EVENT_/' -e 's/#undef /#undef _EVENT_/' -e 's/#ifndef /#ifndef _EVENT_/' < $< >> $@ && echo '#endif' >> $@",
+    cmd = '\n'.join([
+                     "echo '#ifndef _EVENT_CONFIG_H_' >> $@",
+                     "echo '#define _EVENT_CONFIG_H_' >> $@",
+                     "sed -e 's/#define /#define _EVENT_/' -e 's/#undef /#undef _EVENT_/' -e 's/#ifndef /#ifndef _EVENT_/' < $< >> $@",
+                     "echo '#endif' >> $@",
+                     ]),
 )
