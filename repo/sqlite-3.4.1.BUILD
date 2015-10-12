@@ -32,7 +32,7 @@ cc_binary(
 )
 
 genrule(
-    name = "sqlite3.h",
+    name = "sqlite3_h",
     srcs = ["src/sqlite.h.in"],
     outs = ["sqlite3.h"],
     cmd = "sed -e s/--VERS--/3.4.1/ $< | sed -e s/--VERSION-NUMBER--/3004001/ >$@",
@@ -54,7 +54,7 @@ genrule(
 
 
 genrule(
-    name = "opcodes.h",
+    name = "opcodes_h",
     srcs =[":parse.h", "src/vdbe.c", "mkopcodeh.awk"],
     outs = ["opcodes.h"],
     cmd = "cat $(location :parse.h) $(location src/vdbe.c)| mawk -f $(location mkopcodeh.awk) > $@",
@@ -62,14 +62,14 @@ genrule(
 
 
 genrule(
-    name = "opcodes.c",
+    name = "opcodes_c",
     srcs =[":opcodes.h", "mkopcodec.awk"],
     outs = ["opcodes.c"],
     cmd = "sort -n -b -k 3 $(location :opcodes.h) | mawk -f $(location mkopcodec.awk) > $@",
 )
 
 genrule(
-    name = "keywordhash.h",
+    name = "keywordhash_h",
     outs = ["keywordhash.h"],
     tools = [":mkkeywordhash"],
     cmd = "$(location :mkkeywordhash) > $@",
