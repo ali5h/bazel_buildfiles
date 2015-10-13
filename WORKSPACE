@@ -130,6 +130,12 @@ new_local_repository(
     build_file = "repo/pam-0.99.7.1.BUILD",
 )
 
+new_local_repository(
+    name = "libffi-3.2.1",
+    path = "/root/NasX86/SysLib/libffi-3.2.1",
+    build_file = "repo/libffi-3.2.1.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
@@ -149,7 +155,6 @@ new_local_repository(
 # LIBNFSIDMAP = $(SYSLIB_DIR)/libnfsidmap-0.25
 # LIBGSSGLUE = $(SYSLIB_DIR)/libgssglue-0.4
 # LIBRPCSECGSS = $(SYSLIB_DIR)/librpcsecgss-0.19
-# LIBFFI = $(SYSLIB_DIR)/libffi-3.2.1
 # READLINE = $(SYSLIB_DIR)/readline-5.2
 # LIBUSB = $(SYSLIB_DIR)/libusb-1.0.9
 # LIBUSB_COMPAT = $(SYSLIB_DIR)/libusb-compat-0.1.4
