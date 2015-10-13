@@ -124,11 +124,16 @@ new_local_repository(
     build_file = "repo/libevent-1.4.12-stable.BUILD",
 )
 
+new_local_repository(
+    name = "pam-0.99.7.1",
+    path = "/root/NasX86/SysLib/pam-0.99.7.1/Linux-PAM",
+    build_file = "repo/pam-0.99.7.1.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
 # FLEX = $(SYSLIB_DIR)/flex-2.5.39
-# LINUX_PAM = $(SYSLIB_DIR)/pam-0.99.7.1/Linux-PAM
 # LIBSTDCXX = $(SYSLIB_DIR)/libstdcxx
 # BERKELEY_DB = $(SYSLIB_DIR)/db-4.8.30
 # LIBICONV = $(SYSLIB_DIR)/libiconv-1.12
