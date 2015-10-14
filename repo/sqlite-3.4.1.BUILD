@@ -47,13 +47,14 @@ genrule(
     srcs = ["addopcodes.awk", "src/parse.y", "tool/lempar.c"],
     tools = [":lemon"],
     outs = ["parse.h", "parse.c"],
-    cmd = 
-          "TMPDIR=$$(mktemp -d);"+
-          "cp $(location :lemon) $(location src/parse.y) $(location tool/lempar.c) $$TMPDIR/;"+
-          "(cd $$TMPDIR && ./lemon parse.y);"+
-          "cp $$TMPDIR/parse.c $(location parse.c);"+
-          "mawk -f $(location addopcodes.awk) $$TMPDIR/parse.h > $(location parse.h);"+
-          "rm -fr $$TMPDIR;",
+    cmd = """
+          TMPDIR=$$(mktemp -d)
+          cp $(location :lemon) $(location src/parse.y) $(location tool/lempar.c) $$TMPDIR/
+          (cd $$TMPDIR && ./lemon parse.y)
+          cp $$TMPDIR/parse.c $(location parse.c)
+          mawk -f $(location addopcodes.awk) $$TMPDIR/parse.h > $(location parse.h)
+          rm -fr $$TMPDIR
+          """,
 )
 
 
