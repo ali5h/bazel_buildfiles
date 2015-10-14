@@ -144,6 +144,7 @@ new_local_repository(
     build_file = "repo/ncurses-5.5.BUILD",
 )
 
+# dep termcap.h from ncurse-5.5
 new_local_repository(
     name = "readline-5.2",
     path = "/root/NasX86/SysLib/readline-5.2",

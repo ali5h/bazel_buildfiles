@@ -12,6 +12,10 @@ cc_library(
             ":sqlite3.h",
          ],
   includes = ["."],
+  copts = [
+          "-Wno-int-to-pointer-cast",
+          "-Wno-pointer-to-int-cast",
+          ],
 )
 
 cc_binary(
