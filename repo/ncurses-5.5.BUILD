@@ -94,9 +94,9 @@ genrule(
     outs = ["ncurses/names.c"],
     cmd = """
           TMPDIR=$$(mktemp -d)
-          cp $(location ncurses/tinfo/MKnames.awk) $$TMPDIR/
-          (cd $$TMPDIR && mawk -f MKnames.awk $(location include/Caps) &&\
-          cat namehdr boolnames boolfnames numnames numfnames strnames strfnames nameftr >$@) 
+          cp $(location ncurses/tinfo/MKnames.awk) $(location include/Caps) $$TMPDIR/
+          (cd $$TMPDIR && mawk -f MKnames.awk Caps && cat namehdr boolnames boolfnames numnames numfnames strnames strfnames nameftr > tmp)
+          cp $$TMPDIR/tmp $@
           """,
 )
 
