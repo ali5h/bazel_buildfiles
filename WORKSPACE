@@ -138,6 +138,10 @@ new_local_repository(
     build_file = "repo/libffi-3.2.1.BUILD",
 )
 
+bind(
+    name = "ncurses-latest",
+    actual = "@ncurses-5.5//:libncurses",
+)
 new_local_repository(
     name = "ncurses-5.5",
     path = "/root/NasX86/SysLib/ncurses-5.5",

@@ -1,10 +1,161 @@
 package(default_visibility = ["//visibility:public"])
 
-COPT_MACRO = ["-DHAVE_CONFIG_H"]
-
 filegroup(
   name = "libncurses",
-  srcs = [":panel", ":ncurses", ":curses", "form", "menu"],
+  srcs = [":panel", ":ncurses", ":form", ":menu", ":ncurses++"],
+
+)
+
+cc_library(
+  name = "ncurses++",
+  srcs = [
+        ":include/ncurses_def.h",
+        ":include/curses.h",
+
+        "c++/cursesf.cc",
+        "c++/cursesm.cc",
+        "c++/cursesp.cc",
+        "c++/cursesw.cc",
+        "c++/cursespad.cc",
+        "c++/cursslk.cc",
+        "c++/cursesapp.cc",
+        "c++/cursesmain.cc",
+        "c++/demo.cc",
+        ],
+
+  includes = ["include", "ncurses", "c++", "menu", "panel", "form"],
+  copts = [
+           "-DHAVE_CONFIG_H",
+           "-D_GNU_SOURCE",
+           "-DNDEBUG",
+           "-fPIC",
+          ],
+  hdrs = [
+        ":c++/etip.h",
+        "c++/cursesapp.h",
+        "c++/cursesf.h",
+        "c++/cursesm.h",
+        "c++/cursesp.h",
+        "c++/cursesw.h",
+        "c++/cursslk.h",
+        ],
+)
+
+genrule(
+    name = "etip.h",
+    srcs = ["c++/etip.h.in", "c++/edit_cfg.sh", "include/ncurses_cfg.h",],
+    outs = ["c++/etip.h"],
+    cmd = """
+        cp $(location c++/etip.h.in) $@
+        sh $(location c++/edit_cfg.sh) $(location include/ncurses_cfg.h) $@
+          """,
+)
+
+cc_library(
+  name = "menu",
+  srcs = [
+            
+        "menu/menu.priv.h",
+        "menu/mf_common.h",
+        "gen_include_hdr",
+
+        "menu/m_attribs.c",
+        "menu/m_cursor.c",
+        "menu/m_driver.c",
+        "menu/m_format.c",
+        "menu/m_global.c",
+        "menu/m_hook.c",
+        "menu/m_item_cur.c",
+        "menu/m_item_nam.c",
+        "menu/m_item_new.c",
+        "menu/m_item_opt.c",
+        "menu/m_item_top.c",
+        "menu/m_item_use.c",
+        "menu/m_item_val.c",
+        "menu/m_item_vis.c",
+        "menu/m_items.c",
+        "menu/m_new.c",
+        "menu/m_opts.c",
+        "menu/m_pad.c",
+        "menu/m_pattern.c",
+        "menu/m_post.c",
+        "menu/m_req_name.c",
+        "menu/m_scale.c",
+        "menu/m_spacing.c",
+        "menu/m_sub.c",
+        "menu/m_trace.c",
+        "menu/m_userptr.c",
+        "menu/m_win.c",
+         ],
+  copts = [
+           "-DHAVE_CONFIG_H",
+           "-D_GNU_SOURCE",
+           "-DNDEBUG",
+          ],
+  includes = ["include", "ncurses", "menu"],
+  hdrs = ["menu/eti.h", "menu/menu.h"],
+
+)
+
+cc_library(
+  name = "form",
+  srcs = [
+        ":include/ncurses_def.h",
+        ":include/term.h",
+        ":include/curses.h",
+        "menu/eti.h",
+        "menu/mf_common.h",
+        "form/form.priv.h",
+
+        "form/f_trace.c",
+        "form/fld_arg.c",
+        "form/fld_attr.c",
+        "form/fld_current.c",
+        "form/fld_def.c",
+        "form/fld_dup.c",
+        "form/fld_ftchoice.c",
+        "form/fld_ftlink.c",
+        "form/fld_info.c",
+        "form/fld_just.c",
+        "form/fld_link.c",
+        "form/fld_max.c",
+        "form/fld_move.c",
+        "form/fld_newftyp.c",
+        "form/fld_opts.c",
+        "form/fld_pad.c",
+        "form/fld_page.c",
+        "form/fld_stat.c",
+        "form/fld_type.c",
+        "form/fld_user.c",
+        "form/frm_cursor.c",
+        "form/frm_data.c",
+        "form/frm_def.c",
+        "form/frm_driver.c",
+        "form/frm_hook.c",
+        "form/frm_opts.c",
+        "form/frm_page.c",
+        "form/frm_post.c",
+        "form/frm_req_name.c",
+        "form/frm_scale.c",
+        "form/frm_sub.c",
+        "form/frm_user.c",
+        "form/frm_win.c",
+        "form/fty_alnum.c",
+        "form/fty_alpha.c",
+        "form/fty_enum.c",
+        "form/fty_int.c",
+        "form/fty_ipv4.c",
+        "form/fty_num.c",
+        "form/fty_regex.c",
+
+        ],
+  copts = [
+           "-DHAVE_CONFIG_H",
+           "-D_GNU_SOURCE",
+           "-DNDEBUG",
+          ],
+  includes = ["include", "ncurses", "menu"],
+  hdrs = ["form/form.h"],
 )
 
 cc_library(
@@ -26,12 +177,11 @@ cc_library(
         "panel/p_user.c",
         "panel/p_win.c",
         "include/ncurses_cfg.h",
-        ":include/ncurses_def.h",
-        ":include/curses.h",
-        ":include/term.h",
+        ":gen_include_hdr",
         ],
-  copts = COPT_MACRO,
+  copts = ["-DHAVE_CONFIG_H"],
   includes = ["include", "ncurses"],
+  hdrs = ["panel/panel.h"],
 )
 
 genrule(
@@ -76,7 +226,7 @@ genrule(
 genrule(
     name = "init_keytry.h",
     srcs = [":ncurses/keys.list"],
-    tools = ["make_keys"],
+    tools = [":make_keys"],
     outs = ["ncurses/init_keytry.h"],
     cmd = "$(location :make_keys) $(location :ncurses/keys.list) > $@",
 )
@@ -89,42 +239,143 @@ genrule(
 )
 
 genrule(
-    name = "names.c",
+    name = "names_codes",
     srcs = ["ncurses/tinfo/MKnames.awk", "include/Caps"],
-    outs = ["ncurses/names.c"],
+    outs = ["ncurses/names.c", "ncurses/codes.c"],
     cmd = """
           TMPDIR=$$(mktemp -d)
           cp $(location ncurses/tinfo/MKnames.awk) $(location include/Caps) $$TMPDIR/
-          (cd $$TMPDIR && mawk -f MKnames.awk Caps && cat namehdr boolnames boolfnames numnames numfnames strnames strfnames nameftr > tmp)
-          cp $$TMPDIR/tmp $@
+          (cd $$TMPDIR &&\
+          mawk -f MKnames.awk Caps &&\
+          cat namehdr boolnames boolfnames numnames numfnames strnames strfnames nameftr > names_tmp &&\
+          cat namehdr boolcodes numcodes strcodes codeftr > codes_tmp)
+          cp $$TMPDIR/names_tmp $(location ncurses/names.c)
+          cp $$TMPDIR/codes_tmp $(location ncurses/codes.c)
+          rm -fr $$TMPDIR
           """,
 )
 
+
 cc_binary(
     name = "make_keys",
-    srcs = [":ncurses/names.c", "ncurses/tinfo/make_keys.c"],
+    srcs = [ "ncurses/tinfo/make_keys.c",":gen_include_hdr"],
+    includes = ["ncurses", "include"],
+    deps = [":names_c_inc"],
+    copts = [
+             "-DHAVE_CONFIG_H",
+             "-D_GNU_SOURCE",
+             "-DNDEBUG",
+            ],
 )
 
 cc_library(
-  name = "ncurses",
-  srcs = [
+    name = "names_c_inc",
+    hdrs = [":ncurses/names.c"],
+)
 
-        # ":include/nomacros.h",
-        # ":ncurses/codes.c",
-        # ":ncurses/comp_captab.c",
-        # ":ncurses/expanded.c",
-        # ":ncurses/fallback.c",
-        # ":ncurses/init_keytry.h",
-        # ":ncurses/lib_gen.c",
-        # ":ncurses/lib_keyname.c",
-        # ":ncurses/link_test.c",
-        # ":ncurses/names.c",
-        # ":ncurses/unctrl.c",
-
+filegroup(
+    name = "gen_include_hdr",
+    srcs = [
         ":include/ncurses_def.h",
         ":include/curses.h",
         ":include/term.h",
         ":include/hashsize.h",
+        ":include/parametrized.h",
+    ]
+)
+
+filegroup(
+    name = "gen_ncurses_hdr",
+    srcs = [
+        ":include/nomacros.h",
+        ":ncurses/codes.c",
+        ":ncurses/comp_captab.c",
+        ":ncurses/expanded.c",
+        ":ncurses/fallback.c",
+        ":ncurses/init_keytry.h",
+        ":ncurses/lib_gen.c",
+        ":ncurses/lib_keyname.c",
+        # ":ncurses/link_test.c",
+        ":ncurses/names.c",
+        ":ncurses/unctrl.c",
+           ]
+)
+
+genrule(
+    name = "nomacros.h",
+    srcs = ["ncurses/base/MKlib_gen.sh", ":include/curses.h"],
+    outs = ["include/nomacros.h"],
+    # cmd = "sh $(location ncurses/base/MKlib_gen.sh) \"gcc -E -DHAVE_CONFIG_H -D_GNU_SOURCE -DNDEBUG\" \"mawk\" generated < $(location :include/curses.h) | fgrep undef  > $@",
+    cmd = "echo > $@",
+)
+
+genrule(
+    name = "lib_gen.c",
+    srcs = ["ncurses/base/MKlib_gen.sh", ":include/curses.h"],
+    outs = ["ncurses/lib_gen.c"],
+    cmd = "sh $(location ncurses/base/MKlib_gen.sh) \"gcc -E -DHAVE_CONFIG_H -D_GNU_SOURCE -DNDEBUG\" \"mawk\" generated < $(location :include/curses.h) > $@",
+)
+
+genrule(
+    name = "fallback.c",
+    srcs = ["ncurses/tinfo/MKfallback.sh", "misc/terminfo.src"],
+    outs = ["ncurses/fallback.c"],
+    cmd = "sh $(location ncurses/tinfo/MKfallback.sh) /usr/share/terminfo $(location misc/terminfo.src) > $@",
+)
+
+genrule(
+    name = "unctrl.c",
+    srcs = ["ncurses/base/MKunctrl.awk"],
+    outs = ["ncurses/unctrl.c"],
+    cmd = "echo | mawk -f $(location ncurses/base/MKunctrl.awk) > $@",
+)
+
+genrule(
+    name = "lib_keyname.c",
+    srcs = [":ncurses/keys.list", "ncurses/base/MKkeyname.awk"],
+    outs = ["ncurses/lib_keyname.c"],
+    cmd = "mawk -f $(location ncurses/base/MKkeyname.awk) $(location ncurses/keys.list) > $@",
+)
+
+genrule(
+    name = "expanded.c",
+    srcs = ["ncurses/tty/MKexpanded.sh"],
+    outs = ["ncurses/expanded.c"],
+    cmd = "sh $(location ncurses/tty/MKexpanded.sh) \"gcc -E\" -DHAVE_CONFIG_H -D_GNU_SOURCE -DNDEBUG  > $@",
+)
+
+genrule(
+    name = "comp_captab.c",
+    srcs = ["ncurses/tinfo/MKcaptab.awk", ":include/hashsize.h", "include/Caps"],
+    outs = ["ncurses/comp_captab.c"],
+    tools = [":make_hash"],
+    cmd = """
+          TMPDIR=$$(mktemp -d)
+          cp $(location :make_hash) $(location ncurses/tinfo/MKcaptab.awk) $(location include/hashsize.h) $(location include/Caps) $$TMPDIR/
+          (cd $$TMPDIR && sh ./MKcaptab.awk mawk Caps > tmp_out)
+          cp $$TMPDIR/tmp_out $(location ncurses/comp_captab.c)
+          rm -fr $$TMPDIR
+          """,
+)
+
+cc_binary(
+    name = "make_hash",
+    srcs = [ "ncurses/tinfo/comp_hash.c",":gen_include_hdr"],
+    includes = ["ncurses", "include"],
+    copts = [
+             "-DMAIN_PROGRAM",
+             "-DHAVE_CONFIG_H",
+             "-D_GNU_SOURCE",
+             "-DNDEBUG",
+            ],
+)
+
+
+cc_library(
+  name = "ncurses",
+  srcs = [
+        "gen_ncurses_hdr",
+        "gen_include_hdr",
 
         "ncurses/tty/hardscroll.c",
         "ncurses/tty/hashmap.c",
@@ -274,15 +525,21 @@ cc_library(
          ],
   includes = ["ncurses", "include", "ncurses/tinfo"],
   copts = ["-DTRACE"],
+  hdrs = [
+        ":include/term.h",
+        ":include/curses.h",
+        ":include/ncurses.h",
+        "include/unctrl.h",
+        "include/termcap.h",
+        "include/ncurses_dll.h",
+        "include/term_entry.h",
+        "include/tic.h",
+         ],
 )
 
-cc_library(
-  name = "pam_misc",
-  srcs = [
-          "libpam_misc/help_env.c",
-          "libpam_misc/misc_conv.c",
-          "config.h",
-         ],
-  copts = ["-Wno-address"],
-  includes = [".", "libpamc/include", "libpam/include", "libpam_misc/include"],
+genrule(
+    name = "symlink_curses.h",
+    srcs = [":include/curses.h"],
+    outs = [":include/ncurses.h"],
+    cmd = "cat $< > $@",
 )
