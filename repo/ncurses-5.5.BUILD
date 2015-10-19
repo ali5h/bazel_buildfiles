@@ -2,29 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "nc",
-    srcs = [ ":panel", ":ncurses", ":form", ":menu", ":ncurses++", ],
-    hdrs = [
-        ":c++/etip.h",
-        "c++/cursesapp.h",
-        "c++/cursesf.h",
-        "c++/cursesm.h",
-        "c++/cursesp.h",
-        "c++/cursesw.h",
-        "c++/cursslk.h",
-        "menu/eti.h",
-        "menu/menu.h",
-        "form/form.h",
-        "panel/panel.h",
-        ":include/term.h",
-        ":include/curses.h",
-        ":include/ncurses.h",
-        "include/unctrl.h",
-        "include/termcap.h",
-        "include/ncurses_dll.h",
-        "include/term_entry.h",
-        "include/tic.h",
-    ],
-    # deps = [ ":panel", ":ncurses", ":form", ":menu", ":ncurses++", ],
+    deps = [ ":panel", ":ncurses", ":form", ":menu", ":ncurses++", ],
 )
 
 cc_library(
@@ -51,15 +29,15 @@ cc_library(
            "-DNDEBUG",
            "-fPIC",
           ],
-  # hdrs = [
-  #       ":c++/etip.h",
-  #       "c++/cursesapp.h",
-  #       "c++/cursesf.h",
-  #       "c++/cursesm.h",
-  #       "c++/cursesp.h",
-  #       "c++/cursesw.h",
-  #       "c++/cursslk.h",
-  #       ],
+  hdrs = [
+        ":c++/etip.h",
+        "c++/cursesapp.h",
+        "c++/cursesf.h",
+        "c++/cursesm.h",
+        "c++/cursesp.h",
+        "c++/cursesw.h",
+        "c++/cursslk.h",
+        ],
 )
 
 genrule(
@@ -114,7 +92,7 @@ cc_library(
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
-  # hdrs = ["menu/eti.h", "menu/menu.h"],
+  hdrs = ["menu/eti.h", "menu/menu.h"],
 
 )
 
@@ -176,7 +154,7 @@ cc_library(
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
-  # hdrs = ["form/form.h"],
+  hdrs = ["form/form.h"],
 )
 
 cc_library(
@@ -202,7 +180,7 @@ cc_library(
         ],
   copts = ["-DHAVE_CONFIG_H"],
   includes = ["include", "ncurses"],
-  # hdrs = ["panel/panel.h"],
+  hdrs = ["panel/panel.h"],
 )
 
 genrule(
@@ -316,7 +294,6 @@ filegroup(
         ":ncurses/init_keytry.h",
         ":ncurses/lib_gen.c",
         ":ncurses/lib_keyname.c",
-        # ":ncurses/link_test.c",
         ":ncurses/names.c",
         ":ncurses/unctrl.c",
            ]
@@ -546,16 +523,16 @@ cc_library(
          ],
   includes = ["ncurses", "include", "ncurses/tinfo"],
   copts = ["-DTRACE"],
-  # hdrs = [
-  #       ":include/term.h",
-  #       ":include/curses.h",
-  #       ":include/ncurses.h",
-  #       "include/unctrl.h",
-  #       "include/termcap.h",
-  #       "include/ncurses_dll.h",
-  #       "include/term_entry.h",
-  #       "include/tic.h",
-  #        ],
+  hdrs = [
+        ":include/term.h",
+        ":include/curses.h",
+        ":include/ncurses.h",
+        "include/unctrl.h",
+        "include/termcap.h",
+        "include/ncurses_dll.h",
+        "include/term_entry.h",
+        "include/tic.h",
+         ],
 )
 
 genrule(
