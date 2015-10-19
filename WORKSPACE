@@ -158,6 +158,12 @@ new_local_repository(
     build_file = "repo/readline-5.2.BUILD",
 )
 
+new_local_repository(
+    name = "backtrace",
+    path = "/root/NasX86/SysLib/backtrace",
+    build_file = "repo/backtrace.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
