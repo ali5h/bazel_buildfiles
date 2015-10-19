@@ -1,6 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
+    name = "rl",
+    deps = [":readline", ":history"],
+)
+
+cc_library(
   name = "readline",
   srcs = [
         "readline.c",
@@ -27,7 +32,6 @@ cc_library(
         "misc.c",
         "compat.c",
         "xmalloc.c",
-        "tilde.c",
         "history.c",
         "histexpand.c",
         "histfile.c",
@@ -48,6 +52,14 @@ cc_library(
         ],
   includes = ["."],
   copts = ["-DHAVE_CONFIG_H", '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
+  deps = ["//external:ncurses-latest", ":tilde"],
+)
+
+cc_library(
+    name = "tilde",
+    srcs = ["tilde.c", "config.h"],
+    copts = ["-DHAVE_CONFIG_H", "-DREADLINE_LIBRARY"],
+  includes = ["."],
 )
 
 cc_library(
@@ -62,7 +74,6 @@ cc_library(
         "mbutil.c",
         "config.h",
         ],
-  hdrs = [],
   includes = ["."],
   copts = ["-DHAVE_CONFIG_H", '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
 )

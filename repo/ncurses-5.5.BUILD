@@ -1,9 +1,14 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-  name = "libncurses",
-  srcs = [":panel", ":ncurses", ":form", ":menu", ":ncurses++"],
-
+cc_library(
+    name = "nc",
+    deps = [
+        ":panel",
+        ":ncurses",
+        ":form",
+        ":menu",
+        ":ncurses++",
+    ],
 )
 
 cc_library(
