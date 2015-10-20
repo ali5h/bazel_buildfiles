@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
-    name = "backtrace_tool",
+    name = "backtrace_tools",
     srcs = ["backtrace", "crasher",],
 )
 
