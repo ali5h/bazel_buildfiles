@@ -162,6 +162,12 @@ new_local_repository(
     build_file = "repo/backtrace.BUILD",
 )
 
+new_local_repository(
+    name = "gdbm-1.8.3",
+    path = "/root/NasX86/SysLib/gdbm-1.8.3",
+    build_file = "repo/gdbm-1.8.3.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
