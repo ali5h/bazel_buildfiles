@@ -22,4 +22,5 @@ bazel build --dynamic_mode=fully --config=x86_64 --define block_size=4096 \
 @ncurses-5.5//:nc \
 @readline-5.2//:rl \
 @backtrace//:backtrace_tools \
-@gdbm-1.8.3//:libgdbm
+@gdbm-1.8.3//:libgdbm \
+@freetype-2.3.7//:freetype

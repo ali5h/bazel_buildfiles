@@ -168,6 +168,12 @@ new_local_repository(
     build_file = "repo/gdbm-1.8.3.BUILD",
 )
 
+new_local_repository(
+    name = "freetype-2.3.7",
+    path = "/root/NasX86/SysLib/freetype-2.3.7",
+    build_file = "repo/freetype-2.3.7.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
