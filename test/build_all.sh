@@ -26,3 +26,4 @@ bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define
 @freetype-2.3.7//:freetype \
 # @libstdcxx-v3//:stdc++ \
 @libtool-1.5.24//:ltdl \
+@libupnp-1.6.19//:libupnp

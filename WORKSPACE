@@ -187,6 +187,11 @@ new_local_repository(
 # )
 
 
+new_local_repository(
+    name = "libupnp-1.6.19",
+    path = "/root/NasX86/SysLib/libupnp-1.6.19",
+    build_file = "repo/libupnp-1.6.19.BUILD",
+)
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
