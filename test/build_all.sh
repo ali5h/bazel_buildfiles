@@ -1,6 +1,6 @@
 bazel clean
 
-bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=x86_64 --define block_size=4096 \
+bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define block_size=4096 \
 @zlib-1.2.8//:z \
 @popt-1.14//:popt \
 @libid3tag-0.15.1b//:id3tag \
@@ -24,4 +24,5 @@ bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=x86_64 --def
 @backtrace//:backtrace_tools \
 @gdbm-1.8.3//:libgdbm \
 @freetype-2.3.7//:freetype \
-@libtool-1.5.24//:ltdl
+# @libstdcxx-v3//:stdc++ \
+@libtool-1.5.24//:ltdl \

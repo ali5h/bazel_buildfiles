@@ -180,6 +180,14 @@ new_local_repository(
     build_file = "repo/libtool-1.5.24.BUILD",
 )
 
+# new_local_repository(
+#     name = "libstdcxx-v3",
+#     path = "/root/NasX86/SysLib/gcc-4.9.2-stdc++/libstdc++-v3",
+#     build_file = "repo/libstdcxx-v3.BUILD",
+# )
+
+
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
