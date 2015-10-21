@@ -174,6 +174,12 @@ new_local_repository(
     build_file = "repo/freetype-2.3.7.BUILD",
 )
 
+new_local_repository(
+    name = "libtool-1.5.24",
+    path = "/root/NasX86/SysLib/libtool-1.5.24",
+    build_file = "repo/libtool-1.5.24.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
