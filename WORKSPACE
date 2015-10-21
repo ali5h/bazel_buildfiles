@@ -180,17 +180,25 @@ new_local_repository(
     build_file = "repo/libtool-1.5.24.BUILD",
 )
 
-# new_local_repository(
-#     name = "libstdcxx-v3",
-#     path = "/root/NasX86/SysLib/gcc-4.9.2-stdc++/libstdc++-v3",
-#     build_file = "repo/libstdcxx-v3.BUILD",
-# )
+# FIX: libstdc++ incomplete
+new_local_repository(
+    name = "libstdcxx-v3",
+    path = "/root/NasX86/SysLib/gcc-4.9.2-stdc++/libstdc++-v3",
+    build_file = "repo/libstdcxx-v3.BUILD",
+)
 
 
 new_local_repository(
     name = "libupnp-1.6.19",
     path = "/root/NasX86/SysLib/libupnp-1.6.19",
     build_file = "repo/libupnp-1.6.19.BUILD",
+)
+
+# FIX: depend on  #include <gssapi/gssapi.h>
+new_local_repository(
+    name = "libtirpc-0.3.0",
+    path = "/root/NasX86/SysLib/libtirpc-0.3.0",
+    build_file = "repo/libtirpc-0.3.0.BUILD",
 )
 
 # # SYS_LIBRARY
