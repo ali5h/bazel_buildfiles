@@ -220,6 +220,13 @@ new_local_repository(
     build_file = "repo/librpcsecgss-0.19.BUILD",
 )
 
+# FIX: libcom_err only currently
+new_local_repository(
+    name = "e2fsprogs-1.42.5",
+    path = "/root/NasX86/SysLib/e2fsprogs-1.42.5",
+    build_file = "repo/e2fsprogs-1.42.5.BUILD",
+)
+
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36

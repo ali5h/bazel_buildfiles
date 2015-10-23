@@ -28,6 +28,7 @@ bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define
 @libupnp-1.6.19//:libupnp \
 @libnfsidmap-0.23//:libnfsidmap \
 @libgssglue-0.4//:gssglue \
+@e2fsprogs-1.42.5//:com_err \
 
 
 # @libstdcxx-v3//:stdc++ \
