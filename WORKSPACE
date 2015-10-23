@@ -207,6 +207,12 @@ new_local_repository(
     build_file = "repo/libnfsidmap-0.23.BUILD",
 )
 
+new_local_repository(
+    name = "libgssglue-0.4",
+    path = "/root/NasX86/SysLib/libgssglue-0.4",
+    build_file = "repo/libgssglue-0.4.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

@@ -24,8 +24,11 @@ bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define
 @backtrace//:backtrace_tools \
 @gdbm-1.8.3//:libgdbm \
 @freetype-2.3.7//:freetype \
-# @libstdcxx-v3//:stdc++ \
 @libtool-1.5.24//:ltdl \
 @libupnp-1.6.19//:libupnp \
-# @libtirpc-0.3.0//:tirpc \
 @libnfsidmap-0.23//:libnfsidmap \
+@libgssglue-0.4//:gssglue \
+
+
+# @libstdcxx-v3//:stdc++ \
+# @libtirpc-0.3.0//:tirpc \
