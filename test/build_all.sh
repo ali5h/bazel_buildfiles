@@ -16,7 +16,7 @@ bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define
 @eventlog-0.2.7//:evtlog \
 @rlog-1.4//:rlog \
 @jpeg-6b-src//:jpeg \
-@libevent-1.4.12-stable//:event-1.4 \
+@libevent-1.4.12-stable//:libevent \
 @pam-0.99.7.1//:linux-pam \
 @libffi-3.2.1//:ffi \
 @ncurses-5.5//:nc \
