@@ -201,6 +201,12 @@ new_local_repository(
     build_file = "repo/libtirpc-0.3.0.BUILD",
 )
 
+new_local_repository(
+    name = "libnfsidmap-0.23",
+    path = "/root/NasX86/SysLib/libnfsidmap-0.23",
+    build_file = "repo/libnfsidmap-0.23.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
