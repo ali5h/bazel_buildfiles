@@ -213,6 +213,14 @@ new_local_repository(
     build_file = "repo/libgssglue-0.4.BUILD",
 )
 
+# FIX: depend on  #include <gssapi/gssapi.h>
+new_local_repository(
+    name = "librpcsecgss-0.19",
+    path = "/root/NasX86/SysLib/librpcsecgss-0.19",
+    build_file = "repo/librpcsecgss-0.19.BUILD",
+)
+
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

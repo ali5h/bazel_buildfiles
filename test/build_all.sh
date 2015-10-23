@@ -32,3 +32,4 @@ bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define
 
 # @libstdcxx-v3//:stdc++ \
 # @libtirpc-0.3.0//:tirpc \
+# @librpcsecgss-0.19//:rpcsecgss \
