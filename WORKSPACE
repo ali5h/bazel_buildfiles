@@ -227,6 +227,12 @@ new_local_repository(
     build_file = "repo/e2fsprogs-1.42.5.BUILD",
 )
 
+new_local_repository(
+    name = "krb5-1.13",
+    path = "/root/NasX86/SysLib/krb5-1.13/src",
+    build_file = "repo/krb5-1.13.BUILD",
+)
+
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
