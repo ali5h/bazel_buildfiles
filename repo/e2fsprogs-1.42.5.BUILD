@@ -11,8 +11,9 @@ cc_library(
         ":lib/dirpaths.h",
         ],
     hdrs = ["lib/et/com_err.h"],
-    includes = ["lib"],
+    includes = ["lib", "lib/et"],
 )
+
 
 cc_binary(
     name = "subst",
@@ -28,3 +29,5 @@ genrule(
             $(location :subst) -f $(location util/subst.conf) $(location lib/dirpaths.h.in) $@
           """,
 )
+
+
