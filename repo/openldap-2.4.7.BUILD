@@ -100,6 +100,7 @@ cc_library(
         ],
     hdrs = [],
     includes = ["include"],
+    deps = ["//external:openssl-latest"],
 )
 
 cc_library(

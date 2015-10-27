@@ -241,6 +241,16 @@ new_local_repository(
     build_file = "repo/openldap-2.4.7.BUILD",
 )
 
+bind(
+    name = "openssl-latest",
+    actual = "@openssl-1.0.1p//:openssl",
+)
+new_local_repository(
+    name = "openssl-1.0.1p",
+    path = "/root/NasX86/SysLib/openssl-1.0.1p",
+    build_file = "repo/openssl-1.0.1p.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
