@@ -227,12 +227,19 @@ new_local_repository(
     build_file = "repo/e2fsprogs-1.42.5.BUILD",
 )
 
+# FIX: not complete
 new_local_repository(
     name = "krb5-1.13",
     path = "/root/NasX86/SysLib/krb5-1.13/src",
     build_file = "repo/krb5-1.13.BUILD",
 )
 
+# FIX: depend on openssl
+new_local_repository(
+    name = "openldap-2.4.7",
+    path = "/root/NasX86/SysLib/openldap-2.4.7",
+    build_file = "repo/openldap-2.4.7.BUILD",
+)
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36

@@ -39,3 +39,4 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 # @libtirpc-0.3.0//:tirpc \
 # @librpcsecgss-0.19//:rpcsecgss \
 # @krb5-1.13//:
+# @openldap-2.4.7//:
