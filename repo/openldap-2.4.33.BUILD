@@ -1,6 +1,21 @@
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
+    name = "openldap",
+    hdrs = [
+            "include/ldif.h",
+            "include/ldap_utf8.h",
+            "include/ldap_schema.h",
+            "include/ldap_features.h",
+            "include/ldap_cdefs.h",
+            "include/ldap.h",
+            "include/lber.h",
+            "include/lber_typess.h",
+        ],
+    deps = [ "lber", "ldap", "ldap_r"],
+)
+
+cc_library(
     name = "lber",
     srcs = [
 
@@ -17,7 +32,7 @@ cc_library(
             ":include/ldap_config.h",
 
         ],
-    hdrs = [],
+    copts = ["-DLBER_LIBRARY"],
     includes = ["include"],
 )
 
@@ -42,6 +57,7 @@ genrule(
 cc_library(
     name = "ldap",
     srcs = [
+
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -59,6 +75,7 @@ cc_library(
             "libraries/libldap/delete.c",
             "libraries/libldap/abandon.c",
             "libraries/libldap/sasl.c",
+            "libraries/libldap/gssapi.c",
             "libraries/libldap/sbind.c",
             "libraries/libldap/unbind.c",
             "libraries/libldap/cancel.c",
@@ -85,20 +102,28 @@ cc_library(
             "libraries/libldap/util-int.c",
             "libraries/libldap/schema.c",
             "libraries/libldap/charray.c",
-            "libraries/libldap/tls.c",
             "libraries/libldap/os-local.c",
             "libraries/libldap/dnssrv.c",
             "libraries/libldap/utf-8.c",
             "libraries/libldap/utf-8-conv.c",
+            "libraries/libldap/tls2.c",
+            "libraries/libldap/tls_o.c",
+            "libraries/libldap/tls_g.c",
+            "libraries/libldap/tls_m.c",
             "libraries/libldap/turn.c",
             "libraries/libldap/ppolicy.c",
             "libraries/libldap/dds.c",
             "libraries/libldap/txn.c",
             "libraries/libldap/ldap_sync.c",
             "libraries/libldap/stctrl.c",
+            "libraries/libldap/assertion.c",
+            "libraries/libldap/deref.c",
+            "libraries/libldap/ldif.c",
+            "libraries/libldap/fetch.c",
             ":include/ldap_config.h",
+
         ],
-    hdrs = [],
+    copts = ["-DLDAP_LIBRARY"],
     includes = ["include"],
     deps = ["//external:openssl-latest"],
 )
@@ -106,10 +131,6 @@ cc_library(
 cc_library(
     name = "ldap_r",
     srcs = [
-
-
-            "libraries/libldap/apitest.c",
-            "libraries/libldap/test.c",
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -184,8 +205,11 @@ cc_library(
             "libraries/libldap_r/thr_pth.c",
             "libraries/libldap_r/thr_stub.c",
             "libraries/libldap_r/thr_debug.c",
+            ":include/ldap_config.h",
 
         ],
-    hdrs = [],
-    includes = ["include"],
+    copts = ["-DLDAP_R_COMPILE"],
+    includes = ["include", "libraries/libldap"],
+    deps = ["//external:openssl-latest"],
+
 )
