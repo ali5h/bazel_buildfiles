@@ -235,10 +235,11 @@ new_local_repository(
 )
 
 # FIX: depend on openssl
+# openldap-2.4.7 have syntax bug, will lead compile error in new toolchain
 new_local_repository(
-    name = "openldap-2.4.7",
-    path = "/root/NasX86/SysLib/openldap-2.4.7",
-    build_file = "repo/openldap-2.4.7.BUILD",
+    name = "openldap-2.4.33",
+    path = "/root/NasX86/SysLib/openldap-2.4.33",
+    build_file = "repo/openldap-2.4.33.BUILD",
 )
 
 bind(
