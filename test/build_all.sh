@@ -33,7 +33,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @libnfsidmap-0.23//:libnfsidmap \
 @libgssglue-0.4//:gssglue \
 @e2fsprogs-1.42.5//:com_err \
-@openssl-1.0.1p//:openssl \
+@openssl-1.0.1p//:openssl-dev \
 @openldap-2.4.33//:openldap \
 @liboop-1.0//:oop \
 @ruli-0.33//:ruli \

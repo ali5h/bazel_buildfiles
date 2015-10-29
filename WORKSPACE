@@ -241,9 +241,10 @@ new_local_repository(
     build_file = "repo/openldap-2.4.33.BUILD",
 )
 
+# FIX: should fix openssl util (link error)
 bind(
     name = "openssl-latest",
-    actual = "@openssl-1.0.1p//:openssl",
+    actual = "@openssl-1.0.1p//:openssl-dev",
 )
 new_local_repository(
     name = "openssl-1.0.1p",

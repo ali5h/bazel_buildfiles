@@ -1,7 +1,16 @@
 package(default_visibility = ["//visibility:public"])
 
+cc_binary(
+     name = "openssl",
+     srcs = [
+            "apps/progs.h",
+            "apps/openssl.c",
+     ],
+     deps = [":openssl-dev"],
+)
+
 cc_library(
-    name = "openssl",
+    name = "openssl-dev",
     hdrs = [
         "include/openssl/opensslconf.h",
         "include/openssl/aes.h",
@@ -77,7 +86,7 @@ cc_library(
         "include/openssl/x509_vfy.h",
         "include/openssl/x509v3.h",
     ],
-    deps = [":ssl", "crypto"]
+    deps = [":ssl", ":crypto"],
 )
 
 cc_library(
