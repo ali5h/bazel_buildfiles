@@ -267,6 +267,17 @@ new_local_repository(
     build_file = "repo/ruli-0.33.BUILD",
 )
 
+
+bind(
+    name = "libusb-latest",
+    actual = "@libusb-1.0.9//:usb",
+)
+new_local_repository(
+    name = "libusb-1.0.9",
+    path = "/root/NasX86/SysLib/libusb-1.0.9",
+    build_file = "repo/libusb-1.0.9.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
