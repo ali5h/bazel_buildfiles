@@ -270,12 +270,18 @@ new_local_repository(
 
 bind(
     name = "libusb-latest",
-    actual = "@libusb-1.0.9//:usb",
+    actual = "@libusb-1.0.9//:usb-1.0",
 )
 new_local_repository(
     name = "libusb-1.0.9",
     path = "/root/NasX86/SysLib/libusb-1.0.9",
     build_file = "repo/libusb-1.0.9.BUILD",
+)
+
+new_local_repository(
+    name = "libusb-compat-0.1.4",
+    path = "/root/NasX86/SysLib/libusb-compat-0.1.4",
+    build_file = "repo/libusb-compat-0.1.4.BUILD",
 )
 
 # # SYS_LIBRARY

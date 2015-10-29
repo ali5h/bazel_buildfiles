@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
-    name = "usb",
+    name = "usb-1.0",
     srcs = [
             "libusb/libusbi.h",
             "libusb/core.c",
@@ -21,5 +21,6 @@ cc_library(
     hdrs = ["libusb/libusb.h"],
     includes = [".", "libusb"],
     copts = ["-DHAVE_CONFIG_H", '-DLIBUSB_DESCRIBE=\\"\\"'],
+    linkopts = ["-lpthread"],
 )
 

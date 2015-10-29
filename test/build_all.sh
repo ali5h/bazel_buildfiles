@@ -38,6 +38,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @liboop-1.0//:oop \
 @ruli-0.33//:ruli \
 @libusb-1.0.9//:usb \
+@libusb-compat-0.1.4//:libusb-compat \
 
 
 
