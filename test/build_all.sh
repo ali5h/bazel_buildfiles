@@ -35,6 +35,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @e2fsprogs-1.42.5//:com_err \
 @openssl-1.0.1p//:openssl \
 @openldap-2.4.33//:openldap \
+@liboop-1.0//:oop \
 
 
 # @libstdcxx-v3//:stdc++ \

@@ -234,8 +234,7 @@ new_local_repository(
     build_file = "repo/krb5-1.13.BUILD",
 )
 
-# FIX: depend on openssl
-# openldap-2.4.7 have syntax bug, will lead compile error in new toolchain
+# openldap-2.4.7 have syntax bug, will lead compile error in new toolchain. We use 2.4.33
 new_local_repository(
     name = "openldap-2.4.33",
     path = "/root/NasX86/SysLib/openldap-2.4.33",
@@ -250,6 +249,13 @@ new_local_repository(
     name = "openssl-1.0.1p",
     path = "/root/NasX86/SysLib/openssl-1.0.1p",
     build_file = "repo/openssl-1.0.1p.BUILD",
+)
+
+
+new_local_repository(
+    name = "liboop-1.0",
+    path = "/root/NasX86/SysLib/liboop-1.0",
+    build_file = "repo/liboop-1.0.BUILD",
 )
 
 # # SYS_LIBRARY
