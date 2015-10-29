@@ -291,6 +291,12 @@ new_local_repository(
     build_file = "repo/postgresql-9.4.4.BUILD",
 )
 
+new_local_repository(
+    name = "cyrus-sasl-2.1.22",
+    path = "/root/NasX86/SysLib/cyrus-sasl-2.1.22",
+    build_file = "repo/cyrus-sasl-2.1.22.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
