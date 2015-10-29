@@ -297,6 +297,12 @@ new_local_repository(
     build_file = "repo/cyrus-sasl-2.1.22.BUILD",
 )
 
+new_local_repository(
+    name = "libgpg-error-1.6",
+    path = "/root/NasX86/SysLib/libgpg-error-1.6",
+    build_file = "repo/libgpg-error-1.6.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

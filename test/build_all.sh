@@ -41,6 +41,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @libusb-compat-0.1.4//:libusb-compat \
 @postgresql-9.4.4//:pq \
 @cyrus-sasl-2.1.22//:sasl2 \
+@libgpg-error-1.6//:gpg-error \
 
 
 
