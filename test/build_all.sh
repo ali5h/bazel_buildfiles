@@ -36,6 +36,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @openssl-1.0.1p//:openssl \
 @openldap-2.4.33//:openldap \
 @liboop-1.0//:oop \
+@ruli-0.33//:ruli \
 
 
 # @libstdcxx-v3//:stdc++ \

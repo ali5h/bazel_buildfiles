@@ -20,7 +20,7 @@ cc_library(
             "oop-rl.h",
             "oop-read.h",
     ],
-    includes = [],
+    includes = ["."],
     copts = [],
 )
 

@@ -251,11 +251,20 @@ new_local_repository(
     build_file = "repo/openssl-1.0.1p.BUILD",
 )
 
-
+bind(
+    name = "liboop-latest",
+    actual = "@liboop-1.0//:oop",
+)
 new_local_repository(
     name = "liboop-1.0",
     path = "/root/NasX86/SysLib/liboop-1.0",
     build_file = "repo/liboop-1.0.BUILD",
+)
+
+new_local_repository(
+    name = "ruli-0.33",
+    path = "/root/NasX86/SysLib/ruli-0.33",
+    build_file = "repo/ruli-0.33.BUILD",
 )
 
 # # SYS_LIBRARY
