@@ -39,6 +39,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @ruli-0.33//:ruli \
 @libusb-1.0.9//:usb-1.0 \
 @libusb-compat-0.1.4//:libusb-compat \
+@postgresql-9.4.4//:pq \
 
 
 

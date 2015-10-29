@@ -285,6 +285,12 @@ new_local_repository(
     build_file = "repo/libusb-compat-0.1.4.BUILD",
 )
 
+new_local_repository(
+    name = "postgresql-9.4.4",
+    path = "/root/NasX86/SysLib/postgresql-9.4.4",
+    build_file = "repo/postgresql-9.4.4.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
