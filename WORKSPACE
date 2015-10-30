@@ -323,6 +323,12 @@ new_local_repository(
     build_file = "repo/gnutls-2.6.2.BUILD",
 )
 
+new_local_repository(
+    name = "libtasn1-1.6",
+    path = "/root/NasX86/SysLib/libtasn1-1.6",
+    build_file = "repo/libtasn1-1.6.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
