@@ -329,6 +329,12 @@ new_local_repository(
     build_file = "repo/libtasn1-1.6.BUILD",
 )
 
+new_local_repository(
+    name = "bzip2-1.0.6",
+    path = "/root/NasX86/SysLib/bzip2-1.0.6",
+    build_file = "repo/bzip2-1.0.6.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

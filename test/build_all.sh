@@ -45,6 +45,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @libgcrypt-1.4.3//:gcrypt \
 @gnutls-2.6.2//:libgnutls \
 @libtasn1-1.6//:tasn1 \
+@bzip2-1.0.6//:bz2 \
 
 
 
