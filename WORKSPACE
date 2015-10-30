@@ -335,6 +335,12 @@ new_local_repository(
     build_file = "repo/bzip2-1.0.6.BUILD",
 )
 
+new_local_repository(
+    name = "libnl-1.1.4",
+    path = "/root/NasX86/SysLib/libnl-1.1.4",
+    build_file = "repo/libnl-1.1.4.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
