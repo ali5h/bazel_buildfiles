@@ -297,10 +297,20 @@ new_local_repository(
     build_file = "repo/cyrus-sasl-2.1.22.BUILD",
 )
 
+bind(
+    name = "gpg-error-latest",
+    actual = "@libgpg-error-1.6//:gpg-error",
+)
 new_local_repository(
     name = "libgpg-error-1.6",
     path = "/root/NasX86/SysLib/libgpg-error-1.6",
     build_file = "repo/libgpg-error-1.6.BUILD",
+)
+
+new_local_repository(
+    name = "libgcrypt-1.4.3",
+    path = "/root/NasX86/SysLib/libgcrypt-1.4.3",
+    build_file = "repo/libgcrypt-1.4.3.BUILD",
 )
 
 # # SYS_LIBRARY

@@ -4,7 +4,7 @@ bazel clean
 # --dynamic_mode=fully: to compile all shared library
 # --hdrs_check=strict: to enable the header check
 
-bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=arm --define block_size=4096 \
+bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully --config=x86_64 --define block_size=4096 \
 @zlib-1.2.8//:z \
 @popt-1.14//:popt \
 @libid3tag-0.15.1b//:id3tag \
@@ -42,6 +42,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @postgresql-9.4.4//:pq \
 @cyrus-sasl-2.1.22//:sasl2 \
 @libgpg-error-1.6//:gpg-error \
+@libgcrypt-1.4.3//:gcrypt \
 
 
 
