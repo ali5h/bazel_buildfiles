@@ -307,10 +307,20 @@ new_local_repository(
     build_file = "repo/libgpg-error-1.6.BUILD",
 )
 
+bind(
+    name = "gcrypt-latest",
+    actual = "@libgcrypt-1.4.3//:gcrypt",
+)
 new_local_repository(
     name = "libgcrypt-1.4.3",
     path = "/root/NasX86/SysLib/libgcrypt-1.4.3",
     build_file = "repo/libgcrypt-1.4.3.BUILD",
+)
+
+new_local_repository(
+    name = "gnutls-2.6.2",
+    path = "/root/NasX86/SysLib/gnutls-2.6.2",
+    build_file = "repo/gnutls-2.6.2.BUILD",
 )
 
 # # SYS_LIBRARY

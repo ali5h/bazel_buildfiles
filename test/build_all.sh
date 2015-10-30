@@ -43,6 +43,7 @@ bazel build --hdrs_check=strict --linkopt=-Wl,--strip-all --dynamic_mode=fully -
 @cyrus-sasl-2.1.22//:sasl2 \
 @libgpg-error-1.6//:gpg-error \
 @libgcrypt-1.4.3//:gcrypt \
+@gnutls-2.6.2//:libgnutls \
 
 
 
