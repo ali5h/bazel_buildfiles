@@ -31,5 +31,8 @@ cc_library(
         "regex/src/*.cpp",
         "mpi/src/*.cpp",
         ]),
+    hdrs = [
+        "boost/shared_ptr.hpp",
+    ],
     includes = ["."],
 )
