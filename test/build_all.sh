@@ -4,7 +4,7 @@ bazel clean
 # --dynamic_mode=fully: to compile all shared library
 # --hdrs_check=strict: to enable the header check
 
-bazel build --linkopt=-Wl,--strip-all --dynamic_mode=fully --define block_size=4096 \
+bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --define block_size=4096 \
 @zlib-1.2.8//:z \
 @popt-1.14//:popt \
 @libid3tag-0.15.1b//:id3tag \
