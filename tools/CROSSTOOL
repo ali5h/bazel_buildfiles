@@ -63,8 +63,7 @@ toolchain {
   tool_path { name: "objdump" path: "/usr/bin/CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-objdump" }
   tool_path { name: "strip" path: "/usr/bin/CT/arm-QNAP-linux-gnueabi/cross-tools/bin/arm-QNAP-linux-gnueabi-strip" }
 
-  cxx_builtin_include_directory: "/usr/bin/CT/arm-QNAP-linux-gnueabi/cross-tools/lib/gcc/arm-QNAP-linux-gnueabi/4.9.2/include"
-  cxx_builtin_include_directory: "/usr/bin/CT/arm-QNAP-linux-gnueabi/cross-tools/lib/gcc/arm-QNAP-linux-gnueabi/4.9.2/include-fix"
+  cxx_builtin_include_directory: "/usr/bin/CT/arm-QNAP-linux-gnueabi/cross-tools/lib/gcc"
   cxx_builtin_include_directory: "/usr/bin/CT/arm-QNAP-linux-gnueabi/cross-tools/arm-QNAP-linux-gnueabi/include"
   cxx_builtin_include_directory: "/usr/bin/CT/arm-QNAP-linux-gnueabi/fs/include"
 
@@ -103,8 +102,7 @@ toolchain {
   tool_path { name: "objdump" path: "/usr/bin/CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-objdump" }
   tool_path { name: "strip" path: "/usr/bin/CT/i686-QNAP-linux-gnu/cross-tools/bin/i686-QNAP-linux-gnu-strip" }
 
-  cxx_builtin_include_directory: "/usr/bin/CT/i686-QNAP-linux-gnu/cross-tools/lib/gcc/i686-QNAP-linux-gnu/4.9.2/include"
-  cxx_builtin_include_directory: "/usr/bin/CT/i686-QNAP-linux-gnu/cross-tools/lib/gcc/i686-QNAP-linux-gnu/4.9.2/include-fix"
+  cxx_builtin_include_directory: "/usr/bin/CT/i686-QNAP-linux-gnu/cross-tools/lib/gcc"
   cxx_builtin_include_directory: "/usr/bin/CT/i686-QNAP-linux-gnu/cross-tools/i686-QNAP-linux-gnu/include"
   cxx_builtin_include_directory: "/usr/bin/CT/i686-QNAP-linux-gnu/fs/include"
 }
@@ -141,8 +139,7 @@ toolchain {
   tool_path { name: "objdump" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-objdump" }
   tool_path { name: "strip" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-strip" }
 
-  cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/lib/gcc/x86_64-QNAP-linux-gnu/4.9.2/include"
-  cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/lib/gcc/x86_64-QNAP-linux-gnu/4.9.2/include-fix"
+  cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/lib/gcc"
   cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/x86_64-QNAP-linux-gnu/include"
   cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/fs/include"
 }
