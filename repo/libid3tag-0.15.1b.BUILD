@@ -3,9 +3,7 @@ package(default_visibility = ["//visibility:public"])
 cc_library(
   name = "id3tag",
   srcs =  [
-
         "config.h",
-
         "version.c",
         "ucs4.c",
         "latin1.c",
@@ -44,4 +42,5 @@ cc_library(
         ],
   hdrs = ["id3tag.h", "genre.dat"],
   copts = ["-DHAVE_CONFIG_H", "-w"],
+  deps = ["//external:zlib-latest"],
 )
