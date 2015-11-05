@@ -7,7 +7,12 @@ cc_library(
                 "lib/*.h",
                 "expat_config.h",
                 ]),
-  hdrs = ["lib/expat.h", "lib/expat_external.h"],
+  hdrs = [
+            "lib/expat.h",
+            "lib/expat_external.h",
+            "lib/xmltok_impl.c",
+            "lib/xmltok_ns.c",
+            ],
   includes = [".", "lib"],
   copts = [
             "-Wmissing-prototypes",
