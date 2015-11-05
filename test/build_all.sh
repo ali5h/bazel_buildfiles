@@ -11,7 +11,6 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @json-c-0.9//:json-c \
 @sqlite-3.4.1//:sqlite3 \
 @thin-provisioning-tools-v0.4.1//:thintools \
-@libaio-0.3.109//:aio \
 @boost_1_59_0//:boost \
 @expat-2.0.1//:expat \
 @fio-2.0.11//:fio \
@@ -51,6 +50,7 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 
 
 
+# @libaio-0.3.109//:aio \
 # @libstdcxx-v3//:stdc++ \
 # @libtirpc-0.3.0//:tirpc \
 # @librpcsecgss-0.19//:rpcsecgss \
