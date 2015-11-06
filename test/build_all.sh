@@ -13,7 +13,7 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @thin-provisioning-tools-v0.4.1//:thintools \
 @boost_1_59_0//:boost \
 @expat-2.0.1//:expat \
-@fio-2.0.11//:fio \
+@fio-2.2.10//:fio \
 @xmlrpc//:xmlrpc-epi \
 @libxml2-2.9.2//:xml2 \
 @eventlog-0.2.7//:evtlog \

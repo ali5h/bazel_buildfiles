@@ -83,9 +83,9 @@ new_local_repository(
 )
 
 new_local_repository(
-    name = "fio-2.0.11",
-    path = "/root/NasX86/SysUtil/fio-2.0.11",
-    build_file = "repo/fio-2.0.11.BUILD",
+    name = "fio-2.2.10",
+    path = "/root/NasX86/SysUtil/fio-2.2.10",
+    build_file = "repo/fio-2.2.10.BUILD",
 )
 
 new_local_repository(
