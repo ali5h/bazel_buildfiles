@@ -7,9 +7,32 @@ cc_library(
   deps = [":pam", ":pamc", ":pam_misc"],
 )
 
+filegroup(
+    name = "int_headers",
+    srcs = [
+        "libpamc/libpamc.h",
+        "libpam/pam_private.h",
+        "libpam/pam_modutil_private.h",
+        "libpam/pam_prelude.h",
+        "libpam/pam_static_modules.h",
+        "libpam/pam_tokens.h",
+        "config.h",
+        "modules/pam_filter/pam_filter.h",
+        "libpam/include/security/pam_appl.h",
+        "libpam/include/security/_pam_compat.h",
+        "libpam/include/security/pam_ext.h",
+        "libpam/include/security/_pam_macros.h",
+        "libpam/include/security/pam_modules.h",
+        "libpam/include/security/pam_modutil.h",
+        "libpam/include/security/_pam_types.h",
+        "libpamc/include/security/pam_client.h",
+        ],
+)
+
 cc_library(
   name = "pam",
   srcs = [
+        ":int_headers",
         "libpam/pam_account.c",
         "libpam/pam_auth.c",
         "libpam/pam_data.c",
@@ -39,7 +62,6 @@ cc_library(
         "libpam/pam_modutil_getspnam.c",
         "libpam/pam_modutil_getlogin.c",
         "libpam/pam_modutil_ingroup.c",
-        "config.h",
          ],
   copts = COPT_MACRO,
   hdrs = [
@@ -62,6 +84,7 @@ cc_library(
         "libpamc/pamc_client.c",
         "libpamc/pamc_converse.c",
         "libpamc/pamc_load.c",
+        ":int_headers",
          ],
   hdrs = [
         "libpamc/include/security/pam_client.h",
@@ -74,7 +97,7 @@ cc_library(
   srcs = [
           "libpam_misc/help_env.c",
           "libpam_misc/misc_conv.c",
-          "config.h",
+          ":int_headers",
          ],
   copts = ["-Wno-address"],
   hdrs = [
