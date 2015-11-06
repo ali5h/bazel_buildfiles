@@ -47,10 +47,10 @@ cc_library(
     "xmlmodule.c",
 	"schematron.c",
     "xzlib.c",
-    "config.h",
-    ],
-  hdrs = glob(["libxml/*.h"]),
-  includes = ["include"],
+    ] + glob(["*.h"]),
+
+  hdrs = glob(["include/libxml/*.h"]) + ["trionan.c"],
+  includes = ["include", "."],
   copts = ["-DLIBXML_THREAD_ENABLED"],
   deps = ["//external:zlib-latest"],
 )
