@@ -2,8 +2,26 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "libevent",
-    hdrs = ["event.h", "evhttp.h", "evdns.h", "evrpc.h", "evutil.h", ":event-config.h"],
     deps = [":event", "event_core", ":event_extra"],
+)
+
+filegroup(
+    name = "ext_headers",
+    srcs = [ "event.h", "evhttp.h", "evdns.h", "evrpc.h", "evutil.h", ":event-config.h"],
+)
+
+filegroup(
+    name = "int_headers",
+    srcs = [
+            "event-internal.h",
+            "min_heap.h",
+            "config.h",
+            "strlcpy-internal.h",
+            "http-internal.h",
+            "evrpc-internal.h",
+            "log.h",
+            "evsignal.h",
+            ],
 )
 
 cc_library(
@@ -16,18 +34,12 @@ cc_library(
     "evutil.c",
     "event_tagging.c",
     "http.c",
-    "evhttp.h",
-    "http-internal.h",
     "evdns.c",
-    "evdns.h",
     "evrpc.c",
-    "evrpc.h",
-    "evrpc-internal.h",
     "strlcpy.c",
-    "strlcpy-internal.h",
-    ":event-config.h",
-    "config.h",
+    ":int_headers",
     ],
+    hdrs = [":ext_headers"],
     includes = ["."],
     copts = ['-DHAVE_CONFIG_H',],
 )
@@ -39,10 +51,11 @@ cc_library(
     "buffer.c",
     "evbuffer.c",
     "log.c",
+    "log.h",
     "evutil.c",
-    ":event-config.h",
-    "config.h",
+    ":int_headers",
     ],
+    hdrs = [":ext_headers"],
     includes = ["."],
     copts = ['-DHAVE_CONFIG_H',],
 )
@@ -55,9 +68,9 @@ cc_library(
     "evdns.c",
     "evrpc.c",
     "strlcpy.c",
-    ":event-config.h",
-    "config.h",
+    ":int_headers",
     ],
+    hdrs = [":ext_headers"],
     includes = ["."],
     copts = ['-DHAVE_CONFIG_H',],
 )
