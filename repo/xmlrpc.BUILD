@@ -9,11 +9,16 @@ cc_library(
 	"src/simplestring.c",
 	"src/xml_element.c",
 	"src/xml_to_dandarpc.c",
+	"src/xml_to_dandarpc.h",
 	"src/xml_to_xmlrpc.c",
     "src/xml_to_soap.c",
 	"src/xmlrpc.c",
 	"src/xmlrpc_introspection.c",
     "src/system_methods.c",
+    "src/xmlrpc_private.h",
+    "src/xmlrpc_introspection_private.h",
+    "src/system_methods_private.h",
+    "src/xml_to_soap.h",
     ],
 
   hdrs = [
