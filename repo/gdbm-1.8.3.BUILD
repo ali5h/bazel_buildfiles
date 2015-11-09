@@ -1,5 +1,15 @@
 package(default_visibility = ["//visibility:public"])
 
+INTERNAL_HDRS = [
+            "autoconf.h",
+            "gdbmdefs.h",
+            "systems.h",
+            "gdbmconst.h",
+            "proto.h",
+            "extern.h",
+            "gdbmerrno.h",
+            ]
+
 cc_library(
     name = "libgdbm",
     deps = [":gdbm", ":gdbm-compat"],
@@ -29,7 +39,7 @@ cc_library(
         "update.c",
         "version.c",
 
-        ],
+        ] + INTERNAL_HDRS,
   hdrs = [
         ":gdbm.h",
         "dbm.h",
@@ -55,7 +65,7 @@ cc_library(
         "dbmdirfno.c",
         "dbmpagfno.c",
         "dbmrdonly.c",
-        ],
+        ] + INTERNAL_HDRS,
   hdrs = [
         ":gdbm.h",
         "dbm.h",
