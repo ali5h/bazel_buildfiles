@@ -20,6 +20,14 @@ cc_library(
         "c++/cursesapp.cc",
         "c++/cursesmain.cc",
         "c++/demo.cc",
+        "c++/internal.h",
+        "include/ncurses_cfg.h",
+        "include/ncurses_dll.h",
+        "menu/eti.h",
+        "include/unctrl.h",
+        "panel/panel.h",
+        "form/form.h",
+        "menu/menu.h",
         ],
 
   includes = ["include", "ncurses", "c++", "menu", "panel", "form"],
@@ -55,8 +63,11 @@ cc_library(
   srcs = [
             
         "menu/menu.priv.h",
+        "ncurses/curses.priv.h",
         "menu/mf_common.h",
         "gen_include_hdr",
+        "include/nc_panel.h",
+        "include/nc_alloc.h",
 
         "menu/m_attribs.c",
         "menu/m_cursor.c",
@@ -85,6 +96,10 @@ cc_library(
         "menu/m_trace.c",
         "menu/m_userptr.c",
         "menu/m_win.c",
+        "include/ncurses_dll.h",
+        "include/ncurses_cfg.h",
+        "include/unctrl.h",
+        "include/term_entry.h",
          ],
   copts = [
            "-DHAVE_CONFIG_H",
@@ -105,6 +120,9 @@ cc_library(
         "menu/eti.h",
         "menu/mf_common.h",
         "form/form.priv.h",
+        "ncurses/curses.priv.h",
+        "include/unctrl.h",
+        "include/term_entry.h",
 
         "form/f_trace.c",
         "form/fld_arg.c",
@@ -146,6 +164,10 @@ cc_library(
         "form/fty_ipv4.c",
         "form/fty_num.c",
         "form/fty_regex.c",
+        "include/ncurses_dll.h",
+        "include/ncurses_cfg.h",
+        "include/nc_panel.h",
+        "include/nc_alloc.h",
 
         ],
   copts = [
@@ -175,8 +197,15 @@ cc_library(
         "panel/p_update.c",
         "panel/p_user.c",
         "panel/p_win.c",
+        "panel/panel.priv.h",
+        "ncurses/curses.priv.h",
         "include/ncurses_cfg.h",
+        "include/ncurses_dll.h",
+        "include/nc_panel.h",
         ":gen_include_hdr",
+        "include/unctrl.h",
+        "include/term_entry.h",
+        "include/nc_alloc.h",
         ],
   copts = ["-DHAVE_CONFIG_H"],
   includes = ["include", "ncurses"],
@@ -257,7 +286,17 @@ genrule(
 
 cc_binary(
     name = "make_keys",
-    srcs = [ "ncurses/tinfo/make_keys.c",":gen_include_hdr"],
+    srcs = ["ncurses/tinfo/make_keys.c",
+            ":gen_include_hdr",
+            "ncurses/curses.priv.h", 
+            "include/ncurses_dll.h",
+            "include/ncurses_cfg.h",
+            "include/nc_panel.h",
+            "include/unctrl.h",
+            "include/term_entry.h",
+            "include/nc_alloc.h",
+            "include/tic.h",
+        ],
     includes = ["ncurses", "include"],
     deps = [":names_c_inc"],
     copts = [
@@ -270,8 +309,7 @@ cc_binary(
 cc_library(
     name = "names_c_inc",
     hdrs = [":ncurses/names.c"],
-)
-
+) 
 filegroup(
     name = "gen_include_hdr",
     srcs = [
@@ -358,7 +396,18 @@ genrule(
 
 cc_binary(
     name = "make_hash",
-    srcs = [ "ncurses/tinfo/comp_hash.c",":gen_include_hdr"],
+    srcs = [ 
+        "ncurses/tinfo/comp_hash.c",
+        ":gen_include_hdr",
+        "ncurses/curses.priv.h", 
+        "include/ncurses_dll.h",
+        "include/ncurses_cfg.h",
+        "include/nc_panel.h",
+        "include/unctrl.h",
+        "include/term_entry.h",
+        "include/nc_alloc.h",
+        "include/tic.h",
+        ],
     includes = ["ncurses", "include"],
     copts = [
              "-DMAIN_PROGRAM",
@@ -366,8 +415,14 @@ cc_binary(
              "-D_GNU_SOURCE",
              "-DNDEBUG",
             ],
+    deps = [":doalloc_c"],
 )
 
+cc_library(
+    name = "doalloc_c",
+    hdrs = ["ncurses/tinfo/doalloc.c"],
+    includes = ["ncurses"],
+)
 
 cc_library(
   name = "ncurses",
@@ -519,6 +574,12 @@ cc_library(
         "ncurses/tinfo/write_entry.c",
 
         "ncurses/curses.priv.h",
+        "include/ncurses_dll.h",
+        "include/ncurses_cfg.h",
+        "include/nc_panel.h",
+        "include/nc_alloc.h",
+        "ncurses/SigAction.h",
+        "ncurses/fifo_defs.h",
 
          ],
   includes = ["ncurses", "include", "ncurses/tinfo"],
@@ -532,8 +593,11 @@ cc_library(
         "include/ncurses_dll.h",
         "include/term_entry.h",
         "include/tic.h",
+        "include/capdefaults.c",
          ],
 )
+
+
 
 genrule(
     name = "symlink_curses.h",
