@@ -9,7 +9,11 @@ cc_library(
             "src/java_raw_api.c",
             "src/closures.c",
             "x86_64-unknown-linux-gnu/fficonfig.h",
+            "include/ffi_common.h",
+            "x86_64-unknown-linux-gnu/include/ffi.h",
+            "x86_64-unknown-linux-gnu/include/ffitarget.h",
+
          ],
-  hdrs = ["x86_64-unknown-linux-gnu/include"],
-  includes = ["x86_64-unknown-linux-gnu", "x86_64-unknown-linux-gnu/include", "include"],
+  hdrs = ["src/dlmalloc.c"],
+  includes = ["include", "x86_64-unknown-linux-gnu/include", "x86_64-unknown-linux-gnu"],
 )
