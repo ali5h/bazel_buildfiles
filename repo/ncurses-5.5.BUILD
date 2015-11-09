@@ -54,7 +54,7 @@ genrule(
     outs = ["c++/etip.h"],
     cmd = """
         cp $(location c++/etip.h.in) $@
-        sh $(location c++/edit_cfg.sh) $(location include/ncurses_cfg.h) $@
+        sh $(location c++/edit_cfg.sh) $(location include/ncurses_cfg.h) $@ &> /dev/null
           """,
 )
 
@@ -234,7 +234,7 @@ genrule(
     srcs = ["include/Caps", "include/MKterm.h.awk", "include/edit_cfg.sh", "include/ncurses_cfg.h"],
     outs = ["include/term.h"],
     cmd = "mawk -f $(location include/MKterm.h.awk) $(location include/Caps) > $@;" +
-          "sh $(location include/edit_cfg.sh) $(location include/ncurses_cfg.h) $@;",
+          "sh $(location include/edit_cfg.sh) $(location include/ncurses_cfg.h) $@ &> /dev/null;",
 )
 
 genrule(
