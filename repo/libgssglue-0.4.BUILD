@@ -47,6 +47,7 @@ cc_library(
         "src/g_ccache_name.c",
         "src/mglueP.h",
         "src/mechglue.h",
+        "src/gssglue/config.h",
         ],
     hdrs = [":src/gssglue/gssapi/gssapi.h"],
     includes = ["src/gssglue"],
