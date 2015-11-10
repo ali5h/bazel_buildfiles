@@ -1,5 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 
+INTERNAL_HDRS = [
+                "cfg.h",
+                "queue.h",
+                "nfsidmap_internal.h",
+            ]
+
 filegroup(
     name = "libnfsidmap",
     srcs = [
@@ -16,23 +22,20 @@ cc_library(
         "libnfsidmap.c",
         "cfg.c",
         "strlcpy.c",
-        "cfg.h",
-        "nfsidmap_internal.h",
-        "queue.h",
-        ],
+        ] + INTERNAL_HDRS,
     hdrs = ["nfsidmap.h"],
 )
 
 
 cc_binary(
     name = "nsswitch.so",
-    srcs = ["nss.c",],
+    srcs = ["nss.c","nfsidmap.h"] + INTERNAL_HDRS,
     linkshared = 1,
 )
 
 cc_binary(
     name = "static.so",
-    srcs = ["static.c",],
+    srcs = ["static.c", "nfsidmap.h"] + INTERNAL_HDRS,
     linkshared = 1,
 )
 
