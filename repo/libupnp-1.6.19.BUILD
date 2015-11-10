@@ -1,13 +1,27 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "libupnp",
-    deps = [":upnp", ":ixml", ":threadutil"],
-)
+EXTERNAL_HDRS = [
+        "upnp/inc/UpnpString.h",
+        "upnp/inc/upnp.h",
+        "upnp/inc/upnpdebug.h",
+        "upnp/inc/UpnpGlobal.h",
+        "upnp/inc/UpnpInet.h",
+        "upnp/inc/UpnpIntTypes.h",
+        "upnp/inc/UpnpStdInt.h",
+        "upnp/inc/UpnpUniStd.h",
+        "upnp/inc/upnpconfig.h",
+        "upnp/inc/upnptools.h",
+        "ixml/inc/ixml.h",
+        "ixml/inc/ixmldebug.h",
+        "threadutil/inc/FreeList.h",
+        "threadutil/inc/LinkedList.h",
+        "threadutil/inc/ThreadPool.h",
+        "threadutil/inc/TimerThread.h",
+        "threadutil/inc/ithread.h",
+]
 
-cc_library(
-  name = "upnp",
-  srcs = [
+INTERNAL_HDRS = [
+        "build/inc/autoconfig.h",
         "upnp/src/inc/config.h",
         "upnp/src/inc/client_table.h",
         "upnp/src/inc/gena.h",
@@ -41,6 +55,19 @@ cc_library(
         "upnp/src/inc/VirtualDir.h",
         "upnp/src/inc/webserver.h",
         "upnp/src/ssdp/ssdp_ResultData.h",
+        "ixml/src/inc/ixmlmembuf.h",
+        "ixml/src/inc/ixmlparser.h",
+
+]
+
+cc_library(
+    name = "libupnp",
+    deps = [":upnp", ":ixml", ":threadutil"],
+)
+
+cc_library(
+  name = "upnp",
+  srcs = [
         "upnp/src/ssdp/ssdp_device.c",
         "upnp/src/ssdp/ssdp_ctrlpt.c",
         "upnp/src/ssdp/ssdp_server.c",
@@ -75,20 +102,9 @@ cc_library(
         "upnp/src/inet_pton.c",
         "upnp/src/inc/inet_pton.h",
 
-        ],
-  hdrs = [
-        "upnp/inc/UpnpString.h",
-        "upnp/inc/upnp.h",
-        "upnp/inc/upnpdebug.h",
-        "upnp/inc/UpnpGlobal.h",
-        "upnp/inc/UpnpInet.h",
-        "upnp/inc/UpnpIntTypes.h",
-        "upnp/inc/UpnpStdInt.h",
-        "upnp/inc/UpnpUniStd.h",
-        "upnp/inc/upnpconfig.h",
-        "upnp/inc/upnptools.h",
-        ],
-  includes = ["upnp/src/inc", ".", "upnp/inc", "threadutil/inc", "ixml/inc"],
+        ] + INTERNAL_HDRS,
+  hdrs = EXTERNAL_HDRS,
+  includes = ["upnp/src/inc", ".", "upnp/inc", "threadutil/inc", "ixml/inc", "build/inc"],
   copts = ["-DHAVE_CONFIG_H"],
 )
 
@@ -98,8 +114,6 @@ cc_library(
         "ixml/src/attr.c",
         "ixml/src/document.c",
         "ixml/src/element.c",
-        "ixml/src/inc/ixmlmembuf.h",
-        "ixml/src/inc/ixmlparser.h",
         "ixml/src/ixml.c",
         "ixml/src/ixmldebug.c",
         "ixml/src/ixmlparser.c",
@@ -107,12 +121,9 @@ cc_library(
         "ixml/src/namedNodeMap.c",
         "ixml/src/node.c",
         "ixml/src/nodeList.c",
-        ],
-  hdrs = [
-        "ixml/inc/ixml.h",
-        "ixml/inc/ixmldebug.h",
-        ],
-  includes = [".", "ixml/src/inc", "ixml/inc", "upnp/inc"],
+        ] + INTERNAL_HDRS,
+  hdrs = EXTERNAL_HDRS,
+  includes = [".", "ixml/src/inc", "ixml/inc", "upnp/inc", "build/inc"],
   copts = ["-DHAVE_CONFIG_H", "-DNDEBUG"],
 )
 
@@ -128,13 +139,7 @@ cc_library(
 			"threadutil/inc/TimerThread.h",
 			"threadutil/src/TimerThread.c",
         ],
-  hdrs = [
-        "threadutil/inc/FreeList.h",
-        "threadutil/inc/LinkedList.h",
-        "threadutil/inc/ThreadPool.h",
-        "threadutil/inc/TimerThread.h",
-        "threadutil/inc/ithread.h",
-        ],
+  hdrs = EXTERNAL_HDRS,
   includes = ["threadutil/inc", "upnp/inc"],
   copts = ["-DHAVE_CONFIG_H", "-DNO_DEBUG", "-DNDEBUG"],
 )
