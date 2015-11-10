@@ -1,9 +1,29 @@
 package(default_visibility = ["//visibility:public"])
 
+
+EXTERNAL_HDRS = [
+
+            "src/include/c.h",
+            "src/interfaces/libpq/libpq-int.h",
+            "src/include/libpq/pqcomm.h",
+            "src/include/port.h",
+            "src/include/postgres_fe.h",
+            "src/interfaces/libpq/pqexpbuffer.h",
+            "src/interfaces/libpq/libpq-events.h",
+            "src/interfaces/libpq/libpq-fe.h",
+            "src/include/libpq/libpq-fs.h",
+            "src/include/pg_config.h",
+            "src/include/pg_config_ext.h",
+            "src/include/pg_config_manual.h",
+            "src/include/pg_config_os.h",
+            "src/include/postgres_ext.h",
+
+                ]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
 cc_library(
     name = "pq",
     srcs = [
-    
             "src/interfaces/libpq/fe-auth.c",
             "src/interfaces/libpq/fe-connect.c",
             "src/interfaces/libpq/fe-exec.c",
@@ -27,26 +47,10 @@ cc_library(
             "src/backend/libpq/md5.c",
             "src/backend/utils/mb/encnames.c",
             "src/backend/utils/mb/wchar.c",
-            "src/include/pg_config.h",
             ":src/port/pg_config_paths.h",
 
-    ],
-    hdrs = [
-            "src/include/c.h",
-            "src/interfaces/libpq/libpq-int.h",
-            "src/include/libpq/pqcomm.h",
-            "src/include/port.h",
-            "src/include/postgres_fe.h",
-            "src/interfaces/libpq/pqexpbuffer.h",
-            "src/interfaces/libpq/libpq-events.h",
-            "src/interfaces/libpq/libpq-fe.h",
-            "src/include/libpq/libpq-fs.h",
-            "src/include/pg_config.h",
-            "src/include/pg_config_ext.h",
-            "src/include/pg_config_manual.h",
-            "src/include/pg_config_os.h",
-            "src/include/postgres_ext.h",
-    ],
+    ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     includes = ["src/include", "src/backend", "src/port"],
     copts = ["-D_GNU_SOURCE"],
 )
