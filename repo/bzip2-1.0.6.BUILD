@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+EXTERNAL_HDRS = ["bzlib.h"]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
 cc_library(
     name = "bz2",
     srcs = [
@@ -10,8 +13,8 @@ cc_library(
             "compress.c",
             "decompress.c",
             "bzlib.c",
-    ],
-    hdrs = ["bzlib.h"],
+    ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     includes = ["."],
     copts = ["-D_FILE_OFFSET_BITS=64"],
 )

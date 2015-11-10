@@ -10,7 +10,6 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @libid3tag-0.15.1b//:id3tag \
 @json-c-0.9//:json-c \
 @sqlite-3.4.1//:sqlite3 \
-@thin-provisioning-tools-v0.4.1//:thintools \
 @boost_1_59_0//:boost \
 @expat-2.0.1//:expat \
 @fio-2.2.10//:fio \
@@ -45,11 +44,11 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @gnutls-2.6.2//:libgnutls \
 @libtasn1-1.6//:tasn1 \
 @bzip2-1.0.6//:bz2 \
-@bzip2-1.0.6//:bz2 \
-@libnl-1.1.4//:nl \
 
 
 
+# @thin-provisioning-tools-v0.4.1//:thintools \
+# @libnl-1.1.4//:nl \
 # @libaio-0.3.109//:aio \
 # @libstdcxx-v3//:stdc++ \
 # @libtirpc-0.3.0//:tirpc \

@@ -1,42 +1,31 @@
 package(default_visibility = ["//visibility:public"])
 
+EXTERNAL_HDRS = ["src/gcrypt.h", "src/gcrypt-module.h"]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
 cc_library(
     name = "gcrypt",
     srcs = [
     
-            "src/g10lib.h",
             "src/visibility.c",
-            "src/visibility.h",
-            "src/types.h",
-            "src/cipher.h",
-            "src/cipher-proto.h",
             "src/misc.c",
             "src/global.c",
             "src/sexp.c",
             "src/hwfeatures.c",
             "src/stdmem.c",
-            "src/stdmem.h",
             "src/secmem.c",
-            "src/secmem.h",
-            "src/mpi.h",
             "src/missing-string.c",
             "src/module.c",
             "src/fips.c",
             "src/hmac256.c",
-            "src/hmac256.h",
-            "src/ath.h",
             "src/ath.c",
-            "config.h",
             "cipher/cipher.c",
             "cipher/pubkey.c",
             "cipher/ac.c",
             "cipher/md.c",
             "cipher/hmac-tests.c",
-            "cipher/bithelp.h",
             "cipher/primegen.c",
             "cipher/hash-common.c",
-            "cipher/hash-common.h",
-            "cipher/rmd.h",
             "cipher/arcfour.c",
             "cipher/blowfish.c",
             "cipher/cast5.c",
@@ -48,7 +37,6 @@ cc_library(
             "cipher/md4.c",
             "cipher/md5.c",
             "cipher/rijndael.c",
-            "cipher/rijndael-tables.h",
             "cipher/rmd160.c",
             "cipher/rsa.c",
             "cipher/seed.c",
@@ -61,11 +49,8 @@ cc_library(
             "cipher/twofish.c",
             "cipher/rfc2268.c",
             "cipher/camellia.c",
-            "cipher/camellia.h",
             "cipher/camellia-glue.c",
             "random/random.c",
-            "random/random.h",
-            "random/rand-internal.h",
             "random/random-csprng.c",
             "random/random-fips.c",
             "random/rndhw.c",
@@ -88,7 +73,9 @@ cc_library(
             "mpi/mpiutil.c",
             "mpi/ec.c",
 
-            # FIX: target platform depended, *.S are symlink to the correct architect
+            # FIX: target platform depended, *.S are symlink to the correct architect, will fail
+            # with --config=arm currently
+
             "mpi/mpih-add1-asm.S",
             "mpi/mpih-sub1-asm.S",
             "mpi/mpih-mul1-asm.S",
@@ -97,8 +84,8 @@ cc_library(
             "mpi/mpih-lshift-asm.S",
             "mpi/mpih-rshift-asm.S",
 
-    ],
-    hdrs = ["src/gcrypt.h", "src/gcrypt-module.h"],
+    ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     includes = [".", "src"],
     copts = ["-DHAVE_CONFIG_H", "-w"],
     deps = ["//external:gpg-error-latest"],

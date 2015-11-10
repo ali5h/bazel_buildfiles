@@ -1,8 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "libgnutls",
-    hdrs = [
+EXTERNAL_HDRS = [
             "includes/gnutls/compat.h",
             "includes/gnutls/crypto.h",
             "includes/gnutls/extra.h",
@@ -11,15 +9,17 @@ cc_library(
             "includes/gnutls/openssl.h",
             "includes/gnutls/pkcs12.h",
             "includes/gnutls/x509.h",
-    ],
-    includes = ["includes"],
+]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
+cc_library(
+    name = "libgnutls",
     deps = [":gnutls", "gnutls-extra", "gnutls-openssl"],
 )
 
 cc_library(
     name = "gnutls",
     srcs = [
-            "config.h",
             "lib/gnutls_record.c",
             "lib/gnutls_compress.c",
             "lib/debug.c",
@@ -145,7 +145,8 @@ cc_library(
             "lib/x509/output.c",
             "lib/x509/pbkdf2-sha1.c",
 
-    ],
+    ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     includes = ["lib", "includes", "lib/minitasn1", "lgl", ".", "lib/opencdk", "lib/openpgp", "lib/x509"],
     copts = ["-DHAVE_CONFIG_H", '-DLOCALEDIR=\\"/usr/share/locale\\"'],
     deps = ["//external:gcrypt-latest", "//external:zlib-latest"],
@@ -154,7 +155,6 @@ cc_library(
 cc_library(
     name = "gnutls-extra",
     srcs = [
-            "config.h",
             "libextra/gnutls_extra.c",
             "libextra/fipsmd5.c",
             "libextra/ext_inner_application.c",
@@ -162,7 +162,8 @@ cc_library(
             "libextra/gl/hmac-md5.c",
             "libextra/gl/md5.c",
             "libextra/gl/memxor.c",
-    ],
+    ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     includes = ["libextra", ".", "libextra/gl"],
     copts = ["-DHAVE_CONFIG_H"],
     deps = [":gnutls"],
@@ -173,7 +174,8 @@ cc_library(
     srcs = [
             "libextra/gnutls_openssl.c",
             "libextra/openssl_compat.c",
-    ],
+    ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     includes = ["libextra"],
     deps = [":gnutls"],
 )
