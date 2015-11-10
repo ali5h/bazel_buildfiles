@@ -1,17 +1,19 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_binary(
-     name = "openssl",
-     srcs = [
-            "apps/progs.h",
-            "apps/openssl.c",
-     ],
-     deps = [":openssl-dev"],
-)
+INTERNAL_HDRS = [
+            "ssl/ssl_locl.h",
+            "crypto/cryptlib.h",
+            "e_os.h",
+            "crypto/constant_time_locl.h",
+            "ssl/kssl_lcl.h",
+            "crypto/o_dir.h",
+            "MacOS/buildinf.h",
+            "crypto/o_str.h",
+            "crypto/o_time.h",
+            "crypto/ec/ec_lcl.h",
+        ]
 
-cc_library(
-    name = "openssl-dev",
-    hdrs = [
+EXTERNAL_HDRS = [
         "include/openssl/opensslconf.h",
         "include/openssl/aes.h",
         "include/openssl/asn1.h",
@@ -85,7 +87,19 @@ cc_library(
         "include/openssl/x509.h",
         "include/openssl/x509_vfy.h",
         "include/openssl/x509v3.h",
-    ],
+        ]
+
+cc_binary(
+     name = "openssl",
+     srcs = [
+            "apps/progs.h",
+            "apps/openssl.c",
+     ],
+     deps = [":openssl-dev"],
+)
+
+cc_library(
+    name = "openssl-dev",
     deps = [":ssl", ":crypto"],
 )
 
@@ -140,8 +154,10 @@ cc_library(
         "ssl/tls_srp.c",
         "ssl/t1_reneg.c",
         "ssl/ssl_utst.c",
-        ],
-    includes = [".", "include", "crypto"],
+        "ssl/srtp.h",
+        ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
+    includes = [".", "include", "crypto", "ssl"],
 )
 
 cc_library(
@@ -162,6 +178,9 @@ cc_library(
         "crypto/o_fips.c",
         "crypto/o_init.c",
         "crypto/fips_ers.c",
-        ],
+        ] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS +[
+            "crypto/LPdir_unix.c",
+    ],
     includes = ["include", ".", "MacOS"],
 )
