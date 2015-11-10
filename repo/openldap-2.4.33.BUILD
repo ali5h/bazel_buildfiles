@@ -1,8 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "openldap",
-    hdrs = [
+EXTERNAL_HDRS = [
             "include/ldif.h",
             "include/ldap_utf8.h",
             "include/ldap_schema.h",
@@ -10,14 +8,22 @@ cc_library(
             "include/ldap_cdefs.h",
             "include/ldap.h",
             "include/lber.h",
-            "include/lber_typess.h",
-        ],
+            "include/lber_types.h",
+                ]
+
+INTERNAL_HDRS = [
+            ":include/ldap_config.h",
+                ]+  glob(["**/*.h"], exclude=EXTERNAL_HDRS)
+
+
+cc_library(
+    name = "openldap",
     deps = [ "lber", "ldap", "ldap_r"],
 )
 
 cc_library(
     name = "lber",
-    srcs = [
+    srcs = INTERNAL_HDRS + [
 
             "libraries/liblber/assert.c",
             "libraries/liblber/decode.c",
@@ -29,9 +35,9 @@ cc_library(
             "libraries/liblber/options.c",
             "libraries/liblber/sockbuf.c",
             "libraries/liblber/stdio.c",
-            ":include/ldap_config.h",
 
         ],
+    hdrs = EXTERNAL_HDRS,
     copts = ["-DLBER_LIBRARY"],
     includes = ["include"],
 )
@@ -56,8 +62,7 @@ genrule(
 
 cc_library(
     name = "ldap",
-    srcs = [
-
+    srcs = INTERNAL_HDRS + [
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -120,9 +125,9 @@ cc_library(
             "libraries/libldap/deref.c",
             "libraries/libldap/ldif.c",
             "libraries/libldap/fetch.c",
-            ":include/ldap_config.h",
 
         ],
+    hdrs = EXTERNAL_HDRS,
     copts = ["-DLDAP_LIBRARY"],
     includes = ["include"],
     deps = ["//external:openssl-latest"],
@@ -130,7 +135,7 @@ cc_library(
 
 cc_library(
     name = "ldap_r",
-    srcs = [
+    srcs = INTERNAL_HDRS + [
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -205,9 +210,9 @@ cc_library(
             "libraries/libldap_r/thr_pth.c",
             "libraries/libldap_r/thr_stub.c",
             "libraries/libldap_r/thr_debug.c",
-            ":include/ldap_config.h",
 
         ],
+    hdrs = EXTERNAL_HDRS,
     copts = ["-DLDAP_R_COMPILE"],
     includes = ["include", "libraries/libldap"],
     deps = ["//external:openssl-latest"],
