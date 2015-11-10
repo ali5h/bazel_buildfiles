@@ -1,11 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 
+EXTERNAL_HDRS = ["src/gpg-error.h",]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
 cc_library(
     name = "gpg-error",
-    srcs = [
-            "config.h",
-            "src/gpg-error.h",
-            "src/gettext.h",
+    srcs =  INTERNAL_HDRS + [
             "src/init.c",
             "src/strsource.c",
             "src/strerror.c",
@@ -15,7 +15,7 @@ cc_library(
             ":src/code-from-errno.h",
 
         ],
-    hdrs = ["src/gpg-error.h"],
+    hdrs = EXTERNAL_HDRS,
     includes = ["src", "."],
     copts = ["-DHAVE_CONFIG_H", '-DLOCALEDIR=\\"/usr/local/share/locale\\"'],
 )
