@@ -1,11 +1,46 @@
 package(default_visibility = ["//visibility:public"])
 
+EXTERNAL_HDRS = [
+            "tirpc/netconfig.h",
+            "tirpc/rpcsvc/crypt.x",
+            "tirpc/rpcsvc/crypt.h",
+            "tirpc/rpc/xdr.h",
+            "tirpc/rpc/types.h",
+            "tirpc/rpc/svc_soc.h",
+            "tirpc/rpc/svc.h",
+            "tirpc/rpc/svc_dg.h",
+            "tirpc/rpc/svc_auth.h",
+            "tirpc/rpc/rpc_msg.h",
+            "tirpc/rpc/rpc.h",
+            "tirpc/rpc/rpcsec_gss.h",
+            "tirpc/rpc/rpcent.h",
+            "tirpc/rpc/rpc_com.h",
+            "tirpc/rpc/rpcb_prot.x",
+            "tirpc/rpc/rpcb_prot.h",
+            "tirpc/rpc/rpcb_clnt.h",
+            "tirpc/rpc/raw.h",
+            "tirpc/rpc/pmap_rmt.h",
+            "tirpc/rpc/pmap_prot.h",
+            "tirpc/rpc/pmap_clnt.h",
+            "tirpc/rpc/nettype.h",
+            "tirpc/rpc/clnt_stat.h",
+            "tirpc/rpc/clnt_soc.h",
+            "tirpc/rpc/clnt.h",
+            "tirpc/rpc/auth_unix.h",
+            "tirpc/rpc/auth_kerb.h",
+            "tirpc/rpc/auth.h",
+            "tirpc/rpc/auth_gss.h",
+            "tirpc/rpc/des.h",
+            "tirpc/rpc/des_crypt.h",
+            "tirpc/rpc/auth_des.h",
+            ]
+
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
 cc_library(
   name = "tirpc",
-  srcs = [
+  srcs = INTERNAL_HDRS + [
 
-        "config.h",
         "src/auth_none.c",
         "src/auth_unix.c",
         "src/authunix_prot.c",
@@ -67,9 +102,10 @@ cc_library(
         "src/des_impl.c",
 
         ],
-  hdrs = [],
-  includes = ["tirpc"],
+  hdrs = EXTERNAL_HDRS,
+  includes = ["tirpc", "."],
   copts = ["-DHAVE_CONFIG_H", "-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe"],
+  deps = ["//external:krb5-latest"],
 )
 
 
