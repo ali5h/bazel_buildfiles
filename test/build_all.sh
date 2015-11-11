@@ -52,5 +52,5 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 # @libaio-0.3.109//:aio \
 # @libstdcxx-v3//:stdc++ \
 # @libtirpc-0.3.0//:tirpc \ DEPEND ON KRB5
-# @librpcsecgss-0.19//:rpcsecgss \
+# @librpcsecgss-0.19//:rpcsecgss \ DEPEND ON KRB5
 # @krb5-1.13//:

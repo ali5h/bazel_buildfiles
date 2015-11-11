@@ -1,8 +1,18 @@
 package(default_visibility = ["//visibility:public"])
 
+EXTERNAL_HDRS = [
+        "include/rpcsecgss/rpc/auth.h",
+        "include/rpcsecgss/rpc/auth_gss.h",
+        "include/rpcsecgss/rpc/rpc.h",
+        "include/rpcsecgss/rpc/rpcsecgss_rename.h",
+        "include/rpcsecgss/rpc/svc.h",
+        "include/rpcsecgss/rpc/svc_auth.h",
+            ]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
 cc_library(
     name = "rpcsecgss",
-    srcs = [
+    srcs = INTERNAL_HDRS + [
         "src/auth_gss.c",
         "src/authgss_prot.c",
         "src/svc.c",
@@ -23,14 +33,7 @@ cc_library(
         "src/clnt_tcp.c",
         "src/clnt_udp.c",
         ],
-    hdrs = [
-        "include/rpcsecgss/rpc/auth.h",
-        "include/rpcsecgss/rpc/auth_gss.h",
-        "include/rpcsecgss/rpc/rpc.h",
-        "include/rpcsecgss/rpc/rpcsecgss_rename.h",
-        "include/rpcsecgss/rpc/svc.h",
-        "include/rpcsecgss/rpc/svc_auth.h",
-        ],
+    hdrs = EXTERNAL_HDRS,
     includes = ["include/rpcsecgss/"],
     copts = [
         '-DPACKAGE_NAME=\\"librpcsecgss\\"',
