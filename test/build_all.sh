@@ -2,7 +2,7 @@ bazel clean
 
 # --linkopt=-Wl,--strip-all: to strip all shared library
 # --dynamic_mode=fully: to compile all shared library
-# --hdrs_check=strict: to enable the header check
+# --spawn_strategy=standalone --genrule_strategy=standalone : disable sandbox completely
 
 bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --define block_size=4096 \
 @zlib-1.2.8//:z \
