@@ -1,10 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-  name = "aio",
-  srcs = [
-        "src/vsys_def.h",
-        
+EXTERNAL_HDRS = ["src/libaio.h"]
+INTERNAL_HDRS = glob(["src/*.h"], EXTERNAL_HDRS)
+
+filegroup(
+    name = "c_srcs",
+    srcs = EXTERNAL_HDRS + INTERNAL_HDRS + [
         "src/io_queue_init.c",
         "src/io_queue_release.c",
         "src/io_queue_wait.c",
@@ -16,17 +17,27 @@ cc_library(
         "src/io_destroy.c",
         "src/raw_syscall.c",
         "src/compat-0_1.c",
-        "src/syscall.h",
-        "src/syscall-arm.h",
-        "src/syscall-x86_64.h",
-        "src/syscall-i386.h",
+    ],
+)
 
-        ],
-  hdrs = ["src/libaio.h", "src/libaio.map"],
-  # FIX: need to remove this one probably by genrule
-  linkopts = ["-Wl,--version-script=/root/NasX86/SysLib/libaio-0.3.109/src/libaio.map"],
+genrule(
+    name = "symbol_versioning",
+    srcs = [":c_srcs", "src/libaio.map"],
+    outs = ["libaio.so"],
+    cmd = """
+        TMPDIR=$$(mktemp -d)
+        cp $(locations :c_srcs) $(location src/libaio.map) $$TMPDIR/
+        (cd $$TMPDIR && $(CC) *.c -I. -nostdlib -nostartfiles -fomit-frame-pointer -O2 -fPIC -shared -Wl,--version-script=libaio.map -o libaio.so)
+        cp $$TMPDIR/libaio.so  $@
+        rm -fr $$TMPDIR
+    """
+)
+
+cc_library(
+  name = "aio",
+  srcs = [":libaio.so"],
+  hdrs = EXTERNAL_HDRS,
   includes = ["src"],
-  copts = ["-nostdlib", "-nostartfiles", "-fomit-frame-pointer", "-fPIC", "-shared"],
 )
 
 

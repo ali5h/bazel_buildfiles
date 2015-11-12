@@ -45,12 +45,12 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @libtasn1-1.6//:tasn1 \
 @bzip2-1.0.6//:bz2 \
 @fuse-2.9.2//:libfuse \
+@libaio-0.3.109//:aio \
 
 
 
 # @thin-provisioning-tools-v0.4.1//:thintools \
 # @libnl-1.1.4//:nl \
-# @libaio-0.3.109//:aio \
 # @libstdcxx-v3//:stdc++ \
 # @libtirpc-0.3.0//:tirpc \ DEPEND ON KRB5
 # @librpcsecgss-0.19//:rpcsecgss \ DEPEND ON KRB5
