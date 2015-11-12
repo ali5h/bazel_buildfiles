@@ -359,6 +359,12 @@ new_local_repository(
     build_file = "repo/xmlrpc-c-1.25.28.BUILD",
 )
 
+new_local_repository(
+    name = "jrtplib-3.3.0",
+    path = "/root/NasX86/SysLib/jrtplib-3.3.0",
+    build_file = "repo/jrtplib-3.3.0.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
