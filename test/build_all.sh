@@ -50,9 +50,14 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 
 
 
+# @libstdcxx-v3//:stdc++ \
+
+# depend on krb5
+# @libtirpc-0.3.0//:tirpc \
+# @librpcsecgss-0.19//:rpcsecgss \
+# @krb5-1.13//:
+
+# Mount headers error
+# @xmlrpc-c-1.25.28//:xmlrpc
 # @thin-provisioning-tools-v0.4.1//:thintools \
 # @libnl-1.1.4//:nl \
-# @libstdcxx-v3//:stdc++ \
-# @libtirpc-0.3.0//:tirpc \ DEPEND ON KRB5
-# @librpcsecgss-0.19//:rpcsecgss \ DEPEND ON KRB5
-# @krb5-1.13//:
