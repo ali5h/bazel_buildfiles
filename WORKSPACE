@@ -341,6 +341,12 @@ new_local_repository(
     build_file = "repo/libnl-1.1.4.BUILD",
 )
 
+new_local_repository(
+    name = "fuse-2.9.2",
+    path = "/root/NasX86/SysLib/fuse-2.9.2",
+    build_file = "repo/fuse-2.9.2.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

@@ -44,6 +44,7 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @gnutls-2.6.2//:libgnutls \
 @libtasn1-1.6//:tasn1 \
 @bzip2-1.0.6//:bz2 \
+@fuse-2.9.2//:libfuse \
 
 
 
