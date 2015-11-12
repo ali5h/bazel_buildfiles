@@ -46,6 +46,7 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @bzip2-1.0.6//:bz2 \
 @fuse-2.9.2//:libfuse \
 @libaio-0.3.109//:aio \
+@ntfs-3g-1.2412//:ntfs-3g-files \
 
 
 
