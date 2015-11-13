@@ -59,17 +59,12 @@ new_local_repository(
 
 bind(
     name = "boost-latest",
-    actual = "@boost_1_59_0//:boost",
+    actual = "@boost_1_53_0//:boost",
 )
 new_local_repository(
-    name = "boost_1_58_0",
-    path = "/root/NasX86/SysLib/boost_1_58_0",
-    build_file = "repo/boost_1_58_0.BUILD",
-)
-new_local_repository(
-    name = "boost_1_59_0",
-    path = "/root/NasX86/SysLib/boost_1_59_0",
-    build_file = "repo/boost_1_59_0.BUILD",
+    name = "boost_1_53_0",
+    path = "/root/NasX86/SysLib/boost_1_53_0",
+    build_file = "repo/boost_1_53_0.BUILD",
 )
 
 bind(

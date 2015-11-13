@@ -11,7 +11,7 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @libid3tag-0.15.1b//:id3tag \
 @json-c-0.9//:json-c \
 @sqlite-3.4.1//:sqlite3 \
-@boost_1_59_0//:boost \
+@boost_1_53_0//:boost \
 @expat-2.0.1//:expat \
 @fio-2.2.10//:fio \
 @xmlrpc//:xmlrpc-epi \
@@ -52,6 +52,7 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @liblinuxfallocate-glibc-2.17//:linuxfallocate \
 @libeventfd-glibc-2.17//:eventfd \
 @libutimensat-glibc-2.17//:utimensat \
+@thin-provisioning-tools-v0.4.1//:thintools \
 
 
 
@@ -64,5 +65,4 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 
 # Mount headers error
 # @xmlrpc-c-1.25.28//:xmlrpc
-# @thin-provisioning-tools-v0.4.1//:thintools \
 # @libnl-1.1.4//:nl \
