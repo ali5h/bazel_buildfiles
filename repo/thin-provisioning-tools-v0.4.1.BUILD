@@ -71,17 +71,24 @@ cc_binary(
 	"thin-provisioning/thin_restore.cc",
 	"thin-provisioning/thin_rmap.cc",
 	"thin-provisioning/xml_format.cc",
-  ] + glob(["**/*.h", "*.h"]),
+  ] + glob(["**/*.h"]),
   includes = ["."] + select ({
                               ":bs_4096": ["bsize_4096"],
                               ":bs_8192": ["bsize_8192"],
   }),
   deps = [
+            ":tcc_lib",
             "//external:libaio-latest",
             "//external:expat-latest",
             "//external:boost-latest",
          ],
   linkopts = ["-lstdc++", "-lm"],
+)
+
+cc_library(
+    name = "tcc_lib",
+    hdrs = glob(["**/*.tcc"]),
+    includes = ["persistent-data"],
 )
 
 # bazel build --config=arm --define block_size=4096 @thin-prov.......
