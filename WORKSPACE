@@ -365,6 +365,12 @@ new_local_repository(
     build_file = "repo/jrtplib-3.3.0.BUILD",
 )
 
+new_local_repository(
+    name = "liblinuxfallocate-glibc-2.17",
+    path = "/root/NasX86/SysLib/liblinuxfallocate-glibc-2.17",
+    build_file = "repo/liblinuxfallocate-glibc-2.17.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

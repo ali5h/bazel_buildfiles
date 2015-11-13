@@ -48,6 +48,7 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @libaio-0.3.109//:aio \
 @ntfs-3g-1.2412//:ntfs-3g-files \
 @jrtplib-3.3.0//:jrtp \
+@liblinuxfallocate-glibc-2.17//:linuxfallocate \
 
 
 
