@@ -371,6 +371,18 @@ new_local_repository(
     build_file = "repo/liblinuxfallocate-glibc-2.17.BUILD",
 )
 
+new_local_repository(
+    name = "libeventfd-glibc-2.17",
+    path = "/root/NasX86/SysLib/libeventfd-glibc-2.17",
+    build_file = "repo/libeventfd-glibc-2.17.BUILD",
+)
+
+new_local_repository(
+    name = "libutimensat-glibc-2.17",
+    path = "/root/NasX86/SysLib/libutimensat-glibc-2.17",
+    build_file = "repo/libutimensat-glibc-2.17.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2

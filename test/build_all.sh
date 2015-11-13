@@ -3,8 +3,9 @@ bazel clean
 # --linkopt=-Wl,--strip-all: to strip all shared library
 # --dynamic_mode=fully: to compile all shared library
 # --spawn_strategy=standalone --genrule_strategy=standalone : disable sandbox completely
+# -DQNAPNAS can be pass by --copt
 
-bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --define block_size=4096 \
+bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --define block_size=4096 \
 @zlib-1.2.8//:z \
 @popt-1.14//:popt \
 @libid3tag-0.15.1b//:id3tag \
@@ -49,6 +50,8 @@ bazel build --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --def
 @ntfs-3g-1.2412//:ntfs-3g-files \
 @jrtplib-3.3.0//:jrtp \
 @liblinuxfallocate-glibc-2.17//:linuxfallocate \
+@libeventfd-glibc-2.17//:eventfd \
+@libutimensat-glibc-2.17//:utimensat \
 
 
 
