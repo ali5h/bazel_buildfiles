@@ -53,6 +53,7 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @libeventfd-glibc-2.17//:eventfd \
 @libutimensat-glibc-2.17//:utimensat \
 @thin-provisioning-tools-v0.4.1//:thintools \
+@tiff-4.0.4//:tiff \
 
 
 

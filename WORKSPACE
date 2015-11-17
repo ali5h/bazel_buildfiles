@@ -107,6 +107,10 @@ new_local_repository(
     build_file = "repo/rlog-1.4.BUILD",
 )
 
+bind(
+    name = "jpeg-latest",
+    actual = "@jpeg-6b-src//:jpeg",
+)
 new_local_repository(
     name = "jpeg-6b-src",
     path = "/root/NasX86/SysLib/jpeg-6b-src",
@@ -376,6 +380,12 @@ new_local_repository(
     name = "libutimensat-glibc-2.17",
     path = "/root/NasX86/SysLib/libutimensat-glibc-2.17",
     build_file = "repo/libutimensat-glibc-2.17.BUILD",
+)
+
+new_local_repository(
+    name = "tiff-4.0.4",
+    path = "/root/NasX86/SysLib/tiff-4.0.4",
+    build_file = "repo/tiff-4.0.4.BUILD",
 )
 
 # # SYS_LIBRARY
