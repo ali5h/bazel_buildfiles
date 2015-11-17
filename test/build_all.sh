@@ -2,7 +2,8 @@ bazel clean
 
 # --linkopt=-Wl,--strip-all: to strip all shared library
 # --dynamic_mode=fully: to compile all shared library
-# --spawn_strategy=standalone --genrule_strategy=standalone : disable sandbox completely
+# --spawn_strategy=standalone --genrule_strategy=standalone : disable sandbox completely(docker
+# container may cause some permission deny)
 # -DQNAPNAS can be pass by --copt
 
 bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode=fully --define block_size=4096 \
