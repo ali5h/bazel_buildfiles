@@ -388,6 +388,13 @@ new_local_repository(
     build_file = "repo/tiff-4.0.4.BUILD",
 )
 
+new_local_repository(
+    name = "ImageMagick-6.6.1-5",
+    path = "/root/NasX86/SysLib/ImageMagick-6.6.1-5",
+    build_file = "repo/ImageMagick-6.6.1-5.BUILD",
+)
+
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
