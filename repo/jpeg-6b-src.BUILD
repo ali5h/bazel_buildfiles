@@ -65,4 +65,5 @@ cc_library(
     "jpeglib.h",
     "jconfig.h",
     ],
+  includes = ["."],
 )
