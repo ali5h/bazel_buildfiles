@@ -144,8 +144,11 @@ cc_library(
     ] + INTERNAL_HDRS,
     hdrs = EXTERNAL_HDRS,
     includes = ["."],
-    linkopts = ["-no-undefined"],
-    copts = ["-DHAVE_CONFIG_H","-fopenmp", "-pthread"],
+    copts = [
+                "-DHAVE_CONFIG_H",
+                "-pthread",
+                "-Wno-deprecated-declarations",
+                ],
 )
 
 cc_library(
@@ -242,7 +245,7 @@ cc_library(
 
     ] + INTERNAL_HDRS,
     hdrs = EXTERNAL_HDRS,
-    includes = [],
-    linkopts = ["-no-undefined"],
+    includes = ["."],
     copts = ["-DHAVE_CONFIG_H"],
+    deps = ["//external:zlib-latest"],
 )

@@ -388,10 +388,11 @@ new_local_repository(
     build_file = "repo/tiff-4.0.4.BUILD",
 )
 
+# FIX: original IM have compatible issue with latest zlib, update it
 new_local_repository(
-    name = "ImageMagick-6.6.1-5",
-    path = "/root/NasX86/SysLib/ImageMagick-6.6.1-5",
-    build_file = "repo/ImageMagick-6.6.1-5.BUILD",
+    name = "ImageMagick-6.8.9-9",
+    path = "/root/NasX86/SysLib/ImageMagick-6.8.9-9",
+    build_file = "repo/ImageMagick-6.8.9-9.BUILD",
 )
 
 
