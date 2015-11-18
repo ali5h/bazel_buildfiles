@@ -421,6 +421,12 @@ new_local_repository(
     build_file = "repo/gnupg-1.4.19.BUILD",
 )
 
+new_local_repository(
+    name = "cups-1.6.4",
+    path = "/root/NasX86/SysLib/cups-1.6.4",
+    build_file = "repo/cups-1.6.4.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
