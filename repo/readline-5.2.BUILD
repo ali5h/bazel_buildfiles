@@ -27,8 +27,43 @@ EXTERNAL_HDRS = [
         "rltypedefs.h",
 ]
 
+genrule(
+    name = "hdrs_subdir",
+    srcs = [
+        "readline.h",
+        "chardefs.h",
+        "keymaps.h",
+        "history.h",
+        "tilde.h",
+        "rlstdc.h",
+        "rlconf.h",
+        "rltypedefs.h",
+    ],
+    outs = [
+        "readline/readline.h",
+        "readline/chardefs.h",
+        "readline/keymaps.h",
+        "readline/history.h",
+        "readline/tilde.h",
+        "readline/rlstdc.h",
+        "readline/rlconf.h",
+        "readline/rltypedefs.h",
+    ],
+    cmd = """
+     cp   $(location readline.h)    $(location readline/readline.h)
+     cp   $(location chardefs.h)    $(location readline/chardefs.h)
+     cp   $(location keymaps.h)     $(location readline/keymaps.h)
+     cp   $(location history.h)     $(location readline/history.h)
+     cp   $(location tilde.h)       $(location readline/tilde.h)
+     cp   $(location rlstdc.h)      $(location readline/rlstdc.h)
+     cp   $(location rlconf.h)      $(location readline/rlconf.h)
+     cp   $(location rltypedefs.h)  $(location readline/rltypedefs.h)
+    """
+)
+
 cc_library(
     name = "rl",
+    hdrs = [":hdrs_subdir"],
     deps = [":readline", ":history"],
 )
 
