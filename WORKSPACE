@@ -278,6 +278,10 @@ new_local_repository(
     build_file = "repo/libusb-1.0.9.BUILD",
 )
 
+bind(
+    name = "libusb-compat-latest",
+    actual = "@libusb-compat-0.1.4//:usb",
+)
 new_local_repository(
     name = "libusb-compat-0.1.4",
     path = "/root/NasX86/SysLib/libusb-compat-0.1.4",
@@ -409,6 +413,12 @@ new_local_repository(
     name = "acl-2.2.49",
     path = "/root/NasX86/SysLib/acl-2.2.49",
     build_file = "repo/acl-2.2.49.BUILD",
+)
+
+new_local_repository(
+    name = "gnupg-1.4.19",
+    path = "/root/NasX86/SysLib/gnupg-1.4.19",
+    build_file = "repo/gnupg-1.4.19.BUILD",
 )
 
 # # SYS_LIBRARY
