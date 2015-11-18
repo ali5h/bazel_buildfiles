@@ -56,7 +56,7 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @thin-provisioning-tools-v0.4.1//:thintools \
 @tiff-4.0.4//:tiff \
 @ImageMagick-6.8.9-9//:IM \
-
+@attr-2.4.47//:libattr \
 
 
 # @libstdcxx-v3//:stdc++ \
