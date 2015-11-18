@@ -57,6 +57,7 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @tiff-4.0.4//:tiff \
 @ImageMagick-6.8.9-9//:IM \
 @attr-2.4.47//:libattr \
+@acl-2.2.49//:libacl \
 
 
 # @libstdcxx-v3//:stdc++ \

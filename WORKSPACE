@@ -395,10 +395,20 @@ new_local_repository(
     build_file = "repo/ImageMagick-6.8.9-9.BUILD",
 )
 
+bind(
+    name = "attr-latest",
+    actual = "@attr-2.4.47//:attr",
+)
 new_local_repository(
     name = "attr-2.4.47",
     path = "/root/NasX86/SysLib/attr-2.4.47",
     build_file = "repo/attr-2.4.47.BUILD",
+)
+
+new_local_repository(
+    name = "acl-2.2.49",
+    path = "/root/NasX86/SysLib/acl-2.2.49",
+    build_file = "repo/acl-2.2.49.BUILD",
 )
 
 # # SYS_LIBRARY
