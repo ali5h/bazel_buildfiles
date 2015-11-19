@@ -427,13 +427,6 @@ new_local_repository(
     build_file = "repo/cups-1.6.4.BUILD",
 )
 
-
-new_local_repository(
-    name = "libunistring-0.9.3",
-    path = "/root/libunistring-0.9.3",
-    build_file = "repo/libunistring-0.9.3.BUILD",
-)
-
 # new_local_repository(
 #     name = "libunistring-0.9.3",
 #     path = "/root/libunistring-0.9.3",
@@ -446,7 +439,11 @@ new_local_repository(
 #     build_file = "repo/libidn-1.25.BUILD",
 # )
 
-
+new_local_repository(
+    name = "gsoap_2.7.17",
+    path = "/root/NasX86/SysLib/gsoap_2.7.17",
+    build_file = "repo/gsoap_2.7.17.BUILD",
+)
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
