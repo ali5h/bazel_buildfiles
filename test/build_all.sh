@@ -58,9 +58,10 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @ImageMagick-6.8.9-9//:IM \
 @attr-2.4.47//:libattr \
 @acl-2.2.49//:libacl \
-@gnupg-1.4.19//:gpg \
 @cups-1.6.4//:libcups \
 
+
+# @gnupg-1.4.19//:gpg \
 
 # @libstdcxx-v3//:stdc++ \
 

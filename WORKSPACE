@@ -427,6 +427,12 @@ new_local_repository(
     build_file = "repo/cups-1.6.4.BUILD",
 )
 
+new_local_repository(
+    name = "libidn-1.25",
+    path = "/root/NasX86/SysLib/libidn-1.25",
+    build_file = "repo/libidn-1.25.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
