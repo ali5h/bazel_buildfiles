@@ -49,22 +49,8 @@ cc_library(
 
     ] + INTERNAL_HDRS,
     hdrs = EXTERNAL_HDRS,
-    includes = [".", "lib"],
+    includes = [".", "lib", "win32/include", "lib/gl"],
     copts = OPTS,
     deps = ["//external:libunistring-latest"].
 )
 
-# cc_library(
-#     name = "",
-#     srcs = [] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = [],
-#     copts = [],
-# )
-# cc_library(
-#     name = "",
-#     srcs = [] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = [],
-#     copts = [],
-# )

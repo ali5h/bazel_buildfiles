@@ -427,11 +427,26 @@ new_local_repository(
     build_file = "repo/cups-1.6.4.BUILD",
 )
 
+
 new_local_repository(
-    name = "libidn-1.25",
-    path = "/root/NasX86/SysLib/libidn-1.25",
-    build_file = "repo/libidn-1.25.BUILD",
+    name = "libunistring-0.9.3",
+    path = "/root/libunistring-0.9.3",
+    build_file = "repo/libunistring-0.9.3.BUILD",
 )
+
+# new_local_repository(
+#     name = "libunistring-0.9.3",
+#     path = "/root/libunistring-0.9.3",
+#     build_file = "repo/libunistring-0.9.3.BUILD",
+# )
+
+# new_local_repository(
+#     name = "libidn-1.25",
+#     path = "/root/NasX86/SysLib/libidn-1.25",
+#     build_file = "repo/libidn-1.25.BUILD",
+# )
+
+
 
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
