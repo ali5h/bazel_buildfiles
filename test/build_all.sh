@@ -60,6 +60,7 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all --dynamic_mode
 @acl-2.2.49//:libacl \
 @cups-1.6.4//:libcups \
 @gsoap_2.7.17//:gsoap \
+@EtroSDK-src-2.3.3//:EtroSDK \
 
 
 # @gnupg-1.4.19//:gpg \

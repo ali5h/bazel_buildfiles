@@ -445,6 +445,19 @@ new_local_repository(
     build_file = "repo/gsoap_2.7.17.BUILD",
 )
 
+# new_local_repository(
+#     name = "ffmpeg",
+#     path = "/root/NasX86/SysLib/ffmpeg",
+#     build_file = "repo/ffmpeg.BUILD",
+# )
+
+
+new_local_repository(
+    name = "EtroSDK-src-2.3.3",
+    path = "/root/NasX86/SysLib/EtroSDK-src-2.3.3",
+    build_file = "repo/EtroSDK-src-2.3.3.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
