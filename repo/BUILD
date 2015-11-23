@@ -60,7 +60,7 @@ filegroup(
     srcs = [
 # imap-2007e.tar.gz
                 "@libmcrypt-2.5.7//:mcrypt",
-#libcommon-0.98.10.1
+                "@libcommon-0.98.10.1//:common",
                 "@rlog-1.4//:rlog",
                 "@jpeg-6b-src//:jpeg",
                 "@gdbm-1.8.3//:libgdbm",

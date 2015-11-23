@@ -476,6 +476,12 @@ new_local_repository(
     build_file = "repo/libmcrypt-2.5.7.BUILD",
 )
 
+new_local_repository(
+    name = "libcommon-0.98.10.1",
+    path = "/root/NasX86/SysLib/libcommon-0.98.10.1",
+    build_file = "repo/libcommon-0.98.10.1.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
