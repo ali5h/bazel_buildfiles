@@ -59,7 +59,7 @@ filegroup(
     name = "SysLib",
     srcs = [
 # imap-2007e.tar.gz
-# libmcrypt-2.5.7.tar.gz
+                "@libmcrypt-2.5.7//:mcrypt",
 #libcommon-0.98.10.1
                 "@rlog-1.4//:rlog",
                 "@jpeg-6b-src//:jpeg",

@@ -470,6 +470,12 @@ new_local_repository(
     build_file = "repo/librsync-0.9.7.BUILD",
 )
 
+new_local_repository(
+    name = "libmcrypt-2.5.7",
+    path = "/root/NasX86/SysLib/libmcrypt-2.5.7",
+    build_file = "repo/libmcrypt-2.5.7.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
