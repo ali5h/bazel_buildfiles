@@ -68,7 +68,7 @@ filegroup(
                 "@expat-2.0.1//:expat",
                 "@freetype-2.3.7//:freetype",
                 "@libxml2-2.9.2//:xml2",
-# libxslt-1.1.28
+                "@libxslt-1.1.28//:xslt",
                 "@libtool-1.5.24//:ltdl",
                 "@libupnp-1.6.19//:libupnp",
 # @libtirpc-0.3.0//:tirpc

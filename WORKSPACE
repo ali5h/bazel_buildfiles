@@ -89,6 +89,10 @@ new_local_repository(
     build_file = "repo/xmlrpc.BUILD",
 )
 
+bind(
+    name = "libxml2-latest",
+    actual = "@libxml2-2.9.2//:xml2",
+)
 new_local_repository(
     name = "libxml2-2.9.2",
     path = "/root/NasX86/SysLib/libxml2-2.9.2",
@@ -480,6 +484,12 @@ new_local_repository(
     name = "libcommon-0.98.10.1",
     path = "/root/NasX86/SysLib/libcommon-0.98.10.1",
     build_file = "repo/libcommon-0.98.10.1.BUILD",
+)
+
+new_local_repository(
+    name = "libxslt-1.1.28",
+    path = "/root/NasX86/SysLib/libxslt-1.1.28",
+    build_file = "repo/libxslt-1.1.28.BUILD",
 )
 
 # # SYS_LIBRARY
