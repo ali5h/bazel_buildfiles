@@ -492,6 +492,12 @@ new_local_repository(
     build_file = "repo/libxslt-1.1.28.BUILD",
 )
 
+new_local_repository(
+    name = "glib-2.24.2",
+    path = "/root/NasX86/SysLib/glib-2.24.2",
+    build_file = "repo/glib-2.24.2.BUILD",
+)
+
 # # SYS_LIBRARY
 # PCRE = $(SYSLIB_DIR)/pcre-8.36
 # LIBGCC = $(SYSLIB_DIR)/gcc-4.9.2
