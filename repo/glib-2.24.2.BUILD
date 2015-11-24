@@ -8,18 +8,280 @@ filegroup(
             "gthread-2.0",
             "gobject-2.0",
             "gmodule-2.0",
-            # "gio-2.0",
+            "gio-2.0",
     ],
 )
 
 EXTERNAL_HDRS = [
                 "glib/glib.h",
+                "glib/glib-object.h",
                 "gmodule/gmodule.h",
                 ":inc_glib",
                 ":inc_gobject",
+                ":inc_gio",
 ]
 
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+
+genrule(
+    name = "inc_gio",
+    srcs = [
+                
+                "gio/gdesktopappinfo.h",
+                "gio/gfiledescriptorbased.h",
+                "gio/gunixconnection.h",
+                "gio/gunixfdlist.h",
+                "gio/gunixfdmessage.h",
+                "gio/gunixinputstream.h",
+                "gio/gunixmounts.h",
+                "gio/gunixoutputstream.h",
+                "gio/gunixsocketaddress.h",
+
+                "gio/gappinfo.h",
+                "gio/gasyncinitable.h",
+                "gio/gasyncresult.h",
+                "gio/gbufferedinputstream.h",
+                "gio/gbufferedoutputstream.h",
+                "gio/gcancellable.h",
+                "gio/gcharsetconverter.h",
+                "gio/gcontenttype.h",
+                "gio/gconverter.h",
+                "gio/gconverterinputstream.h",
+                "gio/gconverteroutputstream.h",
+                "gio/gdatainputstream.h",
+                "gio/gdataoutputstream.h",
+                "gio/gdrive.h",
+                "gio/gemblem.h",
+                "gio/gemblemedicon.h",
+                "gio/gfile.h",
+                "gio/gfileattribute.h",
+                "gio/gfileenumerator.h",
+                "gio/gfileicon.h",
+                "gio/gfileinfo.h",
+                "gio/gfileinputstream.h",
+                "gio/gfileiostream.h",
+                "gio/gfilemonitor.h",
+                "gio/gfilenamecompleter.h",
+                "gio/gfileoutputstream.h",
+                "gio/gfilterinputstream.h",
+                "gio/gfilteroutputstream.h",
+                "gio/gicon.h",
+                "gio/ginetaddress.h",
+                "gio/ginetsocketaddress.h",
+                "gio/ginitable.h",
+                "gio/ginputstream.h",
+                "gio/gio.h",
+                "gio/gioenums.h",
+                "gio/gioenumtypes.h",
+                "gio/gioerror.h",
+                "gio/giomodule.h",
+                "gio/gioscheduler.h",
+                "gio/giostream.h",
+                "gio/giotypes.h",
+                "gio/gloadableicon.h",
+                "gio/gmemoryinputstream.h",
+                "gio/gmemoryoutputstream.h",
+                "gio/gmount.h",
+                "gio/gmountoperation.h",
+                "gio/gnativevolumemonitor.h",
+                "gio/gnetworkaddress.h",
+                "gio/gnetworkservice.h",
+                "gio/goutputstream.h",
+                "gio/gresolver.h",
+                "gio/gseekable.h",
+                "gio/gsimpleasyncresult.h",
+                "gio/gsocket.h",
+                "gio/gsocketaddress.h",
+                "gio/gsocketaddressenumerator.h",
+                "gio/gsocketclient.h",
+                "gio/gsocketconnectable.h",
+                "gio/gsocketconnection.h",
+                "gio/gsocketcontrolmessage.h",
+                "gio/gsocketlistener.h",
+                "gio/gsocketservice.h",
+                "gio/gsrvtarget.h",
+                "gio/gtcpconnection.h",
+                "gio/gthemedicon.h",
+                "gio/gthreadedsocketservice.h",
+                "gio/gvfs.h",
+                "gio/gvolume.h",
+                "gio/gvolumemonitor.h",
+                "gio/gzlibcompressor.h",
+                "gio/gzlibdecompressor.h",
+    
+    ],
+    outs = [
+    
+
+                "gio-unix-2.0/gio/gdesktopappinfo.h",
+                "gio-unix-2.0/gio/gfiledescriptorbased.h",
+                "gio-unix-2.0/gio/gunixconnection.h",
+                "gio-unix-2.0/gio/gunixfdlist.h",
+                "gio-unix-2.0/gio/gunixfdmessage.h",
+                "gio-unix-2.0/gio/gunixinputstream.h",
+                "gio-unix-2.0/gio/gunixmounts.h",
+                "gio-unix-2.0/gio/gunixoutputstream.h",
+                "gio-unix-2.0/gio/gunixsocketaddress.h",
+
+                "glib-2.0/gio/gappinfo.h",
+                "glib-2.0/gio/gasyncinitable.h",
+                "glib-2.0/gio/gasyncresult.h",
+                "glib-2.0/gio/gbufferedinputstream.h",
+                "glib-2.0/gio/gbufferedoutputstream.h",
+                "glib-2.0/gio/gcancellable.h",
+                "glib-2.0/gio/gcharsetconverter.h",
+                "glib-2.0/gio/gcontenttype.h",
+                "glib-2.0/gio/gconverter.h",
+                "glib-2.0/gio/gconverterinputstream.h",
+                "glib-2.0/gio/gconverteroutputstream.h",
+                "glib-2.0/gio/gdatainputstream.h",
+                "glib-2.0/gio/gdataoutputstream.h",
+                "glib-2.0/gio/gdrive.h",
+                "glib-2.0/gio/gemblem.h",
+                "glib-2.0/gio/gemblemedicon.h",
+                "glib-2.0/gio/gfile.h",
+                "glib-2.0/gio/gfileattribute.h",
+                "glib-2.0/gio/gfileenumerator.h",
+                "glib-2.0/gio/gfileicon.h",
+                "glib-2.0/gio/gfileinfo.h",
+                "glib-2.0/gio/gfileinputstream.h",
+                "glib-2.0/gio/gfileiostream.h",
+                "glib-2.0/gio/gfilemonitor.h",
+                "glib-2.0/gio/gfilenamecompleter.h",
+                "glib-2.0/gio/gfileoutputstream.h",
+                "glib-2.0/gio/gfilterinputstream.h",
+                "glib-2.0/gio/gfilteroutputstream.h",
+                "glib-2.0/gio/gicon.h",
+                "glib-2.0/gio/ginetaddress.h",
+                "glib-2.0/gio/ginetsocketaddress.h",
+                "glib-2.0/gio/ginitable.h",
+                "glib-2.0/gio/ginputstream.h",
+                "glib-2.0/gio/gio.h",
+                "glib-2.0/gio/gioenums.h",
+                "glib-2.0/gio/gioenumtypes.h",
+                "glib-2.0/gio/gioerror.h",
+                "glib-2.0/gio/giomodule.h",
+                "glib-2.0/gio/gioscheduler.h",
+                "glib-2.0/gio/giostream.h",
+                "glib-2.0/gio/giotypes.h",
+                "glib-2.0/gio/gloadableicon.h",
+                "glib-2.0/gio/gmemoryinputstream.h",
+                "glib-2.0/gio/gmemoryoutputstream.h",
+                "glib-2.0/gio/gmount.h",
+                "glib-2.0/gio/gmountoperation.h",
+                "glib-2.0/gio/gnativevolumemonitor.h",
+                "glib-2.0/gio/gnetworkaddress.h",
+                "glib-2.0/gio/gnetworkservice.h",
+                "glib-2.0/gio/goutputstream.h",
+                "glib-2.0/gio/gresolver.h",
+                "glib-2.0/gio/gseekable.h",
+                "glib-2.0/gio/gsimpleasyncresult.h",
+                "glib-2.0/gio/gsocket.h",
+                "glib-2.0/gio/gsocketaddress.h",
+                "glib-2.0/gio/gsocketaddressenumerator.h",
+                "glib-2.0/gio/gsocketclient.h",
+                "glib-2.0/gio/gsocketconnectable.h",
+                "glib-2.0/gio/gsocketconnection.h",
+                "glib-2.0/gio/gsocketcontrolmessage.h",
+                "glib-2.0/gio/gsocketlistener.h",
+                "glib-2.0/gio/gsocketservice.h",
+                "glib-2.0/gio/gsrvtarget.h",
+                "glib-2.0/gio/gtcpconnection.h",
+                "glib-2.0/gio/gthemedicon.h",
+                "glib-2.0/gio/gthreadedsocketservice.h",
+                "glib-2.0/gio/gvfs.h",
+                "glib-2.0/gio/gvolume.h",
+                "glib-2.0/gio/gvolumemonitor.h",
+                "glib-2.0/gio/gzlibcompressor.h",
+                "glib-2.0/gio/gzlibdecompressor.h",
+    ],
+    cmd = """
+
+         cp      $(location gio/gdesktopappinfo.h)             $(location gio-unix-2.0/gio/gdesktopappinfo.h)
+         cp      $(location gio/gfiledescriptorbased.h)        $(location gio-unix-2.0/gio/gfiledescriptorbased.h)
+         cp      $(location gio/gunixconnection.h)             $(location gio-unix-2.0/gio/gunixconnection.h)
+         cp      $(location gio/gunixfdlist.h)                 $(location gio-unix-2.0/gio/gunixfdlist.h)
+         cp      $(location gio/gunixfdmessage.h)              $(location gio-unix-2.0/gio/gunixfdmessage.h)
+         cp      $(location gio/gunixinputstream.h)            $(location gio-unix-2.0/gio/gunixinputstream.h)
+         cp      $(location gio/gunixmounts.h)                 $(location gio-unix-2.0/gio/gunixmounts.h)
+         cp      $(location gio/gunixoutputstream.h)           $(location gio-unix-2.0/gio/gunixoutputstream.h)
+         cp      $(location gio/gunixsocketaddress.h)          $(location gio-unix-2.0/gio/gunixsocketaddress.h)
+
+         cp      $(location gio/gappinfo.h)                    $(location glib-2.0/gio/gappinfo.h)
+         cp      $(location gio/gasyncinitable.h)              $(location glib-2.0/gio/gasyncinitable.h)
+         cp      $(location gio/gasyncresult.h)                $(location glib-2.0/gio/gasyncresult.h)
+         cp      $(location gio/gbufferedinputstream.h)        $(location glib-2.0/gio/gbufferedinputstream.h)
+         cp      $(location gio/gbufferedoutputstream.h)       $(location glib-2.0/gio/gbufferedoutputstream.h)
+         cp      $(location gio/gcancellable.h)                $(location glib-2.0/gio/gcancellable.h)
+         cp      $(location gio/gcharsetconverter.h)           $(location glib-2.0/gio/gcharsetconverter.h)
+         cp      $(location gio/gcontenttype.h)                $(location glib-2.0/gio/gcontenttype.h)
+         cp      $(location gio/gconverter.h)                  $(location glib-2.0/gio/gconverter.h)
+         cp      $(location gio/gconverterinputstream.h)       $(location glib-2.0/gio/gconverterinputstream.h)
+         cp      $(location gio/gconverteroutputstream.h)      $(location glib-2.0/gio/gconverteroutputstream.h)
+         cp      $(location gio/gdatainputstream.h)            $(location glib-2.0/gio/gdatainputstream.h)
+         cp      $(location gio/gdataoutputstream.h)           $(location glib-2.0/gio/gdataoutputstream.h)
+         cp      $(location gio/gdrive.h)                      $(location glib-2.0/gio/gdrive.h)
+         cp      $(location gio/gemblem.h)                     $(location glib-2.0/gio/gemblem.h)
+         cp      $(location gio/gemblemedicon.h)               $(location glib-2.0/gio/gemblemedicon.h)
+         cp      $(location gio/gfile.h)                       $(location glib-2.0/gio/gfile.h)
+         cp      $(location gio/gfileattribute.h)              $(location glib-2.0/gio/gfileattribute.h)
+         cp      $(location gio/gfileenumerator.h)             $(location glib-2.0/gio/gfileenumerator.h)
+         cp      $(location gio/gfileicon.h)                   $(location glib-2.0/gio/gfileicon.h)
+         cp      $(location gio/gfileinfo.h)                   $(location glib-2.0/gio/gfileinfo.h)
+         cp      $(location gio/gfileinputstream.h)            $(location glib-2.0/gio/gfileinputstream.h)
+         cp      $(location gio/gfileiostream.h)               $(location glib-2.0/gio/gfileiostream.h)
+         cp      $(location gio/gfilemonitor.h)                $(location glib-2.0/gio/gfilemonitor.h)
+         cp      $(location gio/gfilenamecompleter.h)          $(location glib-2.0/gio/gfilenamecompleter.h)
+         cp      $(location gio/gfileoutputstream.h)           $(location glib-2.0/gio/gfileoutputstream.h)
+         cp      $(location gio/gfilterinputstream.h)          $(location glib-2.0/gio/gfilterinputstream.h)
+         cp      $(location gio/gfilteroutputstream.h)         $(location glib-2.0/gio/gfilteroutputstream.h)
+         cp      $(location gio/gicon.h)                       $(location glib-2.0/gio/gicon.h)
+         cp      $(location gio/ginetaddress.h)                $(location glib-2.0/gio/ginetaddress.h)
+         cp      $(location gio/ginetsocketaddress.h)          $(location glib-2.0/gio/ginetsocketaddress.h)
+         cp      $(location gio/ginitable.h)                   $(location glib-2.0/gio/ginitable.h)
+         cp      $(location gio/ginputstream.h)                $(location glib-2.0/gio/ginputstream.h)
+         cp      $(location gio/gio.h)                         $(location glib-2.0/gio/gio.h)
+         cp      $(location gio/gioenums.h)                    $(location glib-2.0/gio/gioenums.h)
+         cp      $(location gio/gioenumtypes.h)                $(location glib-2.0/gio/gioenumtypes.h)
+         cp      $(location gio/gioerror.h)                    $(location glib-2.0/gio/gioerror.h)
+         cp      $(location gio/giomodule.h)                   $(location glib-2.0/gio/giomodule.h)
+         cp      $(location gio/gioscheduler.h)                $(location glib-2.0/gio/gioscheduler.h)
+         cp      $(location gio/giostream.h)                   $(location glib-2.0/gio/giostream.h)
+         cp      $(location gio/giotypes.h)                    $(location glib-2.0/gio/giotypes.h)
+         cp      $(location gio/gloadableicon.h)               $(location glib-2.0/gio/gloadableicon.h)
+         cp      $(location gio/gmemoryinputstream.h)          $(location glib-2.0/gio/gmemoryinputstream.h)
+         cp      $(location gio/gmemoryoutputstream.h)         $(location glib-2.0/gio/gmemoryoutputstream.h)
+         cp      $(location gio/gmount.h)                      $(location glib-2.0/gio/gmount.h)
+         cp      $(location gio/gmountoperation.h)             $(location glib-2.0/gio/gmountoperation.h)
+         cp      $(location gio/gnativevolumemonitor.h)        $(location glib-2.0/gio/gnativevolumemonitor.h)
+         cp      $(location gio/gnetworkaddress.h)             $(location glib-2.0/gio/gnetworkaddress.h)
+         cp      $(location gio/gnetworkservice.h)             $(location glib-2.0/gio/gnetworkservice.h)
+         cp      $(location gio/goutputstream.h)               $(location glib-2.0/gio/goutputstream.h)
+         cp      $(location gio/gresolver.h)                   $(location glib-2.0/gio/gresolver.h)
+         cp      $(location gio/gseekable.h)                   $(location glib-2.0/gio/gseekable.h)
+         cp      $(location gio/gsimpleasyncresult.h)          $(location glib-2.0/gio/gsimpleasyncresult.h)
+         cp      $(location gio/gsocket.h)                     $(location glib-2.0/gio/gsocket.h)
+         cp      $(location gio/gsocketaddress.h)              $(location glib-2.0/gio/gsocketaddress.h)
+         cp      $(location gio/gsocketaddressenumerator.h)    $(location glib-2.0/gio/gsocketaddressenumerator.h)
+         cp      $(location gio/gsocketclient.h)               $(location glib-2.0/gio/gsocketclient.h)
+         cp      $(location gio/gsocketconnectable.h)          $(location glib-2.0/gio/gsocketconnectable.h)
+         cp      $(location gio/gsocketconnection.h)           $(location glib-2.0/gio/gsocketconnection.h)
+         cp      $(location gio/gsocketcontrolmessage.h)       $(location glib-2.0/gio/gsocketcontrolmessage.h)
+         cp      $(location gio/gsocketlistener.h)             $(location glib-2.0/gio/gsocketlistener.h)
+         cp      $(location gio/gsocketservice.h)              $(location glib-2.0/gio/gsocketservice.h)
+         cp      $(location gio/gsrvtarget.h)                  $(location glib-2.0/gio/gsrvtarget.h)
+         cp      $(location gio/gtcpconnection.h)              $(location glib-2.0/gio/gtcpconnection.h)
+         cp      $(location gio/gthemedicon.h)                 $(location glib-2.0/gio/gthemedicon.h)
+         cp      $(location gio/gthreadedsocketservice.h)      $(location glib-2.0/gio/gthreadedsocketservice.h)
+         cp      $(location gio/gvfs.h)                        $(location glib-2.0/gio/gvfs.h)
+         cp      $(location gio/gvolume.h)                     $(location glib-2.0/gio/gvolume.h)
+         cp      $(location gio/gvolumemonitor.h)              $(location glib-2.0/gio/gvolumemonitor.h)
+         cp      $(location gio/gzlibcompressor.h)             $(location glib-2.0/gio/gzlibcompressor.h)
+         cp      $(location gio/gzlibdecompressor.h)           $(location glib-2.0/gio/gzlibdecompressor.h)
+
+
+    """
+)
 
 
 genrule(
@@ -580,7 +842,6 @@ cc_library(
                 ":gio_libxdgmime",
                 "//external:zlib-latest",
     ],
-    # linkopts = ["-lselinux"],
 )
 
 cc_library(

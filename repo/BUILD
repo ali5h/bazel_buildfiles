@@ -77,7 +77,7 @@ filegroup(
 # @librpcsecgss-0.19//:rpcsecgss
                 "@libevent-1.4.12-stable//:libevent",
                 "@e2fsprogs-1.42.5//:com_err",
-# glib-2.24.2
+                "@glib-2.24.2//:glib",
                 "@liboop-1.0//:oop",
                 "@ruli-0.33//:ruli",
                 "@readline-5.2//:rl",
