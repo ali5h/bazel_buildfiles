@@ -1,3 +1,5 @@
+load("/tools/build_defs/pkg/pkg", "pkg_tar")
+
 package(default_visibility = ["//visibility:public"])
 
 # filegroup(
@@ -53,6 +55,12 @@ filegroup(
                 # Prebuild mariadb of DataService
         
         ],
+)
+
+pkg_tar(
+    name = "final",
+    files = [":SysUtil", ":misc"],
+    extension = "tar.gz",
 )
 
 filegroup(
