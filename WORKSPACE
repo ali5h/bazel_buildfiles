@@ -1,4 +1,4 @@
-#load("extension", "add_package")
+# load("/ext/extension", "deb_library")
 
 # can be reference by //external:zlib-latest
 bind(
@@ -502,6 +502,35 @@ new_local_repository(
     name = "graphviz-2.38.0",
     path = "/root/NasX86/SysLib/graphviz-2.38.0",
     build_file = "repo/graphviz-2.38.0.BUILD",
+)
+#----------------------------------------------------------
+
+URL = "http://localhost:8000/amd64/"
+BUILD_FILE = "repo/file.BUILD"
+PREFIX_PATH = "root"
+
+new_http_archive(
+    name = "libmcrypt-2.5.8",
+    url = URL + "libmcrypt-2.5.8.tgz",
+    sha256 = "61a6f5ab4f0eac484431c769df0cb848d1440767c47c1db68f1060df67f31b97",
+    build_file = BUILD_FILE,
+    strip_prefix = PREFIX_PATH,
+)
+
+new_http_archive(
+    name = "libaio-0.3.110",
+    url = URL + "libaio-0.3.110.tgz",
+    sha256 = "8a4e293b0bb5daefd86e537a6cc3a32064d7837852a57110eeb962e9cbdd6027",
+    build_file = BUILD_FILE,
+    strip_prefix = PREFIX_PATH,
+)
+
+new_http_archive(
+    name = "thin-provisioning-tools-0.5.6",
+    url = URL + "thin-provisioning-tools-0.5.6.tgz",
+    sha256 = "f254f96ecc6618a5b6cf1666ef2af076f0e7685b3c373de3c4dcc3151d936452",
+    build_file = BUILD_FILE,
+    strip_prefix = PREFIX_PATH,
 )
 
 # # SYS_LIBRARY
