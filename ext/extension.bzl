@@ -17,16 +17,6 @@ def add_package_SysUtil(name):
 #     actual = '@' + name + '//:' + lib_name,
 #   )
 
-# def deb_library(name, srcs, hdrs):
-#     native.cc_library(
-#         name = name,
-#         srcs = srcs,
-#         hdrs = hdrs,
-#         includes = ['usr/include',],
-#         visibility = ["//visibility:public"],
-#         # deps = deps,
-#     )
-    
 # ------------for build file---------------------
 
 def pkg_libs(srcs = []):
