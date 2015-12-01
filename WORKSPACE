@@ -212,7 +212,8 @@ add_package_SysLib("libxslt-1.1.28")
 
 add_package_SysLib("glib-2.24.2")
 
-add_package_SysLib("graphviz-2.38.0")
+# FIX: depend on php
+# add_package_SysLib("graphviz-2.38.0")
 #----------------------------------------------------------
 
 URL = "http://localhost:8000/amd64/"
