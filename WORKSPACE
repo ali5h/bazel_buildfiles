@@ -1,508 +1,222 @@
-# load("/ext/extension", "deb_library")
+load("/ext/extension", "add_package_SysLib", "add_package_SysUtil")
 
 # can be reference by //external:zlib-latest
 bind(
     name = "zlib-latest",
     actual = "@zlib-1.2.8//:z",
 )
-new_local_repository(
-    name = "zlib-1.2.8",
-    path = "/root/NasX86/SysLib/zlib-1.2.8",
-    build_file = "repo/zlib-1.2.8.BUILD",
-)
+add_package_SysLib("zlib-1.2.8")
 
 bind(
     name = "popt-latest",
     actual = "@popt-1.14//:popt",
 )
-new_local_repository(
-    name = "popt-1.14",
-    path = "/root/NasX86/SysLib/popt-1.14",
-    build_file = "repo/popt-1.14.BUILD",
-)
+add_package_SysLib("popt-1.14")
 
-new_local_repository(
-    name = "libid3tag-0.15.1b",
-    path = "/root/NasX86/SysLib/libid3tag-0.15.1b",
-    build_file = "repo/libid3tag-0.15.1b.BUILD",
-)
+add_package_SysLib("libid3tag-0.15.1b")
 
-new_local_repository(
-    name = "json-c-0.9",
-    path = "/root/NasX86/SysLib/json-c-0.9",
-    build_file = "repo/json-c-0.9.BUILD",
-)
+add_package_SysLib("json-c-0.9")
 
-new_local_repository(
-    name = "sqlite-3.4.1",
-    path = "/root/NasX86/SysLib/sqlite-3.4.1",
-    build_file = "repo/sqlite-3.4.1.BUILD",
-)
-#add_package(name = "sqlite3", path = "/root/NasX86/SysLib/sqlite-3.4.1", lib_name="sqlite3")
+add_package_SysLib("sqlite-3.4.1")
 
-
-new_local_repository(
-    name = "thin-provisioning-tools-v0.4.1",
-    path = "/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1",
-    build_file = "repo/thin-provisioning-tools-v0.4.1.BUILD",
-)
+add_package_SysLib("thin-provisioning-tools-v0.4.1")
 
 bind(
     name = "libaio-latest",
     actual = "@libaio-0.3.109//:aio",
 )
-new_local_repository(
-    name = "libaio-0.3.109",
-    path = "/root/NasX86/SysLib/libaio-0.3.109",
-    build_file = "repo/libaio-0.3.109.BUILD",
-)
+add_package_SysLib("libaio-0.3.109")
 
 bind(
     name = "boost-latest",
     actual = "@boost_1_53_0//:boost",
 )
-new_local_repository(
-    name = "boost_1_53_0",
-    path = "/root/NasX86/SysLib/boost_1_53_0",
-    build_file = "repo/boost_1_53_0.BUILD",
-)
+add_package_SysLib("boost_1_53_0")
 
 bind(
     name = "expat-latest",
     actual = "@expat-2.0.1//:expat",
 )
-new_local_repository(
-    name = "expat-2.0.1",
-    path = "/root/NasX86/SysLib/expat-2.0.1",
-    build_file = "repo/expat-2.0.1.BUILD",
-)
+add_package_SysLib("expat-2.0.1")
 
-new_local_repository(
-    name = "fio-2.2.10",
-    path = "/root/NasX86/SysUtil/fio-2.2.10",
-    build_file = "repo/fio-2.2.10.BUILD",
-)
+add_package_SysUtil("fio-2.2.10")
 
-new_local_repository(
-    name = "xmlrpc",
-    path = "/root/NasX86/SysLib/xmlrpc",
-    build_file = "repo/xmlrpc.BUILD",
-)
+add_package_SysLib("xmlrpc")
 
 bind(
     name = "libxml2-latest",
     actual = "@libxml2-2.9.2//:xml2",
 )
-new_local_repository(
-    name = "libxml2-2.9.2",
-    path = "/root/NasX86/SysLib/libxml2-2.9.2",
-    build_file = "repo/libxml2-2.9.2.BUILD",
-)
+add_package_SysLib("libxml2-2.9.2")
 
-new_local_repository(
-    name = "eventlog-0.2.7",
-    path = "/root/NasX86/SysLib/eventlog-0.2.7",
-    build_file = "repo/eventlog-0.2.7.BUILD",
-)
+add_package_SysLib("eventlog-0.2.7")
 
-new_local_repository(
-    name = "rlog-1.4",
-    path = "/root/NasX86/SysLib/rlog-1.4",
-    build_file = "repo/rlog-1.4.BUILD",
-)
+add_package_SysLib("rlog-1.4")
 
 bind(
     name = "jpeg-latest",
     actual = "@jpeg-6b-src//:jpeg",
 )
-new_local_repository(
-    name = "jpeg-6b-src",
-    path = "/root/NasX86/SysLib/jpeg-6b-src",
-    build_file = "repo/jpeg-6b-src.BUILD",
-)
+add_package_SysLib("jpeg-6b-src")
 
-new_local_repository(
-    name = "libevent-1.4.12-stable",
-    path = "/root/NasX86/SysLib/libevent-1.4.12-stable",
-    build_file = "repo/libevent-1.4.12-stable.BUILD",
-)
+add_package_SysLib("libevent-1.4.12-stable")
 
-new_local_repository(
-    name = "pam-0.99.7.1",
-    path = "/root/NasX86/SysLib/pam-0.99.7.1/Linux-PAM",
-    build_file = "repo/pam-0.99.7.1.BUILD",
-)
+add_package_SysLib("pam-0.99.7.1")
 
-new_local_repository(
-    name = "libffi-3.2.1",
-    path = "/root/NasX86/SysLib/libffi-3.2.1",
-    build_file = "repo/libffi-3.2.1.BUILD",
-)
+add_package_SysLib("libffi-3.2.1")
 
 bind(
     name = "ncurses-latest",
     actual = "@ncurses-5.5//:nc",
 )
-new_local_repository(
-    name = "ncurses-5.5",
-    path = "/root/NasX86/SysLib/ncurses-5.5",
-    build_file = "repo/ncurses-5.5.BUILD",
-)
+add_package_SysLib("ncurses-5.5")
 
 bind(
     name = "readline-latest",
     actual = "@readline-5.2//:rl",
 )
-new_local_repository(
-    name = "readline-5.2",
-    path = "/root/NasX86/SysLib/readline-5.2",
-    build_file = "repo/readline-5.2.BUILD",
-)
+add_package_SysLib("readline-5.2")
 
-new_local_repository(
-    name = "backtrace",
-    path = "/root/NasX86/SysLib/backtrace",
-    build_file = "repo/backtrace.BUILD",
-)
+add_package_SysLib("backtrace")
 
-new_local_repository(
-    name = "gdbm-1.8.3",
-    path = "/root/NasX86/SysLib/gdbm-1.8.3",
-    build_file = "repo/gdbm-1.8.3.BUILD",
-)
+add_package_SysLib("gdbm-1.8.3")
 
-new_local_repository(
-    name = "freetype-2.3.7",
-    path = "/root/NasX86/SysLib/freetype-2.3.7",
-    build_file = "repo/freetype-2.3.7.BUILD",
-)
+add_package_SysLib("freetype-2.3.7")
 
-new_local_repository(
-    name = "libtool-1.5.24",
-    path = "/root/NasX86/SysLib/libtool-1.5.24",
-    build_file = "repo/libtool-1.5.24.BUILD",
-)
+add_package_SysLib("libtool-1.5.24")
 
 # FIX: libstdc++ incomplete
-new_local_repository(
-    name = "libstdcxx-v3",
-    path = "/root/NasX86/SysLib/gcc-4.9.2-stdc++/libstdc++-v3",
-    build_file = "repo/libstdcxx-v3.BUILD",
-)
+add_package_SysLib("libstdcxx-v3")
 
 
-new_local_repository(
-    name = "libupnp-1.6.19",
-    path = "/root/NasX86/SysLib/libupnp-1.6.19",
-    build_file = "repo/libupnp-1.6.19.BUILD",
-)
+add_package_SysLib("libupnp-1.6.19")
 
 # FIX: depend on  #include <gssapi/gssapi.h>
-new_local_repository(
-    name = "libtirpc-0.3.0",
-    path = "/root/NasX86/SysLib/libtirpc-0.3.0",
-    build_file = "repo/libtirpc-0.3.0.BUILD",
-)
+add_package_SysLib("libtirpc-0.3.0")
 
-new_local_repository(
-    name = "libnfsidmap-0.23",
-    path = "/root/NasX86/SysLib/libnfsidmap-0.23",
-    build_file = "repo/libnfsidmap-0.23.BUILD",
-)
+add_package_SysLib("libnfsidmap-0.23")
 
-new_local_repository(
-    name = "libgssglue-0.4",
-    path = "/root/NasX86/SysLib/libgssglue-0.4",
-    build_file = "repo/libgssglue-0.4.BUILD",
-)
+add_package_SysLib("libgssglue-0.4")
 
 # FIX: depend on  #include <gssapi/gssapi.h>
-new_local_repository(
-    name = "librpcsecgss-0.19",
-    path = "/root/NasX86/SysLib/librpcsecgss-0.19",
-    build_file = "repo/librpcsecgss-0.19.BUILD",
-)
+add_package_SysLib("librpcsecgss-0.19")
 
 # FIX: libcom_err only currently
-new_local_repository(
-    name = "e2fsprogs-1.42.5",
-    path = "/root/NasX86/SysLib/e2fsprogs-1.42.5",
-    build_file = "repo/e2fsprogs-1.42.5.BUILD",
-)
+add_package_SysLib("e2fsprogs-1.42.5")
 
 # FIX: not complete
-new_local_repository(
-    name = "krb5-1.13",
-    path = "/root/NasX86/SysLib/krb5-1.13/src",
-    build_file = "repo/krb5-1.13.BUILD",
-)
+add_package_SysLib("krb5-1.13")
 
 # openldap-2.4.7 have syntax bug, will lead compile error in new toolchain. We use 2.4.33
-new_local_repository(
-    name = "openldap-2.4.33",
-    path = "/root/NasX86/SysLib/openldap-2.4.33",
-    build_file = "repo/openldap-2.4.33.BUILD",
-)
+add_package_SysLib("openldap-2.4.33")
 
 # FIX: should fix openssl util (link error)
 bind(
     name = "openssl-latest",
     actual = "@openssl-1.0.1p//:openssl-dev",
 )
-new_local_repository(
-    name = "openssl-1.0.1p",
-    path = "/root/NasX86/SysLib/openssl-1.0.1p",
-    build_file = "repo/openssl-1.0.1p.BUILD",
-)
+add_package_SysLib("openssl-1.0.1p")
 
 bind(
     name = "liboop-latest",
     actual = "@liboop-1.0//:oop",
 )
-new_local_repository(
-    name = "liboop-1.0",
-    path = "/root/NasX86/SysLib/liboop-1.0",
-    build_file = "repo/liboop-1.0.BUILD",
-)
+add_package_SysLib("liboop-1.0")
 
-new_local_repository(
-    name = "ruli-0.33",
-    path = "/root/NasX86/SysLib/ruli-0.33",
-    build_file = "repo/ruli-0.33.BUILD",
-)
+add_package_SysLib("ruli-0.33")
 
 
 bind(
     name = "libusb-latest",
     actual = "@libusb-1.0.9//:usb-1.0",
 )
-new_local_repository(
-    name = "libusb-1.0.9",
-    path = "/root/NasX86/SysLib/libusb-1.0.9",
-    build_file = "repo/libusb-1.0.9.BUILD",
-)
+add_package_SysLib("libusb-1.0.9")
 
 bind(
     name = "libusb-compat-latest",
     actual = "@libusb-compat-0.1.4//:usb",
 )
-new_local_repository(
-    name = "libusb-compat-0.1.4",
-    path = "/root/NasX86/SysLib/libusb-compat-0.1.4",
-    build_file = "repo/libusb-compat-0.1.4.BUILD",
-)
+add_package_SysLib("libusb-compat-0.1.4")
 
-new_local_repository(
-    name = "postgresql-9.4.4",
-    path = "/root/NasX86/SysLib/postgresql-9.4.4",
-    build_file = "repo/postgresql-9.4.4.BUILD",
-)
+add_package_SysLib("postgresql-9.4.4")
 
-new_local_repository(
-    name = "cyrus-sasl-2.1.22",
-    path = "/root/NasX86/SysLib/cyrus-sasl-2.1.22",
-    build_file = "repo/cyrus-sasl-2.1.22.BUILD",
-)
+add_package_SysLib("cyrus-sasl-2.1.22")
 
 bind(
     name = "gpg-error-latest",
     actual = "@libgpg-error-1.6//:gpg-error",
 )
-new_local_repository(
-    name = "libgpg-error-1.6",
-    path = "/root/NasX86/SysLib/libgpg-error-1.6",
-    build_file = "repo/libgpg-error-1.6.BUILD",
-)
+add_package_SysLib("libgpg-error-1.6")
 
 bind(
     name = "gcrypt-latest",
     actual = "@libgcrypt-1.4.3//:gcrypt",
 )
-new_local_repository(
-    name = "libgcrypt-1.4.3",
-    path = "/root/NasX86/SysLib/libgcrypt-1.4.3",
-    build_file = "repo/libgcrypt-1.4.3.BUILD",
-)
+add_package_SysLib("libgcrypt-1.4.3")
 
-new_local_repository(
-    name = "gnutls-2.6.2",
-    path = "/root/NasX86/SysLib/gnutls-2.6.2",
-    build_file = "repo/gnutls-2.6.2.BUILD",
-)
+add_package_SysLib("gnutls-2.6.2")
 
-new_local_repository(
-    name = "libtasn1-1.6",
-    path = "/root/NasX86/SysLib/libtasn1-1.6",
-    build_file = "repo/libtasn1-1.6.BUILD",
-)
+add_package_SysLib("libtasn1-1.6")
 
-new_local_repository(
-    name = "bzip2-1.0.6",
-    path = "/root/NasX86/SysLib/bzip2-1.0.6",
-    build_file = "repo/bzip2-1.0.6.BUILD",
-)
+add_package_SysLib("bzip2-1.0.6")
 
-new_local_repository(
-    name = "libnl-1.1.4",
-    path = "/root/NasX86/SysLib/libnl-1.1.4",
-    build_file = "repo/libnl-1.1.4.BUILD",
-)
+add_package_SysLib("libnl-1.1.4")
 
-new_local_repository(
-    name = "fuse-2.9.2",
-    path = "/root/NasX86/SysLib/fuse-2.9.2",
-    build_file = "repo/fuse-2.9.2.BUILD",
-)
+add_package_SysLib("fuse-2.9.2")
 
-new_local_repository(
-    name = "ntfs-3g-1.2412",
-    path = "/root/NasX86/SysLib/ntfs-3g-1.2412",
-    build_file = "repo/ntfs-3g-1.2412.BUILD",
-)
+add_package_SysLib("ntfs-3g-1.2412")
 
-new_local_repository(
-    name = "xmlrpc-c-1.25.28",
-    path = "/root/NasX86/SysLib/xmlrpc-c-1.25.28",
-    build_file = "repo/xmlrpc-c-1.25.28.BUILD",
-)
+add_package_SysLib("xmlrpc-c-1.25.28")
 
-new_local_repository(
-    name = "jrtplib-3.3.0",
-    path = "/root/NasX86/SysLib/jrtplib-3.3.0",
-    build_file = "repo/jrtplib-3.3.0.BUILD",
-)
+add_package_SysLib("jrtplib-3.3.0")
 
-new_local_repository(
-    name = "liblinuxfallocate-glibc-2.17",
-    path = "/root/NasX86/SysLib/liblinuxfallocate-glibc-2.17",
-    build_file = "repo/liblinuxfallocate-glibc-2.17.BUILD",
-)
+add_package_SysLib("liblinuxfallocate-glibc-2.17")
 
-new_local_repository(
-    name = "libeventfd-glibc-2.17",
-    path = "/root/NasX86/SysLib/libeventfd-glibc-2.17",
-    build_file = "repo/libeventfd-glibc-2.17.BUILD",
-)
+add_package_SysLib("libeventfd-glibc-2.17")
 
-new_local_repository(
-    name = "libutimensat-glibc-2.17",
-    path = "/root/NasX86/SysLib/libutimensat-glibc-2.17",
-    build_file = "repo/libutimensat-glibc-2.17.BUILD",
-)
+add_package_SysLib("libutimensat-glibc-2.17")
 
-new_local_repository(
-    name = "tiff-4.0.4",
-    path = "/root/NasX86/SysLib/tiff-4.0.4",
-    build_file = "repo/tiff-4.0.4.BUILD",
-)
+add_package_SysLib("tiff-4.0.4")
 
 # FIX: original IM have compatible issue with latest zlib, update it
-new_local_repository(
-    name = "ImageMagick-6.8.9-9",
-    path = "/root/NasX86/SysLib/ImageMagick-6.8.9-9",
-    build_file = "repo/ImageMagick-6.8.9-9.BUILD",
-)
+add_package_SysLib("ImageMagick-6.8.9-9")
 
 bind(
     name = "attr-latest",
     actual = "@attr-2.4.47//:attr",
 )
-new_local_repository(
-    name = "attr-2.4.47",
-    path = "/root/NasX86/SysLib/attr-2.4.47",
-    build_file = "repo/attr-2.4.47.BUILD",
-)
+add_package_SysLib("attr-2.4.47")
 
-new_local_repository(
-    name = "acl-2.2.49",
-    path = "/root/NasX86/SysLib/acl-2.2.49",
-    build_file = "repo/acl-2.2.49.BUILD",
-)
+add_package_SysLib("acl-2.2.49")
 
-new_local_repository(
-    name = "gnupg-1.4.19",
-    path = "/root/NasX86/SysLib/gnupg-1.4.19",
-    build_file = "repo/gnupg-1.4.19.BUILD",
-)
+add_package_SysLib("gnupg-1.4.19")
 
-new_local_repository(
-    name = "cups-1.6.4",
-    path = "/root/NasX86/SysLib/cups-1.6.4",
-    build_file = "repo/cups-1.6.4.BUILD",
-)
+add_package_SysLib("cups-1.6.4")
 
-# new_local_repository(
-#     name = "libunistring-0.9.3",
-#     path = "/root/libunistring-0.9.3",
 #     build_file = "repo/libunistring-0.9.3.BUILD",
-# )
 
-# new_local_repository(
-#     name = "libidn-1.25",
-#     path = "/root/NasX86/SysLib/libidn-1.25",
 #     build_file = "repo/libidn-1.25.BUILD",
-# )
 
-new_local_repository(
-    name = "gsoap_2.7.17",
-    path = "/root/NasX86/SysLib/gsoap_2.7.17",
-    build_file = "repo/gsoap_2.7.17.BUILD",
-)
+add_package_SysLib("gsoap_2.7.17")
 
-# new_local_repository(
-#     name = "ffmpeg",
-#     path = "/root/NasX86/SysLib/ffmpeg",
 #     build_file = "repo/ffmpeg.BUILD",
-# )
 
 
-new_local_repository(
-    name = "EtroSDK-src-2.3.3",
-    path = "/root/NasX86/SysLib/EtroSDK-src-2.3.3",
-    build_file = "repo/EtroSDK-src-2.3.3.BUILD",
-)
+add_package_SysLib("EtroSDK-src-2.3.3")
 
-new_local_repository(
-    name = "libcsv-3.0.2",
-    path = "/root/NasX86/SysLib/libcsv-3.0.2",
-    build_file = "repo/libcsv-3.0.2.BUILD",
-)
+add_package_SysLib("libcsv-3.0.2")
 
-new_local_repository(
-    name = "librsync-0.9.7",
-    path = "/root/NasX86/SysLib/librsync-0.9.7",
-    build_file = "repo/librsync-0.9.7.BUILD",
-)
+add_package_SysLib("librsync-0.9.7")
 
-new_local_repository(
-    name = "libmcrypt-2.5.7",
-    path = "/root/NasX86/SysLib/libmcrypt-2.5.7",
-    build_file = "repo/libmcrypt-2.5.7.BUILD",
-)
+add_package_SysLib("libmcrypt-2.5.7")
 
-new_local_repository(
-    name = "libcommon-0.98.10.1",
-    path = "/root/NasX86/SysLib/libcommon-0.98.10.1",
-    build_file = "repo/libcommon-0.98.10.1.BUILD",
-)
+add_package_SysLib("libcommon-0.98.10.1")
 
-new_local_repository(
-    name = "libxslt-1.1.28",
-    path = "/root/NasX86/SysLib/libxslt-1.1.28",
-    build_file = "repo/libxslt-1.1.28.BUILD",
-)
+add_package_SysLib("libxslt-1.1.28")
 
-new_local_repository(
-    name = "glib-2.24.2",
-    path = "/root/NasX86/SysLib/glib-2.24.2",
-    build_file = "repo/glib-2.24.2.BUILD",
-)
+add_package_SysLib("glib-2.24.2")
 
-new_local_repository(
-    name = "graphviz-2.38.0",
-    path = "/root/NasX86/SysLib/graphviz-2.38.0",
-    build_file = "repo/graphviz-2.38.0.BUILD",
-)
+add_package_SysLib("graphviz-2.38.0")
 #----------------------------------------------------------
 
 URL = "http://localhost:8000/amd64/"
