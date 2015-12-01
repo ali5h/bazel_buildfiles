@@ -44,7 +44,7 @@ filegroup(
                 "@json-c-0.9//:json-c",
                 # db-4.6.18
                 "@openldap-2.4.33//:openldap",
-                "@popt-1.14//:popt",
+                "@popt-1.14//:outs",
                 # librt.so (libc6)
                 "@xmlrpc//:xmlrpc-epi",
                 "@eventlog-0.2.7//:evtlog",

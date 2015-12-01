@@ -7,10 +7,6 @@ bind(
 )
 add_package_SysLib("zlib-1.2.8")
 
-bind(
-    name = "popt-latest",
-    actual = "@popt-1.14//:popt",
-)
 add_package_SysLib("popt-1.14")
 
 add_package_SysLib("libid3tag-0.15.1b")

@@ -17,12 +17,32 @@ def add_package_SysUtil(name):
 #     actual = '@' + name + '//:' + lib_name,
 #   )
 
-def deb_library(name, srcs, hdrs):
-    native.cc_library(
-        name = name,
+# def deb_library(name, srcs, hdrs):
+#     native.cc_library(
+#         name = name,
+#         srcs = srcs,
+#         hdrs = hdrs,
+#         includes = ['usr/include',],
+#         visibility = ["//visibility:public"],
+#         # deps = deps,
+#     )
+    
+# ------------for build file---------------------
+
+def pkg_libs(srcs = []):
+    native.filegroup(
+        name = 'libs',
         srcs = srcs,
-        hdrs = hdrs,
-        includes = ['usr/include',],
-        visibility = ["//visibility:public"],
-        # deps = deps,
+    )
+
+def pkg_exes(srcs = []):
+    native.filegroup(
+        name = 'exes',
+        srcs = srcs,
+    )
+
+def pkg_outs():
+    native.filegroup(
+        name = 'outs',
+        srcs = [":libs", ":exes"],
     )

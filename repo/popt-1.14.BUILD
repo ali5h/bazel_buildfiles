@@ -1,3 +1,8 @@
+load("/ext/extension", "pkg_libs", "pkg_exes", "pkg_outs")
+pkg_libs([":popt"])
+pkg_exes()
+pkg_outs()
+
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
@@ -21,3 +26,4 @@ cc_library(
             "-Wno-unused-but-set-variable",
             ],
 )
+
