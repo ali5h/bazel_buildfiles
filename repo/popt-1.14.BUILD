@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":popt"])
+pkg_exes()
+
 cc_library(
   name = "popt",
   srcs = [
@@ -22,5 +25,3 @@ cc_library(
             ],
 )
 
-pkg_libs([":popt"])
-pkg_exes()

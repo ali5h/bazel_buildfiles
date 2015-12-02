@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":linuxfallocate"])
+pkg_exes()
+
 INTERNAL_HDRS = glob(["**/*.h"])
 
 cc_library(

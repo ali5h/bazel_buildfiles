@@ -1,20 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-INTERNAL_HDRS = [
-        "posixstat.h",
-        "xmalloc.h",
-        "config.h",
-        "rlmbutil.h",
-        "posixjmp.h",
-        "histlib.h",
-        "rldefs.h",
-        "rlshell.h",
-        "rlprivate.h",
-        "tcap.h",
-        "rltty.h",
-        "rlwinsize.h",
-        "posixdir.h",
-            ]
+pkg_libs([":readline", ":history"])
+pkg_exes()
 
 EXTERNAL_HDRS = [
         "readline.h",
@@ -25,7 +12,10 @@ EXTERNAL_HDRS = [
         "rlstdc.h",
         "rlconf.h",
         "rltypedefs.h",
+        ":hdrs_subdir",
 ]
+
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
 genrule(
     name = "hdrs_subdir",
@@ -61,11 +51,11 @@ genrule(
     """
 )
 
-cc_library(
-    name = "rl",
-    hdrs = [":hdrs_subdir"],
-    deps = [":readline", ":history"],
-)
+# cc_library(
+#     name = "rl",
+#     hdrs = [":hdrs_subdir"],
+#     deps = [":readline", ":history"],
+# )
 
 cc_library(
   name = "readline",
@@ -104,12 +94,16 @@ cc_library(
   hdrs = EXTERNAL_HDRS + ["vi_keymap.c", "emacs_keymap.c"],
   includes = ["."],
   copts = ["-DHAVE_CONFIG_H", '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
-  deps = ["//external:ncurses-latest", ":tilde"],
+  deps = [
+            "//external:ncurses-latest",
+            ":tilde",
+         ],
 )
 
 cc_library(
     name = "tilde",
-    srcs = ["tilde.c"] + INTERNAL_HDRS + EXTERNAL_HDRS,
+    srcs = ["tilde.c"] + INTERNAL_HDRS,
+    hdrs = EXTERNAL_HDRS,
     copts = ["-DHAVE_CONFIG_H", "-DREADLINE_LIBRARY"],
   includes = ["."],
 )

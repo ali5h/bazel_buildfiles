@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "EtroSDK",
-    srcs = ["NVSConfigLib", "NVSNetLib"],
-)
+pkg_libs(["NVSConfigLib", "NVSNetLib"])
+pkg_exes()
 
 EXTERNAL_HDRS = [
                 "EtroConfigLib/EtroConfigLib.h",

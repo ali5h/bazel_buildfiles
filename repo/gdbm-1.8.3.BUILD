@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":gdbm", ":gdbm-compat"])
+pkg_exes()
+
 INTERNAL_HDRS = [
             "autoconf.h",
             "gdbmdefs.h",
@@ -9,11 +12,6 @@ INTERNAL_HDRS = [
             "extern.h",
             "gdbmerrno.h",
             ]
-
-cc_library(
-    name = "libgdbm",
-    deps = [":gdbm", ":gdbm-compat"],
-)
 
 cc_library(
   name = "gdbm",

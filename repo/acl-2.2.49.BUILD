@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "libacl",
-    srcs = [":acl", ":setfacl", ":getfacl"],
-)
+pkg_libs([":acl"])
+pkg_exes([":setfacl", ":getfacl"])
 
 OPTS = [
             '-DHAVE_CONFIG_H',

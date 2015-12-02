@@ -1,11 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 
-COPT_MACRO = ["-DHAVE_CONFIG_H", "-DLIBPAM_COMPILE", "-DWITH_SELINUX", '-DPAM_VERSION=\\"0.99.7.1\\"', '-DDEFAULT_MODULE_PATH=\\"/lib/security/\\"']
+pkg_libs([":pam", ":pamc", ":pam_misc"])
+pkg_exes()
 
-cc_library(
-  name = "linux-pam",
-  deps = [":pam", ":pamc", ":pam_misc"],
-)
+COPT_MACRO = ["-DHAVE_CONFIG_H", "-DLIBPAM_COMPILE", "-DWITH_SELINUX", '-DPAM_VERSION=\\"0.99.7.1\\"', '-DDEFAULT_MODULE_PATH=\\"/lib/security/\\"']
 
 filegroup(
     name = "int_headers",

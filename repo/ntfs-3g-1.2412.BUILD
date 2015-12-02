@@ -1,12 +1,10 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":ntfs-3g"])
+pkg_exes([":mount.ntfs-3g"])
+
 EXTERNAL_HDRS = glob(["include/ntfs-3g/*.h"])
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
-
-filegroup(
-    name = "ntfs-3g-files",
-    srcs = [":mount.ntfs-3g", ":ntfs-3g"],
-)
 
 cc_binary(
     name = "mount.ntfs-3g",

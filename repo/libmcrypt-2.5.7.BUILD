@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs(["mcrypt"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["lib/mcrypt.h"]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 

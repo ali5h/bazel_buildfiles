@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":gcrypt"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["src/gcrypt.h", "src/gcrypt-module.h"]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 

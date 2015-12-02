@@ -1,16 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 
-
-filegroup(
-    name = "glib",
-    srcs = [
+pkg_libs([
             "glib-2.0",
             "gthread-2.0",
             "gobject-2.0",
             "gmodule-2.0",
             "gio-2.0",
-    ],
-)
+])
+pkg_exes()
 
 EXTERNAL_HDRS = [
                 "glib/glib.h",

@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":tiff"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
             "libtiff/tiff.h",
             "libtiff/tiffconf.h",

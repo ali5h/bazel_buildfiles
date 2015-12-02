@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":id3tag"])
+pkg_exes()
+
 cc_library(
   name = "id3tag",
   srcs =  [

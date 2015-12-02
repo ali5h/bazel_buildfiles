@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs(["common"])
+pkg_exes()
+
 OPTS = [
 
                 '-DHAVE_CONFIG_H',

@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":rlog"])
+pkg_exes()
+
 cc_library(
   name = "rlog",
   srcs = [

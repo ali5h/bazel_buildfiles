@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":aio"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["src/libaio.h"]
 INTERNAL_HDRS = glob(["src/*.h"], EXTERNAL_HDRS)
 

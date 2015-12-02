@@ -1,9 +1,9 @@
-load("/ext/extension", "add_package_SysLib", "add_package_SysUtil")
+load("/ext/extension", "add_package_SysLib", "add_package_SysUtil", "add_package_NasLib")
 
 # can be reference by //external:zlib-latest
 bind(
     name = "zlib-latest",
-    actual = "@zlib-1.2.8//:z",
+    actual = "@zlib-1.2.8//:dep_libs",
 )
 add_package_SysLib("zlib-1.2.8")
 
@@ -15,23 +15,23 @@ add_package_SysLib("json-c-0.9")
 
 add_package_SysLib("sqlite-3.4.1")
 
-add_package_SysLib("thin-provisioning-tools-v0.4.1")
+add_package_SysUtil("thin-provisioning-tools-v0.4.1")
 
 bind(
     name = "libaio-latest",
-    actual = "@libaio-0.3.109//:aio",
+    actual = "@libaio-0.3.109//:dep_libs",
 )
 add_package_SysLib("libaio-0.3.109")
 
 bind(
     name = "boost-latest",
-    actual = "@boost_1_53_0//:boost",
+    actual = "@boost_1_53_0//:dep_libs",
 )
 add_package_SysLib("boost_1_53_0")
 
 bind(
     name = "expat-latest",
-    actual = "@expat-2.0.1//:expat",
+    actual = "@expat-2.0.1//:dep_libs",
 )
 add_package_SysLib("expat-2.0.1")
 
@@ -41,7 +41,7 @@ add_package_SysLib("xmlrpc")
 
 bind(
     name = "libxml2-latest",
-    actual = "@libxml2-2.9.2//:xml2",
+    actual = "@libxml2-2.9.2//:dep_libs",
 )
 add_package_SysLib("libxml2-2.9.2")
 
@@ -51,25 +51,25 @@ add_package_SysLib("rlog-1.4")
 
 bind(
     name = "jpeg-latest",
-    actual = "@jpeg-6b-src//:jpeg",
+    actual = "@jpeg-6b-src//:dep_libs",
 )
 add_package_SysLib("jpeg-6b-src")
 
 add_package_SysLib("libevent-1.4.12-stable")
 
-add_package_SysLib("pam-0.99.7.1")
+add_package_NasLib("pam-0.99.7.1")
 
 add_package_SysLib("libffi-3.2.1")
 
 bind(
     name = "ncurses-latest",
-    actual = "@ncurses-5.5//:nc",
+    actual = "@ncurses-5.5//:dep_libs",
 )
 add_package_SysLib("ncurses-5.5")
 
 bind(
     name = "readline-latest",
-    actual = "@readline-5.2//:rl",
+    actual = "@readline-5.2//:dep_libs",
 )
 add_package_SysLib("readline-5.2")
 
@@ -109,13 +109,13 @@ add_package_SysLib("openldap-2.4.33")
 # FIX: should fix openssl util (link error)
 bind(
     name = "openssl-latest",
-    actual = "@openssl-1.0.1p//:openssl-dev",
+    actual = "@openssl-1.0.1p//:dep_libs",
 )
 add_package_SysLib("openssl-1.0.1p")
 
 bind(
     name = "liboop-latest",
-    actual = "@liboop-1.0//:oop",
+    actual = "@liboop-1.0//:dep_libs",
 )
 add_package_SysLib("liboop-1.0")
 
@@ -124,13 +124,13 @@ add_package_SysLib("ruli-0.33")
 
 bind(
     name = "libusb-latest",
-    actual = "@libusb-1.0.9//:usb-1.0",
+    actual = "@libusb-1.0.9//:dep_libs",
 )
 add_package_SysLib("libusb-1.0.9")
 
 bind(
     name = "libusb-compat-latest",
-    actual = "@libusb-compat-0.1.4//:usb",
+    actual = "@libusb-compat-0.1.4//:dep_libs",
 )
 add_package_SysLib("libusb-compat-0.1.4")
 
@@ -140,13 +140,13 @@ add_package_SysLib("cyrus-sasl-2.1.22")
 
 bind(
     name = "gpg-error-latest",
-    actual = "@libgpg-error-1.6//:gpg-error",
+    actual = "@libgpg-error-1.6//:dep_libs",
 )
 add_package_SysLib("libgpg-error-1.6")
 
 bind(
     name = "gcrypt-latest",
-    actual = "@libgcrypt-1.4.3//:gcrypt",
+    actual = "@libgcrypt-1.4.3//:dep_libs",
 )
 add_package_SysLib("libgcrypt-1.4.3")
 
@@ -179,7 +179,7 @@ add_package_SysLib("ImageMagick-6.8.9-9")
 
 bind(
     name = "attr-latest",
-    actual = "@attr-2.4.47//:attr",
+    actual = "@attr-2.4.47//:dep_libs",
 )
 add_package_SysLib("attr-2.4.47")
 

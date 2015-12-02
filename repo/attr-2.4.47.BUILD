@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "libattr",
-    srcs = [":attr", ":getfattr", ":setfattr"],
-)
+pkg_libs([":attr"])
+pkg_exes([":getfattr", ":setfattr"])
 
 OPTS = [
             '-funsigned-char',

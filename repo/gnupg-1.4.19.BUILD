@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs()
+pkg_exes([":gpg"])
+
 OPTS = [
         "-DHAVE_CONFIG_H",
         "-Wno-pointer-sign",

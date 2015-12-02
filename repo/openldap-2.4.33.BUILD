@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":lber", ":ldap", ":ldap_r"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
             "include/ldif.h",
             "include/ldap_utf8.h",
@@ -15,11 +18,6 @@ INTERNAL_HDRS = [
             ":include/ldap_config.h",
                 ]+  glob(["**/*.h"], exclude=EXTERNAL_HDRS)
 
-
-cc_library(
-    name = "openldap",
-    deps = [ "lber", "ldap", "ldap_r"],
-)
 
 cc_library(
     name = "lber",

@@ -1,5 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":sasl2"])
+pkg_exes()
 
 EXTERNAL_HDRS = [
             "include/hmac-md5.h",

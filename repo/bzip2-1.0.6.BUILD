@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":bz2"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["bzlib.h"]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 

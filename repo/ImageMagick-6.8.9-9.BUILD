@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "IM",
-    srcs = [":MagickWand", ":MagickCore", ":convert", ":identify", ":composite"]
-)
+pkg_libs([":MagickWand", ":MagickCore"])
+pkg_exes([":convert", ":identify", ":composite"])
 
 EXTERNAL_HDRS = [
 

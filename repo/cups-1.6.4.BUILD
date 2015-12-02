@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "libcups",
-    srcs = [
-            "cups",
-            "cupsmime",
+pkg_libs([":cups", ":cupsmime"])
+pkg_exes([
             "cupsd",
             "lpadmin",
             "lpinfo",
@@ -17,8 +14,7 @@ filegroup(
             "lpr",
             "lprm",
             "gziptoany",
-    ],
-)
+])
 
 OPTS = [
         '-D_CUPS_SOURCE',

@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":tasn1"])
+pkg_exes()
+
 cc_library(
     name = "tasn1",
     srcs = [

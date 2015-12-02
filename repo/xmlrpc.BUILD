@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":xmlrpc-epi"])
+pkg_exes()
+
 cc_library(
   name = "xmlrpc-epi",
   srcs = [

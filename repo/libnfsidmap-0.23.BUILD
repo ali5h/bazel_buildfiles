@@ -1,20 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":nfsidmap"])
+pkg_exes([":nsswitch.so", ":static.so", ":umich_ldap.so"])
+
 INTERNAL_HDRS = [
                 "cfg.h",
                 "queue.h",
                 "nfsidmap_internal.h",
             ]
-
-filegroup(
-    name = "libnfsidmap",
-    srcs = [
-        ":nfsidmap",
-        ":nsswitch.so",
-        ":static.so",
-        ":umich_ldap.so",
-    ],
-)
 
 cc_library(
     name = "nfsidmap",

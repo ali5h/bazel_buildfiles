@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":ulockmgr", ":fuse"])
+pkg_exes([":fusermount"])
+
 EXTERNAL_HDRS = [
             "include/cuse_lowlevel.h",
             "include/fuse.h",
@@ -18,11 +21,6 @@ INTERNAL_HDRS = [
             "lib/mount_util.h",
             "include/config.h",
                 ]
-
-filegroup(
-    name = "libfuse",
-    srcs = [":ulockmgr", ":fuse", "fusermount" ],
-)
 
 filegroup(
     name = "c_srcs",

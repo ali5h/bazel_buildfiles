@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":nl"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
 
                 "include/netlink/addr.h",

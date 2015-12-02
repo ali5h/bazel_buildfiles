@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":com_err"])
+pkg_exes()
+
 cc_library(
     name = "com_err",
     srcs = [

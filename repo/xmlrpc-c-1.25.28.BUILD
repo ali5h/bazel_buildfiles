@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":xmlrpc"])
+pkg_exes()
+
 EXTERNAL_HDRS = glob(["include/xmlrpc-c/*.h"])
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS+["Windows/*.h"])
 
@@ -32,32 +35,3 @@ cc_library(
     # includes = [],
     copts = ["-DHAVE_CONFIG_H"],
 )
-
-# cc_library(
-#     name = "",
-#     srcs = [] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = [],
-#     copts = [],
-# )
-# cc_library(
-#     name = "",
-#     srcs = [] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = [],
-#     copts = [],
-# )
-# cc_library(
-#     name = "",
-#     srcs = [] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = [],
-#     copts = [],
-# )
-# cc_library(
-#     name = "",
-#     srcs = [] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = [],
-#     copts = [],
-# )

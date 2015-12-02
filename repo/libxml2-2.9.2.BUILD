@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":xml2"])
+pkg_exes()
+
 cc_library(
   name = "xml2",
   srcs = [

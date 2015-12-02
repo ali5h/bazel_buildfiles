@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":jrtp"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
 
                 "src/rtcpapppacket.h",

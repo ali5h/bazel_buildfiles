@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":json-c"])
+pkg_exes()
+
 cc_library(
   name = "json-c",
   srcs = glob(["*.c"], exclude = ["test*.c"])+["config.h"],

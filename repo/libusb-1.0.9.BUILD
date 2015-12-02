@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":usb-1.0"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["libusb/libusb.h"]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 

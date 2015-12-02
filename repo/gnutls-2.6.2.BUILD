@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":gnutls", ":gnutls-extra", ":gnutls-openssl"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
             "includes/gnutls/compat.h",
             "includes/gnutls/crypto.h",
@@ -11,11 +14,6 @@ EXTERNAL_HDRS = [
             "includes/gnutls/x509.h",
 ]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
-
-cc_library(
-    name = "libgnutls",
-    deps = [":gnutls", "gnutls-extra", "gnutls-openssl"],
-)
 
 cc_library(
     name = "gnutls",

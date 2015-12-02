@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":gpg-error"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["src/gpg-error.h",]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 

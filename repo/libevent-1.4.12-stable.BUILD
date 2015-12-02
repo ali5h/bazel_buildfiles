@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "libevent",
-    deps = [":event", "event_core", ":event_extra"],
-)
+pkg_libs([":event", ":event_core", ":event_extra"])
+pkg_exes()
 
 filegroup(
     name = "ext_headers",

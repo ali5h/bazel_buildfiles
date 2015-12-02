@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs(["xslt"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
 
                 "libexslt/exslt.h",

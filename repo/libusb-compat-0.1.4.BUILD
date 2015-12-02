@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "libusb-compat",
-    srcs = [":usb", ":lsusb"],
-)
+pkg_libs([":usb"])
+pkg_exes([":lsusb"])
 
 cc_library(
     name = "usb",

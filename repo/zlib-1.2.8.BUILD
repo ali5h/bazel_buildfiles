@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":z"])
+pkg_exes()
+
 cc_library(
   name = "z",
   srcs = [
@@ -39,3 +42,4 @@ cc_library(
     "-Wno-implicit-function-declaration",
   ],
 )
+

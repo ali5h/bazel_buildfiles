@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":ruli"])
+pkg_exes()
+
 cc_library(
     name = "ruli",
     srcs = [

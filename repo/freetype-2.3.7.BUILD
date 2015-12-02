@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":freetype"])
+pkg_exes()
+
 INTERNAL_HDRS = glob (["include/freetype/internal/*.h", "include/freetype/internal/services/*.h"]) + glob(["src/**/*.h"])
 
 cc_library(

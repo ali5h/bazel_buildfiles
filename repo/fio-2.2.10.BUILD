@@ -1,6 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-
+pkg_libs()
+pkg_exes([":fio"])
 
 cc_binary(
   name = "fio",

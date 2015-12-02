@@ -12,6 +12,12 @@ def add_package_SysUtil(name):
     build_file = 'repo/' + name + '.BUILD',
   )
 
+def add_package_NasLib(name):
+  native.new_local_repository(
+    name = name,
+    path = '/root/NasX86/NasLib/' + name,
+    build_file = 'repo/' + name + '.BUILD',
+  )
 #   native.bind(
 #     name = name + '-latest',
 #     actual = '@' + name + '//:' + lib_name,
@@ -23,6 +29,10 @@ def pkg_libs(srcs = []):
     native.filegroup(
         name = 'libs',
         srcs = srcs,
+    )
+    native.cc_library(
+        name = 'dep_libs',
+        deps = srcs,
     )
 
 def pkg_exes(srcs = []):

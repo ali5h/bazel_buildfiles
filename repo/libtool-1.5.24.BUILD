@@ -1,5 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":ltdl"])
+pkg_exes()
 
 cc_library(
   name = "ltdl",

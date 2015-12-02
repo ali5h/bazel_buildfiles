@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "nc",
-    deps = [ ":panel", ":ncurses", ":form", ":menu", ":ncurses++", ],
-)
+pkg_libs([":panel", ":ncurses", ":form", ":menu", ":ncurses++"])
+pkg_exes()
 
 cc_library(
   name = "ncurses++",

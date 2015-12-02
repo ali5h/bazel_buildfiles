@@ -1,9 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "thintools",
-    srcs = [ "pdata_tools", "thintools_bsadapt"],
-)
+pkg_libs()
+pkg_exes([":pdata_tools", ":thintools_bsadapt"])
 
 cc_binary(
   name = "pdata_tools",

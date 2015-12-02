@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":jpeg"])
+pkg_exes()
+
 cc_library(
   name = "jpeg",
   srcs = [

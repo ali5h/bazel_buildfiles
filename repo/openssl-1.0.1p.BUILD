@@ -1,17 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
-INTERNAL_HDRS = [
-            "ssl/ssl_locl.h",
-            "crypto/cryptlib.h",
-            "e_os.h",
-            "crypto/constant_time_locl.h",
-            "ssl/kssl_lcl.h",
-            "crypto/o_dir.h",
-            "MacOS/buildinf.h",
-            "crypto/o_str.h",
-            "crypto/o_time.h",
-            "crypto/ec/ec_lcl.h",
-        ]
+pkg_libs([":ssl", ":crypto"])
+# FIX: should put openssl when complete
+pkg_exes()
 
 EXTERNAL_HDRS = [
         "include/openssl/opensslconf.h",
@@ -88,19 +79,14 @@ EXTERNAL_HDRS = [
         "include/openssl/x509_vfy.h",
         "include/openssl/x509v3.h",
         ]
+INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
 cc_binary(
      name = "openssl",
      srcs = [
-            "apps/progs.h",
             "apps/openssl.c",
-     ],
-     deps = [":openssl-dev"],
-)
-
-cc_library(
-    name = "openssl-dev",
-    deps = [":ssl", ":crypto"],
+     ] + INTERNAL_HDRS,
+     deps = [":ssl", ":crypto"],
 )
 
 cc_library(
@@ -154,7 +140,6 @@ cc_library(
         "ssl/tls_srp.c",
         "ssl/t1_reneg.c",
         "ssl/ssl_utst.c",
-        "ssl/srtp.h",
         ] + INTERNAL_HDRS,
     hdrs = EXTERNAL_HDRS,
     includes = [".", "include", "crypto", "ssl"],

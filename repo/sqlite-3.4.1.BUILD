@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":sqlite3"])
+pkg_exes()
+
 cc_library(
   name = "sqlite3",
   srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + 

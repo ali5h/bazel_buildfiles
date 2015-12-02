@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs(["rsync"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["librsync-config.h", "librsync.h"]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 

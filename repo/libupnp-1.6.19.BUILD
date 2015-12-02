@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":upnp", ":ixml", ":threadutil"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
         "upnp/inc/UpnpString.h",
         "upnp/inc/upnp.h",
@@ -59,11 +62,6 @@ INTERNAL_HDRS = [
         "ixml/src/inc/ixmlparser.h",
 
 ]
-
-cc_library(
-    name = "libupnp",
-    deps = [":upnp", ":ixml", ":threadutil"],
-)
 
 cc_library(
   name = "upnp",

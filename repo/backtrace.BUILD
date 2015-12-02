@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":backtrace"])
+pkg_exes([":crasher"])
+
 filegroup(
     name = "backtrace_tools",
     srcs = ["backtrace", "crasher",],

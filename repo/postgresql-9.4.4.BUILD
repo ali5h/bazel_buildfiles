@@ -1,5 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":pq"])
+pkg_exes()
 
 EXTERNAL_HDRS = [
 

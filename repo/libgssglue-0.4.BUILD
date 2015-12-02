@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":gssglue"])
+pkg_exes()
+
 cc_library(
     name = "gssglue",
     srcs = [

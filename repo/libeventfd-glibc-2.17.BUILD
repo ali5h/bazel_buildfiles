@@ -1,5 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+pkg_libs([":eventfd"])
+pkg_exes()
+
 EXTERNAL_HDRS = ["sys/eventfd.h"]
 INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
