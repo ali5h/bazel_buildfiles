@@ -10,7 +10,7 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "NasLib",
     srcs = [
-                "@pam-0.99.7.1//:outs",
+                "@Linux-PAM//:outs",
         ],
 )
 
@@ -59,7 +59,7 @@ filegroup(
 
 pkg_tar(
     name = "final",
-    files = [":SysUtil", ":misc"],
+    files = ["NasPreLib", "NasLib", "SysLib", "SysUtil"],
     extension = "tar.gz",
 )
 

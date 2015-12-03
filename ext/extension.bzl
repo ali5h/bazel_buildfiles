@@ -1,13 +1,14 @@
 
-def add_package(dir , alias, name):
+def add_package(abs_path , alias):
     native.new_local_repository(
-        name = name,
-        path = '/root/NasX86/' + dir + '/' + name,
-        build_file = 'repo/' + name + '.BUILD',
+        name = abs_path.split('/')[-1:][0],
+        # path = '/root/NasX86/' + dir + '/' + name,
+        path = abs_path,
+        build_file = 'repo/' + abs_path.split('/')[-1:][0] + '.BUILD',
     )
     native.bind(
         name = alias + '-latest',
-        actual = '@' + name + '//:dep_libs',
+        actual = '@' + abs_path.split('/')[-1:][0] + '//:dep_libs',
     )
 
 # ------------for build file---------------------
