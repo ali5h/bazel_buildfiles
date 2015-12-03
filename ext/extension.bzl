@@ -1,27 +1,14 @@
-def add_package_SysLib(name):
-  native.new_local_repository(
-    name = name,
-    path = '/root/NasX86/SysLib/' + name,
-    build_file = 'repo/' + name + '.BUILD',
-  )
 
-def add_package_SysUtil(name):
-  native.new_local_repository(
-    name = name,
-    path = '/root/NasX86/SysUtil/' + name,
-    build_file = 'repo/' + name + '.BUILD',
-  )
-
-def add_package_NasLib(name):
-  native.new_local_repository(
-    name = name,
-    path = '/root/NasX86/NasLib/' + name,
-    build_file = 'repo/' + name + '.BUILD',
-  )
-#   native.bind(
-#     name = name + '-latest',
-#     actual = '@' + name + '//:' + lib_name,
-#   )
+def add_package(dir , alias, name):
+    native.new_local_repository(
+        name = name,
+        path = '/root/NasX86/' + dir + '/' + name,
+        build_file = 'repo/' + name + '.BUILD',
+    )
+    native.bind(
+        name = alias + '-latest',
+        actual = '@' + name + '//:dep_libs',
+    )
 
 # ------------for build file---------------------
 

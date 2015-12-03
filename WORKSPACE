@@ -1,219 +1,88 @@
-load("/ext/extension", "add_package_SysLib", "add_package_SysUtil", "add_package_NasLib")
+load("/ext/extension", "add_package")
+
+add_package("NasLib", "pam", "pam-0.99.7.1")
+
+add_package("SysUtil", "thin-provisioning-tools", "thin-provisioning-tools-v0.4.1")
+add_package("SysUtil", "fio", "fio-2.2.10")
 
 # can be reference by //external:zlib-latest
-bind(
-    name = "zlib-latest",
-    actual = "@zlib-1.2.8//:dep_libs",
-)
-add_package_SysLib("zlib-1.2.8")
-
-add_package_SysLib("popt-1.14")
-
-add_package_SysLib("libid3tag-0.15.1b")
-
-add_package_SysLib("json-c-0.9")
-
-add_package_SysLib("sqlite-3.4.1")
-
-add_package_SysUtil("thin-provisioning-tools-v0.4.1")
-
-bind(
-    name = "libaio-latest",
-    actual = "@libaio-0.3.109//:dep_libs",
-)
-add_package_SysLib("libaio-0.3.109")
-
-bind(
-    name = "boost-latest",
-    actual = "@boost_1_53_0//:dep_libs",
-)
-add_package_SysLib("boost_1_53_0")
-
-bind(
-    name = "expat-latest",
-    actual = "@expat-2.0.1//:dep_libs",
-)
-add_package_SysLib("expat-2.0.1")
-
-add_package_SysUtil("fio-2.2.10")
-
-add_package_SysLib("xmlrpc")
-
-bind(
-    name = "libxml2-latest",
-    actual = "@libxml2-2.9.2//:dep_libs",
-)
-add_package_SysLib("libxml2-2.9.2")
-
-add_package_SysLib("eventlog-0.2.7")
-
-add_package_SysLib("rlog-1.4")
-
-bind(
-    name = "jpeg-latest",
-    actual = "@jpeg-6b-src//:dep_libs",
-)
-add_package_SysLib("jpeg-6b-src")
-
-add_package_SysLib("libevent-1.4.12-stable")
-
-add_package_NasLib("pam-0.99.7.1")
-
-add_package_SysLib("libffi-3.2.1")
-
-bind(
-    name = "ncurses-latest",
-    actual = "@ncurses-5.5//:dep_libs",
-)
-add_package_SysLib("ncurses-5.5")
-
-bind(
-    name = "readline-latest",
-    actual = "@readline-5.2//:dep_libs",
-)
-add_package_SysLib("readline-5.2")
-
-add_package_SysLib("backtrace")
-
-add_package_SysLib("gdbm-1.8.3")
-
-add_package_SysLib("freetype-2.3.7")
-
-add_package_SysLib("libtool-1.5.24")
-
+add_package("SysLib", "zlib", "zlib-1.2.8")
+add_package("SysLib", "popt", "popt-1.14")
+add_package("SysLib", "libid3tag", "libid3tag-0.15.1b")
+add_package("SysLib", "json-c", "json-c-0.9")
+add_package("SysLib", "sqlite", "sqlite-3.4.1")
+add_package("SysLib", "libaio", "libaio-0.3.109")
+add_package("SysLib", "boost", "boost_1_53_0")
+add_package("SysLib", "expat", "expat-2.0.1")
+add_package("SysLib", "xmlrpc", "xmlrpc")
+add_package("SysLib", "libxml2", "libxml2-2.9.2")
+add_package("SysLib", "eventlog", "eventlog-0.2.7")
+add_package("SysLib", "rlog", "rlog-1.4")
+add_package("SysLib", "jpeg", "jpeg-6b-src")
+add_package("SysLib", "libevent", "libevent-1.4.12-stable")
+add_package("SysLib", "libffi", "libffi-3.2.1")
+add_package("SysLib", "ncurses", "ncurses-5.5")
+add_package("SysLib", "readline", "readline-5.2")
+add_package("SysLib", "backtrace",  "backtrace")
+add_package("SysLib", "gdbm", "gdbm-1.8.3")
+add_package("SysLib", "freetype", "freetype-2.3.7")
+add_package("SysLib", "libtool", "libtool-1.5.24")
 # FIX: libstdc++ incomplete
-add_package_SysLib("libstdcxx-v3")
-
-
-add_package_SysLib("libupnp-1.6.19")
-
+add_package("SysLib", "libstdcxx-v3", "libstdcxx-v3")
+add_package("SysLib", "libupnp", "libupnp-1.6.19")
 # FIX: depend on  #include <gssapi/gssapi.h>
-add_package_SysLib("libtirpc-0.3.0")
-
-add_package_SysLib("libnfsidmap-0.23")
-
-add_package_SysLib("libgssglue-0.4")
-
+add_package("SysLib", "libtirpc", "libtirpc-0.3.0")
+add_package("SysLib", "libnfsidmap", "libnfsidmap-0.23")
+add_package("SysLib", "libgssglue", "libgssglue-0.4")
 # FIX: depend on  #include <gssapi/gssapi.h>
-add_package_SysLib("librpcsecgss-0.19")
-
+add_package("SysLib", "librpcsecgss", "librpcsecgss-0.19")
 # FIX: libcom_err only currently
-add_package_SysLib("e2fsprogs-1.42.5")
-
+add_package("SysLib", "e2fsprogs", "e2fsprogs-1.42.5")
 # FIX: not complete
-add_package_SysLib("krb5-1.13")
-
+add_package("SysLib", "krb5", "krb5-1.13")
 # openldap-2.4.7 have syntax bug, will lead compile error in new toolchain. We use 2.4.33
-add_package_SysLib("openldap-2.4.33")
-
+add_package("SysLib", "openldap", "openldap-2.4.33")
 # FIX: should fix openssl util (link error)
-bind(
-    name = "openssl-latest",
-    actual = "@openssl-1.0.1p//:dep_libs",
-)
-add_package_SysLib("openssl-1.0.1p")
-
-bind(
-    name = "liboop-latest",
-    actual = "@liboop-1.0//:dep_libs",
-)
-add_package_SysLib("liboop-1.0")
-
-add_package_SysLib("ruli-0.33")
-
-
-bind(
-    name = "libusb-latest",
-    actual = "@libusb-1.0.9//:dep_libs",
-)
-add_package_SysLib("libusb-1.0.9")
-
-bind(
-    name = "libusb-compat-latest",
-    actual = "@libusb-compat-0.1.4//:dep_libs",
-)
-add_package_SysLib("libusb-compat-0.1.4")
-
-add_package_SysLib("postgresql-9.4.4")
-
-add_package_SysLib("cyrus-sasl-2.1.22")
-
-bind(
-    name = "gpg-error-latest",
-    actual = "@libgpg-error-1.6//:dep_libs",
-)
-add_package_SysLib("libgpg-error-1.6")
-
-bind(
-    name = "gcrypt-latest",
-    actual = "@libgcrypt-1.4.3//:dep_libs",
-)
-add_package_SysLib("libgcrypt-1.4.3")
-
-add_package_SysLib("gnutls-2.6.2")
-
-add_package_SysLib("libtasn1-1.6")
-
-add_package_SysLib("bzip2-1.0.6")
-
-add_package_SysLib("libnl-1.1.4")
-
-add_package_SysLib("fuse-2.9.2")
-
-add_package_SysLib("ntfs-3g-1.2412")
-
-add_package_SysLib("xmlrpc-c-1.25.28")
-
-add_package_SysLib("jrtplib-3.3.0")
-
-add_package_SysLib("liblinuxfallocate-glibc-2.17")
-
-add_package_SysLib("libeventfd-glibc-2.17")
-
-add_package_SysLib("libutimensat-glibc-2.17")
-
-add_package_SysLib("tiff-4.0.4")
-
+add_package("SysLib", "openssl", "openssl-1.0.1p")
+add_package("SysLib", "liboop", "liboop-1.0")
+add_package("SysLib", "ruli", "ruli-0.33")
+add_package("SysLib", "libusb", "libusb-1.0.9")
+add_package("SysLib", "libusb-compat", "libusb-compat-0.1.4")
+add_package("SysLib", "postgresql", "postgresql-9.4.4")
+add_package("SysLib", "cyrus-sasl", "cyrus-sasl-2.1.22")
+add_package("SysLib", "gpg-error", "libgpg-error-1.6")
+add_package("SysLib", "gcrypt", "libgcrypt-1.4.3")
+add_package("SysLib", "gnutls", "gnutls-2.6.2")
+add_package("SysLib", "libtasn1", "libtasn1-1.6")
+add_package("SysLib", "bzip2", "bzip2-1.0.6")
+add_package("SysLib", "libnl", "libnl-1.1.4")
+add_package("SysLib", "fuse", "fuse-2.9.2")
+add_package("SysLib", "ntfs-3g", "ntfs-3g-1.2412")
+add_package("SysLib", "xmlrpc-c", "xmlrpc-c-1.25.28")
+add_package("SysLib", "jrtplib", "jrtplib-3.3.0")
+add_package("SysLib", "liblinuxfallocate-glibc", "liblinuxfallocate-glibc-2.17")
+add_package("SysLib", "libeventfd-glibc", "libeventfd-glibc-2.17")
+add_package("SysLib", "libutimensat-glibc", "libutimensat-glibc-2.17")
+add_package("SysLib", "tiff", "tiff-4.0.4")
 # FIX: original IM have compatible issue with latest zlib, update it
-add_package_SysLib("ImageMagick-6.8.9-9")
-
-bind(
-    name = "attr-latest",
-    actual = "@attr-2.4.47//:dep_libs",
-)
-add_package_SysLib("attr-2.4.47")
-
-add_package_SysLib("acl-2.2.49")
-
-add_package_SysLib("gnupg-1.4.19")
-
-add_package_SysLib("cups-1.6.4")
-
+add_package("SysLib", "ImageMagick", "ImageMagick-6.8.9-9")
+add_package("SysLib", "attr", "attr-2.4.47")
+add_package("SysLib", "acl", "acl-2.2.49")
+add_package("SysLib", "gnupg", "gnupg-1.4.19")
+add_package("SysLib", "cups", "cups-1.6.4")
 #     build_file = "repo/libunistring-0.9.3.BUILD",
-
 #     build_file = "repo/libidn-1.25.BUILD",
-
-add_package_SysLib("gsoap_2.7.17")
-
+add_package("SysLib", "gsoap", "gsoap_2.7.17")
 #     build_file = "repo/ffmpeg.BUILD",
-
-
-add_package_SysLib("EtroSDK-src-2.3.3")
-
-add_package_SysLib("libcsv-3.0.2")
-
-add_package_SysLib("librsync-0.9.7")
-
-add_package_SysLib("libmcrypt-2.5.7")
-
-add_package_SysLib("libcommon-0.98.10.1")
-
-add_package_SysLib("libxslt-1.1.28")
-
-add_package_SysLib("glib-2.24.2")
-
+add_package("SysLib", "EtroSDK-src", "EtroSDK-src-2.3.3")
+add_package("SysLib", "libcsv", "libcsv-3.0.2")
+add_package("SysLib", "librsync", "librsync-0.9.7")
+add_package("SysLib", "libmcrypt", "libmcrypt-2.5.7")
+add_package("SysLib", "libcommon", "libcommon-0.98.10.1")
+add_package("SysLib", "libxslt", "libxslt-1.1.28")
+add_package("SysLib", "glib", "glib-2.24.2")
 # FIX: depend on php
-# add_package_SysLib("graphviz-2.38.0")
+# add_package("SysLib", "graphviz", "graphviz-2.38.0")
 #----------------------------------------------------------
 
 # # SYS_LIBRARY
