@@ -1,4 +1,6 @@
 package(default_visibility = ["//visibility:public"])
+load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+pkg_outs()
 
 pkg_libs([":event", ":event_core", ":event_extra"])
 pkg_exes()

@@ -2,11 +2,6 @@ load("/tools/build_defs/pkg/pkg", "pkg_tar")
 
 package(default_visibility = ["//visibility:public"])
 
-# filegroup(
-#     name = "all",
-#     srcs = [ "NasPreLib", "SysLib", "NasLib", "SysUtil", "misc"],
-# )
-
 filegroup(
     name = "NasLib",
     srcs = [
@@ -57,9 +52,14 @@ filegroup(
         ],
 )
 
+filegroup(
+    name = "all_files",
+    srcs = ["NasPreLib", "NasLib", "SysLib", "SysUtil", "misc"],
+)
+
 pkg_tar(
     name = "final",
-    files = ["NasPreLib", "NasLib", "SysLib", "SysUtil"],
+    files = ["all_files"],
     extension = "tar.gz",
 )
 

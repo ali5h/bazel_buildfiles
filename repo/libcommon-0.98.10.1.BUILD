@@ -1,4 +1,6 @@
 package(default_visibility = ["//visibility:public"])
+load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+pkg_outs()
 
 pkg_libs(["common"])
 pkg_exes()

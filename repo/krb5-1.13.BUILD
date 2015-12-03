@@ -1,4 +1,6 @@
 package(default_visibility = ["//visibility:public"])
+load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+pkg_outs()
 
 AH  = "util/et/et_h.awk"
 AC  = "util/et/et_c.awk"

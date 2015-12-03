@@ -1,4 +1,6 @@
 package(default_visibility = ["//visibility:public"])
+load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+pkg_outs()
 
 pkg_libs([":boost_filesystem", ":boost_system", ":boost_serialization"])
 pkg_exes()

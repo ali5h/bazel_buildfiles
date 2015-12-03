@@ -2,7 +2,6 @@
 def add_package(abs_path , alias):
     native.new_local_repository(
         name = abs_path.split('/')[-1:][0],
-        # path = '/root/NasX86/' + dir + '/' + name,
         path = abs_path,
         build_file = 'repo/' + abs_path.split('/')[-1:][0] + '.BUILD',
     )
