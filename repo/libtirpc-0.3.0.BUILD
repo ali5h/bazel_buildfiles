@@ -2,6 +2,9 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
 pkg_outs()
 
+pkg_libs(["tirpc"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
             "tirpc/netconfig.h",
             "tirpc/rpcsvc/crypt.x",
@@ -102,12 +105,14 @@ cc_library(
         "src/authdes_prot.c",
         "src/des_crypt.c",
         "src/des_impl.c",
-
         ],
   hdrs = EXTERNAL_HDRS,
   includes = ["tirpc", "."],
-  copts = ["-DHAVE_CONFIG_H", "-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe"],
-  deps = ["//external:krb5-latest"],
+  copts = ["-DHAVE_CONFIG_H", "-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe", "-DHAVE_RPCSEC_GSS"],
+  deps = [
+        "//external:krb5-latest",
+        "//external:e2fsprogs-latest",
+],
 )
 
 
