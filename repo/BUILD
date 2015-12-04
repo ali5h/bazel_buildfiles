@@ -81,7 +81,7 @@ filegroup(
                 "@libxslt-1.1.28//:outs",
                 "@libtool-1.5.24//:outs",
                 "@libupnp-1.6.19//:outs",
-# @libtirpc-0.3.0//:outs
+                "@libtirpc-0.3.0//:outs",
                 "@libnfsidmap-0.23//:outs",
                 "@libgssglue-0.4//:outs",
 # @librpcsecgss-0.19//:outs
