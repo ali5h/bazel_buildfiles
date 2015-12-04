@@ -68,30 +68,6 @@ cc_library(
     includes = ["include"],
 )
 
-cc_library(
-    linkstatic = 1,
-    name = "krb5",
-    hdrs = EXTERNAL_HDRS,
-    includes = ["include"],
-    # srcs = ["libkrb5.so.3.3"],
-)
-
-cc_library(
-    linkstatic = 1,
-    name = "k5crypto",
-    hdrs = EXTERNAL_HDRS,
-    includes = ["include"],
-    # srcs = ["libk5crypto.so.3.1"],
-)
-
-cc_library(
-    linkstatic = 1,
-    name = "krb5support",
-    hdrs = EXTERNAL_HDRS,
-    includes = ["include"],
-    # srcs = ["libkrb5support.so.0.1"],
-)
-
 genrule(
     local = 1,
     name = "local_build",
