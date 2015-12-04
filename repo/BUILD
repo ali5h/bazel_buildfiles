@@ -66,6 +66,7 @@ pkg_tar(
 filegroup(
     name = "SysLib",
     srcs = [
+                "@krb5-1.13//:outs",
 # imap-2007e.tar.gz
                 "@libmcrypt-2.5.7//:outs",
                 "@libcommon-0.98.10.1//:outs",

@@ -6,6 +6,8 @@ pkg_libs(["libgssapi_krb5.so", "libkrb5.so", "libk5crypto.so", "libkrb5support.s
 pkg_exes(["klist", "kinit"])
 
 genrule(
+    local = 1,
+    output_to_bindir = 1,
     name = "local_build",
     outs = [
         "libgssapi_krb5.so",
@@ -14,7 +16,7 @@ genrule(
         "libkrb5support.so",
         "klist",
         "kinit",
-    ]
+    ],
     cmd = """
         TMPDIR=$$(mktemp -d)
         (cd external/krb5-1.13/src &&
@@ -30,7 +32,7 @@ genrule(
         cp $$TMPDIR/bin/klist $(location klist)
         cp $$TMPDIR/bin/kinit $(location kinit)
         rm -fr $$TMPDIR
-    """
+    """,
 
 )
 
