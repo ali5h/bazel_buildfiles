@@ -1,5 +1,9 @@
 load("/ext/extension", "add_package")
 
+# FIX: non-sandbox build
+add_package("/root/sandbox/krb5-1.13", "krb5")
+add_package("/root/sandbox/xmlrpc-c-1.25.28", "xmlrpc-c")
+add_package("/root/sandbox/libnl-1.1.4", "libnl")
 
 add_package("/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1", "thin-provisioning-tools")
 add_package("/root/NasX86/SysUtil/fio-2.2.10", "fio-2.2.10")
@@ -38,8 +42,6 @@ add_package("/root/NasX86/SysLib/libgssglue-0.4", "libgssglue")
 add_package("/root/NasX86/SysLib/librpcsecgss-0.19", "librpcsecgss")
 # FIX: libcom_err only currently
 add_package("/root/NasX86/SysLib/e2fsprogs-1.42.5", "e2fsprogs")
-# FIX: non-sandbox build
-add_package("/root/sandbox/krb5-1.13", "krb5")
 # openldap-2.4.7 have syntax bug, will lead compile error in new toolchain. We use 2.4.33
 add_package("/root/NasX86/SysLib/openldap-2.4.33", "openldap")
 # FIX: should fix openssl util (link error)
@@ -55,10 +57,8 @@ add_package("/root/NasX86/SysLib/libgcrypt-1.4.3", "gcrypt")
 add_package("/root/NasX86/SysLib/gnutls-2.6.2", "gnutls")
 add_package("/root/NasX86/SysLib/libtasn1-1.6", "libtasn1")
 add_package("/root/NasX86/SysLib/bzip2-1.0.6", "bzip2")
-add_package("/root/sandbox/libnl-1.1.4", "libnl")
 add_package("/root/NasX86/SysLib/fuse-2.9.2", "fuse")
 add_package("/root/NasX86/SysLib/ntfs-3g-1.2412", "ntfs-3g")
-add_package("/root/NasX86/SysLib/xmlrpc-c-1.25.28", "xmlrpc-c")
 add_package("/root/NasX86/SysLib/jrtplib-3.3.0", "jrtplib")
 add_package("/root/NasX86/SysLib/liblinuxfallocate-glibc-2.17", "liblinuxfallocate-glibc")
 add_package("/root/NasX86/SysLib/libeventfd-glibc-2.17", "libeventfd-glibc")

@@ -100,7 +100,7 @@ filegroup(
                 "@bzip2-1.0.6//:outs",
                 "@libnl-1.1.4//:outs",
                 "@fuse-2.9.2//:outs",
-# @xmlrpc-c-1.25.28//:outs
+                "@xmlrpc-c-1.25.28//:outs",
 # install i18n
                 "@jrtplib-3.3.0//:outs",
                 "@liblinuxfallocate-glibc-2.17//:outs",

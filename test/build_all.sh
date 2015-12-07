@@ -2,6 +2,7 @@ rm -fr /root/sandbox
 mkdir /root/sandbox
 cp -r /root/NasX86/SysLib/krb5-1.13 /root/sandbox
 cp -r /root/NasX86/SysLib/libnl-1.1.4 /root/sandbox
+cp -r /root/NasX86/SysLib/xmlrpc-c-1.25.28 /root/sandbox
 
 bazel clean
 
