@@ -14,11 +14,6 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all  //repo:SysLib
 
 # @libstdcxx-v3//:stdc++ \
 
-# depend on krb5
-# @libtirpc-0.3.0//:tirpc \
-# @librpcsecgss-0.19//:rpcsecgss \
-# @krb5-1.13//:
-
 # Mount headers error
 # @xmlrpc-c-1.25.28//:xmlrpc
 # @libnl-1.1.4//:nl \
