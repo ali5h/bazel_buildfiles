@@ -39,7 +39,7 @@ add_package("/root/NasX86/SysLib/librpcsecgss-0.19", "librpcsecgss")
 # FIX: libcom_err only currently
 add_package("/root/NasX86/SysLib/e2fsprogs-1.42.5", "e2fsprogs")
 # FIX: non-sandbox build
-add_package("/root/krb5-1.13", "krb5")
+add_package("/root/NasX86/SysLib/krb5-1.13", "krb5")
 # openldap-2.4.7 have syntax bug, will lead compile error in new toolchain. We use 2.4.33
 add_package("/root/NasX86/SysLib/openldap-2.4.33", "openldap")
 # FIX: should fix openssl util (link error)
