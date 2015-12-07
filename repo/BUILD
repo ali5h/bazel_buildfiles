@@ -84,7 +84,7 @@ filegroup(
                 "@libtirpc-0.3.0//:outs",
                 "@libnfsidmap-0.23//:outs",
                 "@libgssglue-0.4//:outs",
-# @librpcsecgss-0.19//:outs
+                "@librpcsecgss-0.19//:outs",
                 "@libevent-1.4.12-stable//:outs",
                 "@e2fsprogs-1.42.5//:outs",
                 "@glib-2.24.2//:outs",
@@ -98,7 +98,7 @@ filegroup(
                 "@cyrus-sasl-2.1.22//:outs",
                 "@libtasn1-1.6//:outs",
                 "@bzip2-1.0.6//:outs",
-# @libnl-1.1.4//:outs
+                "@libnl-1.1.4//:outs",
                 "@fuse-2.9.2//:outs",
 # @xmlrpc-c-1.25.28//:outs
 # install i18n

@@ -2,6 +2,9 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
 pkg_outs()
 
+pkg_libs(["rpcsecgss"])
+pkg_exes()
+
 EXTERNAL_HDRS = [
         "include/rpcsecgss/rpc/auth.h",
         "include/rpcsecgss/rpc/auth_gss.h",
@@ -66,5 +69,6 @@ cc_library(
         '-DHAVE_MEMSET=1',
         '-DHAVE_STRERROR=1',
     ],
+    deps = ["//external:krb5-latest"],
 )
 
