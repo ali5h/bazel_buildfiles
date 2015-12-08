@@ -68,7 +68,7 @@ filegroup(
     srcs = [
                 "@krb5-1.13//:outs",
 
-# imap-2007e.tar.gz
+                "@imap-2007e//:outs",
                 "@libmcrypt-2.5.7//:outs",
                 "@libcommon-0.98.10.1//:outs",
                 "@rlog-1.4//:outs",
