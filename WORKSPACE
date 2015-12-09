@@ -12,7 +12,6 @@ add_package("/root/sandbox/openssl-1.0.1p", "openssl")
 add_package("/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1", "thin-provisioning-tools")
 add_package("/root/NasX86/SysUtil/fio-2.2.10", "fio-2.2.10")
 
-# can be reference by //external:zlib-latest
 add_package("/root/NasX86/SysLib/zlib-1.2.8", "zlib")
 add_package("/root/NasX86/SysLib/pam-0.99.7.1/Linux-PAM", "pam")
 add_package("/root/NasX86/SysLib/imap-2007e", "imap")
@@ -39,11 +38,9 @@ add_package("/root/NasX86/SysLib/libtool-1.5.24", "libtool")
 # FIX: libstdc++ incomplete
 add_package("/root/NasX86/SysLib/libstdcxx-v3", "libstdcxx-v3")
 add_package("/root/NasX86/SysLib/libupnp-1.6.19", "libupnp")
-# FIX: depend on  #include <gssapi/gssapi.h>
 add_package("/root/NasX86/SysLib/libtirpc-0.3.0", "libtirpc")
 add_package("/root/NasX86/SysLib/libnfsidmap-0.23", "libnfsidmap")
 add_package("/root/NasX86/SysLib/libgssglue-0.4", "libgssglue")
-# FIX: depend on  #include <gssapi/gssapi.h>
 add_package("/root/NasX86/SysLib/librpcsecgss-0.19", "librpcsecgss")
 # FIX: libcom_err only currently
 add_package("/root/NasX86/SysLib/e2fsprogs-1.42.5", "e2fsprogs")
@@ -76,7 +73,6 @@ add_package("/root/NasX86/SysLib/cups-1.6.4", "cups")
 #     build_file = "repo/libunistring-0.9.3.BUILD",
 #     build_file = "repo/libidn-1.25.BUILD",
 add_package("/root/NasX86/SysLib/gsoap_2.7.17", "gsoap")
-#     build_file = "repo/ffmpeg.BUILD",
 add_package("/root/NasX86/SysLib/EtroSDK-src-2.3.3", "EtroSDK-src")
 add_package("/root/NasX86/SysLib/libcsv-3.0.2", "libcsv")
 add_package("/root/NasX86/SysLib/librsync-0.9.7", "librsync")
