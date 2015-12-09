@@ -2,7 +2,6 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
 pkg_outs()
 
-# pkg_libs()
 pkg_exes()
 
 # EXTERNAL_HDRS = []
@@ -22,7 +21,7 @@ genrule(
             "libc-client.so",
     ],
     cmd = """
-        ln -sf $$PWD/bazel-out/QNAP_x86_64-fastbuild/genfiles/external/openssl-1.0.1p $$PWD/external/openssl-1.0.1p/lib
+        ln -sf $$PWD/$(GENDIR)/external/openssl-1.0.1p $$PWD/external/openssl-1.0.1p/lib
         (cd external/imap-2007e &&
         make slx SSLDIR=$$PWD/../openssl-1.0.1p)
         cp external/imap-2007e/c-client/libc-client.so $(location libc-client.so)
