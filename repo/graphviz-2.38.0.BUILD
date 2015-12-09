@@ -2,81 +2,107 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
 pkg_outs()
 
-EXTERNAL_HDRS = []
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+pkg_exes()
+
+EXTERNAL_HDRS = [
+            "graphviz/arith.h",
+            "graphviz/cdt.h",
+            "graphviz/cgraph.h",
+            "graphviz/color.h",
+            "graphviz/geom.h",
+            "graphviz/graphviz_version.h",
+            "graphviz/gv.cpp",
+            "graphviz/gv.i",
+            "graphviz/gvc.h",
+            "graphviz/gvcext.h",
+            "graphviz/gvcjob.h",
+            "graphviz/gvcommon.h",
+            "graphviz/gvconfig.h",
+            "graphviz/gvplugin.h",
+            "graphviz/gvplugin_device.h",
+            "graphviz/gvplugin_layout.h",
+            "graphviz/gvplugin_loadimage.h",
+            "graphviz/gvplugin_render.h",
+            "graphviz/gvplugin_textlayout.h",
+            "graphviz/gvpr.h",
+            "graphviz/pack.h",
+            "graphviz/pathgeom.h",
+            "graphviz/pathplan.h",
+            "graphviz/textspan.h",
+            "graphviz/types.h",
+            "graphviz/usershape.h",
+            "graphviz/xdot.h",
+]
 
 cc_library(
-    name = "gv_php",
-    srcs = [
-            
-
-            "tclpkg/gv/gv_php_init.c",
-            "tclpkg/gv/gv.cpp",
-            "tclpkg/gv/gv_builtins.c",
-# gv_php.lo
-
-            "lib/gvc/gvrender.c",
-            "lib/gvc/gvlayout.c",
-            "lib/gvc/gvdevice.c",
-            "lib/gvc/gvloadimage.c",
-            "lib/gvc/gvcontext.c",
-            "lib/gvc/gvjobs.c",
-            "lib/gvc/gvevent.c",
-            "lib/gvc/gvplugin.c",
-            "lib/gvc/gvconfig.c",
-            "lib/gvc/gvtextlayout.c",
-            "lib/gvc/gvusershape.c",
-            "lib/gvc/gvbuffstderr.c",
-            "lib/gvc/gvc.c",
-
-            "lib/cgraph/agerror.c",
-            "lib/cgraph/agxbuf.c",
-            "lib/cgraph/apply.c",
-            "lib/cgraph/attr.c",
-            "lib/cgraph/edge.c",
-            "lib/cgraph/flatten.c",
-            "lib/cgraph/graph.c",
-            "lib/cgraph/grammar.c",
-            "lib/cgraph/id.c",
-            "lib/cgraph/imap.c",
-            "lib/cgraph/io.c",
-            "lib/cgraph/mem.c",
-            "lib/cgraph/node.c",
-            "lib/cgraph/obj.c",
-            "lib/cgraph/pend.c",
-            "lib/cgraph/rec.c",
-            "lib/cgraph/refstr.c",
-            "lib/cgraph/scan.c",
-            "lib/cgraph/subg.c",
-            "lib/cgraph/utils.c",
-            "lib/cgraph/write.c",
-
-
-            "lib/cdt/dtclose.c",
-            "lib/cdt/dtdisc.c",
-            "lib/cdt/dtextract.c",
-            "lib/cdt/dtflatten.c",
-            "lib/cdt/dthash.c",
-            "lib/cdt/dtlist.c",
-            "lib/cdt/dtmethod.c",
-            "lib/cdt/dtopen.c",
-            "lib/cdt/dtrenew.c",
-            "lib/cdt/dtrestore.c",
-            "lib/cdt/dtsize.c",
-            "lib/cdt/dtstat.c",
-            "lib/cdt/dtstrhash.c",
-            "lib/cdt/dttree.c",
-            "lib/cdt/dttreeset.c",
-            "lib/cdt/dtview.c",
-            "lib/cdt/dtwalk.c",
-
-    ] + INTERNAL_HDRS,
+    name = 'dep_libs',
     hdrs = EXTERNAL_HDRS,
-    includes = ["."],
-    copts = [
-                "-DHAVE_CONFIG_H",
-                "-DDEMAND_LOADING=1",
-                '-DGVLIBDIR=\\"/usr/local/lib/graphviz\\"'
-                ],
 )
 
+filegroup(
+    name = 'libs',
+    srcs = [
+                "libxdot.so",
+                "libpathplan.so",
+                "libgvpr.so",
+                "libgvc.so",
+                "libcgraph.so",
+                "libcdt.so",
+        ],
+)
+
+genrule(
+    local = 1,
+    name = "local_build",
+    outs = EXTERNAL_HDRS + [
+                "libxdot.so",
+                "libpathplan.so",
+                "libgvpr.so",
+                "libgvc.so",
+                "libcgraph.so",
+                "libcdt.so",
+    ],
+    cmd = """
+                TMPDIR2=$$(mktemp -d)
+                TMPDIR=/root/sandbox/graphviz-2.38.0
+                (cd $$TMPDIR &&
+                ./configure --prefix= --enable-shared --disable-static --disable-nls &&
+                make &&
+                make DESTDIR=$$TMPDIR2 install)
+                cp $$TMPDIR2/lib/libxdot.so.4.0.0        $(location libxdot.so)
+                cp $$TMPDIR2/lib/libpathplan.so.4.0.0    $(location libpathplan.so)
+                cp $$TMPDIR2/lib/libgvpr.so.2.0.0        $(location libgvpr.so)
+                cp $$TMPDIR2/lib/libgvc.so.6.0.0         $(location libgvc.so)
+                cp $$TMPDIR2/lib/libcgraph.so.6.0.0      $(location libcgraph.so)
+                cp $$TMPDIR2/lib/libcdt.so.5.0.0         $(location libcdt.so)
+
+                cp $$TMPDIR2/include/graphviz/arith.h                  $(location graphviz/arith.h)
+                cp $$TMPDIR2/include/graphviz/cdt.h                    $(location graphviz/cdt.h)
+                cp $$TMPDIR2/include/graphviz/cgraph.h                 $(location graphviz/cgraph.h)
+                cp $$TMPDIR2/include/graphviz/color.h                  $(location graphviz/color.h)
+                cp $$TMPDIR2/include/graphviz/geom.h                   $(location graphviz/geom.h)
+                cp $$TMPDIR2/include/graphviz/graphviz_version.h       $(location graphviz/graphviz_version.h)
+                cp $$TMPDIR2/include/graphviz/gv.cpp                   $(location graphviz/gv.cpp)
+                cp $$TMPDIR2/include/graphviz/gv.i                     $(location graphviz/gv.i)
+                cp $$TMPDIR2/include/graphviz/gvc.h                    $(location graphviz/gvc.h)
+                cp $$TMPDIR2/include/graphviz/gvcext.h                 $(location graphviz/gvcext.h)
+                cp $$TMPDIR2/include/graphviz/gvcjob.h                 $(location graphviz/gvcjob.h)
+                cp $$TMPDIR2/include/graphviz/gvcommon.h               $(location graphviz/gvcommon.h)
+                cp $$TMPDIR2/include/graphviz/gvconfig.h               $(location graphviz/gvconfig.h)
+                cp $$TMPDIR2/include/graphviz/gvplugin.h               $(location graphviz/gvplugin.h)
+                cp $$TMPDIR2/include/graphviz/gvplugin_device.h        $(location graphviz/gvplugin_device.h)
+                cp $$TMPDIR2/include/graphviz/gvplugin_layout.h        $(location graphviz/gvplugin_layout.h)
+                cp $$TMPDIR2/include/graphviz/gvplugin_loadimage.h     $(location graphviz/gvplugin_loadimage.h)
+                cp $$TMPDIR2/include/graphviz/gvplugin_render.h        $(location graphviz/gvplugin_render.h)
+                cp $$TMPDIR2/include/graphviz/gvplugin_textlayout.h    $(location graphviz/gvplugin_textlayout.h)
+                cp $$TMPDIR2/include/graphviz/gvpr.h                   $(location graphviz/gvpr.h)
+                cp $$TMPDIR2/include/graphviz/pack.h                   $(location graphviz/pack.h)
+                cp $$TMPDIR2/include/graphviz/pathgeom.h               $(location graphviz/pathgeom.h)
+                cp $$TMPDIR2/include/graphviz/pathplan.h               $(location graphviz/pathplan.h)
+                cp $$TMPDIR2/include/graphviz/textspan.h               $(location graphviz/textspan.h)
+                cp $$TMPDIR2/include/graphviz/types.h                  $(location graphviz/types.h)
+                cp $$TMPDIR2/include/graphviz/usershape.h              $(location graphviz/usershape.h)
+                cp $$TMPDIR2/include/graphviz/xdot.h                   $(location graphviz/xdot.h)
+
+        """
+)

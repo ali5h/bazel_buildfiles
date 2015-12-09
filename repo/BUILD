@@ -108,7 +108,7 @@ filegroup(
                 "@libutimensat-glibc-2.17//:outs",
                 "@libaio-0.3.109//:outs",
                 "@boost_1_53_0//:outs",
-# graphviz-2.38.0
+                "@graphviz-2.38.0//:outs",
                 "@ImageMagick-6.8.9-9//:outs",
                 "@attr-2.4.47//:outs",
                 "@acl-2.2.49//:outs",

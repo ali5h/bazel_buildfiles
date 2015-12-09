@@ -1,13 +1,12 @@
 load("/ext/extension", "add_package")
 
-# FIX: non-sandbox build
 add_package("/root/sandbox/krb5-1.13", "krb5")
 add_package("/root/sandbox/xmlrpc-c-1.25.28", "xmlrpc-c")
 add_package("/root/sandbox/libnl-1.1.4", "libnl")
 # FIX: TMPDIR is absolute path due to original Makefile symlink
-add_package("/root/sandbox/ffmpeg", "ffmpeg")
-# FIX: TMPDIR is absolute path due to original Makefile symlink
 add_package("/root/sandbox/openssl-1.0.1p", "openssl")
+add_package("/root/sandbox/ffmpeg", "ffmpeg")
+add_package("/root/sandbox/graphviz-2.38.0", "graphviz")
 
 add_package("/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1", "thin-provisioning-tools")
 add_package("/root/NasX86/SysUtil/fio-2.2.10", "fio-2.2.10")
@@ -80,8 +79,6 @@ add_package("/root/NasX86/SysLib/libmcrypt-2.5.7", "libmcrypt")
 add_package("/root/NasX86/SysLib/libcommon-0.98.10.1", "libcommon")
 add_package("/root/NasX86/SysLib/libxslt-1.1.28", "libxslt")
 add_package("/root/NasX86/SysLib/glib-2.24.2", "glib")
-# FIX: depend on php
-# add_package("/root/NasX86/SysLib/graphviz-2.38.0", "graphviz")
 #----------------------------------------------------------
 
 # # SYS_LIBRARY
