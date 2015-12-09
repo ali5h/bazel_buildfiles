@@ -115,7 +115,7 @@ filegroup(
                 "@gnupg-1.4.19//:outs",
                 "@cups-1.6.4//:outs",
                 "@gsoap_2.7.17//:outs",
-# ffmpeg
+                "@ffmpeg//:outs",
                 "@EtroSDK-src-2.3.3//:outs",
                 "@libcsv-3.0.2//:outs",
                 "@librsync-0.9.7//:outs",
