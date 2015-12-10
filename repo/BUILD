@@ -46,6 +46,7 @@ filegroup(
                 "@libgpg-error-1.6//:outs",
                 "@libgcrypt-1.4.3//:outs",
                 "@gnutls-2.6.2//:outs",
+                "@krb5-1.13//:outs",
                 # NasLib/libversioning/libuLinux_versioning.so
                 # Prebuild mariadb of DataService
         
@@ -59,14 +60,13 @@ filegroup(
 
 pkg_tar(
     name = "final",
-    files = ["all_files"],
+    files = ["SysLib"],
     extension = "tar.gz",
 )
 
 filegroup(
     name = "SysLib",
     srcs = [
-                "@krb5-1.13//:outs",
 
                 "@imap-2007e//:outs",
                 "@libmcrypt-2.5.7//:outs",
