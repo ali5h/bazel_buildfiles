@@ -103,7 +103,7 @@ genrule(
             "openssl",
     ],
     cmd = """
-        TMPDIR=/root/sandbox/openssl-1.0.1p
+        TMPDIR=/root/sandbox/""" + REPOSITORY_NAME[1:] + """
 
         TMP=$(CC)
         ABS_PATH=$${TMP%/*}

@@ -5,7 +5,7 @@ cp -r /root/NasX86/SysLib/libnl-1.1.4 /root/sandbox
 cp -r /root/NasX86/SysLib/xmlrpc-c-1.25.28 /root/sandbox
 cp -r /root/NasX86/SysLib/krb5-1.13 /root/sandbox
 cp -r /root/NasX86/SysLib/ffmpeg /root/sandbox
-cp -r /root/NasX86/SysLib/openssl-1.0.1p /root/sandbox
+cp -r /root/NasX86/SysLib/openssl-1.0.2e /root/sandbox
 cp -r /root/NasX86/SysLib/graphviz-2.38.0 /root/sandbox
 cp -r /root/NasX86/SysLib/imap-2007e /root/sandbox
 

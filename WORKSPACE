@@ -4,7 +4,7 @@ add_package("/root/sandbox/krb5-1.13", "krb5")
 add_package("/root/sandbox/xmlrpc-c-1.25.28", "xmlrpc-c")
 add_package("/root/sandbox/libnl-1.1.4", "libnl")
 # FIX: TMPDIR is absolute path due to original Makefile symlink
-add_package("/root/sandbox/openssl-1.0.1p", "openssl")
+add_package("/root/sandbox/openssl-1.0.2e", "openssl")
 add_package("/root/sandbox/ffmpeg", "ffmpeg")
 # FIX: cross build will fail due to hostcc not supported
 add_package("/root/sandbox/graphviz-2.38.0", "graphviz")
