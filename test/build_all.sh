@@ -1,11 +1,13 @@
 rm -fr /root/sandbox
 mkdir /root/sandbox
-cp -r /root/NasX86/SysLib/krb5-1.13 /root/sandbox
+# libnl & xmlrpc-c is sanboxed-built but will failt due to dcoker layer, so we need to copy it to local
 cp -r /root/NasX86/SysLib/libnl-1.1.4 /root/sandbox
 cp -r /root/NasX86/SysLib/xmlrpc-c-1.25.28 /root/sandbox
+cp -r /root/NasX86/SysLib/krb5-1.13 /root/sandbox
 cp -r /root/NasX86/SysLib/ffmpeg /root/sandbox
 cp -r /root/NasX86/SysLib/openssl-1.0.1p /root/sandbox
 cp -r /root/NasX86/SysLib/graphviz-2.38.0 /root/sandbox
+cp -r /root/NasX86/SysLib/imap-2007e /root/sandbox
 
 bazel clean
 
@@ -22,6 +24,3 @@ bazel build --copt="-w" --config=x86_64 --linkopt=-Wl,--strip-all //repo:SysLib
 
 
 # @libstdcxx-v3//:stdc++ \
-
-# Mount headers error
-# @xmlrpc-c-1.25.28//:xmlrpc

@@ -104,9 +104,23 @@ genrule(
     ],
     cmd = """
         TMPDIR=/root/sandbox/openssl-1.0.1p
+
+        TMP=$(CC)
+        ABS_PATH=$${TMP%/*}
+
+        if [ '$(TARGET_CPU)' = 'armeabi-v7a' ]
+        then 
+            TARGET_CFG=linux-armv4
+            CROSS_PFX=$$ABS_PATH/arm-QNAP-linux-gnueabi-
+        elif [ '$(TARGET_CPU)' = 'x86_64' ]
+        then
+            TARGET_CFG=linux-x86_64
+            CROSS_PFX=$$ABS_PATH/x86_64-QNAP-linux-gnu-
+        fi
+        
         (cd $$TMPDIR &&
-        ./Configure --prefix=$$TMPDIR -DOPENSSL_NO_HEARTBEATS no-zlib linux-x86_64 shared &&
-        make clean && make)
+        ./Configure --prefix= --openssldir=/etc/ssl -DOPENSSL_NO_HEARTBEATS no-zlib no-asm $$TARGET_CFG --cross-compile-prefix=$$CROSS_PFX shared &&
+        make)
         cp $$TMPDIR/libcrypto.so.1.0.0 $(location libcrypto.so)
         cp $$TMPDIR/libssl.so.1.0.0 $(location libssl.so)
         cp $$TMPDIR/apps/openssl $(location openssl)
