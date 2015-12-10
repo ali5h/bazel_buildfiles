@@ -85,7 +85,7 @@ genrule(
             HOST_CFG=x86_64-linux-gnu
         fi
 
-        (cd external/krb5-1.13/src &&
+        (cd external/""" + REPOSITORY_NAME[1:] + """/src &&
         make distclean &&
         krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes ac_cv_printf_positional=yes CPPFLAGS="-DDESTRUCTOR_ATTR_WORKS" CC=$(CC) AR=$(AR) NM=$(NM) STRIP=$(STRIP) OBJCOPY=$(OBJCOPY) ./configure --host=$$HOST_CFG --prefix= --disable-static --enable-shared --disable-nls &&
         make &&

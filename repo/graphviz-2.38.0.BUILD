@@ -64,7 +64,7 @@ genrule(
     ],
     cmd = """
                 TMPDIR2=$$(mktemp -d)
-                TMPDIR=/root/sandbox/graphviz-2.38.0
+                TMPDIR=/root/sandbox/""" + REPOSITORY_NAME[1:] + """
                 
                 if [ '$(TARGET_CPU)' = 'armeabi-v7a' ]
                 then 

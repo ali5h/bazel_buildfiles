@@ -25,7 +25,7 @@ genrule(
     ],
     cmd = """
         ln -sf $$PWD/$(GENDIR)/external/openssl-1.0.2e $$PWD/external/openssl-1.0.2e/lib
-        (cd external/imap-2007e &&
+        (cd external/""" + REPOSITORY_NAME[1:] +""" &&
         make CC=$(CC) AR=$(AR) NM=$(NM) STRIP=$(STRIP) OBJCOPY=$(OBJCOPY) slx SSLDIR=$$PWD/../openssl-1.0.2e)
         cp external/imap-2007e/c-client/libc-client.so $(location libc-client.so)
     """,

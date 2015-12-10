@@ -22,7 +22,7 @@ genrule(
                 "libavutil.so",
                 ],
     cmd = """
-        TMPDIR=/root/sandbox/ffmpeg
+        TMPDIR=/root/sandbox/""" + REPOSITORY_NAME[1:] + """
 
         TMP=$(CC)
         ABS_PATH=$${TMP%/*}
