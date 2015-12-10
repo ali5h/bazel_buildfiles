@@ -6,6 +6,7 @@ add_package("/root/sandbox/libnl-1.1.4", "libnl")
 # FIX: TMPDIR is absolute path due to original Makefile symlink
 add_package("/root/sandbox/openssl-1.0.1p", "openssl")
 add_package("/root/sandbox/ffmpeg", "ffmpeg")
+# FIX: cross build will fail due to hostcc not supported
 add_package("/root/sandbox/graphviz-2.38.0", "graphviz")
 add_package("/root/sandbox/imap-2007e", "imap")
 

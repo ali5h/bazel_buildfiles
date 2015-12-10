@@ -65,8 +65,17 @@ genrule(
     cmd = """
                 TMPDIR2=$$(mktemp -d)
                 TMPDIR=/root/sandbox/graphviz-2.38.0
+                
+                if [ '$(TARGET_CPU)' = 'armeabi-v7a' ]
+                then 
+                    HOST_CFG=arm-linux-gnueabi
+                elif [ '$(TARGET_CPU)' = 'x86_64' ]
+                then
+                    HOST_CFG=x86_64-linux-gnu
+                fi
+
                 (cd $$TMPDIR &&
-                ./configure --prefix= --enable-shared --disable-static --disable-nls &&
+                CC=$(CC) AR=$(AR) NM=$(NM) STRIP=$(STRIP) OBJCOPY=$(OBJCOPY) ./configure --host=$$HOST_CFG --prefix= --enable-shared --disable-static --disable-nls &&
                 make &&
                 make DESTDIR=$$TMPDIR2 install)
                 cp $$TMPDIR2/lib/libxdot.so.4.0.0        $(location libxdot.so)
