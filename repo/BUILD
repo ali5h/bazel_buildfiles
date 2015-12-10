@@ -93,7 +93,7 @@ filegroup(
                 "@readline-5.2//:outs",
                 "@libusb-1.0.9//:outs",
                 "@libusb-compat-0.1.4//:outs",
-                "@openssl-1.0.1p//:outs",
+                "@openssl-1.0.2e//:outs",
                 "@postgresql-9.4.4//:outs",
                 "@cyrus-sasl-2.1.22//:outs",
                 "@libtasn1-1.6//:outs",
