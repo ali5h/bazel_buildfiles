@@ -60,7 +60,7 @@ filegroup(
 
 pkg_tar(
     name = "final",
-    files = ["SysLib"],
+    files = ["all_files"],
     extension = "tar.gz",
 )
 
