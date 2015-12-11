@@ -1,14 +1,16 @@
 load("/ext/extension", "add_package")
 
-add_package("/root/sandbox/krb5-1.13", "krb5")
 add_package("/root/sandbox/xmlrpc-c-1.25.28", "xmlrpc-c")
 add_package("/root/sandbox/libnl-1.1.4", "libnl")
-# FIX: TMPDIR is absolute path due to original Makefile symlink
+# FIX: ---------TMPDIR is absolute path due to original Makefile symlink-------
+# FIX: manually create openssl include symlink
 add_package("/root/sandbox/openssl-1.0.2e", "openssl")
 add_package("/root/sandbox/ffmpeg", "ffmpeg")
+add_package("/root/sandbox/krb5-1.13", "krb5")
 # FIX: cross build will fail due to hostcc not supported
 add_package("/root/sandbox/graphviz-2.38.0", "graphviz")
 add_package("/root/sandbox/imap-2007e", "imap")
+# ------------------------------------------------------------------------------
 
 add_package("/root/NasX86/SysUtil/thin-provisioning-tools-v0.4.1", "thin-provisioning-tools")
 add_package("/root/NasX86/SysUtil/fio-2.2.10", "fio-2.2.10")
