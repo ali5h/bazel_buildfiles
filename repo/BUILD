@@ -119,6 +119,7 @@ filegroup(
                 "@EtroSDK-src-2.3.3//:outs",
                 "@libcsv-3.0.2//:outs",
                 "@librsync-0.9.7//:outs",
+                "@numactl-2.0.6//:outs",
 
                 "@backtrace//:outs",
 

@@ -82,6 +82,7 @@ add_package("/root/NasX86/SysLib/libmcrypt-2.5.7", "libmcrypt")
 add_package("/root/NasX86/SysLib/libcommon-0.98.10.1", "libcommon")
 add_package("/root/NasX86/SysLib/libxslt-1.1.28", "libxslt")
 add_package("/root/NasX86/SysLib/glib-2.24.2", "glib")
+add_package("/root/NasX86/SysLib/numactl-2.0.6", "numactl")
 #----------------------------------------------------------
 
 # # SYS_LIBRARY
