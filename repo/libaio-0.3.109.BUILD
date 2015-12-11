@@ -13,9 +13,7 @@ genrule(
     name = "lds_rename",
     srcs = ["src/libaio.map"],
     outs = ["libaio.ldscript"],
-    cmd = """
-        cat $< > $@
-    """
+    cmd = "cat $< > $@"
 )
 
 cc_library(

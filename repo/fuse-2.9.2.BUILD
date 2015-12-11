@@ -24,28 +24,6 @@ INTERNAL_HDRS = [
             "include/config.h",
                 ]
 
-filegroup(
-    name = "c_srcs",
-    srcs = EXTERNAL_HDRS + INTERNAL_HDRS + [
-            "lib/mount.c",
-            "lib/mount_util.c",
-            "lib/modules/iconv.c",
-            "lib/fuse.c",
-            "lib/fuse_kern_chan.c",
-            "lib/fuse_loop.c",
-            "lib/fuse_loop_mt.c",
-            "lib/fuse_lowlevel.c",
-            "lib/fuse_mt.c",
-            "lib/fuse_opt.c",
-            "lib/fuse_session.c",
-            "lib/fuse_signals.c",
-            "lib/buffer.c",
-            "lib/cuse_lowlevel.c",
-            "lib/helper.c",
-            "lib/modules/subdir.c",
-    ],
-)
-
 cc_binary(
     name = "fusermount",
     srcs = ["util/fusermount.c","util/mount_util.c"] + INTERNAL_HDRS,
@@ -67,20 +45,40 @@ cc_library(
 
 cc_library(
     name = "fuse",
-    srcs = [":libfuse.so"],
+    srcs = [
+            "lib/mount.c",
+            "lib/mount_util.c",
+            "lib/modules/iconv.c",
+            "lib/fuse.c",
+            "lib/fuse_kern_chan.c",
+            "lib/fuse_loop.c",
+            "lib/fuse_loop_mt.c",
+            "lib/fuse_lowlevel.c",
+            "lib/fuse_mt.c",
+            "lib/fuse_opt.c",
+            "lib/fuse_session.c",
+            "lib/fuse_signals.c",
+            "lib/buffer.c",
+            "lib/cuse_lowlevel.c",
+            "lib/helper.c",
+            "lib/modules/subdir.c",
+            ] + INTERNAL_HDRS,
     hdrs = EXTERNAL_HDRS,
+    copts = [
+                "-fPIC",
+                '-D_FILE_OFFSET_BITS=64',
+                '-D_REENTRANT',
+                '-DFUSE_USE_VERSION=26',
+                '-DFUSERMOUNT_DIR=\\"/usr/local/bin\\"'
+            ],
+    linkopts = ["-ldl", "-pthread", "-shared", "-Wl,--version-script", "fuse_versionscript.ldscript"],
     includes = ["include"],
+    deps = ["fuse_versionscript.ldscript"],
 )
 
 genrule(
-    name = "symbol_versioning",
-    srcs = [":c_srcs", "lib/fuse_versionscript"],
-    outs = ["libfuse.so"],
-    cmd = """
-        TMPDIR=$$(mktemp -d)
-        cp $(locations :c_srcs) $(location lib/fuse_versionscript) $$TMPDIR/
-        (cd $$TMPDIR && $(CC) *.c -I. -ldl -pthread -fPIC -shared -D_FILE_OFFSET_BITS=64 -D_REENTRANT -DFUSE_USE_VERSION=26 -DFUSERMOUNT_DIR=\\"/usr/local/bin\\" -Wl,--version-script=fuse_versionscript -o libfuse.so)
-        cp $$TMPDIR/libfuse.so  $@
-        rm -fr $$TMPDIR
-    """
+    name = "lds_rename",
+    srcs = ["lib/fuse_versionscript"],
+    outs = ["fuse_versionscript.ldscript"],
+    cmd = "cat $< > $@"
 )
