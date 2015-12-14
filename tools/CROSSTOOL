@@ -114,7 +114,7 @@ toolchain {
   compiler: "compiler"
   host_system_name: "x86_64"
   needsPic: true
-  supports_gold_linker: false
+  supports_gold_linker: true
   supports_incremental_linker: false
   supports_fission: false
   supports_interface_shared_objects: false
@@ -127,17 +127,18 @@ toolchain {
   toolchain_identifier: "QNAP_x86_64"
 
   tool_path { name: "ar" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ar" }
-  tool_path { name: "compat-ld" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ld" }
+  tool_path { name: "compat-ld" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ld.gold" }
   tool_path { name: "cpp" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-cpp" }
   tool_path { name: "dwp" path: "/bin/false" }
   tool_path { name: "gcc" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-gcc" }
   tool_path { name: "gcov" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-gcov" }
-  tool_path { name: "ld" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ld" }
+  tool_path { name: "ld" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-ld.gold" }
 
   tool_path { name: "nm" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-nm" }
   tool_path { name: "objcopy" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-objcopy" }
   tool_path { name: "objdump" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-objdump" }
   tool_path { name: "strip" path: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/bin/x86_64-QNAP-linux-gnu-strip" }
+  linker_flag: "-Wl,-fuse-ld=gold"
 
   cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/lib/gcc"
   cxx_builtin_include_directory: "/usr/bin/CT/x86_64-QNAP-linux-gnu/cross-tools/x86_64-QNAP-linux-gnu/include"
