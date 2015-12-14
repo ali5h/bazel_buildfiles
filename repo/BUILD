@@ -99,7 +99,8 @@ filegroup(
                 "@libtasn1-1.6//:outs",
                 "@bzip2-1.0.6//:outs",
                 "@libnl-1.1.4//:outs",
-                "@fuse-2.9.2//:outs",
+                # comment out due to gold linker complaining, should remove the line in lib/fuse.c
+                # "@fuse-2.9.2//:outs",
                 "@xmlrpc-c-1.25.28//:outs",
 # install i18n
                 "@jrtplib-3.3.0//:outs",
