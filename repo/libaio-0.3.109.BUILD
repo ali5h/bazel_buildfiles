@@ -8,17 +8,9 @@ pkg_exes()
 EXTERNAL_HDRS = ["src/libaio.h"]
 INTERNAL_HDRS = glob(["src/*.h"], EXTERNAL_HDRS)
 
-# because Bazel only support *.ld, *.lds, *.ldscript in deps
-genrule(
-    name = "lds_rename",
-    srcs = ["src/libaio.map"],
-    outs = ["libaio.ldscript"],
-    cmd = "cat $< > $@"
-)
-
-cc_library(
-  name = "aio",
-  srcs = [
+filegroup(
+    name = "c_srcs",
+    srcs = EXTERNAL_HDRS + INTERNAL_HDRS + [
         "src/io_queue_init.c",
         "src/io_queue_release.c",
         "src/io_queue_wait.c",
@@ -30,10 +22,27 @@ cc_library(
         "src/io_destroy.c",
         "src/raw_syscall.c",
         "src/compat-0_1.c",
-  ] + INTERNAL_HDRS,
+    ],
+)
+
+genrule(
+    name = "symbol_versioning",
+    srcs = [":c_srcs", "src/libaio.map"],
+    outs = ["libaio.so"],
+    cmd = """
+        TMPDIR=$$(mktemp -d)
+        cp $(locations :c_srcs) $(location src/libaio.map) $$TMPDIR/
+        (cd $$TMPDIR && $(CC) *.c -I. -nostdlib -nostartfiles -fomit-frame-pointer -O2 -fPIC -shared -Wl,--version-script=libaio.map -o libaio.so)
+        cp $$TMPDIR/libaio.so  $@
+        rm -fr $$TMPDIR
+    """
+)
+
+cc_library(
+  name = "aio",
+  srcs = [":libaio.so"],
   hdrs = EXTERNAL_HDRS,
   includes = ["src"],
-  copts = ["-nostdlib", "-nostartfiles", "-fomit-frame-pointer", "-fPIC" ],
-  linkopts = ["-Wl,-soname=libaio.so.1", "-Wl,--version-script", ":libaio.ldscript"],
-  deps = ["libaio.ldscript"],
 )
+
+
