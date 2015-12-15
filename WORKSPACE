@@ -59,6 +59,7 @@ add_package("/root/NasX86/SysLib/libgcrypt-1.4.3", "gcrypt")
 add_package("/root/NasX86/SysLib/gnutls-2.6.2", "gnutls")
 add_package("/root/NasX86/SysLib/libtasn1-1.6", "libtasn1")
 add_package("/root/NasX86/SysLib/bzip2-1.0.6", "bzip2")
+# FIX: gold linker did not support unversion symbol. comment out the line in lib/fuse.c is fine
 add_package("/root/NasX86/SysLib/fuse-2.9.2", "fuse")
 add_package("/root/NasX86/SysLib/ntfs-3g-1.2412", "ntfs-3g")
 add_package("/root/NasX86/SysLib/jrtplib-3.3.0", "jrtplib")
