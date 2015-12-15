@@ -78,7 +78,7 @@ cc_binary(
   }),
   deps = [
             ":tcc_lib",
-            "//external:libaio-latest",
+            "//external:libaio-latest", "@libaio-0.3.109//:libaio.ldscript",
             "//external:expat-latest",
             "//external:boost-latest",
          ],
