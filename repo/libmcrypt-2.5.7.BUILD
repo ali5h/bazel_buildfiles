@@ -1,15 +1,16 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
 
-pkg_libs(["mcrypt"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["lib/mcrypt.h"]
+
+pkg_outs()
+pkg_libs(["libmcrypt.so"], EXTERNAL_HDRS)
 pkg_exes()
 
-EXTERNAL_HDRS = ["lib/mcrypt.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
-
-cc_library(
-    name = "mcrypt",
+cc_binary(
+    linkshared = 1,
+    name = "libmcrypt.so",
     srcs = [
         
                 "lib/mcrypt_extra.c",
@@ -50,8 +51,7 @@ cc_library(
                 "modules/algorithms/tripledes.c",
 
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "lib"],
     copts = ["-DHAVE_CONFIG_H", '-DLIBDIR=\\"/usr/local/lib/libmcrypt/\\"'],
 )
