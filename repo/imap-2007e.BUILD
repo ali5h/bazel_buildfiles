@@ -1,17 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
 pkg_outs()
-
+pkg_libs(["libc-client.so"])
 pkg_exes()
-
-# EXTERNAL_HDRS = []
-
-filegroup(
-    name = 'libs',
-    srcs = [
-            "libc-client.so",
-        ],
-)
 
 genrule(
     local = 1,
