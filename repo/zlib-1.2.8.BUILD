@@ -1,13 +1,29 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
 
-pkg_libs([":z"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+            "crc32.h",
+            "deflate.h",
+            "gzguts.h",
+            "inffast.h",
+            "inffixed.h",
+            "inflate.h",
+            "inftrees.h",
+            "trees.h",
+            "zconf.h",
+            "zlib.h",
+            "zutil.h",
+        ]
+
+pkg_outs()
+pkg_libs(["libz.so"], EXTERNAL_HDRS)
 pkg_exes()
 
-cc_library(
-  name = "z",
-  srcs = [
+cc_binary(
+    linkshared = 1,
+    name = "libz.so",
+    srcs = ALL_HDRS + [
             "adler32.c",
             "crc32.c",
             "deflate.c",
@@ -23,25 +39,14 @@ cc_library(
             "gzlib.c",
             "gzread.c",
             "gzwrite.c",
-  ],
-  hdrs = [
-            "crc32.h",
-            "deflate.h",
-            "gzguts.h",
-            "inffast.h",
-            "inffixed.h",
-            "inflate.h",
-            "inftrees.h",
-            "trees.h",
-            "zconf.h",
-            "zlib.h",
-            "zutil.h",
-        ],
-  includes = ['.'],
-  copts = [
+    ],
+    copts = [
     "-DPIC",
     "-Wno-unused-variable",
     "-Wno-implicit-function-declaration",
-  ],
+    ],
+    linkopts = [
+            "-Wl,-soname,libz.so.1"
+    ],
 )
 

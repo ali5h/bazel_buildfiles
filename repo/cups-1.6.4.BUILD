@@ -1,8 +1,26 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
 
-pkg_libs([":cups", ":cupsmime"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+        "cups/adminutil.h",
+        "cups/array.h",
+        "cups/backend.h",
+        "cups/cups.h",
+        "cups/dir.h",
+        "cups/file.h",
+        "cups/http.h",
+        "cups/ipp.h",
+        "cups/language.h",
+        "cups/ppd.h",
+        "cups/raster.h",
+        "cups/sidechannel.h",
+        "cups/transcode.h",
+        "cups/versioning.h",
+]
+
+pkg_outs()
+pkg_libs(["libcups.so", "libcupsmime.so"], EXTERNAL_HDRS)
 pkg_exes([
             "cupsd",
             "lpadmin",
@@ -31,25 +49,7 @@ OPTS = [
         '-D_GNU_SOURCE',
     ]
 
-EXTERNAL_HDRS = [
 
-        "cups/adminutil.h",
-        "cups/array.h",
-        "cups/backend.h",
-        "cups/cups.h",
-        "cups/dir.h",
-        "cups/file.h",
-        "cups/http.h",
-        "cups/ipp.h",
-        "cups/language.h",
-        "cups/ppd.h",
-        "cups/raster.h",
-        "cups/sidechannel.h",
-        "cups/transcode.h",
-        "cups/versioning.h",
-
-]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
 cc_binary(
     name = "cupsd",
@@ -81,14 +81,15 @@ cc_binary(
 		"scheduler/subscriptions.c",
 		"scheduler/sysman.c",
 		"scheduler/tls.c",
-
-    ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+        "libcups.so",
+        "libcupsmime.so",
+        "//external:zlib-so-latest",
+    ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
     linkopts = ["-lcrypt"],
     deps = [
-        "//external:zlib-latest",
-        ":cupsmime",
+        "//external:zlib-hdr-latest",
     ],
 )
 
@@ -97,12 +98,12 @@ cc_binary(
     srcs = [
         "scheduler/cups-deviced.c",
         "scheduler/util.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+        "libcups.so",
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
     deps = [
-        "//external:zlib-latest",
-        ":cups",
+        "//external:zlib-hdr-latest",
     ],
 )
 
@@ -110,149 +111,125 @@ cc_binary(
     name = "cups-lpd",
     srcs = [
         "scheduler/cups-lpd.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+        "libcups.so",
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpadmin",
     srcs = [
         "systemv/lpadmin.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+        "libcups.so",
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-latest",
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpinfo",
     srcs = [
+        "libcups.so",
         "systemv/lpinfo.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpstat",
     srcs = [
+        "libcups.so",
         "systemv/lpstat.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpmove",
     srcs = [
+        "libcups.so",
         "systemv/lpmove.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpoptions",
     srcs = [
+        "libcups.so",
         "systemv/lpoptions.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lp",
     srcs = [
+        "libcups.so",
         "systemv/lp.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpq",
     srcs = [
+        "libcups.so",
         "berkeley/lpq.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lpr",
     srcs = [
+        "libcups.so",
         "berkeley/lpr.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "lprm",
     srcs = [
+        "libcups.so",
         "berkeley/lprm.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
 cc_binary(
     name = "cancel",
     srcs = [
+        "libcups.so",
         "systemv/cancel.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
-    includes = ["."],
+            ] + ALL_HDRS,
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
+    includes = ["."],
 )
 
 cc_binary(
     name = "gziptoany",
     srcs = [
+        "libcups.so",
         "filter/gziptoany.c",
-            ] + INTERNAL_HDRS + EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        ":cups",
-    ],
 )
 
-cc_library(
-    name = "cups",
+cc_binary(
+    linkshared = 1,
+    name = "libcups.so",
     srcs = [
     
 		"cups/adminutil.c",
@@ -305,27 +282,23 @@ cc_library(
 		"cups/usersys.c",
 		"cups/util.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
-    includes = ["."],
+    ] + ALL_HDRS,
     copts = OPTS,
+    includes = ["."],
     linkopts = ["-pthread", "-lm"],
     deps = [
-        "//external:zlib-latest",
+        "//external:zlib-hdr-latest",
     ],
 )
 
-cc_library(
-    name = "cupsmime",
+cc_binary(
+    linkshared = 1,
+    name = "libcupsmime.so",
     srcs = [
-
 		"scheduler/filter.c",
 		"scheduler/mime.c",
 		"scheduler/type.c",
-
-        ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
-    includes = ["."],
+        ] + ALL_HDRS,
     copts = OPTS,
-    deps = [":cups"],
+    includes = ["."],
 )
