@@ -1,67 +1,56 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
-
-pkg_exes(["klist", "kinit"])
 
 # EXTERNAL_HDRS referring to installed header
 EXTERNAL_HDRS = [
-            "include/gssapi.h",
-            "include/gssapi/gssapi.h",
-            "include/gssapi/gssapi_ext.h",
-            "include/gssapi/gssapi_generic.h",
-            "include/gssapi/gssapi_krb5.h",
-            "include/gssapi/mechglue.h",
-            "include/gssrpc/auth.h",
-            "include/gssrpc/auth_gss.h",
-            "include/gssrpc/auth_gssapi.h",
-            "include/gssrpc/auth_unix.h",
-            "include/gssrpc/clnt.h",
-            "include/gssrpc/netdb.h",
-            "include/gssrpc/pmap_clnt.h",
-            "include/gssrpc/pmap_prot.h",
-            "include/gssrpc/pmap_rmt.h",
-            "include/gssrpc/rename.h",
-            "include/gssrpc/rpc.h",
-            "include/gssrpc/rpc_msg.h",
-            "include/gssrpc/svc.h",
-            "include/gssrpc/svc_auth.h",
-            "include/gssrpc/types.h",
-            "include/gssrpc/xdr.h",
-            "include/kadm5/admin.h",
-            "include/kadm5/chpass_util_strings.h",
-            "include/kadm5/kadm_err.h",
-            "include/kdb.h",
-            "include/krb5.h",
-            "include/krb5/ccselect_plugin.h",
-            "include/krb5/clpreauth_plugin.h",
-            "include/krb5/hostrealm_plugin.h",
-            "include/krb5/kadm5_hook_plugin.h",
-            "include/krb5/kdcpreauth_plugin.h",
-            "include/krb5/krb5.h",
-            "include/krb5/localauth_plugin.h",
-            "include/krb5/locate_plugin.h",
-            "include/krb5/plugin.h",
-            "include/krb5/preauth_plugin.h",
-            "include/krb5/pwqual_plugin.h",
-            "include/profile.h",
+            "gssapi.h",
+            "gssapi/gssapi.h",
+            "gssapi/gssapi_ext.h",
+            "gssapi/gssapi_generic.h",
+            "gssapi/gssapi_krb5.h",
+            "gssapi/mechglue.h",
+            "gssrpc/auth.h",
+            "gssrpc/auth_gss.h",
+            "gssrpc/auth_gssapi.h",
+            "gssrpc/auth_unix.h",
+            "gssrpc/clnt.h",
+            "gssrpc/netdb.h",
+            "gssrpc/pmap_clnt.h",
+            "gssrpc/pmap_prot.h",
+            "gssrpc/pmap_rmt.h",
+            "gssrpc/rename.h",
+            "gssrpc/rpc.h",
+            "gssrpc/rpc_msg.h",
+            "gssrpc/svc.h",
+            "gssrpc/svc_auth.h",
+            "gssrpc/types.h",
+            "gssrpc/xdr.h",
+            "kadm5/admin.h",
+            "kadm5/chpass_util_strings.h",
+            "kadm5/kadm_err.h",
+            "kdb.h",
+            "krb5.h",
+            "krb5/ccselect_plugin.h",
+            "krb5/clpreauth_plugin.h",
+            "krb5/hostrealm_plugin.h",
+            "krb5/kadm5_hook_plugin.h",
+            "krb5/kdcpreauth_plugin.h",
+            "krb5/krb5.h",
+            "krb5/localauth_plugin.h",
+            "krb5/locate_plugin.h",
+            "krb5/plugin.h",
+            "krb5/preauth_plugin.h",
+            "krb5/pwqual_plugin.h",
+            "profile.h",
 ]
 
-cc_library(
-    name = 'dep_libs',
-    hdrs = EXTERNAL_HDRS,
-    includes = ["include"],
-)
-
-filegroup(
-    name = 'libs',
-    srcs = [
-            "libgssapi_krb5.so",
-            "libkrb5.so", 
-            "libk5crypto.so",
-            "libkrb5support.so",
-        ],
-)
+pkg_outs()
+pkg_libs(["libgssapi_krb5.so",
+          "libkrb5.so", 
+          "libk5crypto.so",
+          "libkrb5support.so",]
+          ,EXTERNAL_HDRS)
+pkg_exes(["klist", "kinit"])
 
 genrule(
     local = 1,
@@ -98,45 +87,45 @@ genrule(
         cp $$TMPDIR/bin/klist $(location klist)
         cp $$TMPDIR/bin/kinit $(location kinit)
 
-        cp $$TMPDIR/include/gssapi.h                         $(location include/gssapi.h)
-        cp $$TMPDIR/include/gssapi/gssapi.h                  $(location include/gssapi/gssapi.h)
-        cp $$TMPDIR/include/gssapi/gssapi_ext.h              $(location include/gssapi/gssapi_ext.h)
-        cp $$TMPDIR/include/gssapi/gssapi_generic.h          $(location include/gssapi/gssapi_generic.h)
-        cp $$TMPDIR/include/gssapi/gssapi_krb5.h             $(location include/gssapi/gssapi_krb5.h)
-        cp $$TMPDIR/include/gssapi/mechglue.h                $(location include/gssapi/mechglue.h)
-        cp $$TMPDIR/include/gssrpc/auth.h                    $(location include/gssrpc/auth.h)
-        cp $$TMPDIR/include/gssrpc/auth_gss.h                $(location include/gssrpc/auth_gss.h)
-        cp $$TMPDIR/include/gssrpc/auth_gssapi.h             $(location include/gssrpc/auth_gssapi.h)
-        cp $$TMPDIR/include/gssrpc/auth_unix.h               $(location include/gssrpc/auth_unix.h)
-        cp $$TMPDIR/include/gssrpc/clnt.h                    $(location include/gssrpc/clnt.h)
-        cp $$TMPDIR/include/gssrpc/netdb.h                   $(location include/gssrpc/netdb.h)
-        cp $$TMPDIR/include/gssrpc/pmap_clnt.h               $(location include/gssrpc/pmap_clnt.h)
-        cp $$TMPDIR/include/gssrpc/pmap_prot.h               $(location include/gssrpc/pmap_prot.h)
-        cp $$TMPDIR/include/gssrpc/pmap_rmt.h                $(location include/gssrpc/pmap_rmt.h)
-        cp $$TMPDIR/include/gssrpc/rename.h                  $(location include/gssrpc/rename.h)
-        cp $$TMPDIR/include/gssrpc/rpc.h                     $(location include/gssrpc/rpc.h)
-        cp $$TMPDIR/include/gssrpc/rpc_msg.h                 $(location include/gssrpc/rpc_msg.h)
-        cp $$TMPDIR/include/gssrpc/svc.h                     $(location include/gssrpc/svc.h)
-        cp $$TMPDIR/include/gssrpc/svc_auth.h                $(location include/gssrpc/svc_auth.h)
-        cp $$TMPDIR/include/gssrpc/types.h                   $(location include/gssrpc/types.h)
-        cp $$TMPDIR/include/gssrpc/xdr.h                     $(location include/gssrpc/xdr.h)
-        cp $$TMPDIR/include/kadm5/admin.h                    $(location include/kadm5/admin.h)
-        cp $$TMPDIR/include/kadm5/chpass_util_strings.h      $(location include/kadm5/chpass_util_strings.h)
-        cp $$TMPDIR/include/kadm5/kadm_err.h                 $(location include/kadm5/kadm_err.h)
-        cp $$TMPDIR/include/kdb.h                            $(location include/kdb.h)
-        cp $$TMPDIR/include/krb5.h                           $(location include/krb5.h)
-        cp $$TMPDIR/include/krb5/ccselect_plugin.h           $(location include/krb5/ccselect_plugin.h)
-        cp $$TMPDIR/include/krb5/clpreauth_plugin.h          $(location include/krb5/clpreauth_plugin.h)
-        cp $$TMPDIR/include/krb5/hostrealm_plugin.h          $(location include/krb5/hostrealm_plugin.h)
-        cp $$TMPDIR/include/krb5/kadm5_hook_plugin.h         $(location include/krb5/kadm5_hook_plugin.h)
-        cp $$TMPDIR/include/krb5/kdcpreauth_plugin.h         $(location include/krb5/kdcpreauth_plugin.h)
-        cp $$TMPDIR/include/krb5/krb5.h                      $(location include/krb5/krb5.h)
-        cp $$TMPDIR/include/krb5/localauth_plugin.h          $(location include/krb5/localauth_plugin.h)
-        cp $$TMPDIR/include/krb5/locate_plugin.h             $(location include/krb5/locate_plugin.h)
-        cp $$TMPDIR/include/krb5/plugin.h                    $(location include/krb5/plugin.h)
-        cp $$TMPDIR/include/krb5/preauth_plugin.h            $(location include/krb5/preauth_plugin.h)
-        cp $$TMPDIR/include/krb5/pwqual_plugin.h             $(location include/krb5/pwqual_plugin.h)
-        cp $$TMPDIR/include/profile.h                        $(location include/profile.h)
+        cp $$TMPDIR/include/gssapi.h                         $(location gssapi.h)
+        cp $$TMPDIR/include/gssapi/gssapi.h                  $(location gssapi/gssapi.h)
+        cp $$TMPDIR/include/gssapi/gssapi_ext.h              $(location gssapi/gssapi_ext.h)
+        cp $$TMPDIR/include/gssapi/gssapi_generic.h          $(location gssapi/gssapi_generic.h)
+        cp $$TMPDIR/include/gssapi/gssapi_krb5.h             $(location gssapi/gssapi_krb5.h)
+        cp $$TMPDIR/include/gssapi/mechglue.h                $(location gssapi/mechglue.h)
+        cp $$TMPDIR/include/gssrpc/auth.h                    $(location gssrpc/auth.h)
+        cp $$TMPDIR/include/gssrpc/auth_gss.h                $(location gssrpc/auth_gss.h)
+        cp $$TMPDIR/include/gssrpc/auth_gssapi.h             $(location gssrpc/auth_gssapi.h)
+        cp $$TMPDIR/include/gssrpc/auth_unix.h               $(location gssrpc/auth_unix.h)
+        cp $$TMPDIR/include/gssrpc/clnt.h                    $(location gssrpc/clnt.h)
+        cp $$TMPDIR/include/gssrpc/netdb.h                   $(location gssrpc/netdb.h)
+        cp $$TMPDIR/include/gssrpc/pmap_clnt.h               $(location gssrpc/pmap_clnt.h)
+        cp $$TMPDIR/include/gssrpc/pmap_prot.h               $(location gssrpc/pmap_prot.h)
+        cp $$TMPDIR/include/gssrpc/pmap_rmt.h                $(location gssrpc/pmap_rmt.h)
+        cp $$TMPDIR/include/gssrpc/rename.h                  $(location gssrpc/rename.h)
+        cp $$TMPDIR/include/gssrpc/rpc.h                     $(location gssrpc/rpc.h)
+        cp $$TMPDIR/include/gssrpc/rpc_msg.h                 $(location gssrpc/rpc_msg.h)
+        cp $$TMPDIR/include/gssrpc/svc.h                     $(location gssrpc/svc.h)
+        cp $$TMPDIR/include/gssrpc/svc_auth.h                $(location gssrpc/svc_auth.h)
+        cp $$TMPDIR/include/gssrpc/types.h                   $(location gssrpc/types.h)
+        cp $$TMPDIR/include/gssrpc/xdr.h                     $(location gssrpc/xdr.h)
+        cp $$TMPDIR/include/kadm5/admin.h                    $(location kadm5/admin.h)
+        cp $$TMPDIR/include/kadm5/chpass_util_strings.h      $(location kadm5/chpass_util_strings.h)
+        cp $$TMPDIR/include/kadm5/kadm_err.h                 $(location kadm5/kadm_err.h)
+        cp $$TMPDIR/include/kdb.h                            $(location kdb.h)
+        cp $$TMPDIR/include/krb5.h                           $(location krb5.h)
+        cp $$TMPDIR/include/krb5/ccselect_plugin.h           $(location krb5/ccselect_plugin.h)
+        cp $$TMPDIR/include/krb5/clpreauth_plugin.h          $(location krb5/clpreauth_plugin.h)
+        cp $$TMPDIR/include/krb5/hostrealm_plugin.h          $(location krb5/hostrealm_plugin.h)
+        cp $$TMPDIR/include/krb5/kadm5_hook_plugin.h         $(location krb5/kadm5_hook_plugin.h)
+        cp $$TMPDIR/include/krb5/kdcpreauth_plugin.h         $(location krb5/kdcpreauth_plugin.h)
+        cp $$TMPDIR/include/krb5/krb5.h                      $(location krb5/krb5.h)
+        cp $$TMPDIR/include/krb5/localauth_plugin.h          $(location krb5/localauth_plugin.h)
+        cp $$TMPDIR/include/krb5/locate_plugin.h             $(location krb5/locate_plugin.h)
+        cp $$TMPDIR/include/krb5/plugin.h                    $(location krb5/plugin.h)
+        cp $$TMPDIR/include/krb5/preauth_plugin.h            $(location krb5/preauth_plugin.h)
+        cp $$TMPDIR/include/krb5/pwqual_plugin.h             $(location krb5/pwqual_plugin.h)
+        cp $$TMPDIR/include/profile.h                        $(location profile.h)
 
     """,
 

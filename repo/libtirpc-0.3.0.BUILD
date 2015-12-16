@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
 
-pkg_libs(["tirpc"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "tirpc/netconfig.h",
             "tirpc/rpcsvc/crypt.x",
@@ -39,12 +36,16 @@ EXTERNAL_HDRS = [
             "tirpc/rpc/des_crypt.h",
             "tirpc/rpc/auth_des.h",
             ]
+pkg_outs()
+pkg_libs(["libtirpc.so"], EXTERNAL_HDRS)
+pkg_exes()
 
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-  name = "tirpc",
-  srcs = INTERNAL_HDRS + [
+
+cc_binary(
+    linkshared = 1,
+    name = "libtirpc.so",
+    srcs = ALL_HDRS + [
 
         "src/auth_none.c",
         "src/auth_unix.c",
@@ -105,14 +106,16 @@ cc_library(
         "src/authdes_prot.c",
         "src/des_crypt.c",
         "src/des_impl.c",
+
+        "//external:krb5-so-latest",
+        "//external:e2fsprogs-so-latest",
         ],
-  hdrs = EXTERNAL_HDRS,
-  includes = ["tirpc", "."],
-  copts = ["-DHAVE_CONFIG_H", "-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe", "-DHAVE_RPCSEC_GSS"],
-  deps = [
-        "//external:krb5-latest",
-        "//external:e2fsprogs-latest",
-],
+    includes = ["tirpc", "."],
+    copts = ["-DHAVE_CONFIG_H", "-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe", "-DHAVE_RPCSEC_GSS"],
+    deps = [
+        "//external:krb5-hdr-latest",
+        "//external:e2fsprogs-hdr-latest",
+    ],
 )
 
 

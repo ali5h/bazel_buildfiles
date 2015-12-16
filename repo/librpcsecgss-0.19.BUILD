@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
 
-pkg_libs(["rpcsecgss"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "include/rpcsecgss/rpc/auth.h",
         "include/rpcsecgss/rpc/auth_gss.h",
@@ -13,11 +10,15 @@ EXTERNAL_HDRS = [
         "include/rpcsecgss/rpc/svc.h",
         "include/rpcsecgss/rpc/svc_auth.h",
             ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "rpcsecgss",
-    srcs = INTERNAL_HDRS + [
+pkg_outs()
+pkg_libs(["librpcsecgss.so"], EXTERNAL_HDRS)
+pkg_exes()
+
+cc_binary(
+    linkshared = 1,
+    name = "librpcsecgss.so",
+    srcs = ALL_HDRS + [
         "src/auth_gss.c",
         "src/authgss_prot.c",
         "src/svc.c",
@@ -37,8 +38,9 @@ cc_library(
         "src/clnt_simple.c",
         "src/clnt_tcp.c",
         "src/clnt_udp.c",
+
+        "//external:krb5-so-latest",
         ],
-    hdrs = EXTERNAL_HDRS,
     includes = ["include/rpcsecgss/"],
     copts = [
         '-DPACKAGE_NAME=\\"librpcsecgss\\"',
@@ -69,6 +71,6 @@ cc_library(
         '-DHAVE_MEMSET=1',
         '-DHAVE_STRERROR=1',
     ],
-    deps = ["//external:krb5-latest"],
+    deps = ["//external:krb5-hdr-latest"],
 )
 

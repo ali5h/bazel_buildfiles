@@ -20,6 +20,7 @@ def add_package(abs_path , alias):
 def pkg_libs(srcs = [], ext_hdrs = []):
     # pkg_tar(
     #     name = 'hdrs',
+    # #   ext_hdrs will all be put in the top level of .tgz, no subdir exist
     #     files = ext_hdrs,
     #     extension = "tar.gz",
     #     package_dir = REPOSITORY_NAME[1:],
