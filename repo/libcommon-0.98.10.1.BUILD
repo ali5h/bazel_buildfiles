@@ -1,22 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
 
-pkg_libs(["common"])
-pkg_exes()
-
-OPTS = [
-
-                '-DHAVE_CONFIG_H',
-                '-D_XOPEN_SOURCE=600',
-                '-fno-common',
-                '-pedantic',
-                '-std=c99',
-
-]
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
-                
                 "src/match/cm_libmatch.h",
                 "src/debug/cm_libdebug.h",
                 "src/container/fifo/cm_libfifo.h",
@@ -34,12 +20,25 @@ EXTERNAL_HDRS = [
                 "src/socket/cm_libsocket.h",
                 "src/unitary_test/cm_libunitary_test.h",
                 "src/getopt/cm_libgetopt.h",
-
                 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "common",
+pkg_outs()
+pkg_libs(["libcommon.so"], EXTERNAL_HDRS)
+pkg_exes()
+
+OPTS = [
+
+                '-DHAVE_CONFIG_H',
+                '-D_XOPEN_SOURCE=600',
+                '-fno-common',
+                '-pedantic',
+                '-std=c99',
+
+]
+
+cc_binary(
+    linkshared = 1,
+    name = "libcommon.so",
     srcs = [
     
                 "src/posix/libposix_accept.c",
@@ -154,8 +153,7 @@ cc_library(
                 "src/memory/libmemory_release.c",
                 "src/unitary_test/libunitary_test.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [
                 "src/match",
                 "src/debug",
@@ -174,7 +172,6 @@ cc_library(
                 "src/socket",
                 "src/unitary_test",
                 "src/getopt",
-
                 ],
     copts = OPTS,
 )

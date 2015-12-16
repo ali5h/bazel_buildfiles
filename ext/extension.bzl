@@ -17,13 +17,14 @@ def add_package(abs_path , alias):
 
 # ------------for build file---------------------
 
-def pkg_libs(srcs = [], ext_hdrs = []):
+def pkg_libs(srcs = [], ext_hdrs = [], inc_dir = ""):
     # pkg_tar(
     #     name = 'hdrs',
     # #   ext_hdrs will all be put in the top level of .tgz, no subdir exist
     #     files = ext_hdrs,
     #     extension = "tar.gz",
     #     package_dir = REPOSITORY_NAME[1:],
+    #     package_dir = inc_dir,
     # )
     native.filegroup(
         name = 'libs',
