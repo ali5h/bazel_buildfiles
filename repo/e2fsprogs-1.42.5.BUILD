@@ -1,11 +1,13 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs")
 
 ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["com_err.h"]
-pkg_outs()
-pkg_libs(["libcom_err.so"], EXTERNAL_HDRS)
-pkg_exes()
+
+pkg_outs(
+        libs = ["libcom_err.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
 
 cc_binary(
     linkshared = 1,

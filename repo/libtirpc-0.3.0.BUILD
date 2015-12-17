@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs")
 
 ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
@@ -36,11 +36,11 @@ EXTERNAL_HDRS = [
             "tirpc/rpc/des_crypt.h",
             "tirpc/rpc/auth_des.h",
             ]
-pkg_outs()
-pkg_libs(["libtirpc.so"], EXTERNAL_HDRS)
-pkg_exes()
 
-
+pkg_outs(
+            libs = ["libtirpc.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 cc_binary(
     linkshared = 1,

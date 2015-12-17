@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":upnp", ":ixml", ":threadutil"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "upnp/inc/UpnpString.h",
         "upnp/inc/upnp.h",
@@ -24,6 +21,12 @@ EXTERNAL_HDRS = [
         "threadutil/inc/TimerThread.h",
         "threadutil/inc/ithread.h",
 ]
+
+pkg_outs(
+        libs = ["libupnp.so", "libixml.so", "libthreadutil.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
+
 
 INTERNAL_HDRS = [
         "build/inc/autoconfig.h",
@@ -65,9 +68,10 @@ INTERNAL_HDRS = [
 
 ]
 
-cc_library(
-  name = "upnp",
-  srcs = [
+cc_binary(
+    linkshared = 1,
+    name = "libupnp.so",
+    srcs = [
         "upnp/src/ssdp/ssdp_device.c",
         "upnp/src/ssdp/ssdp_ctrlpt.c",
         "upnp/src/ssdp/ssdp_server.c",
@@ -100,17 +104,16 @@ cc_library(
         "upnp/src/uuid/uuid.c",
         "upnp/src/urlconfig/urlconfig.c",
         "upnp/src/inet_pton.c",
-        "upnp/src/inc/inet_pton.h",
 
-        ] + INTERNAL_HDRS,
-  hdrs = EXTERNAL_HDRS,
-  includes = ["upnp/src/inc", ".", "upnp/inc", "threadutil/inc", "ixml/inc", "build/inc"],
-  copts = ["-DHAVE_CONFIG_H"],
+        ] + ALL_HDRS,
+    includes = ["upnp/src/inc", ".", "upnp/inc", "threadutil/inc", "ixml/inc", "build/inc"],
+    copts = ["-DHAVE_CONFIG_H"],
 )
 
-cc_library(
-  name = "ixml",
-  srcs = [
+cc_binary(
+    linkshared = 1,
+    name = "libixml.so",
+    srcs = [
         "ixml/src/attr.c",
         "ixml/src/document.c",
         "ixml/src/element.c",
@@ -121,25 +124,20 @@ cc_library(
         "ixml/src/namedNodeMap.c",
         "ixml/src/node.c",
         "ixml/src/nodeList.c",
-        ] + INTERNAL_HDRS,
-  hdrs = EXTERNAL_HDRS,
-  includes = [".", "ixml/src/inc", "ixml/inc", "upnp/inc", "build/inc"],
-  copts = ["-DHAVE_CONFIG_H", "-DNDEBUG"],
+        ] + ALL_HDRS,
+    includes = [".", "ixml/src/inc", "ixml/inc", "upnp/inc", "build/inc"],
+    copts = ["-DHAVE_CONFIG_H", "-DNDEBUG"],
 )
 
-cc_library(
-  name = "threadutil",
-  srcs = [
-			"threadutil/inc/FreeList.h",
-			"threadutil/src/FreeList.c",
-			"threadutil/inc/LinkedList.h",
-			"threadutil/src/LinkedList.c",
-			"threadutil/inc/ThreadPool.h",
-			"threadutil/src/ThreadPool.c",
-			"threadutil/inc/TimerThread.h",
-			"threadutil/src/TimerThread.c",
+cc_binary(
+    linkshared = 1,
+    name = "libthreadutil.so",
+    srcs = ALL_HDRS + [
+            "threadutil/src/FreeList.c",
+            "threadutil/src/LinkedList.c",
+            "threadutil/src/ThreadPool.c",
+            "threadutil/src/TimerThread.c",
         ],
-  hdrs = EXTERNAL_HDRS,
-  includes = ["threadutil/inc", "upnp/inc"],
-  copts = ["-DHAVE_CONFIG_H", "-DNO_DEBUG", "-DNDEBUG"],
+    includes = ["threadutil/inc", "upnp/inc"],
+    copts = ["-DHAVE_CONFIG_H", "-DNO_DEBUG", "-DNDEBUG"],
 )

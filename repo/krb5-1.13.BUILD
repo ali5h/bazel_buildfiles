@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs")
 
 # EXTERNAL_HDRS referring to installed header
 EXTERNAL_HDRS = [
@@ -44,13 +44,19 @@ EXTERNAL_HDRS = [
             "profile.h",
 ]
 
-pkg_outs()
-pkg_libs(["libgssapi_krb5.so",
-          "libkrb5.so", 
-          "libk5crypto.so",
-          "libkrb5support.so",]
-          ,EXTERNAL_HDRS)
-pkg_exes(["klist", "kinit"])
+pkg_outs(
+        exes = [
+                "klist",
+                "kinit",
+                ],
+        libs = [
+                "libgssapi_krb5.so",
+                "libkrb5.so", 
+                "libk5crypto.so",
+                "libkrb5support.so",
+                ],
+        hdrs = EXTERNAL_HDRS
+        )
 
 genrule(
     local = 1,
