@@ -1,8 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
-
-pkg_exes(["openssl"])
+load("/ext/extension", "pkg_outs",)
 
 EXTERNAL_HDRS = [
         "include/openssl/opensslconf.h",
@@ -80,19 +77,11 @@ EXTERNAL_HDRS = [
         "include/openssl/x509v3.h",
         ]
 
-cc_library(
-    name = 'dep_libs',
-    hdrs = EXTERNAL_HDRS,
-    includes = ["include"],
-)
-
-filegroup(
-    name = 'libs',
-    srcs = [
-            "libssl.so",
-            "libcrypto.so", 
-        ],
-)
+pkg_outs(
+        exes = ["openssl"], 
+        libs = ["libssl.so", "libcrypto.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
 
 genrule(
     local = 1,
