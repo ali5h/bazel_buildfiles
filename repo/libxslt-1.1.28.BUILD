@@ -1,12 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs(["xslt"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
-
                 "libexslt/exslt.h",
                 "libexslt/exsltconfig.h",
                 "libexslt/exsltexports.h",
@@ -31,12 +27,17 @@ EXTERNAL_HDRS = [
                 "libxslt/xsltexports.h",
                 "libxslt/xsltlocale.h",
                 "libxslt/xsltutils.h",
-
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "xslt",
+pkg_outs(
+            libs = ["libxslt.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libxslt.so",
     srcs = [
     
                 "libxslt/attrvt.c",
@@ -59,10 +60,10 @@ cc_library(
                 "libxslt/transform.c",
                 "libxslt/security.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+                "//external:libxml2-so-latest",
+    ] + ALL_HDRS,
     includes = ["."],
     copts = ["-DHAVE_CONFIG_H"],
-    deps = ["//external:libxml2-latest"],
+    deps = ["//external:libxml2-hdr-latest"],
 )
 
