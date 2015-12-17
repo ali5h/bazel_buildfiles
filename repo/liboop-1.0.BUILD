@@ -1,13 +1,26 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":oop"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+        "oop.h",
+        "oop-adns.h",
+        "oop-glib.h",
+        "oop-tcl.h",
+        "oop-www.h",
+        "oop-rl.h",
+        "oop-read.h",
+]
 
-cc_library(
-    name = "oop",
-    srcs = [
+pkg_outs(
+            libs = ["liboop.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "liboop.so",
+    srcs = ALL_HDRS + [
             "sys.c",
             "select.c",
             "signal.c",
@@ -15,15 +28,6 @@ cc_library(
             "read.c",
             "read-fd.c",
             "read-mem.c",
-    ],
-    hdrs = [
-            "oop.h",
-            "oop-adns.h",
-            "oop-glib.h",
-            "oop-tcl.h",
-            "oop-www.h",
-            "oop-rl.h",
-            "oop-read.h",
     ],
     includes = ["."],
     copts = [],

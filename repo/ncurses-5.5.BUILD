@@ -1,13 +1,46 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":panel", ":ncurses", ":form", ":menu", ":ncurses++"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+        ":c++/etip.h",
+        "c++/cursesapp.h",
+        "c++/cursesf.h",
+        "c++/cursesm.h",
+        "c++/cursesp.h",
+        "c++/cursesw.h",
+        "c++/cursslk.h",
 
-cc_library(
-  name = "ncurses++",
-  srcs = [
+        "panel/panel.h",
+        "menu/eti.h",
+        "menu/menu.h",
+
+        "form/form.h",
+
+        ":include/term.h",
+        ":include/curses.h",
+        ":include/ncurses.h",
+        "include/unctrl.h",
+        "include/termcap.h",
+        "include/ncurses_dll.h",
+        "include/term_entry.h",
+        "include/tic.h",
+                ]
+pkg_outs(
+            libs = [
+                    "libpanel.so",
+                    "libncurses.so",
+                    "libform.so",
+                    "libmenu.so",
+                    "libncurses++.so",
+                    ],
+            hdrs = EXTERNAL_HDRS,
+)
+
+cc_binary(
+linkshared = 1,
+  name = "libncurses++.so",
+  srcs = ALL_HDRS + [
         ":include/ncurses_def.h",
         ":include/curses.h",
 
@@ -20,14 +53,6 @@ cc_library(
         "c++/cursesapp.cc",
         "c++/cursesmain.cc",
         "c++/demo.cc",
-        "c++/internal.h",
-        "include/ncurses_cfg.h",
-        "include/ncurses_dll.h",
-        "menu/eti.h",
-        "include/unctrl.h",
-        "panel/panel.h",
-        "form/form.h",
-        "menu/menu.h",
         ],
 
   includes = ["include", "ncurses", "c++", "menu", "panel", "form"],
@@ -37,15 +62,15 @@ cc_library(
            "-DNDEBUG",
            "-fPIC",
           ],
-  hdrs = [
-        ":c++/etip.h",
-        "c++/cursesapp.h",
-        "c++/cursesf.h",
-        "c++/cursesm.h",
-        "c++/cursesp.h",
-        "c++/cursesw.h",
-        "c++/cursslk.h",
-        ],
+  # hdrs = [
+  #       ":c++/etip.h",
+  #       "c++/cursesapp.h",
+  #       "c++/cursesf.h",
+  #       "c++/cursesm.h",
+  #       "c++/cursesp.h",
+  #       "c++/cursesw.h",
+  #       "c++/cursslk.h",
+  #       ],
 )
 
 genrule(
@@ -58,16 +83,12 @@ genrule(
           """,
 )
 
-cc_library(
-  name = "menu",
-  srcs = [
+cc_binary(
+linkshared = 1,
+  name = "libmenu.so",
+  srcs = ALL_HDRS + [
             
-        "menu/menu.priv.h",
-        "ncurses/curses.priv.h",
-        "menu/mf_common.h",
         "gen_include_hdr",
-        "include/nc_panel.h",
-        "include/nc_alloc.h",
 
         "menu/m_attribs.c",
         "menu/m_cursor.c",
@@ -96,10 +117,6 @@ cc_library(
         "menu/m_trace.c",
         "menu/m_userptr.c",
         "menu/m_win.c",
-        "include/ncurses_dll.h",
-        "include/ncurses_cfg.h",
-        "include/unctrl.h",
-        "include/term_entry.h",
          ],
   copts = [
            "-DHAVE_CONFIG_H",
@@ -107,22 +124,17 @@ cc_library(
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
-  hdrs = ["menu/eti.h", "menu/menu.h"],
+  # hdrs = ["menu/eti.h", "menu/menu.h"],
 
 )
 
-cc_library(
-  name = "form",
-  srcs = [
+cc_binary(
+linkshared = 1,
+  name = "libform.so",
+  srcs = ALL_HDRS + [
         ":include/ncurses_def.h",
         ":include/term.h",
         ":include/curses.h",
-        "menu/eti.h",
-        "menu/mf_common.h",
-        "form/form.priv.h",
-        "ncurses/curses.priv.h",
-        "include/unctrl.h",
-        "include/term_entry.h",
 
         "form/f_trace.c",
         "form/fld_arg.c",
@@ -164,10 +176,6 @@ cc_library(
         "form/fty_ipv4.c",
         "form/fty_num.c",
         "form/fty_regex.c",
-        "include/ncurses_dll.h",
-        "include/ncurses_cfg.h",
-        "include/nc_panel.h",
-        "include/nc_alloc.h",
 
         ],
   copts = [
@@ -176,12 +184,13 @@ cc_library(
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
-  hdrs = ["form/form.h"],
+  # hdrs = ["form/form.h"],
 )
 
-cc_library(
-  name = "panel",
-  srcs = [
+cc_binary(
+linkshared = 1,
+  name = "libpanel.so",
+  srcs = ALL_HDRS + [
         "panel/panel.c",
         "panel/p_above.c",
         "panel/p_below.c",
@@ -197,19 +206,19 @@ cc_library(
         "panel/p_update.c",
         "panel/p_user.c",
         "panel/p_win.c",
-        "panel/panel.priv.h",
-        "ncurses/curses.priv.h",
-        "include/ncurses_cfg.h",
-        "include/ncurses_dll.h",
-        "include/nc_panel.h",
-        ":gen_include_hdr",
-        "include/unctrl.h",
-        "include/term_entry.h",
-        "include/nc_alloc.h",
+        # "panel/panel.priv.h",
+        # "ncurses/curses.priv.h",
+        # "include/ncurses_cfg.h",
+        # "include/ncurses_dll.h",
+        # "include/nc_panel.h",
+        # ":gen_include_hdr",
+        # "include/unctrl.h",
+        # "include/term_entry.h",
+        # "include/nc_alloc.h",
         ],
   copts = ["-DHAVE_CONFIG_H"],
   includes = ["include", "ncurses"],
-  hdrs = ["panel/panel.h"],
+  # hdrs = ["panel/panel.h"],
 )
 
 genrule(
@@ -424,7 +433,8 @@ cc_library(
     includes = ["ncurses"],
 )
 
-cc_library(
+cc_binary(
+linkshared = 1,
   name = "ncurses",
   srcs = [
         "gen_ncurses_hdr",
