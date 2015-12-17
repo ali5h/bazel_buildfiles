@@ -1,78 +1,66 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs")
 
-pkg_libs([":event", ":event_core", ":event_extra"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [ 
+            "event.h",
+            "evhttp.h",
+            "evdns.h",
+            "evrpc.h",
+            "evutil.h",
+            ":event-config.h"
+]
 
-filegroup(
-    name = "ext_headers",
-    srcs = [ "event.h", "evhttp.h", "evdns.h", "evrpc.h", "evutil.h", ":event-config.h"],
+pkg_outs(
+            libs = ["libevent.so", "libevent_core.so", "libevent_extra.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+        linkshared = 1,
+        name = "libevent.so",
+        srcs = [
+                "event.c",
+                "buffer.c",
+                "evbuffer.c",
+                "log.c",
+                "evutil.c",
+                "event_tagging.c",
+                "http.c",
+                "evdns.c",
+                "evrpc.c",
+                "strlcpy.c",
+        ] + ALL_HDRS + [":event-config.h"],
+        includes = ["."],
+        copts = ['-DHAVE_CONFIG_H',],
 )
 
-filegroup(
-    name = "int_headers",
-    srcs = [
-            "event-internal.h",
-            "min_heap.h",
-            "config.h",
-            "strlcpy-internal.h",
-            "http-internal.h",
-            "evrpc-internal.h",
-            "log.h",
-            "evsignal.h",
-            ],
+cc_binary(
+        linkshared = 1,
+        name = "libevent_core.so",
+        srcs = [
+                "event.c",
+                "buffer.c",
+                "evbuffer.c",
+                "log.c",
+                "evutil.c",
+        ] + ALL_HDRS + [":event-config.h"],
+        includes = ["."],
+        copts = ['-DHAVE_CONFIG_H',],
 )
 
-cc_library(
-  name = "event",
-  srcs = [
-    "event.c",
-    "buffer.c",
-    "evbuffer.c",
-    "log.c",
-    "evutil.c",
-    "event_tagging.c",
-    "http.c",
-    "evdns.c",
-    "evrpc.c",
-    "strlcpy.c",
-    ":int_headers",
-    ],
-    hdrs = [":ext_headers"],
-    includes = ["."],
-    copts = ['-DHAVE_CONFIG_H',],
-)
-
-cc_library(
-    name = "event_core",
-    srcs = [
-    "event.c",
-    "buffer.c",
-    "evbuffer.c",
-    "log.c",
-    "log.h",
-    "evutil.c",
-    ":int_headers",
-    ],
-    hdrs = [":ext_headers"],
-    includes = ["."],
-    copts = ['-DHAVE_CONFIG_H',],
-)
-
-cc_library(
-    name = "event_extra",
-    srcs = [
-    "event_tagging.c",
-    "http.c",
-    "evdns.c",
-    "evrpc.c",
-    "strlcpy.c",
-    ":int_headers",
-    ],
-    hdrs = [":ext_headers"],
-    includes = ["."],
-    copts = ['-DHAVE_CONFIG_H',],
+cc_binary(
+        linkshared = 1,
+        name = "libevent_extra.so",
+        srcs = [
+                "event_tagging.c",
+                "http.c",
+                "evdns.c",
+                "evrpc.c",
+                "strlcpy.c",
+        ] + ALL_HDRS + [":event-config.h"],
+        includes = ["."],
+        copts = ['-DHAVE_CONFIG_H',],
 )
 
 genrule(

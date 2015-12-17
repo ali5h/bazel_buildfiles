@@ -1,36 +1,34 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs")
 
-pkg_libs([":nfsidmap"])
-pkg_exes([":nsswitch.so", ":static.so", ":umich_ldap.so"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["nfsidmap.h"]
 
-INTERNAL_HDRS = [
-                "cfg.h",
-                "queue.h",
-                "nfsidmap_internal.h",
-            ]
+pkg_outs(
+            libs = ["libnfsidmap.so", "nsswitch.so", "static.so", "umich_ldap.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
-cc_library(
-    name = "nfsidmap",
+cc_binary(
+    linkshared = 1, 
+    name = "libnfsidmap.so",
     srcs = [
         "libnfsidmap.c",
         "cfg.c",
         "strlcpy.c",
-        ] + INTERNAL_HDRS,
-    hdrs = ["nfsidmap.h"],
+        ] + ALL_HDRS,
 )
 
 
 cc_binary(
     name = "nsswitch.so",
-    srcs = ["nss.c","nfsidmap.h"] + INTERNAL_HDRS,
+    srcs = ["nss.c"] + ALL_HDRS,
     linkshared = 1,
 )
 
 cc_binary(
     name = "static.so",
-    srcs = ["static.c", "nfsidmap.h"] + INTERNAL_HDRS,
+    srcs = ["static.c"] + ALL_HDRS,
     linkshared = 1,
 )
 

@@ -1,13 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":gssglue"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["gssglue/gssapi/gssapi.h"]
 
-cc_library(
-    name = "gssglue",
-    srcs = [
+pkg_outs(
+            libs = ["libgssglue.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "libgssglue.so",
+    srcs = EXTERNAL_HDRS + ALL_HDRS + [
         "src/g_accept_sec_context.c",
         "src/g_acquire_cred.c",
         "src/g_compare_name.c",
@@ -50,18 +55,14 @@ cc_library(
         "src/g_get_mic.c",
         "src/g_verify_mic.c",
         "src/g_ccache_name.c",
-        "src/mglueP.h",
-        "src/mechglue.h",
-        "src/gssglue/config.h",
         ],
-    hdrs = [":src/gssglue/gssapi/gssapi.h"],
-    includes = ["src/gssglue"],
+    includes = ["src/gssglue", "gssglue"],
 )
 
 genrule(
     name = "gssapi.h",
     srcs = ["src/gssglue/gssapi/gssapi.h.in", "src/gssglue/config.h"],
-    outs = ["src/gssglue/gssapi/gssapi.h"],
+    outs = ["gssglue/gssapi/gssapi.h"],
     cmd = """
 	(echo "/* Beginning of gssapi.h prologue. */"
 	echo "/*"

@@ -1,16 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs")
 
-pkg_libs([
-            "glib-2.0",
-            "gthread-2.0",
-            "gobject-2.0",
-            "gmodule-2.0",
-            "gio-2.0",
-])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "glib/glib.h",
                 "glib/glib-object.h",
@@ -20,7 +11,18 @@ EXTERNAL_HDRS = [
                 ":inc_gio",
 ]
 
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+pkg_outs(
+            libs = [
+                "libglib-2.0.so",
+                "libgthread-2.0.so",
+                "libgobject-2.0.so",
+                "libgmodule-2.0.so",
+                "libgio-2.0.so",
+            ],
+            hdrs = EXTERNAL_HDRS,
+)
+
+
 
 genrule(
     name = "inc_gio",
@@ -562,8 +564,7 @@ cc_library(
     
                 "glib/libcharset/localcharset.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["glib", "."],
     copts = [
                 '-DLIBDIR=\\"/usr/local/lib\\"',
@@ -597,8 +598,7 @@ cc_library(
                 "glib/pcre/pcre_valid_utf8.c",
                 "glib/pcre/pcre_version.c",
                 "glib/pcre/pcre_xclass.c",
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["glib", "."],
     copts = [
     
@@ -622,8 +622,9 @@ cc_library(
     ],
 )
 
-cc_library(
-    name = "glib-2.0",
+cc_binary(
+    linkshared = 1,
+    name = "libglib-2.0.so",
     srcs = [
     
                 "glib/gatomic-gcc.c",
@@ -694,10 +695,7 @@ cc_library(
                 "glib/giounix.c",
                 "glib/gspawn.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = [
-                "glib/galiasdef.c",
-    ] + EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "glib"],
     copts = [
                 '-DHAVE_CONFIG_H',
@@ -710,11 +708,25 @@ cc_library(
                 '-DG_DISABLE_CAST_CHECKS',
     
     ],
-    deps = [":glib_pcre", ":glib_libcharset"],
+    deps = [":glib_pcre", ":glib_libcharset", "special_ext"],
 )
 
 cc_library(
-    name = "gio-2.0",
+        name = "special_ext",
+        hdrs = [
+                "gio/gioaliasdef.c",
+                "glib/galiasdef.c",
+                "gobject/gobjectaliasdef.c",
+                "gobject/gobjectnotifyqueue.c",
+                "gobject/gmarshal.c",
+                "gthread/gthread-posix.c",
+                "gmodule/gmodule-dl.c",
+        ],
+)
+
+cc_binary(
+    linkshared = 1, 
+    name = "libgio-2.0.so",
     srcs = [
     
                 "gio/gappinfo.c",
@@ -816,11 +828,11 @@ cc_library(
                 "gio/glocalvfs.c",
                 "gio/gio-marshal.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = [
-    
-                "gio/gioaliasdef.c",
-    ] + EXTERNAL_HDRS,
+                "//external:zlib-so-latest",
+                "libglib-2.0.so",
+                "libgobject-2.0.so",
+                "libgmodule-2.0.so",
+    ] + ALL_HDRS,
     includes = [".", "glib"],
     copts = [
     
@@ -833,13 +845,11 @@ cc_library(
 
     ],
     deps = [
-                ":glib-2.0",
-                ":gobject-2.0",
-                ":gmodule-2.0",
                 ":gio_libasyncns",
                 ":gio_libinotify",
                 ":gio_libxdgmime",
-                "//external:zlib-latest",
+                "//external:zlib-hdr-latest",
+                "special_ext",
     ],
 )
 
@@ -855,8 +865,7 @@ cc_library(
                 "gio/xdgmime/xdgmimemagic.c",
                 "gio/xdgmime/xdgmimeparent.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [],
     copts = [
             '-DXDG_PREFIX=_gio_xdg',
@@ -878,8 +887,7 @@ cc_library(
                 "gio/inotify/ginotifyfilemonitor.c",
                 "gio/inotify/ginotifydirectorymonitor.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["glib", ".", "gmodule", "gio"],
     copts = [
     
@@ -900,9 +908,7 @@ cc_library(
     
             "gio/libasyncns/asyncns.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
-    includes = [],
+    ] + ALL_HDRS,
     copts = [
     
             '-DHAVE_CONFIG_H',
@@ -913,15 +919,14 @@ cc_library(
 )
 
 
-cc_library(
-    name = "gmodule-2.0",
+cc_binary(
+    linkshared = 1,
+    name = "libgmodule-2.0.so",
     srcs = [
                 "gmodule/gmodule.c",
-    
-    ] + INTERNAL_HDRS,
-    hdrs = [
-                "gmodule/gmodule-dl.c",
-    ] + EXTERNAL_HDRS,
+
+                "libglib-2.0.so",
+    ] + ALL_HDRS,
     includes = ["glib", "."],
     copts = [
     
@@ -934,11 +939,12 @@ cc_library(
 
     ],
     linkopts = ["-ldl"],
-    deps = [":glib-2.0"],
+    deps = ["special_ext"],
 )
 
-cc_library(
-    name = "gobject-2.0",
+cc_binary(
+    linkshared = 1,
+    name = "libgobject-2.0.so",
     srcs = [
     
                 "gobject/gatomicarray.c",
@@ -958,12 +964,7 @@ cc_library(
                 "gobject/gvaluetransform.c",
                 "gobject/gvaluetypes.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = [
-                "gobject/gobjectaliasdef.c",
-                "gobject/gobjectnotifyqueue.c",
-                "gobject/gmarshal.c",
-    ] + EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "glib", "gobject"],
     copts = [
     
@@ -979,18 +980,17 @@ cc_library(
                 '-DG_DISABLE_CONST_RETURNS',
     
     ],
+    deps = ["special_ext"],
 )
 
-cc_library(
-    name = "gthread-2.0",
+cc_binary(
+    linkshared = 1,
+    name = "libgthread-2.0.so",
     srcs = [
                 "gthread/gthread-impl.c",
-    
-    ] + INTERNAL_HDRS,
-    hdrs = [
-                "gthread/gthread-posix.c",
-    ] + EXTERNAL_HDRS,
-    includes = ["gthread"],
+                "libglib-2.0.so",
+    ] + ALL_HDRS,
+    includes = [".", "gthread", "glib"],
     copts = [
     
                 '-DG_LOG_DOMAIN=\\"GThread\\"',
@@ -1005,5 +1005,5 @@ cc_library(
     
     ],
     linkopts = ["-lpthread"],
-    deps = [":glib-2.0"],
+    deps = ["special_ext"],
 )
