@@ -1,15 +1,13 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
-pkg_libs(["libc-client.so"])
-pkg_exes()
+load("/ext/extension", "pkg_outs",)
+
+pkg_outs(libs = ["libc-client.so"])
 
 genrule(
     local = 1,
     name = "local_build",
     srcs = [
-            # FIX: should use openssl-latest but will fail in this case
-            "@openssl-1.0.2e//:outs",
+            "//external:openssl-so-latest",
             ],
     outs = [
             "libc-client.so",
