@@ -6,7 +6,10 @@ EXTERNAL_HDRS = [
             "lib/expat.h",
             "lib/expat_external.h",
             ]
-pkg_outs(["libexpat.so"])
+pkg_outs(
+            libs = ["libexpat.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 cc_binary(
             linkshared = 1,

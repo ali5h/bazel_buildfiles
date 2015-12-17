@@ -1,41 +1,75 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":freetype"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = glob(["include/freetype/*.h", "include/freetype/config/*.h"]) + [
+            "include/ft2build.h",
+            ]
+pkg_outs(
+            libs = ["libfreetype.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
-INTERNAL_HDRS = glob (["include/freetype/internal/*.h", "include/freetype/internal/services/*.h"]) + glob(["src/**/*.h"])
+cc_binary(
+            linkshared = 1,
+            name = "libfreetype.so",
+            srcs = ALL_HDRS + [
+                "src/psnames/psmodule.c",
+                "src/cache/ftcache.c",
+                "src/gxvalid/gxvalid.c",
+                "src/cid/type1cid.c",
+                "src/pcf/pcf.c",
+                "src/base/ftbase.c",
+                "src/type1/type1.c",
+                "src/raster/raster.c",
+                "src/gzip/ftgzip.c",
+                "src/psaux/psaux.c",
+                "src/smooth/smooth.c",
+                "src/type42/type42.c",
+                "src/lzw/ftlzw.c",
+                "src/truetype/truetype.c",
+                "src/bdf/bdf.c",
+                "src/winfonts/winfnt.c",
+                "src/cff/cff.c",
+                "src/sfnt/sfnt.c",
+                "src/autofit/autofit.c",
+                "src/pshinter/pshinter.c",
+                "src/otvalid/otvalid.c",
+                "src/pfr/pfr.c",
+                ],
+            includes = [
+                "include",
+                "src/psname",
+                "src/cache",
+                "src/gxvalid",
+                "src/cid",
+                "src/pcf",
+                "src/base",
+                "src/type1",
+                "src/raster",
+                "src/gzip",
+                "src/psaux",
+                "src/smooth",
+                "src/type42",
+                "src/lzw",
+                "src/truetype",
+                "src/bdf",
+                "src/winfonts",
+                "src/cff",
+                "src/sfnt",
+                "src/autofit",
+                "src/pshinter",
+                "src/otvalid",
+                "src/pfr",
+            ],
+            copts = ["-DFT2_BUILD_LIBRARY", '-DFT_CONFIG_MODULES_H=\\"<ftmodule.h>\\"'],
+            deps = [":special_ext"],
+)
 
 cc_library(
-  name = "freetype",
-  srcs = [
-        "src/psnames/psmodule.c",
-        "src/cache/ftcache.c",
-        "src/gxvalid/gxvalid.c",
-        "src/cid/type1cid.c",
-        "src/pcf/pcf.c",
-        "src/base/ftbase.c",
-        "src/type1/type1.c",
-        "src/raster/raster.c",
-        "src/gzip/ftgzip.c",
-        "src/psaux/psaux.c",
-        "src/smooth/smooth.c",
-        "src/type42/type42.c",
-        "src/lzw/ftlzw.c",
-        "src/truetype/truetype.c",
-        "src/bdf/bdf.c",
-        "src/winfonts/winfnt.c",
-        "src/cff/cff.c",
-        "src/sfnt/sfnt.c",
-        "src/autofit/autofit.c",
-        "src/pshinter/pshinter.c",
-        "src/otvalid/otvalid.c",
-        "src/pfr/pfr.c",
-        ] + INTERNAL_HDRS,
-  hdrs = glob(["include/freetype/*.h", "include/freetype/config/*.h"]) + 
-            [
-            "include/ft2build.h",
+            name = "special_ext",
+            hdrs = [
+            
             "src/cache/ftcmru.c",
             "src/cache/ftcmanag.c",
             "src/cache/ftccache.c",
@@ -165,34 +199,5 @@ cc_library(
             "src/otvalid/otvjstf.c",
             "src/otvalid/otvmath.c",
             "src/otvalid/otvmod.c",
-
             ],
-  includes = [
-        "include",
-        "src/psname",
-        "src/cache",
-        "src/gxvalid",
-        "src/cid",
-        "src/pcf",
-        "src/base",
-        "src/type1",
-        "src/raster",
-        "src/gzip",
-        "src/psaux",
-        "src/smooth",
-        "src/type42",
-        "src/lzw",
-        "src/truetype",
-        "src/bdf",
-        "src/winfonts",
-        "src/cff",
-        "src/sfnt",
-        "src/autofit",
-        "src/pshinter",
-        "src/otvalid",
-        "src/pfr",
-  ],
-  copts = ["-DFT2_BUILD_LIBRARY", '-DFT_CONFIG_MODULES_H=\\"<ftmodule.h>\\"'],
 )
-
-
