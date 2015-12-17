@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs")
 
 ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
@@ -22,18 +22,17 @@ EXTERNAL_HDRS = [
                 "src/getopt/cm_libgetopt.h",
                 ]
 
-pkg_outs()
-pkg_libs(["libcommon.so"], EXTERNAL_HDRS)
-pkg_exes()
+pkg_outs(
+        libs = ["libcommon.so"],
+        hdrs = EXTERNAL_HDRS
+)
 
 OPTS = [
-
                 '-DHAVE_CONFIG_H',
                 '-D_XOPEN_SOURCE=600',
                 '-fno-common',
                 '-pedantic',
                 '-std=c99',
-
 ]
 
 cc_binary(
