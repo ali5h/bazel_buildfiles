@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs")
 
 ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
@@ -16,9 +16,10 @@ EXTERNAL_HDRS = [
             "zutil.h",
         ]
 
-pkg_outs()
-pkg_libs(["libz.so"], EXTERNAL_HDRS)
-pkg_exes()
+pkg_outs(
+            libs = ["libz.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 cc_binary(
     linkshared = 1,

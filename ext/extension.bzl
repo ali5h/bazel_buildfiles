@@ -25,7 +25,7 @@ def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
     # #   hdrs will all be put in the top level of .tgz, no subdir exist
     #     files = hdrs,
     #     extension = "tar.gz",
-    #     package_dir = REPOSITORY_NAME[1:],
+    # #   package_dir = REPOSITORY_NAME[1:],
     #     package_dir = inc_dir,
     # )
     native.filegroup(
