@@ -1,12 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":pq"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
-
             "src/include/c.h",
             "src/interfaces/libpq/libpq-int.h",
             "src/include/libpq/pqcomm.h",
@@ -21,12 +17,18 @@ EXTERNAL_HDRS = [
             "src/include/pg_config_manual.h",
             "src/include/pg_config_os.h",
             "src/include/postgres_ext.h",
-
                 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "pq",
+pkg_outs(
+            libs = ["libpq.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libpq.so",
     srcs = [
             "src/interfaces/libpq/fe-auth.c",
             "src/interfaces/libpq/fe-connect.c",
@@ -53,8 +55,7 @@ cc_library(
             "src/backend/utils/mb/wchar.c",
             ":src/port/pg_config_paths.h",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["src/include", "src/backend", "src/port"],
     copts = ["-D_GNU_SOURCE"],
 )

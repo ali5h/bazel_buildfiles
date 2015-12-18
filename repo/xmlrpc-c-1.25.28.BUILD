@@ -1,32 +1,34 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs(["xmlrpc", "xmlrpc_xmltok", "xmlrpc_xmlparse", "xmlrpc_util"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = glob(["include/xmlrpc-c/*.h"]) +[":include/xmlrpc-c/config.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS+["Windows/*.h"]) +[":version.h"]
+
+pkg_outs(
+            libs = ["libxmlrpc.so", "libxmlrpc_xmltok.so", "libxmlrpc_xmlparse.so", "libxmlrpc_util.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
 
 INC = ["lib/util/include", "include", "lib/expat/xmlparse", "lib/expat/xmltok", "."]
 
-cc_library(
-    name = "xmlrpc_client",
+cc_binary(
+    linkshared = 1,
+    name = "libxmlrpc_client.so",
     srcs = [
 
                 "src/xmlrpc_client.c",
                 "src/xmlrpc_client_global.c",
                 "src/xmlrpc_server_info.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = INC,
 )
 
-cc_library(
-    name = "xmlrpc_util",
+cc_binary(
+    linkshared = 1,
+    name = "libxmlrpc_util.so",
     srcs = [
-    
                 "lib/libutil/asprintf.c",
                 "lib/libutil/base64.c",
                 "lib/libutil/error.c",
@@ -37,24 +39,25 @@ cc_library(
                 "lib/libutil/string_number.c",
                 "lib/libutil/time.c",
                 "lib/libutil/utf8.c",
+                ":include/xmlrpc-c/config.h",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+
+    ] + ALL_HDRS,
     includes = INC,
 )
 
-cc_library(
-    name = "xmlrpc_xmlparse",
+cc_binary(
+    linkshared = 1,
+    name = "libxmlrpc_xmlparse.so",
     srcs = [
                     "lib/expat/xmlparse/xmlparse.c",
-                    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+                    ] + ALL_HDRS,
     includes = INC,
 )
 
 cc_binary(
     name = "gennmtab",
-    srcs = ["lib/expat/gennmtab/gennmtab.c"] + INTERNAL_HDRS,
+    srcs = ["lib/expat/gennmtab/gennmtab.c"] + ALL_HDRS,
 )
 
 genrule(
@@ -66,25 +69,32 @@ genrule(
     """
 )
 
-cc_library(
-    name = "xmlrpc_xmltok",
+cc_binary(
+    linkshared = 1,
+    name = "libxmlrpc_xmltok.so",
     srcs = [
     
                 "lib/expat/xmltok/xmltok.c",
                 "lib/expat/xmltok/xmlrole.c",
                 ":lib/expat/xmltok/nametab.h",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS + [
-                "lib/expat/xmltok/xmltok_impl.c",
-                "lib/expat/xmltok/xmltok_ns.c",
-    ],
+    ] + ALL_HDRS,
+    deps = ["special_ext"],
     includes = INC,
     copts = ["-DXML_BYTE_ORDER=0"],
 )
 
 cc_library(
-    name = "xmlrpc",
+    name = "special_ext",
+    hdrs = [
+                "lib/expat/xmltok/xmltok_impl.c",
+                "lib/expat/xmltok/xmltok_ns.c",
+            ],
+)
+
+cc_binary(
+    linkshared = 1,
+    name = "libxmlrpc.so",
     srcs = [
     
                 "src/double.c",
@@ -106,9 +116,10 @@ cc_library(
                 "src/xmlrpc_base64.c",
                 "src/xmlrpc_expat.c",
                 "src/xmlrpc_authcookie.c",
+                ":include/xmlrpc-c/config.h",
+                ":version.h",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = INC,
     copts = ["-DHAVE_CONFIG_H"],
 )

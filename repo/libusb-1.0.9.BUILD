@@ -1,15 +1,26 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":usb-1.0"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["libusb.h"]
 
-EXTERNAL_HDRS = ["libusb/libusb.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+pkg_outs(
+        libs = ["libusb-1.0.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
 
-cc_library(
-    name = "usb-1.0",
+genrule(
+    name = "mv_hdrs",
+    srcs = ["libusb/libusb.h"],
+    outs = ["libusb.h"],
+    cmd = """
+        cp -r $<  $@
+    """,
+)
+
+cc_binary(
+    linkshared = 1,
+    name = "libusb-1.0.so",
     srcs = [
             "libusb/core.c",
             "libusb/descriptor.c",
@@ -17,8 +28,7 @@ cc_library(
             "libusb/sync.c",
             "libusb/os/linux_usbfs.c",
             "libusb/os/threads_posix.c",
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "libusb"],
     copts = ["-DHAVE_CONFIG_H", '-DLIBUSB_DESCRIBE=\\"\\"'],
     linkopts = ["-lpthread"],

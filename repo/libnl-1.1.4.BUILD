@@ -1,12 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":nl"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
-
                 "include/netlink/addr.h",
                 "include/netlink/attr.h",
                 "include/netlink/cache-api.h",
@@ -56,15 +52,19 @@ EXTERNAL_HDRS = [
                 "include/netlink/socket.h",
                 "include/netlink/types.h",
                 "include/netlink/utils.h",
-
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "nl",
-    srcs = glob(["lib/**/*.c"]) + INTERNAL_HDRS,
+pkg_outs(
+            libs = ["libnl.so"],
+            hdrs = EXTERNAL_HDRS, 
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libnl.so",
+    srcs = glob(["lib/**/*.c"]) + ALL_HDRS,
     includes = ["include"],
-    hdrs = EXTERNAL_HDRS,
-    copts = ["-shared", "-D_GNU_SOURCE"],
+    copts = ["-D_GNU_SOURCE"],
 )
 

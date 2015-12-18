@@ -1,21 +1,29 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":usb"])
-pkg_exes([":lsusb"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["libusb/usb.h"]
 
-cc_library(
-    name = "usb",
-    srcs = ["libusb/core.c", "libusb/usbi.h", "config.h"],
-    hdrs = ["libusb/usb.h"],
+pkg_outs(
+        exes = ["lsusb"],
+        libs = ["libusb.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
+
+cc_binary(
+    linkshared = 1,
+    name = "libusb.so",
+    srcs = ALL_HDRS + [
+            "libusb/core.c",
+            "//external:libusb-so-latest",
+            ],
     includes = [".", "libusb"],
     copts = ["-DHAVE_CONFIG_H"],
-    deps = ["//external:libusb-latest"],
+    deps = ["//external:libusb-hdr-latest"],
 )
 
 cc_binary(
     name = "lsusb",
-    srcs = ["examples/lsusb.c"],
-    deps = [":usb"],
+    srcs = ALL_HDRS + ["examples/lsusb.c", "libusb.so"],
+    includes = ["libusb"],
 )

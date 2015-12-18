@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":sasl2"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "include/hmac-md5.h",
             "include/md5global.h",
@@ -14,11 +11,16 @@ EXTERNAL_HDRS = [
             "include/saslplug.h",
             "include/saslutil.h",
                 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "sasl2",
-    srcs = INTERNAL_HDRS + [
+pkg_outs(
+            libs = ["libsasl2.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "libsasl2.so",
+    srcs = ALL_HDRS + [
     
             "lib/auxprop.c",
             "lib/canonusr.c",
@@ -35,7 +37,6 @@ cc_library(
             "plugins/plugin_common.c",
 
     ],
-    hdrs = EXTERNAL_HDRS,
     includes = [".", "include"],
     copts = ["-DHAVE_CONFIG_H"],
 )

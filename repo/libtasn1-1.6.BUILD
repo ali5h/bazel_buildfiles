@@ -1,14 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":tasn1"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["lib/libtasn1.h"]
 
-cc_library(
-    name = "tasn1",
-    srcs = [
-            "config.h",
+pkg_outs(
+            libs = ["libtasn1.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "libtasn1.so",
+    srcs = ALL_HDRS + [
             "lib/ASN1.c",
             "lib/decoding.c",
             "lib/gstr.c",
@@ -17,14 +21,7 @@ cc_library(
             "lib/structure.c",
             "lib/element.c",
             "lib/coding.c",
-            "lib/int.h",
-            "lib/errors.h",
-            "lib/parser_aux.h",
-            "lib/gstr.h",
-            "lib/element.h",
-            "lib/structure.h",
     ],
-    hdrs = ["lib/libtasn1.h"],
     includes = ["lib", "."],
     copts = ["-DHAVE_CONFIG_H"],
 )

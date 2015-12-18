@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":ulockmgr", ":fuse"])
-pkg_exes([":fusermount"])
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "include/cuse_lowlevel.h",
             "include/fuse.h",
@@ -17,23 +14,23 @@ EXTERNAL_HDRS = [
             "include/fuse_opt.h",
             "include/ulockmgr.h",
             ]
-INTERNAL_HDRS = [
-            "lib/fuse_i.h",
-            "lib/fuse_misc.h",
-            "lib/mount_util.h",
-            "include/config.h",
-                ]
+
+pkg_outs(
+            exes = ["fusermount"],
+            libs = ["libulockmgr.so", "libfuse.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 cc_binary(
     name = "fusermount",
-    srcs = ["util/fusermount.c","util/mount_util.c"] + INTERNAL_HDRS,
+    srcs = ["util/fusermount.c","util/mount_util.c"] + ALL_HDRS,
     includes = ["lib", "include"],
 )
 
-cc_library(
-    name = "ulockmgr",
-    srcs = ["lib/ulockmgr.c"],
-    hdrs = EXTERNAL_HDRS,
+cc_binary(
+    linkshared = 1,
+    name = "libulockmgr.so",
+    srcs = ALL_HDRS + ["lib/ulockmgr.c"],
     includes = ["include"],
     copts = [
             '-D_FILE_OFFSET_BITS=64',
@@ -43,8 +40,9 @@ cc_library(
             ],
 )
 
-cc_library(
-    name = "fuse",
+cc_binary(
+    linkshared = 1,
+    name = "libfuse.so",
     srcs = [
             "lib/mount.c",
             "lib/mount_util.c",
@@ -62,8 +60,7 @@ cc_library(
             "lib/cuse_lowlevel.c",
             "lib/helper.c",
             "lib/modules/subdir.c",
-            ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+            ] + ALL_HDRS,
     copts = [
                 "-fPIC",
                 '-D_FILE_OFFSET_BITS=64',
