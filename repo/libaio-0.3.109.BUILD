@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
 ALL_HDRS = glob(["**/*.h"])
-EXTERNAL_HDRS = ["src/libaio.h"]
+EXTERNAL_HDRS = ["libaio.h"]
 pkg_outs(
             libs = ["libaio.so"],
             hdrs = EXTERNAL_HDRS,
@@ -16,6 +16,13 @@ genrule(
     cmd = """
         cat $< > $@
     """
+)
+
+genrule(
+    name = "mv_hdrs",
+    srcs = ["src/libaio.h"],
+    outs = ["libaio.h"],
+    cmd = "cp -r $< $@",
 )
 
 cc_binary(

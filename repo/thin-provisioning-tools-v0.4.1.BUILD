@@ -1,9 +1,12 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs()
-pkg_exes([":pdata_tools", ":thintools_bsadapt"])
+EXTERNAL_HDRS = []
+
+pkg_outs(
+            exes = ["pdata_tools", "thintools_bsadapt"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 cc_binary(
   name = "pdata_tools",
@@ -71,6 +74,10 @@ cc_binary(
 	"thin-provisioning/thin_restore.cc",
 	"thin-provisioning/thin_rmap.cc",
 	"thin-provisioning/xml_format.cc",
+
+    "//external:libaio-so-latest",
+    "//external:expat-so-latest",
+    "//external:boost-so-latest",
   ] + glob(["**/*.h"]),
   includes = ["."] + select ({
                               ":bs_4096": ["bsize_4096"],
@@ -78,9 +85,9 @@ cc_binary(
   }),
   deps = [
             ":tcc_lib",
-            "//external:libaio-latest", "@libaio-0.3.109//:libaio.ldscript",
-            "//external:expat-latest",
-            "//external:boost-latest",
+            "//external:libaio-hdr-latest",
+            "//external:expat-hdr-latest",
+            "//external:boost-hdr-latest",
          ],
   linkopts = ["-lstdc++", "-lm"],
 )
