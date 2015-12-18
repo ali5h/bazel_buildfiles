@@ -3,28 +3,25 @@ load("/ext/extension", "pkg_outs",)
 
 ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
-        ":c++/etip.h",
-        "c++/cursesapp.h",
-        "c++/cursesf.h",
-        "c++/cursesm.h",
-        "c++/cursesp.h",
-        "c++/cursesw.h",
-        "c++/cursslk.h",
-
-        "panel/panel.h",
-        "menu/eti.h",
-        "menu/menu.h",
-
-        "form/form.h",
-
-        ":include/term.h",
-        ":include/curses.h",
-        ":include/ncurses.h",
-        "include/unctrl.h",
-        "include/termcap.h",
-        "include/ncurses_dll.h",
-        "include/term_entry.h",
-        "include/tic.h",
+        "etip.h",
+        "cursesapp.h",
+        "cursesf.h",
+        "cursesm.h",
+        "cursesp.h",
+        "cursesw.h",
+        "cursslk.h",
+        "panel.h",
+        "eti.h",
+        "menu.h",
+        "form.h",
+        "term.h",
+        "curses.h",
+        "ncurses.h",
+        "unctrl.h",
+        "termcap.h",
+        "ncurses_dll.h",
+        "term_entry.h",
+        "tic.h",
                 ]
 pkg_outs(
             libs = [
@@ -35,6 +32,75 @@ pkg_outs(
                     "libncurses++.so",
                     ],
             hdrs = EXTERNAL_HDRS,
+)
+
+genrule(
+    name = "mv_hdrs",
+    srcs = [
+        "c++/etip.h",
+        "c++/cursesapp.h",
+        "c++/cursesf.h",
+        "c++/cursesm.h",
+        "c++/cursesp.h",
+        "c++/cursesw.h",
+        "c++/cursslk.h",
+        "panel/panel.h",
+        "menu/eti.h",
+        "menu/menu.h",
+        "form/form.h",
+        "include/term.h",
+        "include/curses.h",
+        "include/ncurses.h",
+        "include/unctrl.h",
+        "include/termcap.h",
+        "include/ncurses_dll.h",
+        "include/term_entry.h",
+        "include/tic.h",
+    
+    ],
+    outs = [
+        "etip.h",
+        "cursesapp.h",
+        "cursesf.h",
+        "cursesm.h",
+        "cursesp.h",
+        "cursesw.h",
+        "cursslk.h",
+        "panel.h",
+        "eti.h",
+        "menu.h",
+        "form.h",
+        "term.h",
+        "curses.h",
+        "ncurses.h",
+        "unctrl.h",
+        "termcap.h",
+        "ncurses_dll.h",
+        "term_entry.h",
+        "tic.h",
+    ],
+    cmd = """
+     cp -r   $(location c++/etip.h)              $(location etip.h)
+     cp -r   $(location c++/cursesapp.h)         $(location cursesapp.h)
+     cp -r   $(location c++/cursesf.h)           $(location cursesf.h)
+     cp -r   $(location c++/cursesm.h)           $(location cursesm.h)
+     cp -r   $(location c++/cursesp.h)           $(location cursesp.h)
+     cp -r   $(location c++/cursesw.h)           $(location cursesw.h)
+     cp -r   $(location c++/cursslk.h)           $(location cursslk.h)
+     cp -r   $(location panel/panel.h)           $(location panel.h)
+     cp -r   $(location menu/eti.h)              $(location eti.h)
+     cp -r   $(location menu/menu.h)             $(location menu.h)
+     cp -r   $(location form/form.h)             $(location form.h)
+     cp -r   $(location include/term.h)          $(location term.h)
+     cp -r   $(location include/curses.h)        $(location curses.h)
+     cp -r   $(location include/ncurses.h)       $(location ncurses.h)
+     cp -r   $(location include/unctrl.h)        $(location unctrl.h)
+     cp -r   $(location include/termcap.h)       $(location termcap.h)
+     cp -r   $(location include/ncurses_dll.h)   $(location ncurses_dll.h)
+     cp -r   $(location include/term_entry.h)    $(location term_entry.h)
+     cp -r   $(location include/tic.h)           $(location tic.h)
+    """,
+
 )
 
 cc_binary(
@@ -62,19 +128,11 @@ linkshared = 1,
            "-DNDEBUG",
            "-fPIC",
           ],
-  # hdrs = [
-  #       ":c++/etip.h",
-  #       "c++/cursesapp.h",
-  #       "c++/cursesf.h",
-  #       "c++/cursesm.h",
-  #       "c++/cursesp.h",
-  #       "c++/cursesw.h",
-  #       "c++/cursslk.h",
-  #       ],
+  deps = ["special_ext"],
 )
 
 genrule(
-    name = "etip.h",
+    name = "etip_h",
     srcs = ["c++/etip.h.in", "c++/edit_cfg.sh", "include/ncurses_cfg.h",],
     outs = ["c++/etip.h"],
     cmd = """
@@ -124,8 +182,6 @@ linkshared = 1,
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
-  # hdrs = ["menu/eti.h", "menu/menu.h"],
-
 )
 
 cc_binary(
@@ -184,7 +240,6 @@ linkshared = 1,
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
-  # hdrs = ["form/form.h"],
 )
 
 cc_binary(
@@ -206,19 +261,11 @@ linkshared = 1,
         "panel/p_update.c",
         "panel/p_user.c",
         "panel/p_win.c",
-        # "panel/panel.priv.h",
-        # "ncurses/curses.priv.h",
-        # "include/ncurses_cfg.h",
-        # "include/ncurses_dll.h",
-        # "include/nc_panel.h",
-        # ":gen_include_hdr",
-        # "include/unctrl.h",
-        # "include/term_entry.h",
-        # "include/nc_alloc.h",
+
+        ":gen_include_hdr",
         ],
   copts = ["-DHAVE_CONFIG_H"],
   includes = ["include", "ncurses"],
-  # hdrs = ["panel/panel.h"],
 )
 
 genrule(
@@ -229,7 +276,7 @@ genrule(
 )
 
 genrule(
-    name = "curses.h",
+    name = "curses_h",
     srcs = ["include/Caps", "include/curses.head", "include/curses.tail", "include/MKkey_defs.sh"],
     outs = ["include/curses.h"],
     cmd = "cat $(location include/curses.head) > $@;" +
@@ -239,7 +286,7 @@ genrule(
 )
 
 genrule(
-    name = "term.h",
+    name = "term_h",
     srcs = ["include/Caps", "include/MKterm.h.awk", "include/edit_cfg.sh", "include/ncurses_cfg.h"],
     outs = ["include/term.h"],
     cmd = "mawk -f $(location include/MKterm.h.awk) $(location include/Caps) > $@;" +
@@ -435,8 +482,8 @@ cc_library(
 
 cc_binary(
 linkshared = 1,
-  name = "ncurses",
-  srcs = [
+  name = "libncurses.so",
+  srcs = ALL_HDRS +[
         "gen_ncurses_hdr",
         "gen_include_hdr",
 
@@ -582,31 +629,19 @@ linkshared = 1,
         "ncurses/tinfo/strings.c",
         "ncurses/tinfo/trim_sgr0.c",
         "ncurses/tinfo/write_entry.c",
-
-        "ncurses/curses.priv.h",
-        "include/ncurses_dll.h",
-        "include/ncurses_cfg.h",
-        "include/nc_panel.h",
-        "include/nc_alloc.h",
-        "ncurses/SigAction.h",
-        "ncurses/fifo_defs.h",
-
          ],
   includes = ["ncurses", "include", "ncurses/tinfo"],
   copts = ["-DTRACE"],
-  hdrs = [
-        ":include/term.h",
-        ":include/curses.h",
-        ":include/ncurses.h",
-        "include/unctrl.h",
-        "include/termcap.h",
-        "include/ncurses_dll.h",
-        "include/term_entry.h",
-        "include/tic.h",
-        "include/capdefaults.c",
-         ],
+    deps = ["special_ext"],
 )
 
+cc_library(
+    name = "special_ext",
+    hdrs = [
+        "include/capdefaults.c",
+        ":c++/etip.h",
+    ],
+)
 
 
 genrule(

@@ -91,19 +91,26 @@ cc_binary(
 
             "//external:ncurses-so-latest",
             ] + ALL_HDRS,
-        # hdrs = EXTERNAL_HDRS + ["vi_keymap.c", "emacs_keymap.c"],
         includes = ["."],
         copts = ["-DHAVE_CONFIG_H", '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
         deps = [
                 "//external:ncurses-hdr-latest",
                 ":tilde",
+                "special_ext",
              ],
+)
+
+cc_library(
+    name = "special_ext",
+    hdrs = [
+        "vi_keymap.c",
+        "emacs_keymap.c",
+    ],
 )
 
 cc_library(
         name = "tilde",
         srcs = ["tilde.c"] + ALL_HDRS,
-        # hdrs = EXTERNAL_HDRS,
         copts = ["-DHAVE_CONFIG_H", "-DREADLINE_LIBRARY"],
         includes = ["."],
 )
