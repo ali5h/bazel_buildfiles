@@ -1,12 +1,12 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":aio"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["src/libaio.h"]
-INTERNAL_HDRS = glob(["src/*.h"], EXTERNAL_HDRS)
+pkg_outs(
+            libs = ["libaio.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 # because Bazel only support *.ld, *.lds, *.ldscript in deps
 genrule(
@@ -18,9 +18,10 @@ genrule(
     """
 )
 
-cc_library(
-  name = "aio",
-  srcs = [
+cc_binary(
+    linkshared = 1,
+    name = "libaio.so",
+    srcs = [
         "src/io_queue_init.c",
         "src/io_queue_release.c",
         "src/io_queue_wait.c",
@@ -32,10 +33,9 @@ cc_library(
         "src/io_destroy.c",
         "src/raw_syscall.c",
         "src/compat-0_1.c",
-  ] + INTERNAL_HDRS,
-  hdrs = EXTERNAL_HDRS,
-  includes = ["src"],
-  copts = ["-nostdlib", "-nostartfiles", "-fomit-frame-pointer", "-fPIC" ],
-  linkopts = ["-Wl,-soname=libaio.so.1", "-Wl,--version-script", "libaio.ldscript"],
-  deps = ["libaio.ldscript"],
+    ] + ALL_HDRS,
+    includes = ["src"],
+    copts = ["-nostdlib", "-nostartfiles", "-fomit-frame-pointer", "-fPIC" ],
+    linkopts = ["-Wl,-soname=libaio.so.1", "-Wl,--version-script", "libaio.ldscript"],
+    deps = ["libaio.ldscript"],
 )

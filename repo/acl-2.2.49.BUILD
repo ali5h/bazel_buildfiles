@@ -1,9 +1,17 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":acl"])
-pkg_exes([":setfacl", ":getfacl"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+            "sys/acl.h",
+            "acl/libacl.h",
+]
+
+pkg_outs(
+            exes = ["setfacl", "getfacl"],
+            libs = ["libacl.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 OPTS = [
             '-DHAVE_CONFIG_H',
@@ -18,14 +26,10 @@ OPTS = [
 
 ]
 
-EXTERNAL_HDRS = [
-    "include/acl.h",
-    "include/libacl.h",
-]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "acl",
+cc_binary(
+    linkshared = 1,
+    name = "libacl.so",
     srcs = [
 
             "libacl/perm_copy_fd.c",
@@ -76,17 +80,22 @@ cc_library(
             "libacl/__apply_mask_to_mode.c",
             ":mv_headers",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+            "//external:attr-so-latest",
+    ] + ALL_HDRS,
     includes = [".", "include"],
     copts = OPTS + ['-include', 'libacl/perm_copy.h'],
-    deps = ["//external:attr-latest"],
+    deps = [
+            "//external:attr-hdr-latest",
+            ],
 )
 
 genrule(
     name = "mv_headers",
     srcs = ["include/acl.h", "include/libacl.h"],
-    outs = ["sys/acl.h", "acl/libacl.h"],
+    outs = [
+            "sys/acl.h",
+            "acl/libacl.h",
+            ],
     cmd = """
     cp $(location include/acl.h) $(location sys/acl.h)
     cp $(location include/libacl.h) $(location acl/libacl.h)
@@ -103,7 +112,7 @@ cc_library(
             "libmisc/next_line.c",
             "libmisc/walk_tree.c",
 
-    ] + INTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["include"],
 )
 
@@ -112,9 +121,13 @@ cc_binary(
     srcs = [
             "getfacl/getfacl.c",
             "getfacl/user_group.c",
-    ] + INTERNAL_HDRS,
+            ":mv_headers",
+
+            "libacl.so",
+    ] + ALL_HDRS,
     copts = OPTS,
-    deps = [":acl", ":misc"],
+    deps = [":misc"],
+    includes = ["."],
 )
 
 cc_binary(
@@ -124,7 +137,11 @@ cc_binary(
             "setfacl/do_set.c",
             "setfacl/sequence.c",
             "setfacl/parse.c",
-    ] + INTERNAL_HDRS,
+            ":mv_headers",
+
+            "libacl.so",
+    ] + ALL_HDRS,
     copts = OPTS,
-    deps = [":acl", ":misc"],
+    includes = ["."],
+    deps = [":misc"],
 )

@@ -1,9 +1,19 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":attr"])
-pkg_exes([":getfattr", ":setfattr"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+            "attr/attributes.h",
+            "attr/error_context.h",
+            "attr/libattr.h",
+            "attr/xattr.h",
+]
+
+pkg_outs(
+            exes = ["getfattr", "setfattr"],
+            libs = ["libattr.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 OPTS = [
             '-funsigned-char',
@@ -13,26 +23,19 @@ OPTS = [
             '-DPACKAGE=\\"attr\\"',
 ]
 
-EXTERNAL_HDRS = [
-            "include/attributes.h",
-            "include/error_context.h",
-            "include/libattr.h",
-            "include/xattr.h",
-]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
-
-
 cc_binary(
     name = "getfattr",
-    srcs = ["getfattr/getfattr.c"] + INTERNAL_HDRS,
+    srcs = ["getfattr/getfattr.c", "libattr.so"] + ALL_HDRS + EXTERNAL_HDRS,
     copts = OPTS,
-    deps = [":attr", ":misc"],
+    includes = ["."],
+    deps = [":misc"],
 )
 cc_binary(
     name = "setfattr",
-    srcs = ["setfattr/setfattr.c"] + INTERNAL_HDRS,
+    srcs = ["setfattr/setfattr.c", "libattr.so"] + ALL_HDRS + EXTERNAL_HDRS,
     copts = OPTS,
-    deps = [":attr", ":misc"],
+    includes = ["."],
+    deps = [":misc"],
 )
 
 cc_library(
@@ -45,13 +48,13 @@ cc_library(
             "libmisc/next_line.c",
             "libmisc/walk_tree.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["include"],
 )
 
-cc_library(
-    name = "attr",
+cc_binary(
+    linkshared = 1,
+    name = "libattr.so",
     srcs = [
 
             "libattr/libattr.c",
@@ -62,15 +65,18 @@ cc_library(
             "libattr/syscalls.c",
             ":mv_headers",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["include", "."],
-    copts = [],
 )
 
 genrule(
     name = "mv_headers",
-    srcs = EXTERNAL_HDRS,
+    srcs = [
+            "include/attributes.h",
+            "include/error_context.h",
+            "include/libattr.h",
+            "include/xattr.h",
+    ],
     outs = [
             "attr/attributes.h",
             "attr/error_context.h",

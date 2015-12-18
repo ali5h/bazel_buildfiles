@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs(["NVSConfigLib", "NVSNetLib"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "EtroConfigLib/EtroConfigLib.h",
                 "EtroConfigLib/NVSConfigLib.h",
@@ -12,10 +9,16 @@ EXTERNAL_HDRS = [
                 "EtroNetLib/include/NVSNetLib.h",
                 "EtroNetLib/EtroNetLib.h",
                 ]
-INTERNAL_HDRS = glob(["**/*.h"])
 
-cc_library(
-    name = "NVSConfigLib",
+pkg_outs(
+            libs = ["libNVSConfigLib.so", "libNVSNetLib.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libNVSConfigLib.so",
     srcs = [
     
                 "EtroConfigLib/capture.c",
@@ -46,16 +49,13 @@ cc_library(
                 "EtroConfigLib/EtroConfigLibStc/NVSConfigLibStc.c",
                 "EtroConfigLib/qnap_fix_network.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["EtroConfigLib"],
-    copts = [
-            "-w",
-    ],
 )
 
-cc_library(
-    name = "NVSNetLib",
+cc_binary(
+    linkshared = 1,
+    name = "libNVSNetLib.so",
     srcs = [
             
                 "EtroNetLib/common.c",
@@ -68,8 +68,6 @@ cc_library(
                 "EtroNetLib/EtroNetLibStc/NVSNetLibStc.c",
                 "EtroNetLib/qnap_fix_network.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["EtroNetLib", "EtroNetLib/include"],
-    copts = ["-w"],
 )

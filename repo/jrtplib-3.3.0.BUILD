@@ -1,12 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":jrtp"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
-
                 "src/rtcpapppacket.h",
                 "src/rtcpbyepacket.h",
                 "src/rtcpcompoundpacket.h",
@@ -54,17 +50,20 @@ EXTERNAL_HDRS = [
                 "src/rtptypes.h",
                 "src/rtptypes_unix.h",
                 "src/rtpgsttransmitter.h",
-
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "jrtp",
+pkg_outs(
+            libs = ["libjrtp.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libjrtp.so",
     srcs = [
-    
                 "src/rtpdebug.cpp",
                 "src/rtpsession.cpp",
-                "src/rtpconfig_win.h",
                 "src/rtperrors.cpp",
                 "src/rtpudpv4transmitter.cpp",
                 "src/rtcpsdesinfo.cpp",
@@ -95,8 +94,7 @@ cc_library(
                 "src/rtptimeutilities.cpp",
                 "src/rtpgsttransmitter.cpp",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     copts = [
             '-Wno-write-strings',
             '-DPACKAGE_NAME=\\"\\"',

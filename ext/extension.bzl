@@ -17,7 +17,6 @@ def add_package(abs_path , alias):
 
 # ------------for build file---------------------
 
-# ALL_HDRS = native.glob(["**/*.h"])
 
 def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
     # pkg_tar(
@@ -45,3 +44,4 @@ def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
         name = 'outs',
         srcs = [":libs", ":exes"],
     )
+    # return  native.glob(["**/*.h"])

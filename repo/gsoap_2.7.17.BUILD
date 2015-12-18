@@ -1,16 +1,17 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":gsoap"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["stdsoap2.h",]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "gsoap",
-    srcs = ["stdsoap2.cpp"] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+pkg_outs(
+            libs = ["libgsoap.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "libgsoap.so",
+    srcs = ["stdsoap2.cpp"] + ALL_HDRS,
     includes = ["."],
 )

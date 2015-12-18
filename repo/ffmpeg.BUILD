@@ -1,16 +1,12 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_exes()
-
-filegroup(
-    name = 'libs',
-    srcs = [
-            "libtranscoder.so",
-            "libavcodec.so",
-            "libavutil.so",
-        ],
+pkg_outs(
+            libs = [
+                "libtranscoder.so",
+                "libavcodec.so",
+                "libavutil.so",
+            ],
 )
 
 genrule(

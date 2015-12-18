@@ -1,30 +1,39 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":boost_filesystem", ":boost_system", ":boost_serialization"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h","boost/**/*.h", "boost/**/*.hpp"])
 EXTERNAL_HDRS = glob(["boost/**/*.h", "boost/**/*.hpp", "boost/**/*.ipp"])
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "boost_filesystem",
-    srcs = glob(["libs/filesystem/src/*"]),
-    hdrs = EXTERNAL_HDRS,
+pkg_outs(
+            libs = ["libboost_filesystem.so", "libboost_system.so", "libboost_serialization.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libboost_filesystem.so",
+    srcs = glob(["libs/filesystem/src/*"]) + ALL_HDRS,
     includes = ["."],
+    deps = ["special_ext"],
+)
+
+cc_binary(
+    linkshared = 1,
+    name = "libboost_serialization.so",
+    srcs = glob(["libs/serialization/src/*.cpp"]) + ALL_HDRS,
+    includes = ["."],
+    deps = ["special_ext"],
 )
 
 cc_library(
-    name = "boost_serialization",
-    srcs = glob(["libs/serialization/src/*.cpp"]),
-    hdrs = EXTERNAL_HDRS + ["libs/serialization/src/basic_xml_grammar.ipp"],
-    includes = ["."],
+    name = "special_ext",
+    hdrs = glob(["boost/**/*.ipp"]) + ["libs/serialization/src/basic_xml_grammar.ipp"],
 )
 
-cc_library(
-    name = "boost_system",
-    srcs = glob(["libs/system/src/*"]),
-    hdrs = EXTERNAL_HDRS,
+cc_binary(
+    linkshared = 1,
+    name = "libboost_system.so",
+    srcs = glob(["libs/system/src/*"]) + ALL_HDRS,
     includes = ["."],
 )

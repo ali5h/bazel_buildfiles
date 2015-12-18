@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs",)
 
 ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
@@ -19,22 +19,27 @@ EXTERNAL_HDRS = [
         "cups/versioning.h",
 ]
 
-pkg_outs()
-pkg_libs(["libcups.so", "libcupsmime.so"], EXTERNAL_HDRS)
-pkg_exes([
-            "cupsd",
-            "lpadmin",
-            "lpinfo",
-            "lpstat",
-            "lpmove",
-            "lpoptions",
-            "lp",
-            "cancel",
-            "lpq",
-            "lpr",
-            "lprm",
-            "gziptoany",
-])
+pkg_outs(
+            exes = [
+                    "cupsd",
+                    "lpadmin",
+                    "lpinfo",
+                    "lpstat",
+                    "lpmove",
+                    "lpoptions",
+                    "lp",
+                    "cancel",
+                    "lpq",
+                    "lpr",
+                    "lprm",
+                    "gziptoany",
+            ],
+            libs = [
+                    "libcups.so",
+                    "libcupsmime.so"
+                    ],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 OPTS = [
         '-D_CUPS_SOURCE',

@@ -1,17 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":utimensat"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["sys/stat.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "utimensat",
-    srcs = ["utimensat.c"] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+pkg_outs(
+            libs = ["libutimensat.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "libutimensat.so",
+    srcs = ["utimensat.c"] + ALL_HDRS,
     includes = ["."],
     copts = [
             "-D_GNU_SOURCE",

@@ -1,8 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
-
-pkg_exes()
+load("/ext/extension", "pkg_outs",)
 
 EXTERNAL_HDRS = [
             "graphviz/arith.h",
@@ -34,21 +31,9 @@ EXTERNAL_HDRS = [
             "graphviz/xdot.h",
 ]
 
-cc_library(
-    name = 'dep_libs',
-    hdrs = EXTERNAL_HDRS,
-)
-
-filegroup(
-    name = 'libs',
-    srcs = [
-                "libxdot.so",
-                "libpathplan.so",
-                "libgvpr.so",
-                "libgvc.so",
-                "libcgraph.so",
-                "libcdt.so",
-        ],
+pkg_outs(
+            libs = ["libxdot.so", "libpathplan.so", "libgvpr.so", "libgvc.so", "libcgraph.so", "libcdt.so"],
+            hdrs = EXTERNAL_HDRS,
 )
 
 genrule(

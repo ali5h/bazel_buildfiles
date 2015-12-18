@@ -1,17 +1,19 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs(["csv"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["csv.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "csv",
-    srcs = ["libcsv.c"] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+pkg_outs(
+            libs = ["libcsv.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libcsv.so",
+    srcs = ["libcsv.c"] + ALL_HDRS,
     includes = ["."],
     copts = [
     

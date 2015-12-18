@@ -1,17 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs(["rsync"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["librsync-config.h", "librsync.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "rsync",
+pkg_outs(
+            libs = ["librsync.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+    name = "librsync.so",
     srcs = [
-    
                 "prototab.c",
                 "base64.c",
                 "buf.c",
@@ -40,8 +41,7 @@ cc_library(
                 "version.c",
                 "whole.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = ["."],
     copts = ["-DHAVE_CONFIG_H",],
 )

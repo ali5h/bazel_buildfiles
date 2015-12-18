@@ -1,9 +1,13 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs()
-pkg_exes([":gpg"])
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = []
+
+pkg_outs(
+            exes = ["gpg"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 OPTS = [
         "-DHAVE_CONFIG_H",
@@ -14,8 +18,6 @@ OPTS = [
         '-DGNUPG_DATADIR=\\"/usr/local/share/gnupg\\"',
         ]
 
-EXTERNAL_HDRS = [""]
-INTERNAL_HDRS = glob(["**/*.h"])
 
 cc_binary(
     name = "gpg",
@@ -78,16 +80,17 @@ cc_binary(
             "g10/photoid.c",
             "g10/exec.c",
 
-    ] + INTERNAL_HDRS,
-    includes = [],
+            "//external:zlib-so-latest",
+            "//external:libusb-compat-so-latest",
+    ] + ALL_HDRS,
     copts = OPTS,
     linkopts = ["-ldl"],
     deps = [
             ":cipher",
             ":mpi",
             ":util",
-            "//external:zlib-latest",
-            "//external:libusb-compat-latest",
+            "//external:zlib-hdr-latest",
+            "//external:libusb-compat-hdr-latest",
             ],
 )
 
@@ -118,11 +121,13 @@ cc_library(
             "cipher/sha256.c",
             "cipher/rndlinux.c",
             "cipher/sha512.c",
+
+            "//external:readline-so-latest",
     
-    ] + INTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "include"],
     copts = OPTS,
-    deps = ["//external:readline-latest"]
+    deps = ["//external:readline-hdr-latest"]
 )
 
 cc_library(
@@ -152,7 +157,7 @@ cc_library(
             "mpi/mpih-lshift.c",
             "mpi/mpih-rshift.c",
 
-    ] + INTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "include"],
     copts = OPTS,
 )
@@ -188,9 +193,10 @@ cc_library(
             "util/assuan-socket.c",
             "util/assuan-util.c",
             
-    ] + INTERNAL_HDRS,
+            "//external:readline-so-latest",
+    ] + ALL_HDRS,
     includes = [".", "include"],
     copts = OPTS,
     linkopts = ["-lresolv"],
-    deps = ["//external:readline-latest"]
+    deps = ["//external:readline-hdr-latest"]
 )

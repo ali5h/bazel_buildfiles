@@ -1,15 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":linuxfallocate"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = []
 
-INTERNAL_HDRS = glob(["**/*.h"])
+pkg_outs(
+            libs = ["liblinuxfallocate.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
-cc_library(
-    name = "linuxfallocate",
-    srcs = ["fallocate.c"] + INTERNAL_HDRS,
+cc_binary(
+    linkshared = 1,
+    name = "liblinuxfallocate.so",
+    srcs = ["fallocate.c"] + ALL_HDRS,
     includes = ["."],
     copts = [
             "-D_GNU_SOURCE",

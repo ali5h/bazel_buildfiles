@@ -1,17 +1,17 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":backtrace"])
-pkg_exes([":crasher"])
+EXTERNAL_HDRS = []
 
-filegroup(
-    name = "backtrace_tools",
-    srcs = ["backtrace", "crasher",],
-)
+pkg_outs(
+            exes = ["crasher"],
+            libs = ["libbacktrace.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
-cc_library(
-  name = "backtrace",
+cc_binary(
+  linkshared = 1,
+  name = "libbacktrace.so",
   srcs = ["backtrace.cxx"],
   copts = ["-Werror", "-D_GNU_SOURCE"],
   linkopts = ["-fPIC", "-shared"],

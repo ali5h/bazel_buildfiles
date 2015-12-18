@@ -2,13 +2,20 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
 ALL_HDRS = glob(["**/*.h"])
-EXTERNAL_HDRS = ["libusb/usb.h"]
+EXTERNAL_HDRS = ["usb.h"]
 
 pkg_outs(
         exes = ["lsusb"],
         libs = ["libusb.so"],
         hdrs = EXTERNAL_HDRS,
         )
+
+genrule(
+    name = "mv_hdrs",
+    srcs = ["libusb/usb.h"],
+    outs = ["usb.h"],
+    cmd = "cp -r $< $@",
+)
 
 cc_binary(
     linkshared = 1,
