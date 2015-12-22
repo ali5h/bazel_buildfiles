@@ -2,12 +2,21 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
 ALL_HDRS = glob(["**/*.h"])
-EXTERNAL_HDRS = ["lib/libtasn1.h"]
+EXTERNAL_HDRS = ["libtasn1.h"]
 
 pkg_outs(
             libs = ["libtasn1.so"],
             hdrs = EXTERNAL_HDRS,
             )
+
+genrule(
+    name = "mv_hdrs",
+    srcs = ["lib/libtasn1.h"],
+    outs = EXTERNAL_HDRS,
+    cmd = """
+            cp -r $(location lib/libtasn1.h) $(location libtasn1.h)
+    """,
+)
 
 cc_binary(
     linkshared = 1,

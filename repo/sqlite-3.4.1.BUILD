@@ -1,26 +1,30 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":sqlite3"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+            "sqlite3.h",
+]
 
-cc_library(
-  name = "sqlite3",
-  srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + 
-         glob(["src/*.h"]) + 
-         [":sqlite3.h"] +
-         [":opcodes.h"] + 
-         [":keywordhash.h"] + 
-         [":parse.h"],
-  hdrs = [
-            ":sqlite3.h",
-         ],
-  includes = ["."],
-  copts = [
-          "-Wno-int-to-pointer-cast",
-          "-Wno-pointer-to-int-cast",
-          ],
+pkg_outs(
+            libs = ["libsqlite3.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+        linkshared = 1,
+        name = "libsqlite3.so",
+        srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + 
+             ALL_HDRS + 
+             [":sqlite3.h"] +
+             [":opcodes.h"] + 
+             [":keywordhash.h"] + 
+             [":parse.h"],
+        includes = ["."],
+        copts = [
+              "-Wno-int-to-pointer-cast",
+              "-Wno-pointer-to-int-cast",
+              ],
 )
 
 cc_binary(

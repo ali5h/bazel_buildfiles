@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":tiff"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "libtiff/tiff.h",
             "libtiff/tiffconf.h",
@@ -12,11 +9,17 @@ EXTERNAL_HDRS = [
             "libtiff/tiffio.hxx",
             "libtiff/tiffvers.h",
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "tiff",
-    srcs = [
+pkg_outs(
+            libs = ["libtiff.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libtiff.so",
+    srcs = ALL_HDRS + [
             "port/dummy.c",
             "libtiff/tif_aux.c",
             "libtiff/tif_close.c",
@@ -57,13 +60,15 @@ cc_library(
             "libtiff/tif_write.c",
             "libtiff/tif_zip.c",
     
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
-    includes = [],
+            "//external:zlib-so-latest",
+            "//external:jpeg-so-latest",
+    ],
+    # hdrs = EXTERNAL_HDRS,
+    # includes = [],
     copts = ["-DHAVE_CONFIG_H", "-w"],
     deps = [
-            "//external:zlib-latest",
-            "//external:jpeg-latest",
+            "//external:zlib-hdr-latest",
+            "//external:jpeg-hdr-latest",
             ],
 )
 

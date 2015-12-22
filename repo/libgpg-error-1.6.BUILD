@@ -1,16 +1,27 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":gpg-error"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["gpg-error.h"]
 
-EXTERNAL_HDRS = ["src/gpg-error.h",]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+pkg_outs(
+            libs = ["libgpg-error.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
-cc_library(
-    name = "gpg-error",
-    srcs =  INTERNAL_HDRS + [
+genrule(
+    name = "mv_hdrs",
+    srcs = ["src/gpg-error.h"],
+    outs = EXTERNAL_HDRS,
+    cmd = """
+            cp -r $(location src/gpg-error.h) $(location gpg-error.h)
+    """,
+)
+
+cc_binary(
+    linkshared = 1,
+    name = "libgpg-error.so",
+    srcs =  ALL_HDRS + [
             "src/init.c",
             "src/strsource.c",
             "src/strerror.c",
@@ -20,7 +31,6 @@ cc_library(
             ":src/code-from-errno.h",
 
         ],
-    hdrs = EXTERNAL_HDRS,
     includes = ["src", "."],
     copts = ["-DHAVE_CONFIG_H", '-DLOCALEDIR=\\"/usr/local/share/locale\\"'],
 )

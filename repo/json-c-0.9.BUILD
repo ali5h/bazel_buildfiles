@@ -1,14 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":json-c"])
-pkg_exes()
-
-cc_library(
-  name = "json-c",
-  srcs = glob(["*.c"], exclude = ["test*.c"])+["config.h"],
-  hdrs = [
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS  = [
             "arraylist.h",
             "bits.h",
             "debug.h",
@@ -19,6 +13,15 @@ cc_library(
             "json_object.h",
             "json_tokener.h",
             "linkhash.h",
-         ],
-  copts = ["-DHAVE_CONFIG_H", "-D_GNU_SOURCE"],
+         ]
+
+pkg_outs(
+            libs = ["libjson-c.so"],
+            )
+
+cc_binary(
+        linkshared = 1,
+        name = "libjson-c.so",
+        srcs = ALL_HDRS + glob(["*.c"], exclude = ["test*.c"]),
+        copts = ["-DHAVE_CONFIG_H", "-D_GNU_SOURCE"],
 )

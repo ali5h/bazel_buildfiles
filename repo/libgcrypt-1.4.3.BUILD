@@ -1,17 +1,34 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":gcrypt"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+                "gcrypt.h",
+                "gcrypt-module.h",
+                ]
 
-EXTERNAL_HDRS = ["src/gcrypt.h", "src/gcrypt-module.h"]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+pkg_outs(
+            libs = ["libgcrypt.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
-cc_library(
-    name = "gcrypt",
+genrule(
+    name = "mv_hdrs",
     srcs = [
-    
+                "src/gcrypt.h",
+                "src/gcrypt-module.h",
+    ],
+    outs = EXTERNAL_HDRS,
+    cmd = """
+        cp -r $(location src/gcrypt.h) $(location gcrypt.h)
+        cp -r $(location src/gcrypt-module.h) $(location gcrypt-module.h)
+    """,
+)
+
+cc_binary(
+    linkshared = 1,
+    name = "libgcrypt.so",
+    srcs = [
             "src/visibility.c",
             "src/misc.c",
             "src/global.c",
@@ -89,10 +106,13 @@ cc_library(
             "mpi/mpih-lshift-asm.S",
             "mpi/mpih-rshift-asm.S",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+            "//external:gpg-error-so-latest",
+
+    ] + ALL_HDRS,
     includes = [".", "src"],
     copts = ["-DHAVE_CONFIG_H", "-w"],
-    deps = ["//external:gpg-error-latest"],
+    deps = [
+            "//external:gpg-error-hdr-latest",
+            ],
 )
 

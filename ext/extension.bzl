@@ -34,7 +34,7 @@ def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
     native.cc_library(
         name = 'dep_libs',
         hdrs = hdrs,
-        includes = ["."],
+        includes = [".", "include"],
     )
     native.filegroup(
         name = 'exes',

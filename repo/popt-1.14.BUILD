@@ -1,29 +1,30 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":popt"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = ["popt.h"]
 
-cc_library(
-  name = "popt",
-  srcs = [
-        "popt.c",
-        "poptconfig.c",
-        "popthelp.c",
-        "poptint.c",
-        "poptparse.c",
-        "system.h",
-        "config.h",
-        "poptint.h",
-        ],
-  hdrs = ["popt.h"],
-  includes = ["."],
-  copts = [
-            "-DHAVE_CONFIG_H",
-            "-D_GNU_SOURCE",
-            "-D_REENTRANT",
-            "-Wno-unused-but-set-variable",
+pkg_outs(
+            libs = ["libpopt.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+        linkshared = 1,
+        name = "libpopt.so",
+        srcs = ALL_HDRS + [
+            "popt.c",
+            "poptconfig.c",
+            "popthelp.c",
+            "poptint.c",
+            "poptparse.c",
             ],
+        includes = ["."],
+        copts = [
+                "-DHAVE_CONFIG_H",
+                "-D_GNU_SOURCE",
+                "-D_REENTRANT",
+                "-Wno-unused-but-set-variable",
+                ],
 )
 

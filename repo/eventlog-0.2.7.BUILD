@@ -1,13 +1,21 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":evtlog"])
-pkg_exes()
+ALL_HDRS = glob(["**/*.h"])
+EXTERNAL_HDRS = [
+	"src/evtmaps.h",
+	"src/evtlog.h",
+]
 
-cc_library(
-  name = "evtlog",
-  srcs = [
+pkg_outs(
+            libs = ["libevtlog.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+cc_binary(
+    linkshared = 1,
+  name = "libevtlog.so",
+  srcs = ALL_HDRS + [
     "src/evtrec.c",
     "src/evtfmt.c",
     "src/evtout.c",
@@ -15,12 +23,6 @@ cc_library(
     "src/evtctx.c",
     "src/evttags.c",
     "src/evtsyslog.c",
-    "src/evt_internals.h",
-    "config.h",
-    ],
-  hdrs = [
-	"src/evtmaps.h",
-	"src/evtlog.h",
     ],
   includes = ["."],
   copts = [

@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":lber", ":ldap", ":ldap_r"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "include/ldif.h",
             "include/ldap_utf8.h",
@@ -16,14 +13,16 @@ EXTERNAL_HDRS = [
             "include/lber_types.h",
                 ]
 
-INTERNAL_HDRS = [
-            ":include/ldap_config.h",
-                ]+  glob(["**/*.h"], exclude=EXTERNAL_HDRS)
+pkg_outs(
+            libs = ["liblber.so", "libldap.so", "libldap_r.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
 
 
-cc_library(
-    name = "lber",
-    srcs = INTERNAL_HDRS + [
+cc_binary(
+    linkshared = 1,
+    name = "liblber.so",
+    srcs = ALL_HDRS + [
 
             "libraries/liblber/assert.c",
             "libraries/liblber/decode.c",
@@ -35,9 +34,8 @@ cc_library(
             "libraries/liblber/options.c",
             "libraries/liblber/sockbuf.c",
             "libraries/liblber/stdio.c",
-
+            "include/ldap_config.h",
         ],
-    hdrs = EXTERNAL_HDRS,
     copts = ["-DLBER_LIBRARY"],
     includes = ["include"],
 )
@@ -60,9 +58,10 @@ genrule(
     """,
 )
 
-cc_library(
-    name = "ldap",
-    srcs = INTERNAL_HDRS + [
+cc_binary(
+    linkshared = 1,
+    name = "libldap.so",
+    srcs = ALL_HDRS + [
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -126,16 +125,21 @@ cc_library(
             "libraries/libldap/ldif.c",
             "libraries/libldap/fetch.c",
 
+            "include/ldap_config.h",
+
+            "//external:openssl-so-latest",
         ],
-    hdrs = EXTERNAL_HDRS,
     copts = ["-DLDAP_LIBRARY"],
     includes = ["include"],
-    deps = ["//external:openssl-latest"],
+    deps = [
+            "//external:openssl-hdr-latest",
+        ],
 )
 
-cc_library(
-    name = "ldap_r",
-    srcs = INTERNAL_HDRS + [
+cc_binary(
+    linkshared = 1,
+    name = "libldap_r.so",
+    srcs = ALL_HDRS + [
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -211,10 +215,14 @@ cc_library(
             "libraries/libldap_r/thr_stub.c",
             "libraries/libldap_r/thr_debug.c",
 
+            "include/ldap_config.h",
+
+            "//external:openssl-so-latest",
         ],
-    hdrs = EXTERNAL_HDRS,
     copts = ["-DLDAP_R_COMPILE"],
     includes = ["include", "libraries/libldap"],
-    deps = ["//external:openssl-latest"],
+    deps = [
+                "//external:openssl-hdr-latest",
+                ],
 
 )

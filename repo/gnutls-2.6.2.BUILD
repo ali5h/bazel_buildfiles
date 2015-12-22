@@ -1,10 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
-pkg_libs([":gnutls", ":gnutls-extra", ":gnutls-openssl"])
-pkg_exes()
-
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "includes/gnutls/compat.h",
             "includes/gnutls/crypto.h",
@@ -15,10 +12,16 @@ EXTERNAL_HDRS = [
             "includes/gnutls/pkcs12.h",
             "includes/gnutls/x509.h",
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "gnutls",
+pkg_outs(
+            libs = ["libgnutls.so", "libgnutls-extra.so", "libgnutls-openssl.so"],
+            hdrs = EXTERNAL_HDRS,
+            )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libgnutls.so",
     srcs = [
             "lib/gnutls_record.c",
             "lib/gnutls_compress.c",
@@ -145,15 +148,23 @@ cc_library(
             "lib/x509/output.c",
             "lib/x509/pbkdf2-sha1.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+            "//external:gcrypt-so-latest",
+            "//external:zlib-so-latest",
+            "//external:gpg-error-so-latest",
+
+    ] + ALL_HDRS,
     includes = ["lib", "includes", "lib/minitasn1", "lgl", ".", "lib/opencdk", "lib/openpgp", "lib/x509"],
     copts = ["-DHAVE_CONFIG_H", '-DLOCALEDIR=\\"/usr/share/locale\\"'],
-    deps = ["//external:gcrypt-latest", "//external:zlib-latest"],
+    deps = [
+            "//external:gcrypt-hdr-latest",
+            "//external:zlib-hdr-latest",
+            "//external:gpg-error-hdr-latest",
+            ],
 )
 
-cc_library(
-    name = "gnutls-extra",
+cc_binary(
+    linkshared = 1,
+    name = "libgnutls-extra.so",
     srcs = [
             "libextra/gnutls_extra.c",
             "libextra/fipsmd5.c",
@@ -162,20 +173,33 @@ cc_library(
             "libextra/gl/hmac-md5.c",
             "libextra/gl/md5.c",
             "libextra/gl/memxor.c",
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
-    includes = ["libextra", ".", "libextra/gl"],
+
+            "libgnutls.so",
+            "//external:libtasn1-so-latest",
+            "//external:zlib-so-latest",
+    ] + ALL_HDRS,
+    includes = ["libextra", ".", "lgl", "libextra/gl", "lib", "includes"],
     copts = ["-DHAVE_CONFIG_H"],
-    deps = [":gnutls"],
+    deps = [
+            "//external:libtasn1-hdr-latest",
+            "//external:zlib-hdr-latest",
+    ],
 )
 
-cc_library(
-    name = "gnutls-openssl",
+cc_binary(
+    linkshared = 1,
+    name = "libgnutls-openssl.so",
     srcs = [
             "libextra/gnutls_openssl.c",
             "libextra/openssl_compat.c",
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
-    includes = ["libextra"],
-    deps = [":gnutls"],
+
+            "libgnutls.so",
+            "//external:libtasn1-so-latest",
+            "//external:zlib-so-latest",
+    ] + ALL_HDRS,
+    includes = ["libextra", "lib", "includes", "."],
+    deps = [
+            "//external:libtasn1-hdr-latest",
+            "//external:zlib-hdr-latest",
+    ],
 )
