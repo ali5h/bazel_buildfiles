@@ -1,9 +1,9 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
+load("/ext/extension", "pkg_outs",)
+
 pkg_outs()
 
-
-cc_library(
+cc_binary(
   name = "stdc++",
   srcs = [
 

@@ -1,6 +1,6 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
+
 
 OPTS = [
             "-DHAVE_CONFIG_H",
@@ -8,6 +8,7 @@ OPTS = [
             '-DLOCALEDIR=\\"/usr/local/share/locale\\"',
     ]
 
+ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "lib/idn-free.h",
             "win32/include/idn-int.h",
@@ -17,10 +18,15 @@ EXTERNAL_HDRS = [
             "lib/stringprep.h",
             "lib/tld.h",
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
+ 
+pkg_outs(
+        libs = ["libidn.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
 
-cc_library(
-    name = "idn",
+cc_binary(
+    linkshared = 1,
+    name = "libidn.so",
     srcs = [
     
             "lib/tld.c",
@@ -48,11 +54,13 @@ cc_library(
             "lib/gl/c-strncasecmp.c",
             "lib/gl/striconv.c",
 
+            "//external:libunistring-so-latest",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [".", "lib", "win32/include", "lib/gl"],
     copts = OPTS,
-    deps = ["//external:libunistring-latest"].
+    deps = [
+                "//external:libunistring-hdr-latest",
+                ].
 )
 

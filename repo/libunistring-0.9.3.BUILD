@@ -1,14 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "pkg_libs", "pkg_exes")
-pkg_outs()
+load("/ext/extension", "pkg_outs",)
 
 EXTERNAL_HDRS = [
-
 ]
-INTERNAL_HDRS = glob(["**/*.h"], EXTERNAL_HDRS)
 
-cc_library(
-    name = "unistring",
+pkg_outs(
+        libs = ["libunistring.so"],
+        hdrs = EXTERNAL_HDRS,
+        )
+
+
+cc_binary(
+    linkshared = 1,
+    name = "libunistring.so",
     srcs = [
     
                 "lib/isnanl.c",
@@ -510,8 +514,7 @@ cc_library(
                 "lib/uniwidth/width.c",
                 "lib/version.c",
 
-    ] + INTERNAL_HDRS,
-    hdrs = EXTERNAL_HDRS,
+    ] + ALL_HDRS,
     includes = [],
     copts = [
                 "-DHAVE_CONFIG_H",
