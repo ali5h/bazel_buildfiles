@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "include/cuse_lowlevel.h",
             "include/fuse.h",
@@ -15,7 +14,7 @@ EXTERNAL_HDRS = [
             "include/ulockmgr.h",
             ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             exes = ["fusermount"],
             libs = ["libulockmgr.so", "libfuse.so"],
             hdrs = EXTERNAL_HDRS,

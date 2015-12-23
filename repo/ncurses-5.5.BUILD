@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "etip.h",
         "cursesapp.h",
@@ -23,7 +22,7 @@ EXTERNAL_HDRS = [
         "term_entry.h",
         "tic.h",
                 ]
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = [
                     "libpanel.so",
                     "libncurses.so",

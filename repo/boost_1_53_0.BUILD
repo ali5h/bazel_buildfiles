@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h","boost/**/*.h", "boost/**/*.hpp"])
+ALL_HDRS = glob(["**/*.h", "boost/**/*.hpp"])
 EXTERNAL_HDRS = glob(["boost/**/*.h", "boost/**/*.hpp", "boost/**/*.ipp"])
 
 pkg_outs(

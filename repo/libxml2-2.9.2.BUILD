@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "libxml/DOCBparser.h",
             "libxml/HTMLparser.h",
@@ -52,7 +51,7 @@ EXTERNAL_HDRS = [
             "libxml/xpointer.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libxml2.so"],
             hdrs = EXTERNAL_HDRS,
             )

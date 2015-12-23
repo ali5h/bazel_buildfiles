@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "src/include/c.h",
             "src/interfaces/libpq/libpq-int.h",
@@ -19,7 +18,7 @@ EXTERNAL_HDRS = [
             "src/include/postgres_ext.h",
                 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libpq.so"],
             hdrs = EXTERNAL_HDRS,
             )

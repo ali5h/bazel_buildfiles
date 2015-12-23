@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "rlog/common.h",
         "rlog/Error.h",
@@ -21,7 +20,7 @@ EXTERNAL_HDRS = [
         "rlog/SyslogNode.h",
         ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["librlog.so"],
         hdrs = EXTERNAL_HDRS,
         )

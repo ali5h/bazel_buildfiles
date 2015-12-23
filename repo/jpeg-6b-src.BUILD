@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "jerror.h",
         "jmorecfg.h",
@@ -9,7 +8,7 @@ EXTERNAL_HDRS = [
         "jconfig.h",
         ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libjpeg.so"],
         hdrs = EXTERNAL_HDRS,
         )

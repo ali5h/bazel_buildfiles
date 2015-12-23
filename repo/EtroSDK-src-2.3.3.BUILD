@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "EtroConfigLib/EtroConfigLib.h",
                 "EtroConfigLib/NVSConfigLib.h",
@@ -10,7 +9,7 @@ EXTERNAL_HDRS = [
                 "EtroNetLib/EtroNetLib.h",
                 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libNVSConfigLib.so", "libNVSNetLib.so"],
             hdrs = EXTERNAL_HDRS,
             )

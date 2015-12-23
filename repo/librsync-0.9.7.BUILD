@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["librsync-config.h", "librsync.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["librsync.so"],
             hdrs = EXTERNAL_HDRS,
             )

@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "include/netlink/addr.h",
                 "include/netlink/attr.h",
@@ -54,7 +53,7 @@ EXTERNAL_HDRS = [
                 "include/netlink/utils.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libnl.so"],
             hdrs = EXTERNAL_HDRS, 
             )

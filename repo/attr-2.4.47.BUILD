@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "attr/attributes.h",
             "attr/error_context.h",
@@ -9,7 +8,7 @@ EXTERNAL_HDRS = [
             "attr/xattr.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             exes = ["getfattr", "setfattr"],
             libs = ["libattr.so"],
             hdrs = EXTERNAL_HDRS,

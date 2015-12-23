@@ -8,7 +8,6 @@ OPTS = [
             '-DLOCALEDIR=\\"/usr/local/share/locale\\"',
     ]
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "lib/idn-free.h",
             "win32/include/idn-int.h",
@@ -19,7 +18,7 @@ EXTERNAL_HDRS = [
             "lib/tld.h",
 ]
  
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libidn.so"],
         hdrs = EXTERNAL_HDRS,
         )

@@ -44,7 +44,7 @@ EXTERNAL_HDRS = [
             "profile.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         exes = [
                 "klist",
                 "kinit",

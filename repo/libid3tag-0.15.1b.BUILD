@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["id3tag.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libid3tag.so"],
             hdrs = EXTERNAL_HDRS,
             )

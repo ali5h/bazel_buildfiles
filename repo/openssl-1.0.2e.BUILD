@@ -77,7 +77,7 @@ EXTERNAL_HDRS = [
         "include/openssl/x509v3.h",
         ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         exes = ["openssl"], 
         libs = ["libssl.so", "libcrypto.so"],
         hdrs = EXTERNAL_HDRS,

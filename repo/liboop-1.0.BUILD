@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "oop.h",
         "oop-adns.h",
@@ -12,7 +11,7 @@ EXTERNAL_HDRS = [
         "oop-read.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["liboop.so"],
             hdrs = EXTERNAL_HDRS,
             )

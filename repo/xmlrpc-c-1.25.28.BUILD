@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = glob(["include/xmlrpc-c/*.h"]) +[":include/xmlrpc-c/config.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libxmlrpc.so", "libxmlrpc_xmltok.so", "libxmlrpc_xmlparse.so", "libxmlrpc_util.so"],
             hdrs = EXTERNAL_HDRS,
             )

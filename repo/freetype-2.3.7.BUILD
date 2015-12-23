@@ -1,11 +1,10 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = glob(["include/freetype/*.h", "include/freetype/config/*.h"]) + [
             "include/ft2build.h",
             ]
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libfreetype.so"],
             hdrs = EXTERNAL_HDRS,
             )

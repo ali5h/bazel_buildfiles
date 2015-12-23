@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "libexslt/exslt.h",
                 "libexslt/exsltconfig.h",
@@ -29,7 +28,7 @@ EXTERNAL_HDRS = [
                 "libxslt/xsltutils.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libxslt.so"],
             hdrs = EXTERNAL_HDRS,
             )

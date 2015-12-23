@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs")
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "src/match/cm_libmatch.h",
                 "src/debug/cm_libdebug.h",
@@ -22,7 +21,7 @@ EXTERNAL_HDRS = [
                 "src/getopt/cm_libgetopt.h",
                 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libcommon.so"],
         hdrs = EXTERNAL_HDRS
 )

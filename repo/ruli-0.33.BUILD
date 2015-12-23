@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "ruli_addr.h",
             "ruli_getaddrinfo.h",
@@ -28,7 +27,7 @@ EXTERNAL_HDRS = [
             "ruli_sync.h",
 
 ]
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libruli.so"],
             hdrs = EXTERNAL_HDRS,
             )

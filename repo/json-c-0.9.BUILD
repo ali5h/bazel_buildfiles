@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS  = [
             "arraylist.h",
             "bits.h",
@@ -15,7 +14,7 @@ EXTERNAL_HDRS  = [
             "linkhash.h",
          ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libjson-c.so"],
             )
 

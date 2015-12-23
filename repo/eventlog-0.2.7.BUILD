@@ -1,13 +1,12 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
 	"src/evtmaps.h",
 	"src/evtlog.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libevtlog.so"],
             hdrs = EXTERNAL_HDRS,
             )

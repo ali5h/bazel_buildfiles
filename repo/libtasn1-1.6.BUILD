@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["libtasn1.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libtasn1.so"],
             hdrs = EXTERNAL_HDRS,
             )

@@ -3,7 +3,7 @@ load("/ext/extension", "pkg_outs",)
 
 EXTERNAL_HDRS = []
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         exes = [],
         libs = [],
         hdrs = EXTERNAL_HDRS,

@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["bzlib.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libbz2.so"],
         hdrs = EXTERNAL_HDRS,
         )

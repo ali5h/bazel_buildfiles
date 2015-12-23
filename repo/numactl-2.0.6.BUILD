@@ -1,14 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "numacompat1.h",
             "numa.h",
             "numaif.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libnuma.so"],
             hdrs = EXTERNAL_HDRS,
             )

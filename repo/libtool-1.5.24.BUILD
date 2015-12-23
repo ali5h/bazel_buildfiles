@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["libltdl/ltdl.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libltdl.so"],
         hdrs = EXTERNAL_HDRS,
         )

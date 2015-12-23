@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs")
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "include/rpcsecgss/rpc/auth.h",
         "include/rpcsecgss/rpc/auth_gss.h",
@@ -11,7 +10,7 @@ EXTERNAL_HDRS = [
         "include/rpcsecgss/rpc/svc_auth.h",
             ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["librpcsecgss.so"],
         hdrs = EXTERNAL_HDRS, 
         )

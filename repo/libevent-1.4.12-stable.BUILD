@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs")
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [ 
             "event.h",
             "evhttp.h",
@@ -11,7 +10,7 @@ EXTERNAL_HDRS = [
             ":event-config.h"
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libevent.so", "libevent_core.so", "libevent_extra.so"],
             hdrs = EXTERNAL_HDRS,
             )

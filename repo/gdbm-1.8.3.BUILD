@@ -1,14 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         ":gdbm.h",
         "dbm.h",
         "ndbm.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libgdbm.so", "libgdbm-compat.so"],
         hdrs = EXTERNAL_HDRS,
         )

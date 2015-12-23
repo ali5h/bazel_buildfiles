@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
 	"wand/MagickWand.h",
 	"wand/animate.h",
@@ -125,7 +124,7 @@ EXTERNAL_HDRS = [
 	"magick/xwindow.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             exes = ["convert", "identify", "composite"],
             libs = ["libMagickWand.so", "libMagickCore.so"],
             hdrs = EXTERNAL_HDRS,

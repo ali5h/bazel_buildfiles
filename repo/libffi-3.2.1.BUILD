@@ -1,13 +1,12 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
     "x86_64-linux-gnu/ffi.h",
     "x86_64-linux-gnu/ffitarget.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libffi.so"],
             hdrs = EXTERNAL_HDRS,
             )

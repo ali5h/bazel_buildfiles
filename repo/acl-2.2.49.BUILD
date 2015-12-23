@@ -1,13 +1,12 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "sys/acl.h",
             "acl/libacl.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             exes = ["setfacl", "getfacl"],
             libs = ["libacl.so"],
             hdrs = EXTERNAL_HDRS,

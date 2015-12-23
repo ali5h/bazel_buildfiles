@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "include/hmac-md5.h",
             "include/md5global.h",
@@ -12,7 +11,7 @@ EXTERNAL_HDRS = [
             "include/saslutil.h",
                 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libsasl2.so"],
             hdrs = EXTERNAL_HDRS,
             )

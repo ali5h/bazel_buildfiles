@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["sys/eventfd.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libeventfd.so"],
             hdrs = EXTERNAL_HDRS,
             )

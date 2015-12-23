@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "include/ldif.h",
             "include/ldap_utf8.h",
@@ -13,7 +12,7 @@ EXTERNAL_HDRS = [
             "include/lber_types.h",
                 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["liblber.so", "libldap.so", "libldap_r.so"],
             hdrs = EXTERNAL_HDRS,
             )

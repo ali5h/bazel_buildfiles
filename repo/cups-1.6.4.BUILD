@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "cups/adminutil.h",
         "cups/array.h",
@@ -19,7 +18,7 @@ EXTERNAL_HDRS = [
         "cups/versioning.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             exes = [
                     "cupsd",
                     "lpadmin",

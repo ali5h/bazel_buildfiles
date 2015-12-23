@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "security/pam_client.h",
             "security/pam_misc.h",
@@ -15,7 +14,7 @@ EXTERNAL_HDRS = [
             "security/_pam_types.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libpam.so", "libpamc.so", "libpam_misc.so"],
             hdrs = EXTERNAL_HDRS,
             )

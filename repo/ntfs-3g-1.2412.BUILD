@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
         "ntfs-3g/attrib.h",
         "ntfs-3g/attrlist.h",
@@ -34,7 +33,7 @@ EXTERNAL_HDRS = [
         "ntfs-3g/volume.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             exes = ["mount.ntfs-3g"],
             libs = ["libntfs-3g.so"],
             hdrs = EXTERNAL_HDRS,

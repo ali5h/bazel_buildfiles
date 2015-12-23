@@ -31,7 +31,7 @@ EXTERNAL_HDRS = [
             "graphviz/xdot.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libxdot.so", "libpathplan.so", "libgvpr.so", "libgvc.so", "libcgraph.so", "libcdt.so"],
             hdrs = EXTERNAL_HDRS,
 )

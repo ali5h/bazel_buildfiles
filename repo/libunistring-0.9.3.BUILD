@@ -4,7 +4,7 @@ load("/ext/extension", "pkg_outs",)
 EXTERNAL_HDRS = [
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
         libs = ["libunistring.so"],
         hdrs = EXTERNAL_HDRS,
         )

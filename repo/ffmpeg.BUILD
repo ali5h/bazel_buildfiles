@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = [
                 "libtranscoder.so",
                 "libavcodec.so",

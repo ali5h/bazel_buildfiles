@@ -1,10 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = ["gssglue/gssapi/gssapi.h"]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libgssglue.so"],
             hdrs = EXTERNAL_HDRS,
             )

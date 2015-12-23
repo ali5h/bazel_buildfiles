@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs")
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
                 "glib/glib.h",
                 "glib/glib-object.h",
@@ -11,7 +10,7 @@ EXTERNAL_HDRS = [
                 ":inc_gio",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = [
                 "libglib-2.0.so",
                 "libgthread-2.0.so",

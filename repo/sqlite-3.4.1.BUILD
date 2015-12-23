@@ -1,12 +1,11 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "sqlite3.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libsqlite3.so"],
             hdrs = EXTERNAL_HDRS,
             )

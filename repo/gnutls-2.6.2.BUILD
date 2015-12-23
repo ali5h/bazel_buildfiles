@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-ALL_HDRS = glob(["**/*.h"])
 EXTERNAL_HDRS = [
             "includes/gnutls/compat.h",
             "includes/gnutls/crypto.h",
@@ -13,7 +12,7 @@ EXTERNAL_HDRS = [
             "includes/gnutls/x509.h",
 ]
 
-pkg_outs(
+ALL_HDRS = pkg_outs(
             libs = ["libgnutls.so", "libgnutls-extra.so", "libgnutls-openssl.so"],
             hdrs = EXTERNAL_HDRS,
             )
