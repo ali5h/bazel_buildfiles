@@ -1,7 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-pkg_outs(libs = ["libc-client.so"])
+pkg_outs(
+        libs = ["libc-client.so"],
+        )
 
 genrule(
     local = 1,

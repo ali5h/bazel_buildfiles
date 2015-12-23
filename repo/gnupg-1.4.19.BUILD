@@ -2,11 +2,9 @@ package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
 ALL_HDRS = glob(["**/*.h"])
-EXTERNAL_HDRS = []
 
 pkg_outs(
             exes = ["gpg"],
-            hdrs = EXTERNAL_HDRS,
             )
 
 OPTS = [

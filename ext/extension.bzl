@@ -44,4 +44,4 @@ def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
         name = 'outs',
         srcs = [":libs", ":exes"],
     )
-    # return  native.glob(["**/*.h"])
+    return  native.glob(["**/*.h"])

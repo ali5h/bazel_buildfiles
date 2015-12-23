@@ -1,11 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 load("/ext/extension", "pkg_outs",)
 
-EXTERNAL_HDRS = []
-
 pkg_outs(
             exes = ["pdata_tools", "thintools_bsadapt"],
-            hdrs = EXTERNAL_HDRS,
             )
 
 cc_binary(
