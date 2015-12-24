@@ -13,18 +13,18 @@ ALL_HDRS = pkg_outs(
 
 cc_binary(
     linkshared = 1,
-  name = "libevtlog.so",
-  srcs = ALL_HDRS + [
-    "src/evtrec.c",
-    "src/evtfmt.c",
-    "src/evtout.c",
-    "src/evtstr.c",
-    "src/evtctx.c",
-    "src/evttags.c",
-    "src/evtsyslog.c",
+    name = "libevtlog.so",
+    srcs = [
+        "src/evtrec.c",
+        "src/evtfmt.c",
+        "src/evtout.c",
+        "src/evtstr.c",
+        "src/evtctx.c",
+        "src/evttags.c",
+        "src/evtsyslog.c",
+    ] + ALL_HDRS,
+    includes = ["."],
+    copts = [
+        '-DHAVE_CONFIG_H',
     ],
-  includes = ["."],
-  copts = [
-    '-DHAVE_CONFIG_H',
-  ],
 )
