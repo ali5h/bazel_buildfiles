@@ -15,6 +15,27 @@ def add_package(abs_path , alias):
         actual = '@' + abs_path.split('/')[-1:][0] + '//:libs',
     )
 
+def add_package_http(url , tmp_name, alias, sha256):
+    native.new_http_archive(
+        # name = abs_path.split('/')[-1:][0],
+        name = tmp_name,
+        strip_prefix = tmp_name,
+        url = url,
+        sha256 = sha256,
+        # build_file = 'repo/' + abs_path.split('/')[-1:][0] + '.BUILD',
+        build_file = 'repo/' + tmp_name + '.BUILD',
+    )
+    native.bind(
+        name = alias + '-hdr-latest',
+        # actual = '@' + abs_path.split('/')[-1:][0] + '//:dep_libs',
+        actual = '@' + tmp_name+ '//:dep_libs',
+    )
+    native.bind(
+        name = alias + '-so-latest',
+        # actual = '@' + abs_path.split('/')[-1:][0] + '//:libs',
+        actual = '@' + tmp_name+ '//:libs',
+    )
+
 # ------------for build file---------------------
 
 
