@@ -156,6 +156,8 @@ cc_binary(
             "wand/stream.c",
             "wand/wand.c",
             "wand/wand-view.c",
+
+            "//external:zlib-so-latest",
     
     ] + ALL_HDRS,
     includes = ["."],
@@ -165,6 +167,9 @@ cc_binary(
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
                 "-DMAGICKCORE_EXCLUDE_DEPRECATED",
+                ],
+    deps = [
+                "//external:zlib-hdr-latest",
                 ],
 )
 
@@ -411,12 +416,16 @@ cc_binary(
                 "utilities/convert.c",
                 "libMagickWand.so",
                 "libMagickCore.so",
+                "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = [
                 "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
+                ],
+    deps = [
+                "//external:zlib-hdr-latest",
                 ],
 )
 
@@ -426,12 +435,16 @@ cc_binary(
                 "utilities/identify.c",
                 "libMagickWand.so",
                 "libMagickCore.so",
+                "//external:zlib-so-latest",
                 ] + ALL_HDRS,
     includes = ["."],
     copts = [
                 "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
+                ],
+    deps = [
+                "//external:zlib-hdr-latest",
                 ],
 )
 
@@ -441,11 +454,15 @@ cc_binary(
                 "utilities/composite.c",
                 "libMagickWand.so",
                 "libMagickCore.so",
+                "//external:zlib-so-latest",
                 ] + ALL_HDRS,
     includes = ["."],
     copts = [
                 "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
+                ],
+    deps = [
+                "//external:zlib-hdr-latest",
                 ],
 )
