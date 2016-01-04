@@ -30,6 +30,11 @@ cc_binary(
 
 cc_binary(
     name = "lsusb",
-    srcs = ALL_HDRS + ["examples/lsusb.c", "libusb.so"],
+    srcs = ALL_HDRS + [
+            "examples/lsusb.c",
+            "libusb.so",
+            "//external:libusb-so-latest",
+            ],
     includes = ["libusb"],
+    deps = ["//external:libusb-hdr-latest"],
 )
