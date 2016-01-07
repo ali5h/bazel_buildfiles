@@ -19,7 +19,7 @@ bazel clean
 # --experimental_skip_static_outputs : will cause some problem
 # --define block_size=4096
 
-bazel build --copt="-w" --define block_size=4096 --config=x86_64 --linkopt=-Wl,--strip-all //repo:final
+bazel build --copt="-w" --define block_size=4096 --config=x86_64 --linkopt=-Wl,--strip-all //repo:SysLib
 
 
 
