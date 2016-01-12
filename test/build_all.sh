@@ -1,13 +1,17 @@
-rm -fr /root/sandbox
-mkdir /root/sandbox
+REPO_ROOT=/root/NasX86
+SANDBOX_ROOT=/root/sandbox
+
+rm -fr ${SANDBOX_ROOT}
+mkdir ${SANDBOX_ROOT}
+
 # libnl & xmlrpc-c is sanboxed-built but will failt due to dcoker layer, so we need to copy it to local
-cp -r /root/NasX86/SysLib/libnl-1.1.4 /root/sandbox
-cp -r /root/NasX86/SysLib/xmlrpc-c-1.25.28 /root/sandbox
-cp -r /root/NasX86/SysLib/krb5-1.13 /root/sandbox
-cp -r /root/NasX86/SysLib/ffmpeg /root/sandbox
-cp -r /root/NasX86/SysLib/openssl-1.0.2e /root/sandbox
-cp -r /root/NasX86/SysLib/graphviz-2.38.0 /root/sandbox
-cp -r /root/NasX86/SysLib/imap-2007e /root/sandbox
+cp -r ${REPO_ROOT}/SysLib/libnl-1.1.4 ${SANDBOX_ROOT}
+cp -r ${REPO_ROOT}/SysLib/xmlrpc-c-1.25.28 ${SANDBOX_ROOT}
+cp -r ${REPO_ROOT}/SysLib/krb5-1.13 ${SANDBOX_ROOT}
+cp -r ${REPO_ROOT}/SysLib/ffmpeg ${SANDBOX_ROOT}
+cp -r ${REPO_ROOT}/SysLib/openssl-1.0.2e ${SANDBOX_ROOT}
+cp -r ${REPO_ROOT}/SysLib/graphviz-2.38.0 ${SANDBOX_ROOT}
+cp -r ${REPO_ROOT}/SysLib/imap-2007e ${SANDBOX_ROOT}
 
 bazel clean
 
