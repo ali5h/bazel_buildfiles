@@ -103,8 +103,6 @@ cc_binary(
         "scheduler/cups-deviced.c",
         "scheduler/util.c",
         "libcups.so",
-
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
@@ -118,13 +116,9 @@ cc_binary(
     srcs = [
         "scheduler/cups-lpd.c",
         "libcups.so",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -132,13 +126,9 @@ cc_binary(
     srcs = [
         "systemv/lpadmin.c",
         "libcups.so",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -146,13 +136,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "systemv/lpinfo.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -160,13 +146,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "systemv/lpstat.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -174,13 +156,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "systemv/lpmove.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -188,13 +166,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "systemv/lpoptions.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -202,13 +176,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "systemv/lp.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -216,14 +186,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "berkeley/lpq.c",
-
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -231,14 +196,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "berkeley/lpr.c",
-
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -246,14 +206,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "berkeley/lprm.c",
-
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -261,13 +216,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "systemv/cancel.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     copts = OPTS,
     includes = ["."],
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -275,13 +226,9 @@ cc_binary(
     srcs = [
         "libcups.so",
         "filter/gziptoany.c",
-        "//external:zlib-so-latest",
             ] + ALL_HDRS,
     includes = ["."],
     copts = OPTS,
-    deps = [
-        "//external:zlib-hdr-latest",
-    ],
 )
 
 cc_binary(
@@ -338,8 +285,6 @@ cc_binary(
 		"cups/transcode.c",
 		"cups/usersys.c",
 		"cups/util.c",
-
-        "//external:zlib-so-latest",
 
     ] + ALL_HDRS,
     copts = OPTS,
