@@ -1,8 +1,4 @@
-load("/ext/extension", "add_package", "add_package_http")
-
-REPO_ROOT = "/root/NasX86/"
-SANDBOX_ROOT = "/root/sandbox/"
-
+load("/ext/extension", "add_package", "add_package_http", "REPO_ROOT", "SANDBOX_ROOT")
 
 add_package( SANDBOX_ROOT + "xmlrpc-c-1.25.28", "xmlrpc-c")
 add_package( SANDBOX_ROOT + "libnl-1.1.4", "libnl")

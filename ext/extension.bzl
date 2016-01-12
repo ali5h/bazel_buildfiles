@@ -1,5 +1,8 @@
 # load("/tools/build_defs/pkg/pkg", "pkg_tar")
 
+REPO_ROOT = "/root/NasX86/"
+SANDBOX_ROOT = "/root/sandbox/"
+
 def add_package(abs_path , alias):
     native.new_local_repository(
         name = abs_path.split('/')[-1:][0],

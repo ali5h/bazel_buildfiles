@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "SANDBOX_ROOT")
 
 ALL_HDRS = pkg_outs(
             libs = [
@@ -18,7 +18,7 @@ genrule(
                 "libavutil.so",
                 ],
     cmd = """
-        TMPDIR=/root/sandbox/""" + REPOSITORY_NAME[1:] + """
+        TMPDIR=""" + SANDBOX_ROOT + REPOSITORY_NAME[1:] + """
 
         TMP=$(CC)
         ABS_PATH=$${TMP%/*}

@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "SANDBOX_ROOT")
 
 EXTERNAL_HDRS = [
             "graphviz/arith.h",
@@ -49,7 +49,7 @@ genrule(
     ],
     cmd = """
                 TMPDIR2=$$(mktemp -d)
-                TMPDIR=/root/sandbox/""" + REPOSITORY_NAME[1:] + """
+                TMPDIR="""+ SANDBOX_ROOT + REPOSITORY_NAME[1:] + """
                 
                 if [ '$(TARGET_CPU)' = 'armeabi-v7a' ]
                 then 
