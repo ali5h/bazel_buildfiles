@@ -12,6 +12,7 @@ cp -r /root/NasX86/SysLib/imap-2007e /root/sandbox
 bazel clean
 
 # --linkopt=-Wl,--strip-all: to strip all shared library
+# -Wl,--allow-shlib-undefined: to disable symbol cannot reslove in indirect symbol resolving
 # --dynamic_mode=fully: to compile all shared library
 # --spawn_strategy=standalone --genrule_strategy=standalone : disable sandbox completely(docker container may cause some permission deny)
 # Or, 
