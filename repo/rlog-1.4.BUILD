@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library")
 
 EXTERNAL_HDRS = [
         "rlog/common.h",
@@ -20,15 +20,14 @@ EXTERNAL_HDRS = [
         "rlog/SyslogNode.h",
         ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["librlog.so"],
         hdrs = EXTERNAL_HDRS,
         )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "librlog.so",
-    srcs = ALL_HDRS + [
+    srcs = [
         "rlog/rlog.cpp",
         "rlog/rloginit.cpp",
         "rlog/rloglocation.cpp",
@@ -40,9 +39,7 @@ cc_binary(
         "rlog/StdioNode.cpp",
         "rlog/SyslogNode.cpp",
     ],
-    includes = ["."],
     copts = [
-        '-DHAVE_CONFIG_H',
         '-DRLOG_COMPONENT=\\"rlog\\"',
         '-DUSE_VALGRIND=0',
     ],

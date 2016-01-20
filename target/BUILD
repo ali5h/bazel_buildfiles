@@ -5,7 +5,6 @@ config_setting(
     values = {
         "cpu": "armeabi-v7a",
         "crosstool_top": "//tools:toolchain",
-        "host_crosstool_top": "//tools/cpp:toolchain",
     },
 )
 config_setting(
@@ -13,7 +12,6 @@ config_setting(
     values = {
         "cpu": "i686",
         "crosstool_top": "//tools:toolchain",
-        "host_crosstool_top": "//tools/cpp:toolchain",
     },
 )
 config_setting(
@@ -21,6 +19,5 @@ config_setting(
     values = {
         "cpu": "x86_64",
         "crosstool_top": "//tools:toolchain",
-        "host_crosstool_top": "//tools/cpp:toolchain",
     },
 )

@@ -65,3 +65,18 @@ def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
         srcs = [":libs", ":exes"],
     )
     return  native.glob(["**/*.h"])
+
+def qnap_cc_library( name="", deps = [], srcs =[] , copts = [], defines = [], includes = [], linkopts = [] ):
+    native.cc_binary(
+        name = name,
+        deps = deps,
+        srcs = srcs + native.glob(["**/*.h"]),
+        copts = copts + ["-DHAVE_CONFIG_H"],
+        defines = defines,
+        includes = ["."] + includes + select({
+                                                "//target:x86_64": ["qnap_cfg_inc/x86_64"],
+                                                "//target:arm":    ["qnap_cfg_inc/arm"],
+                                            }),
+        linkopts = linkopts,
+        linkshared = 1,
+    )
