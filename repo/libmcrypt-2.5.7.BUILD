@@ -1,15 +1,14 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library")
 
 EXTERNAL_HDRS = ["lib/mcrypt.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libmcrypt.so"],
         hdrs = EXTERNAL_HDRS
         )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libmcrypt.so",
     srcs = [
         
@@ -51,8 +50,8 @@ cc_binary(
                 "modules/algorithms/tripledes.c",
 
     
-    ] + ALL_HDRS,
-    includes = [".", "lib"],
-    copts = ["-DHAVE_CONFIG_H", '-DLIBDIR=\\"/usr/local/lib/libmcrypt/\\"'],
+    ],
+    includes = ["lib"],
+    copts = ['-DLIBDIR=\\"/usr/local/lib/libmcrypt/\\"'],
 )
 
