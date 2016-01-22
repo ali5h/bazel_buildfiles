@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS  = [
             "arraylist.h",
@@ -14,13 +14,22 @@ EXTERNAL_HDRS  = [
             "linkhash.h",
          ]
 
-ALL_HDRS = pkg_outs(
-            libs = ["libjson-c.so"],
+pkg_outs(
+            libs = ["libjson.so"],
             )
 
-cc_binary(
-        linkshared = 1,
-        name = "libjson-c.so",
-        srcs = ALL_HDRS + glob(["*.c"], exclude = ["test*.c"]),
-        copts = ["-DHAVE_CONFIG_H", "-D_GNU_SOURCE"],
+qnap_cc_library(
+        name = "libjson.so",
+        srcs = [
+
+            "arraylist.c",
+            "debug.c",
+            "json_object.c",
+            "json_tokener.c",
+            "json_util.c",
+            "linkhash.c",
+            "printbuf.c",
+
+        ],
+        copts = ["-D_GNU_SOURCE"],
 )

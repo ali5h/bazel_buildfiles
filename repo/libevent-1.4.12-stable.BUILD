@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [ 
             "event.h",
@@ -10,13 +10,12 @@ EXTERNAL_HDRS = [
             ":event-config.h"
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libevent.so", "libevent_core.so", "libevent_extra.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libevent.so",
         srcs = [
                 "event.c",
@@ -29,13 +28,10 @@ cc_binary(
                 "evdns.c",
                 "evrpc.c",
                 "strlcpy.c",
-        ] + ALL_HDRS + [":event-config.h"],
-        includes = ["."],
-        copts = ['-DHAVE_CONFIG_H',],
+        ] + [":event-config.h"],
 )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libevent_core.so",
         srcs = [
                 "event.c",
@@ -43,13 +39,10 @@ cc_binary(
                 "evbuffer.c",
                 "log.c",
                 "evutil.c",
-        ] + ALL_HDRS + [":event-config.h"],
-        includes = ["."],
-        copts = ['-DHAVE_CONFIG_H',],
+        ] +  [":event-config.h"],
 )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libevent_extra.so",
         srcs = [
                 "event_tagging.c",
@@ -57,9 +50,7 @@ cc_binary(
                 "evdns.c",
                 "evrpc.c",
                 "strlcpy.c",
-        ] + ALL_HDRS + [":event-config.h"],
-        includes = ["."],
-        copts = ['-DHAVE_CONFIG_H',],
+        ] + [":event-config.h"],
 )
 
 genrule(

@@ -1,18 +1,17 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = glob(["include/freetype/*.h", "include/freetype/config/*.h"]) + [
             "include/ft2build.h",
             ]
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libfreetype.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-            linkshared = 1,
+qnap_cc_library(
             name = "libfreetype.so",
-            srcs = ALL_HDRS + [
+            srcs = [
                 "src/psnames/psmodule.c",
                 "src/cache/ftcache.c",
                 "src/gxvalid/gxvalid.c",
@@ -37,7 +36,6 @@ cc_binary(
                 "src/pfr/pfr.c",
                 ],
             includes = [
-                "include",
                 "src/psname",
                 "src/cache",
                 "src/gxvalid",

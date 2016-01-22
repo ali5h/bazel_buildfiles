@@ -1,19 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "sys/acl.h",
             "acl/libacl.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["setfacl", "getfacl"],
             libs = ["libacl.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
 OPTS = [
-            '-DHAVE_CONFIG_H',
             '-DDEBUG',
             '-D_GNU_SOURCE',
             '-D_FILE_OFFSET_BITS=64',
@@ -26,8 +25,7 @@ OPTS = [
 ]
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libacl.so",
     srcs = [
 
@@ -80,8 +78,8 @@ cc_binary(
             ":mv_headers",
     
             "//external:attr-so-latest",
-    ] + ALL_HDRS,
-    includes = [".", "include"],
+    ],
+    includes = ["include"],
     copts = OPTS + ['-include', 'libacl/perm_copy.h'],
     deps = [
             "//external:attr-hdr-latest",
@@ -111,11 +109,11 @@ cc_library(
             "libmisc/next_line.c",
             "libmisc/walk_tree.c",
 
-    ] + ALL_HDRS,
+    ] + glob(["**/*.h"]),
     includes = ["include"],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "getfacl",
     srcs = [
             "getfacl/getfacl.c",
@@ -123,13 +121,12 @@ cc_binary(
             ":mv_headers",
 
             "libacl.so",
-    ] + ALL_HDRS,
+    ],
     copts = OPTS,
     deps = [":misc"],
-    includes = ["."],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "setfacl",
     srcs = [
             "setfacl/setfacl.c",
@@ -139,8 +136,7 @@ cc_binary(
             ":mv_headers",
 
             "libacl.so",
-    ] + ALL_HDRS,
+    ],
     copts = OPTS,
-    includes = ["."],
     deps = [":misc"],
 )

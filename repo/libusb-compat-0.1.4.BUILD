@@ -1,9 +1,9 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["usb.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         exes = ["lsusb"],
         libs = ["libusb.so"],
         hdrs = EXTERNAL_HDRS,
@@ -16,20 +16,18 @@ genrule(
     cmd = "cp -r $< $@",
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libusb.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "libusb/core.c",
             "//external:libusb-so-latest",
             ],
-    includes = [".", "libusb"],
-    copts = ["-DHAVE_CONFIG_H"],
+    includes = ["libusb"],
     deps = ["//external:libusb-hdr-latest"],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lsusb",
-    srcs = ALL_HDRS + ["examples/lsusb.c", "libusb.so"],
+    srcs = ["examples/lsusb.c", "libusb.so"],
     includes = ["libusb"],
 )

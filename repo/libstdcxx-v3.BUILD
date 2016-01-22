@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
-ALL_HDRS = pkg_outs()
+pkg_outs()
 
 cc_binary(
   name = "stdc++",

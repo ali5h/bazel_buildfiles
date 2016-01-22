@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "src/include/c.h",
@@ -18,15 +18,14 @@ EXTERNAL_HDRS = [
             "src/include/postgres_ext.h",
                 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libpq.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libpq.so",
     srcs = [
             "src/interfaces/libpq/fe-auth.c",
@@ -54,7 +53,7 @@ cc_binary(
             "src/backend/utils/mb/wchar.c",
             ":src/port/pg_config_paths.h",
 
-    ] + ALL_HDRS,
+    ],
     includes = ["src/include", "src/backend", "src/port"],
     copts = ["-D_GNU_SOURCE"],
 )

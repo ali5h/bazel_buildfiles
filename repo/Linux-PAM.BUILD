@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "security/pam_client.h",
@@ -14,12 +14,12 @@ EXTERNAL_HDRS = [
             "security/_pam_types.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libpam.so", "libpamc.so", "libpam_misc.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-COPT_MACRO = ["-DHAVE_CONFIG_H", "-DLIBPAM_COMPILE", "-DWITH_SELINUX", '-DPAM_VERSION=\\"0.99.7.1\\"', '-DDEFAULT_MODULE_PATH=\\"/lib/security/\\"']
+COPT_MACRO = ["-DLIBPAM_COMPILE", "-DWITH_SELINUX", '-DPAM_VERSION=\\"0.99.7.1\\"', '-DDEFAULT_MODULE_PATH=\\"/lib/security/\\"']
 
 genrule(
         name = "mv_hdrs",
@@ -50,10 +50,9 @@ genrule(
         """,
 )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libpam.so",
-        srcs = ALL_HDRS + [
+        srcs = [
             "libpam/pam_account.c",
             "libpam/pam_auth.c",
             "libpam/pam_data.c",
@@ -85,14 +84,13 @@ cc_binary(
             "libpam/pam_modutil_ingroup.c",
              ],
         copts = COPT_MACRO,
-        includes = [".", "libpam/include"],
+        includes = ["libpam/include"],
 )
 
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libpamc.so",
-        srcs = ALL_HDRS + [
+        srcs = [
             "libpamc/pamc_client.c",
             "libpamc/pamc_converse.c",
             "libpamc/pamc_load.c",
@@ -100,13 +98,12 @@ cc_binary(
         includes = ["libpamc/include", "libpam/include"],
 )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libpam_misc.so",
-        srcs = ALL_HDRS + [
+        srcs = [
               "libpam_misc/help_env.c",
               "libpam_misc/misc_conv.c",
              ],
         copts = ["-Wno-address"],
-        includes = [".", "libpamc/include", "libpam/include", "libpam_misc/include"],
+        includes = ["libpamc/include", "libpam/include", "libpam_misc/include"],
 )

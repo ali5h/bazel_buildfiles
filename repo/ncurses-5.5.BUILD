@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
         "etip.h",
@@ -22,7 +22,7 @@ EXTERNAL_HDRS = [
         "term_entry.h",
         "tic.h",
                 ]
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = [
                     "libpanel.so",
                     "libncurses.so",
@@ -102,10 +102,9 @@ genrule(
 
 )
 
-cc_binary(
-linkshared = 1,
+qnap_cc_library(
   name = "libncurses++.so",
-  srcs = ALL_HDRS + [
+  srcs = [
         ":include/ncurses_def.h",
         ":include/curses.h",
 
@@ -122,7 +121,6 @@ linkshared = 1,
 
   includes = ["include", "ncurses", "c++", "menu", "panel", "form"],
   copts = [
-           "-DHAVE_CONFIG_H",
            "-D_GNU_SOURCE",
            "-DNDEBUG",
            "-fPIC",
@@ -140,10 +138,9 @@ genrule(
           """,
 )
 
-cc_binary(
-linkshared = 1,
+qnap_cc_library(
   name = "libmenu.so",
-  srcs = ALL_HDRS + [
+  srcs = [
             
         "gen_include_hdr",
 
@@ -176,17 +173,15 @@ linkshared = 1,
         "menu/m_win.c",
          ],
   copts = [
-           "-DHAVE_CONFIG_H",
            "-D_GNU_SOURCE",
            "-DNDEBUG",
           ],
-  includes = ["include", "ncurses", "menu"],
+  includes = ["ncurses", "menu"],
 )
 
-cc_binary(
-linkshared = 1,
+qnap_cc_library(
   name = "libform.so",
-  srcs = ALL_HDRS + [
+  srcs = [
         ":include/ncurses_def.h",
         ":include/term.h",
         ":include/curses.h",
@@ -234,17 +229,15 @@ linkshared = 1,
 
         ],
   copts = [
-           "-DHAVE_CONFIG_H",
            "-D_GNU_SOURCE",
            "-DNDEBUG",
           ],
   includes = ["include", "ncurses", "menu"],
 )
 
-cc_binary(
-linkshared = 1,
+qnap_cc_library(
   name = "libpanel.so",
-  srcs = ALL_HDRS + [
+  srcs = [
         "panel/panel.c",
         "panel/p_above.c",
         "panel/p_below.c",
@@ -263,8 +256,7 @@ linkshared = 1,
 
         ":gen_include_hdr",
         ],
-  copts = ["-DHAVE_CONFIG_H"],
-  includes = ["include", "ncurses"],
+  includes = ["ncurses"],
 )
 
 genrule(
@@ -479,10 +471,9 @@ cc_library(
     includes = ["ncurses"],
 )
 
-cc_binary(
-linkshared = 1,
+qnap_cc_library(
   name = "libncurses.so",
-  srcs = ALL_HDRS +[
+  srcs = [
         "gen_ncurses_hdr",
         "gen_include_hdr",
 
@@ -629,7 +620,7 @@ linkshared = 1,
         "ncurses/tinfo/trim_sgr0.c",
         "ncurses/tinfo/write_entry.c",
          ],
-  includes = ["ncurses", "include", "ncurses/tinfo"],
+  includes = ["ncurses", "ncurses/tinfo"],
   copts = ["-DTRACE"],
     deps = ["special_ext"],
 )

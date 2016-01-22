@@ -1,17 +1,16 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["id3tag.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libid3tag.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libid3tag.so",
-        srcs = ALL_HDRS +  [
+        srcs = [
                 "version.c",
                 "ucs4.c",
                 "latin1.c",
@@ -31,7 +30,6 @@ cc_binary(
 
                 "//external:zlib-so-latest",
             ],
-        copts = ["-DHAVE_CONFIG_H", "-w"],
         deps = [
                 "//external:zlib-hdr-latest",
                 ":special_ext",

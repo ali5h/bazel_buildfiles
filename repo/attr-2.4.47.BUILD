@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "attr/attributes.h",
@@ -8,7 +8,7 @@ EXTERNAL_HDRS = [
             "attr/xattr.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["getfattr", "setfattr"],
             libs = ["libattr.so"],
             hdrs = EXTERNAL_HDRS,
@@ -22,18 +22,16 @@ OPTS = [
             '-DPACKAGE=\\"attr\\"',
 ]
 
-cc_binary(
+qnap_cc_binary(
     name = "getfattr",
-    srcs = ["getfattr/getfattr.c", "libattr.so"] + ALL_HDRS + EXTERNAL_HDRS,
+    srcs = ["getfattr/getfattr.c", "libattr.so"] + EXTERNAL_HDRS,
     copts = OPTS,
-    includes = ["."],
     deps = [":misc"],
 )
-cc_binary(
+qnap_cc_binary(
     name = "setfattr",
-    srcs = ["setfattr/setfattr.c", "libattr.so"] + ALL_HDRS + EXTERNAL_HDRS,
+    srcs = ["setfattr/setfattr.c", "libattr.so"] + EXTERNAL_HDRS,
     copts = OPTS,
-    includes = ["."],
     deps = [":misc"],
 )
 
@@ -47,12 +45,11 @@ cc_library(
             "libmisc/next_line.c",
             "libmisc/walk_tree.c",
 
-    ] + ALL_HDRS,
+    ] + glob(["**/*.h"]),
     includes = ["include"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libattr.so",
     srcs = [
 
@@ -64,8 +61,8 @@ cc_binary(
             "libattr/syscalls.c",
             ":mv_headers",
     
-    ] + ALL_HDRS,
-    includes = ["include", "."],
+    ],
+    includes = ["include"],
 )
 
 genrule(

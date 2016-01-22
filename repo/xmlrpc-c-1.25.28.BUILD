@@ -1,18 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = glob(["include/xmlrpc-c/*.h"]) +[":include/xmlrpc-c/config.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libxmlrpc.so", "libxmlrpc_xmltok.so", "libxmlrpc_xmlparse.so", "libxmlrpc_util.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
 
-INC = ["lib/util/include", "include", "lib/expat/xmlparse", "lib/expat/xmltok", "."]
+INC = ["lib/util/include", "lib/expat/xmlparse", "lib/expat/xmltok"]
+ALL_HDRS = glob(["**/*.h"])
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libxmlrpc_client.so",
     srcs = [
 
@@ -20,12 +20,11 @@ cc_binary(
                 "src/xmlrpc_client_global.c",
                 "src/xmlrpc_server_info.c",
 
-    ] + ALL_HDRS,
+    ],
     includes = INC,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libxmlrpc_util.so",
     srcs = [
                 "lib/libutil/asprintf.c",
@@ -41,16 +40,15 @@ cc_binary(
                 ":include/xmlrpc-c/config.h",
 
 
-    ] + ALL_HDRS,
+    ],
     includes = INC,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libxmlrpc_xmlparse.so",
     srcs = [
                     "lib/expat/xmlparse/xmlparse.c",
-                    ] + ALL_HDRS,
+                    ],
     includes = INC,
 )
 
@@ -68,8 +66,7 @@ genrule(
     """
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libxmlrpc_xmltok.so",
     srcs = [
     
@@ -77,7 +74,7 @@ cc_binary(
                 "lib/expat/xmltok/xmlrole.c",
                 ":lib/expat/xmltok/nametab.h",
 
-    ] + ALL_HDRS,
+    ],
     deps = ["special_ext"],
     includes = INC,
     copts = ["-DXML_BYTE_ORDER=0"],
@@ -91,8 +88,7 @@ cc_library(
             ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libxmlrpc.so",
     srcs = [
     
@@ -118,9 +114,8 @@ cc_binary(
                 ":include/xmlrpc-c/config.h",
                 ":version.h",
     
-    ] + ALL_HDRS,
+    ],
     includes = INC,
-    copts = ["-DHAVE_CONFIG_H"],
 )
 
 genrule(

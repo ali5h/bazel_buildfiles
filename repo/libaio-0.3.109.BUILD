@@ -1,8 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["libaio.h"]
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libaio.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -24,8 +24,7 @@ genrule(
     cmd = "cp -r $< $@",
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libaio.so",
     srcs = [
         "src/io_queue_init.c",
@@ -39,7 +38,7 @@ cc_binary(
         "src/io_destroy.c",
         "src/raw_syscall.c",
         "src/compat-0_1.c",
-    ] + ALL_HDRS,
+    ],
     includes = ["src"],
     copts = ["-nostdlib", "-nostartfiles", "-fomit-frame-pointer", "-fPIC" ],
     linkopts = ["-Wl,-soname=libaio.so.1", "-Wl,--version-script", "libaio.ldscript"],

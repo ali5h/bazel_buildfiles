@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
                 "EtroConfigLib/EtroConfigLib.h",
@@ -9,14 +9,13 @@ EXTERNAL_HDRS = [
                 "EtroNetLib/EtroNetLib.h",
                 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libNVSConfigLib.so", "libNVSNetLib.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libNVSConfigLib.so",
     srcs = [
     
@@ -48,12 +47,11 @@ cc_binary(
                 "EtroConfigLib/EtroConfigLibStc/NVSConfigLibStc.c",
                 "EtroConfigLib/qnap_fix_network.c",
 
-    ] + ALL_HDRS,
+    ],
     includes = ["EtroConfigLib"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libNVSNetLib.so",
     srcs = [
             
@@ -67,6 +65,6 @@ cc_binary(
                 "EtroNetLib/EtroNetLibStc/NVSNetLibStc.c",
                 "EtroNetLib/qnap_fix_network.c",
 
-    ] + ALL_HDRS,
+    ],
     includes = ["EtroNetLib", "EtroNetLib/include"],
 )

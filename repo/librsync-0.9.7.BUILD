@@ -1,15 +1,14 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["librsync-config.h", "librsync.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["librsync.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "librsync.so",
     srcs = [
                 "prototab.c",
@@ -40,8 +39,6 @@ cc_binary(
                 "version.c",
                 "whole.c",
 
-    ] + ALL_HDRS,
-    includes = ["."],
-    copts = ["-DHAVE_CONFIG_H",],
+    ],
 )
 

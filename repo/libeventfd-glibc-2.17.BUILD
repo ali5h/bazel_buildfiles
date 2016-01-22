@@ -1,18 +1,16 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["sys/eventfd.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libeventfd.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libeventfd.so",
-    srcs = ["eventfd_read.c", "eventfd.c", "eventfd_write.c"] + ALL_HDRS,
-    includes = ["."],
+    srcs = ["eventfd_read.c", "eventfd.c", "eventfd_write.c"],
     copts = [
             "-D_GNU_SOURCE",
             "-D_LARGEFILE_SOURCE",

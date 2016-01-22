@@ -1,9 +1,9 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["libtasn1.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libtasn1.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -17,10 +17,9 @@ genrule(
     """,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libtasn1.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "lib/ASN1.c",
             "lib/decoding.c",
             "lib/gstr.c",
@@ -30,7 +29,6 @@ cc_binary(
             "lib/element.c",
             "lib/coding.c",
     ],
-    includes = ["lib", "."],
-    copts = ["-DHAVE_CONFIG_H"],
+    includes = ["lib"],
 )
 

@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "libxml/DOCBparser.h",
@@ -51,7 +51,7 @@ EXTERNAL_HDRS = [
             "libxml/xpointer.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libxml2.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -114,8 +114,7 @@ genrule(
 
 )
 
-cc_binary(
-            linkshared = 1,
+qnap_cc_library(
             name = "libxml2.so",
             srcs = [
                     "SAX.c",
@@ -164,9 +163,7 @@ cc_binary(
                     "xzlib.c",
 
                     "//external:zlib-so-latest",
-            ] + ALL_HDRS,
-
-            includes = ["include", "."],
+            ],
             copts = ["-DLIBXML_THREAD_ENABLED"],
             deps = [
                     "//external:zlib-hdr-latest",

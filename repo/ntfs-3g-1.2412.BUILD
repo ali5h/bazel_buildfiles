@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
         "ntfs-3g/attrib.h",
@@ -33,7 +33,7 @@ EXTERNAL_HDRS = [
         "ntfs-3g/volume.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["mount.ntfs-3g"],
             libs = ["libntfs-3g.so"],
             hdrs = EXTERNAL_HDRS,

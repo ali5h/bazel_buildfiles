@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
                 "glib/glib.h",
@@ -10,7 +10,7 @@ EXTERNAL_HDRS = [
                 ":inc_gio",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = [
                 "libglib-2.0.so",
                 "libgthread-2.0.so",
@@ -21,7 +21,7 @@ ALL_HDRS = pkg_outs(
             hdrs = EXTERNAL_HDRS,
 )
 
-
+ALL_HDRS = glob(["**/*.h"])
 
 genrule(
     name = "inc_gio",
@@ -621,8 +621,7 @@ cc_library(
     ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libglib-2.0.so",
     srcs = [
     
@@ -694,10 +693,9 @@ cc_binary(
                 "glib/giounix.c",
                 "glib/gspawn.c",
     
-    ] + ALL_HDRS,
-    includes = [".", "glib"],
+    ],
+    includes = ["glib"],
     copts = [
-                '-DHAVE_CONFIG_H',
                 '-DG_LOG_DOMAIN=\\"GLib\\"',
                 '-DG_DISABLE_DEPRECATED',
                 '-DGLIB_COMPILATION',
@@ -723,8 +721,7 @@ cc_library(
         ],
 )
 
-cc_binary(
-    linkshared = 1, 
+qnap_cc_library(
     name = "libgio-2.0.so",
     srcs = [
     
@@ -831,8 +828,8 @@ cc_binary(
                 "libglib-2.0.so",
                 "libgobject-2.0.so",
                 "libgmodule-2.0.so",
-    ] + ALL_HDRS,
-    includes = [".", "glib"],
+    ],
+    includes = ["glib"],
     copts = [
     
                 '-DG_LOG_DOMAIN=\\"GLib-GIO\\"',
@@ -865,7 +862,6 @@ cc_library(
                 "gio/xdgmime/xdgmimeparent.c",
     
     ] + ALL_HDRS,
-    includes = [],
     copts = [
             '-DXDG_PREFIX=_gio_xdg',
             '-DHAVE_CONFIG_H',
@@ -918,21 +914,19 @@ cc_library(
 )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgmodule-2.0.so",
     srcs = [
                 "gmodule/gmodule.c",
 
                 "libglib-2.0.so",
-    ] + ALL_HDRS,
-    includes = ["glib", "."],
+    ],
+    includes = ["glib"],
     copts = [
     
                 '-DG_LOG_DOMAIN=\\"GModule\\"',
                 '-DG_DISABLE_CAST_CHECKS',
                 '-DG_DISABLE_DEPRECATED',
-                '-DHAVE_CONFIG_H',
                 '-pthread',
                 '-DG_DISABLE_SINGLE_INCLUDES',
 
@@ -941,8 +935,7 @@ cc_binary(
     deps = ["special_ext"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgobject-2.0.so",
     srcs = [
     
@@ -963,11 +956,10 @@ cc_binary(
                 "gobject/gvaluetransform.c",
                 "gobject/gvaluetypes.c",
 
-    ] + ALL_HDRS,
-    includes = [".", "glib", "gobject"],
+    ],
+    includes = ["glib", "gobject"],
     copts = [
     
-                '-DHAVE_CONFIG_H',
                 '-DG_DISABLE_SINGLE_INCLUDES',
                 '-pthread',
 
@@ -982,14 +974,13 @@ cc_binary(
     deps = ["special_ext"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgthread-2.0.so",
     srcs = [
                 "gthread/gthread-impl.c",
                 "libglib-2.0.so",
-    ] + ALL_HDRS,
-    includes = [".", "gthread", "glib"],
+    ],
+    includes = ["gthread", "glib"],
     copts = [
     
                 '-DG_LOG_DOMAIN=\\"GThread\\"',
@@ -998,7 +989,6 @@ cc_binary(
                 '-U_OSF_SOURCE',
                 '-DG_DISABLE_CAST_CHECKS',
                 '-DG_DISABLE_DEPRECATED',
-                '-DHAVE_CONFIG_H',
                 '-DG_DISABLE_SINGLE_INCLUDES',
                 '-pthread',
     

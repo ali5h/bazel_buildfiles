@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "SANDBOX_ROOT")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary", "SANDBOX_ROOT")
 
 EXTERNAL_HDRS = [
             "graphviz/arith.h",
@@ -31,7 +31,7 @@ EXTERNAL_HDRS = [
             "graphviz/xdot.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libxdot.so", "libpathplan.so", "libgvpr.so", "libgvc.so", "libcgraph.so", "libcdt.so"],
             hdrs = EXTERNAL_HDRS,
 )

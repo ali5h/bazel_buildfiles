@@ -1,16 +1,15 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["bzlib.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libbz2.so"],
         hdrs = EXTERNAL_HDRS,
         )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libbz2.so",
     srcs = [
             "blocksort.c",
@@ -20,8 +19,7 @@ cc_binary(
             "compress.c",
             "decompress.c",
             "bzlib.c",
-    ] + ALL_HDRS,
-    includes = ["."],
+    ],
     copts = ["-D_FILE_OFFSET_BITS=64"],
 )
 

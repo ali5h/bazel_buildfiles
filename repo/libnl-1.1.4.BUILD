@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
                 "include/netlink/addr.h",
@@ -53,17 +53,15 @@ EXTERNAL_HDRS = [
                 "include/netlink/utils.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libnl.so"],
             hdrs = EXTERNAL_HDRS, 
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libnl.so",
-    srcs = glob(["lib/**/*.c"]) + ALL_HDRS,
-    includes = ["include"],
+    srcs = glob(["lib/**/*.c"]),
     copts = ["-D_GNU_SOURCE"],
 )
 

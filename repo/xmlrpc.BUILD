@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
 	"src/base64.h",
@@ -12,7 +12,7 @@ EXTERNAL_HDRS = [
 	"src/xmlrpc_introspection.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libxmlrpc-epi.so"],
             hdrs = EXTERNAL_HDRS,
             )

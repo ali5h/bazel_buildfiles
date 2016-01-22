@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
         "upnp/inc/UpnpString.h",
@@ -21,7 +21,7 @@ EXTERNAL_HDRS = [
         "threadutil/inc/ithread.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libupnp.so", "libixml.so", "libthreadutil.so"],
         hdrs = EXTERNAL_HDRS,
         )
@@ -67,8 +67,7 @@ INTERNAL_HDRS = [
 
 ]
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libupnp.so",
     srcs = [
         "upnp/src/ssdp/ssdp_device.c",
@@ -104,13 +103,11 @@ cc_binary(
         "upnp/src/urlconfig/urlconfig.c",
         "upnp/src/inet_pton.c",
 
-        ] + ALL_HDRS,
+        ],
     includes = ["upnp/src/inc", ".", "upnp/inc", "threadutil/inc", "ixml/inc", "build/inc"],
-    copts = ["-DHAVE_CONFIG_H"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libixml.so",
     srcs = [
         "ixml/src/attr.c",
@@ -123,20 +120,19 @@ cc_binary(
         "ixml/src/namedNodeMap.c",
         "ixml/src/node.c",
         "ixml/src/nodeList.c",
-        ] + ALL_HDRS,
-    includes = [".", "ixml/src/inc", "ixml/inc", "upnp/inc", "build/inc"],
-    copts = ["-DHAVE_CONFIG_H", "-DNDEBUG"],
+        ],
+    includes = [ "ixml/src/inc", "ixml/inc", "upnp/inc", "build/inc"],
+    copts = ["-DNDEBUG"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libthreadutil.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "threadutil/src/FreeList.c",
             "threadutil/src/LinkedList.c",
             "threadutil/src/ThreadPool.c",
             "threadutil/src/TimerThread.c",
         ],
     includes = ["threadutil/inc", "upnp/inc"],
-    copts = ["-DHAVE_CONFIG_H", "-DNO_DEBUG", "-DNDEBUG"],
+    copts = ["-DNO_DEBUG", "-DNDEBUG"],
 )

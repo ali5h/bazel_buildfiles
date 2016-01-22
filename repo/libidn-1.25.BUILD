@@ -1,9 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 
 OPTS = [
-            "-DHAVE_CONFIG_H",
             "-DLIBIDN_BUILDING",
             '-DLOCALEDIR=\\"/usr/local/share/locale\\"',
     ]
@@ -18,13 +17,12 @@ EXTERNAL_HDRS = [
             "lib/tld.h",
 ]
  
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libidn.so"],
         hdrs = EXTERNAL_HDRS,
         )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libidn.so",
     srcs = [
     
@@ -55,9 +53,12 @@ cc_binary(
 
             "//external:libunistring-so-latest",
 
-    ] + ALL_HDRS,
-    includes = [".", "lib", "win32/include", "lib/gl"],
-    copts = OPTS,
+    ],
+    includes = ["lib", "win32/include", "lib/gl"],
+    copts = [
+            "-DLIBIDN_BUILDING",
+            '-DLOCALEDIR=\\"/usr/local/share/locale\\"',
+    ],
     deps = [
                 "//external:libunistring-hdr-latest",
                 ].

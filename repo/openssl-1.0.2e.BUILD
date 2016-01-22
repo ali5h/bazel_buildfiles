@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "SANDBOX_ROOT")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary", "SANDBOX_ROOT")
 
 EXTERNAL_HDRS = [
         "include/openssl/opensslconf.h",
@@ -77,7 +77,7 @@ EXTERNAL_HDRS = [
         "include/openssl/x509v3.h",
         ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         exes = ["openssl"], 
         libs = ["libssl.so", "libcrypto.so"],
         hdrs = EXTERNAL_HDRS,

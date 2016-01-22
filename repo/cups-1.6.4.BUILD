@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
         "cups/adminutil.h",
@@ -18,7 +18,7 @@ EXTERNAL_HDRS = [
         "cups/versioning.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = [
                     "cupsd",
                     "lpadmin",
@@ -49,13 +49,12 @@ OPTS = [
         '-Wno-format-y2k',
         '-Wunused',
         '-fstack-protector',
-        '-Wno-tautological-compare',
         '-D_GNU_SOURCE',
     ]
 
 
 
-cc_binary(
+qnap_cc_binary(
     name = "cupsd",
     srcs = [
             
@@ -88,8 +87,7 @@ cc_binary(
         "libcups.so",
         "libcupsmime.so",
         "//external:zlib-so-latest",
-    ] + ALL_HDRS,
-    includes = ["."],
+    ],
     copts = OPTS,
     linkopts = ["-lcrypt"],
     deps = [
@@ -97,142 +95,128 @@ cc_binary(
     ],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "cups-deviced",
     srcs = [
         "scheduler/cups-deviced.c",
         "scheduler/util.c",
         "libcups.so",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
     deps = [
         "//external:zlib-hdr-latest",
     ],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "cups-lpd",
     srcs = [
         "scheduler/cups-lpd.c",
         "libcups.so",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpadmin",
     srcs = [
         "systemv/lpadmin.c",
         "libcups.so",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpinfo",
     srcs = [
         "libcups.so",
         "systemv/lpinfo.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpstat",
     srcs = [
         "libcups.so",
         "systemv/lpstat.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpmove",
     srcs = [
         "libcups.so",
         "systemv/lpmove.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpoptions",
     srcs = [
         "libcups.so",
         "systemv/lpoptions.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lp",
     srcs = [
         "libcups.so",
         "systemv/lp.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpq",
     srcs = [
         "libcups.so",
         "berkeley/lpq.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lpr",
     srcs = [
         "libcups.so",
         "berkeley/lpr.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "lprm",
     srcs = [
         "libcups.so",
         "berkeley/lprm.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "cancel",
     srcs = [
         "libcups.so",
         "systemv/cancel.c",
-            ] + ALL_HDRS,
+            ],
     copts = OPTS,
-    includes = ["."],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "gziptoany",
     srcs = [
         "libcups.so",
         "filter/gziptoany.c",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = OPTS,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libcups.so",
     srcs = [
     
@@ -286,23 +270,20 @@ cc_binary(
 		"cups/usersys.c",
 		"cups/util.c",
 
-    ] + ALL_HDRS,
+    ],
     copts = OPTS,
-    includes = ["."],
     linkopts = ["-pthread", "-lm"],
     deps = [
         "//external:zlib-hdr-latest",
     ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libcupsmime.so",
     srcs = [
 		"scheduler/filter.c",
 		"scheduler/mime.c",
 		"scheduler/type.c",
-        ] + ALL_HDRS,
+        ],
     copts = OPTS,
-    includes = ["."],
 )

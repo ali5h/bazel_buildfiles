@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 # EXTERNAL_HDRS referring to installed header
 EXTERNAL_HDRS = [
@@ -44,7 +44,7 @@ EXTERNAL_HDRS = [
             "profile.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         exes = [
                 "klist",
                 "kinit",

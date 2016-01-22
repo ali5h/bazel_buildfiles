@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "tirpc/netconfig.h",
@@ -36,15 +36,14 @@ EXTERNAL_HDRS = [
             "tirpc/rpc/auth_des.h",
             ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libtirpc.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libtirpc.so",
-    srcs = ALL_HDRS + [
+    srcs = [
 
         "src/auth_none.c",
         "src/auth_unix.c",
@@ -109,8 +108,8 @@ cc_binary(
         "//external:krb5-so-latest",
         "//external:e2fsprogs-so-latest",
         ],
-    includes = ["tirpc", "."],
-    copts = ["-DHAVE_CONFIG_H", "-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe", "-DHAVE_RPCSEC_GSS"],
+    includes = ["tirpc"],
+    copts = ["-DPORTMAP", "-DINET6", "-D_GNU_SOURCE", "-pipe", "-DHAVE_RPCSEC_GSS"],
     deps = [
         "//external:krb5-hdr-latest",
         "//external:e2fsprogs-hdr-latest",

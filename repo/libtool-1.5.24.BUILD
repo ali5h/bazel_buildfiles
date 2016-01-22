@@ -1,20 +1,18 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["libltdl/ltdl.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libltdl.so"],
         hdrs = EXTERNAL_HDRS,
         )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libltdl.so",
-        srcs = ALL_HDRS + [
+        srcs = [
             "libltdl/ltdl.c",
             ],
         includes = ["libltdl"],
-        copts = ["-DHAVE_CONFIG_H"],
 )
 

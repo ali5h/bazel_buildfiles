@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
 	"wand/MagickWand.h",
@@ -124,15 +124,14 @@ EXTERNAL_HDRS = [
 	"magick/xwindow.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["convert", "identify", "composite"],
             libs = ["libMagickWand.so", "libMagickCore.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libMagickWand.so",
     srcs = [
     
@@ -157,19 +156,16 @@ cc_binary(
             "wand/wand.c",
             "wand/wand-view.c",
     
-    ] + ALL_HDRS,
-    includes = ["."],
+    ],
     linkopts = ["-lm"],
     copts = [
-                "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
                 "-DMAGICKCORE_EXCLUDE_DEPRECATED",
                 ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libMagickCore.so",
     srcs = [
     
@@ -267,11 +263,9 @@ cc_binary(
             "magick/xwindow.c",
 
             "//external:zlib-so-latest",
-    ] + ALL_HDRS,
-    includes = ["."],
+    ],
     linkopts = ["-lm", "-pthread"],
     copts = [
-                "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
                 "-DMAGICKCORE_BUILD_MODULES",
@@ -281,170 +275,40 @@ cc_binary(
                 ],
 )
 
-# cc_library(
-#     name = "coders",
-#     srcs = [
-# 	"coders/aai.c",
-# 	"coders/art.c",
-# 	"coders/avs.c",
-# 	"coders/bgr.c",
-# 	"coders/bmp.c",
-# 	"coders/braille.c",
-# 	"coders/cals.c",
-# 	"coders/caption.c",
-# 	"coders/cin.c",
-# 	"coders/cip.c",
-# 	"coders/clip.c",
-# 	"coders/cmyk.c",
-# 	"coders/cut.c",
-# 	"coders/dcm.c",
-# 	"coders/dds.c",
-# 	"coders/debug.c",
-# 	"coders/dib.c",
-# 	"coders/dng.c",
-# 	"coders/dot.c",
-# 	"coders/dpx.c",
-# 	"coders/fax.c",
-# 	"coders/fd.c",
-# 	"coders/fits.c",
-# 	"coders/gif.c",
-# 	"coders/gradient.c",
-# 	"coders/gray.c",
-# 	"coders/hald.c",
-# 	"coders/hdr.c",
-# 	"coders/histogram.c",
-# 	"coders/hrz.c",
-# 	"coders/html.c",
-# 	"coders/icon.c",
-# 	"coders/info.c",
-# 	"coders/inline.c",
-# 	"coders/ipl.c",
-# 	"coders/jnx.c",
-# 	"coders/json.c",
-# 	"coders/label.c",
-# 	"coders/mac.c",
-# 	"coders/magick.c",
-# 	"coders/map.c",
-# 	"coders/mask.c",
-# 	"coders/mat.c",
-# 	"coders/matte.c",
-# 	"coders/meta.c",
-# 	"coders/miff.c",
-# 	"coders/mono.c",
-# 	"coders/mpc.c",
-# 	"coders/mpeg.c",
-# 	"coders/mpr.c",
-# 	"coders/msl.c",
-# 	"coders/mtv.c",
-# 	"coders/mvg.c",
-# 	"coders/null.c",
-# 	"coders/otb.c",
-# 	"coders/palm.c",
-# 	"coders/pango.c",
-# 	"coders/pattern.c",
-# 	"coders/pcd.c",
-# 	"coders/pcl.c",
-# 	"coders/pcx.c",
-# 	"coders/pdb.c",
-# 	"coders/pdf.c",
-# 	"coders/pes.c",
-# 	"coders/pict.c",
-# 	"coders/pix.c",
-# 	"coders/plasma.c",
-# 	"coders/pnm.c",
-# 	"coders/preview.c",
-# 	"coders/ps.c",
-# 	"coders/ps2.c",
-# 	"coders/ps3.c",
-# 	"coders/psd.c",
-# 	"coders/pwp.c",
-# 	"coders/raw.c",
-# 	"coders/rgb.c",
-# 	"coders/rgf.c",
-# 	"coders/rla.c",
-# 	"coders/rle.c",
-# 	"coders/scr.c",
-# 	"coders/screenshot.c",
-# 	"coders/sct.c",
-# 	"coders/sfw.c",
-# 	"coders/sgi.c",
-# 	"coders/sixel.c",
-# 	"coders/stegano.c",
-# 	"coders/sun.c",
-# 	"coders/svg.c",
-# 	"coders/tga.c",
-# 	"coders/thumbnail.c",
-# 	"coders/tile.c",
-# 	"coders/tim.c",
-# 	"coders/ttf.c",
-# 	"coders/txt.c",
-# 	"coders/uil.c",
-# 	"coders/url.c",
-# 	"coders/uyvy.c",
-# 	"coders/vicar.c",
-# 	"coders/vid.c",
-# 	"coders/viff.c",
-# 	"coders/vips.c",
-# 	"coders/wbmp.c",
-# 	"coders/wpg.c",
-# 	"coders/xbm.c",
-# 	"coders/xc.c",
-# 	"coders/xcf.c",
-# 	"coders/xpm.c",
-# 	"coders/xps.c",
-# 	"coders/ycbcr.c",
-# 	"coders/yuv.c",
-#     ] + INTERNAL_HDRS,
-#     hdrs = EXTERNAL_HDRS,
-#     includes = ["."],
-#     copts = [
-#                 "-DHAVE_CONFIG_H",
-#                 "-DMAGICKCORE_HDRI_ENABLE=0",
-#                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
-#                 ],
-#     deps = ["//external:zlib-latest"],
-# )
-
-cc_binary(
+qnap_cc_binary(
     name = "convert",
     srcs = [
                 "utilities/convert.c",
                 "libMagickWand.so",
                 "libMagickCore.so",
-            ] + ALL_HDRS,
-    includes = ["."],
+            ],
     copts = [
-                "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
                 ],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "identify",
     srcs = [
                 "utilities/identify.c",
                 "libMagickWand.so",
                 "libMagickCore.so",
-                ] + ALL_HDRS,
-    includes = ["."],
+                ],
     copts = [
-                "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
                 ],
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "composite",
     srcs = [
                 "utilities/composite.c",
                 "libMagickWand.so",
                 "libMagickCore.so",
-                ] + ALL_HDRS,
-    includes = ["."],
+                ],
     copts = [
-                "-DHAVE_CONFIG_H",
                 "-DMAGICKCORE_HDRI_ENABLE=0",
                 "-DMAGICKCORE_QUANTUM_DEPTH=16",
                 ],

@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
-ALL_HDRS = glob(["**/*.h", "boost/**/*.hpp"])
 EXTERNAL_HDRS = glob(["boost/**/*.h", "boost/**/*.hpp", "boost/**/*.ipp"])
 
 pkg_outs(
@@ -10,19 +9,15 @@ pkg_outs(
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libboost_filesystem.so",
-    srcs = glob(["libs/filesystem/src/*"]) + ALL_HDRS,
-    includes = ["."],
+    srcs = glob(["libs/filesystem/src/*"]),
     deps = ["special_ext"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libboost_serialization.so",
-    srcs = glob(["libs/serialization/src/*.cpp"]) + ALL_HDRS,
-    includes = ["."],
+    srcs = glob(["libs/serialization/src/*.cpp"]),
     deps = ["special_ext"],
 )
 
@@ -31,9 +26,7 @@ cc_library(
     hdrs = glob(["boost/**/*.ipp"]) + ["libs/serialization/src/basic_xml_grammar.ipp"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libboost_system.so",
-    srcs = glob(["libs/system/src/*"]) + ALL_HDRS,
-    includes = ["."],
+    srcs = glob(["libs/system/src/*"]),
 )

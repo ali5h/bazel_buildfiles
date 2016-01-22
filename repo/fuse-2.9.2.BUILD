@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "include/cuse_lowlevel.h",
@@ -14,23 +14,21 @@ EXTERNAL_HDRS = [
             "include/ulockmgr.h",
             ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["fusermount"],
             libs = ["libulockmgr.so", "libfuse.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
+qnap_cc_binary(
     name = "fusermount",
-    srcs = ["util/fusermount.c","util/mount_util.c"] + ALL_HDRS,
-    includes = ["lib", "include"],
+    srcs = ["util/fusermount.c","util/mount_util.c"],
+    includes = ["lib"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libulockmgr.so",
-    srcs = ALL_HDRS + ["lib/ulockmgr.c"],
-    includes = ["include"],
+    srcs = ["lib/ulockmgr.c"],
     copts = [
             '-D_FILE_OFFSET_BITS=64',
             '-D_REENTRANT',
@@ -39,8 +37,7 @@ cc_binary(
             ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libfuse.so",
     srcs = [
             "lib/mount.c",
@@ -59,7 +56,7 @@ cc_binary(
             "lib/cuse_lowlevel.c",
             "lib/helper.c",
             "lib/modules/subdir.c",
-            ] + ALL_HDRS,
+            ],
     copts = [
                 "-fPIC",
                 '-D_FILE_OFFSET_BITS=64',
@@ -68,7 +65,6 @@ cc_binary(
                 '-DFUSERMOUNT_DIR=\\"/usr/local/bin\\"'
             ],
     linkopts = ["-ldl", "-pthread", "-shared", "-Wl,--version-script", "fuse_versionscript.ldscript"],
-    includes = ["include"],
     deps = ["fuse_versionscript.ldscript"],
 )
 

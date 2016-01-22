@@ -1,8 +1,8 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["gpg"],
             )
 
@@ -15,8 +15,9 @@ OPTS = [
         '-DGNUPG_DATADIR=\\"/usr/local/share/gnupg\\"',
         ]
 
+ALL_HDRS = glob(["**/*.h"])
 
-cc_binary(
+qnap_cc_binary(
     name = "gpg",
     srcs = [
 
@@ -79,7 +80,7 @@ cc_binary(
 
             "//external:zlib-so-latest",
             "//external:libusb-compat-so-latest",
-    ] + ALL_HDRS,
+    ],
     copts = OPTS,
     linkopts = ["-ldl"],
     deps = [

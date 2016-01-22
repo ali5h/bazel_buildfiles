@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
                 "src/match/cm_libmatch.h",
@@ -21,21 +21,19 @@ EXTERNAL_HDRS = [
                 "src/getopt/cm_libgetopt.h",
                 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libcommon.so"],
         hdrs = EXTERNAL_HDRS
 )
 
 OPTS = [
-                '-DHAVE_CONFIG_H',
                 '-D_XOPEN_SOURCE=600',
                 '-fno-common',
                 '-pedantic',
                 '-std=c99',
 ]
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libcommon.so",
     srcs = [
     
@@ -151,7 +149,7 @@ cc_binary(
                 "src/memory/libmemory_release.c",
                 "src/unitary_test/libunitary_test.c",
     
-    ] + ALL_HDRS,
+    ],
     includes = [
                 "src/match",
                 "src/debug",

@@ -1,11 +1,11 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "sqlite3.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libsqlite3.so"],
             hdrs = EXTERNAL_HDRS,
             )

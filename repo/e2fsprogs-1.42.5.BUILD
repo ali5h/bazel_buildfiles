@@ -1,17 +1,16 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["com_err.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libcom_err.so"],
         hdrs = EXTERNAL_HDRS,
         )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libcom_err.so",
-    srcs = ALL_HDRS + [
+    srcs = [
         "lib/et/error_message.c",
         "lib/et/et_name.c",
         "lib/et/init_et.c",

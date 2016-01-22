@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs", "SANDBOX_ROOT")
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary", "SANDBOX_ROOT")
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = [
                 "libtranscoder.so",
                 "libavcodec.so",

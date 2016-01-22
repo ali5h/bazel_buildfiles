@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "include/ldif.h",
@@ -12,7 +12,7 @@ EXTERNAL_HDRS = [
             "include/lber_types.h",
                 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["liblber.so", "libldap.so", "libldap_r.so"],
             hdrs = EXTERNAL_HDRS,
             )

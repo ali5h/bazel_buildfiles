@@ -64,19 +64,33 @@ def pkg_outs(exes = [], libs = [], hdrs = [], inc_dir = ""):
         name = 'outs',
         srcs = [":libs", ":exes"],
     )
-    return  native.glob(["**/*.h"])
+    # return  native.glob(["**/*.h"])
 
 def qnap_cc_library( name="", deps = [], srcs =[] , copts = [], defines = [], includes = [], linkopts = [] ):
     native.cc_binary(
         name = name,
         deps = deps,
-        srcs = srcs + native.glob(["**/*.h"]),
+        srcs = srcs + native.glob(["**/*.h", "boost/**/*.hpp"]),
         copts = copts + ["-DHAVE_CONFIG_H"],
         defines = defines,
-        includes = ["."] + includes + select({
+        includes = [".", "include"] + includes + select({
                                                 "//target:x86_64": ["qnap_cfg_inc/x86_64"],
                                                 "//target:arm":    ["qnap_cfg_inc/arm"],
                                             }),
         linkopts = linkopts,
         linkshared = 1,
+    )
+
+def qnap_cc_binary( name="", deps = [], srcs =[] , copts = [], defines = [], includes = [], linkopts = [] ):
+    native.cc_binary(
+        name = name,
+        deps = deps,
+        srcs = srcs + native.glob(["**/*.h", "boost/**/*.hpp"]),
+        copts = copts + ["-DHAVE_CONFIG_H"],
+        defines = defines,
+        includes = [".", "include"] + includes + select({
+                                                "//target:x86_64": ["qnap_cfg_inc/x86_64"],
+                                                "//target:arm":    ["qnap_cfg_inc/arm"],
+                                            }),
+        linkopts = linkopts,
     )

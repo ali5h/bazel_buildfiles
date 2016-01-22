@@ -1,9 +1,9 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["libusb.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libusb-1.0.so"],
         hdrs = EXTERNAL_HDRS,
         )
@@ -17,8 +17,7 @@ genrule(
     """,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libusb-1.0.so",
     srcs = [
             "libusb/core.c",
@@ -27,9 +26,9 @@ cc_binary(
             "libusb/sync.c",
             "libusb/os/linux_usbfs.c",
             "libusb/os/threads_posix.c",
-    ] + ALL_HDRS,
-    includes = [".", "libusb"],
-    copts = ["-DHAVE_CONFIG_H", '-DLIBUSB_DESCRIBE=\\"\\"'],
+    ],
+    includes = ["libusb"],
+    copts = ['-DLIBUSB_DESCRIBE=\\"\\"'],
     linkopts = ["-lpthread"],
 )
 

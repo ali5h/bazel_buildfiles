@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "includes/gnutls/compat.h",
@@ -12,14 +12,13 @@ EXTERNAL_HDRS = [
             "includes/gnutls/x509.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libgnutls.so", "libgnutls-extra.so", "libgnutls-openssl.so"],
             hdrs = EXTERNAL_HDRS,
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgnutls.so",
     srcs = [
             "lib/gnutls_record.c",
@@ -151,9 +150,9 @@ cc_binary(
             "//external:zlib-so-latest",
             "//external:gpg-error-so-latest",
 
-    ] + ALL_HDRS,
-    includes = ["lib", "includes", "lib/minitasn1", "lgl", ".", "lib/opencdk", "lib/openpgp", "lib/x509"],
-    copts = ["-DHAVE_CONFIG_H", '-DLOCALEDIR=\\"/usr/share/locale\\"'],
+    ],
+    includes = ["lib", "includes", "lib/minitasn1", "lgl", "lib/opencdk", "lib/openpgp", "lib/x509"],
+    copts = ['-DLOCALEDIR=\\"/usr/share/locale\\"'],
     deps = [
             "//external:gcrypt-hdr-latest",
             "//external:zlib-hdr-latest",
@@ -161,8 +160,7 @@ cc_binary(
             ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgnutls-extra.so",
     srcs = [
             "libextra/gnutls_extra.c",
@@ -176,17 +174,15 @@ cc_binary(
             "libgnutls.so",
             "//external:libtasn1-so-latest",
             "//external:zlib-so-latest",
-    ] + ALL_HDRS,
-    includes = ["libextra", ".", "lgl", "libextra/gl", "lib", "includes"],
-    copts = ["-DHAVE_CONFIG_H"],
+    ],
+    includes = ["libextra", "lgl", "libextra/gl", "lib", "includes"],
     deps = [
             "//external:libtasn1-hdr-latest",
             "//external:zlib-hdr-latest",
     ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgnutls-openssl.so",
     srcs = [
             "libextra/gnutls_openssl.c",
@@ -195,8 +191,8 @@ cc_binary(
             "libgnutls.so",
             "//external:libtasn1-so-latest",
             "//external:zlib-so-latest",
-    ] + ALL_HDRS,
-    includes = ["libextra", "lib", "includes", "."],
+    ],
+    includes = ["libextra", "lib", "includes"],
     deps = [
             "//external:libtasn1-hdr-latest",
             "//external:zlib-hdr-latest",

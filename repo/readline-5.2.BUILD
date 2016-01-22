@@ -1,5 +1,5 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
         "readline.h",
@@ -13,11 +13,12 @@ EXTERNAL_HDRS = [
         ":hdrs_subdir",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
         libs = ["libreadline.so", "libhistory.so"],
         hdrs = EXTERNAL_HDRS,
         )
 
+ALL_HDRS = glob(["**/*.h"])
 
 genrule(
     name = "hdrs_subdir",
@@ -53,8 +54,7 @@ genrule(
     """
 )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libreadline.so",
         srcs = [
             "readline.c",
@@ -89,9 +89,8 @@ cc_binary(
             "mbutil.c",
 
             "//external:ncurses-so-latest",
-            ] + ALL_HDRS,
-        includes = ["."],
-        copts = ["-DHAVE_CONFIG_H", '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
+            ],
+        copts = [ '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
         deps = [
                 "//external:ncurses-hdr-latest",
                 ":tilde",
@@ -114,8 +113,7 @@ cc_library(
         includes = ["."],
 )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libhistory.so",
         srcs = [
                 "xmalloc.c",
@@ -125,9 +123,8 @@ cc_binary(
                 "histsearch.c",
                 "shell.c",
                 "mbutil.c",
-            ] + ALL_HDRS,
-        includes = ["."],
-        copts = ["-DHAVE_CONFIG_H", '-DRL_LIBRARY_VERSION=\\"5.2\\"'],
+            ],
+        copts = ['-DRL_LIBRARY_VERSION=\\"5.2\\"'],
 )
 
 

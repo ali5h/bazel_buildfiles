@@ -1,16 +1,14 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["liblinuxfallocate.so"],
             )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "liblinuxfallocate.so",
-    srcs = ["fallocate.c"] + ALL_HDRS,
-    includes = ["."],
+    srcs = ["fallocate.c"],
     copts = [
             "-D_GNU_SOURCE",
             "-D_LARGEFILE_SOURCE",

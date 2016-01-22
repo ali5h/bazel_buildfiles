@@ -1,11 +1,11 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
             "expat.h",
             "expat_external.h",
             ]
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libexpat.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -27,15 +27,14 @@ genrule(
         """,
 )
 
-cc_binary(
-            linkshared = 1,
+qnap_cc_library(
             name = "libexpat.so",
             srcs = glob([
                         "lib/xmlparse.c",
                         "lib/xmlrole.c",
                         "lib/xmltok.c",
-                        ]) + ALL_HDRS,
-            includes = [".", "lib"],
+                        ]),
+            includes = ["lib"],
             copts = [
                     "-Wmissing-prototypes",
                     "-Wstrict-prototypes",

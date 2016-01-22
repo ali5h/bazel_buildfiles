@@ -1,12 +1,12 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
     "x86_64-linux-gnu/ffi.h",
     "x86_64-linux-gnu/ffitarget.h",
 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libffi.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -24,17 +24,16 @@ genrule(
     """,
 )
 
-cc_binary(
-    linkshared = 1 ,
+qnap_cc_library(
     name = "libffi.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "src/prep_cif.c",
             "src/types.c",
             "src/raw_api.c",
             "src/java_raw_api.c",
             "src/closures.c",
          ],
-    includes = ["include", "x86_64-unknown-linux-gnu/include", "x86_64-unknown-linux-gnu"],
+    includes = ["x86_64-unknown-linux-gnu/include", "x86_64-unknown-linux-gnu"],
     deps = ["special_ext"],
 )
 

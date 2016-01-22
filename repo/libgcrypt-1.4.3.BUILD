@@ -1,12 +1,12 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = [
                 "gcrypt.h",
                 "gcrypt-module.h",
                 ]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libgcrypt.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -24,8 +24,7 @@ genrule(
     """,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgcrypt.so",
     srcs = [
             "src/visibility.c",
@@ -107,9 +106,8 @@ cc_binary(
 
             "//external:gpg-error-so-latest",
 
-    ] + ALL_HDRS,
-    includes = [".", "src"],
-    copts = ["-DHAVE_CONFIG_H", "-w"],
+    ],
+    includes = ["src"],
     deps = [
             "//external:gpg-error-hdr-latest",
             ],

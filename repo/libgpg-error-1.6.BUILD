@@ -1,9 +1,9 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
 EXTERNAL_HDRS = ["gpg-error.h"]
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             libs = ["libgpg-error.so"],
             hdrs = EXTERNAL_HDRS,
             )
@@ -17,10 +17,9 @@ genrule(
     """,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libgpg-error.so",
-    srcs =  ALL_HDRS + [
+    srcs =  [
             "src/init.c",
             "src/strsource.c",
             "src/strerror.c",
@@ -30,8 +29,8 @@ cc_binary(
             ":src/code-from-errno.h",
 
         ],
-    includes = ["src", "."],
-    copts = ["-DHAVE_CONFIG_H", '-DLOCALEDIR=\\"/usr/local/share/locale\\"'],
+    includes = ["src"],
+    copts = ['-DLOCALEDIR=\\"/usr/local/share/locale\\"'],
 )
 
 cc_binary(

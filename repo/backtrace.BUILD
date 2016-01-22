@@ -1,20 +1,19 @@
 package(default_visibility = ["//visibility:public"])
-load("/ext/extension", "pkg_outs",)
+load("/ext/extension", "pkg_outs", "qnap_cc_library", "qnap_cc_binary",)
 
-ALL_HDRS = pkg_outs(
+pkg_outs(
             exes = ["crasher"],
             libs = ["libbacktrace.so"],
             )
 
-cc_binary(
-  linkshared = 1,
+qnap_cc_library(
   name = "libbacktrace.so",
   srcs = ["backtrace.cxx"],
   copts = ["-Werror", "-D_GNU_SOURCE"],
   linkopts = ["-fPIC", "-shared"],
 )
 
-cc_binary(
+qnap_cc_binary(
   name = "crasher",
   srcs = ["crasher.cxx"],
   copts = ["-Werror", "-D_GNU_SOURCE"],
