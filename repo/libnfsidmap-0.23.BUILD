@@ -8,9 +8,12 @@ pkg_outs(
             hdrs = EXTERNAL_HDRS,
             )
 
-qnap_cc_library(
+ALL_HDRS = glob(["**/*.h"])
+
+cc_binary(
+    linkshared = 1,
     name = "libnfsidmap.so",
-    srcs = [
+    srcs = ALL_HDRS + [
         "libnfsidmap.c",
         "cfg.c",
         "strlcpy.c",
@@ -18,17 +21,20 @@ qnap_cc_library(
 )
 
 
-qnap_cc_library(
+cc_binary(
+    linkshared = 1,
     name = "nsswitch.so",
-    srcs = ["nss.c"],
+    srcs = ["nss.c"] + ALL_HDRS,
 )
 
-qnap_cc_library(
+cc_binary(
+    linkshared = 1,
     name = "static.so",
-    srcs = ["static.c"],
+    srcs = ["static.c"] + ALL_HDRS,
 )
 
-qnap_cc_library(
-  name = "umich_ldap.so",
-  srcs = ["umich_ldap.c",],
+cc_binary(
+    linkshared = 1,
+    name = "umich_ldap.so",
+    srcs = ["umich_ldap.c",] + ALL_HDRS,
 )
