@@ -8,7 +8,9 @@ pkg_outs(
             hdrs = EXTERNAL_HDRS,
             )
 
-qnap_cc_library(
+cc_binary(
+    linkshared = 1,
     name = "libgsoap.so",
-    srcs = ["stdsoap2.cpp"],
+    srcs = ["stdsoap2.cpp"] + glob(["**/*.h"]),
+    includes = ["."],
 )
