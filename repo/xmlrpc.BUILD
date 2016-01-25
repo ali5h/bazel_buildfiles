@@ -17,10 +17,9 @@ pkg_outs(
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libxmlrpc-epi.so",
-        srcs = ALL_HDRS + [
+        srcs = [
         "src/base64.c",
         "src/encodings.c",
         "src/queue.c",
