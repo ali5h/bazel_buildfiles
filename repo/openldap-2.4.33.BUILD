@@ -18,10 +18,9 @@ pkg_outs(
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "liblber.so",
-    srcs = ALL_HDRS + [
+    srcs = [
 
             "libraries/liblber/assert.c",
             "libraries/liblber/decode.c",
@@ -36,7 +35,6 @@ cc_binary(
             "include/ldap_config.h",
         ],
     copts = ["-DLBER_LIBRARY"],
-    includes = ["include"],
 )
 
 genrule(
@@ -57,10 +55,9 @@ genrule(
     """,
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libldap.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -129,16 +126,14 @@ cc_binary(
             "//external:openssl-so-latest",
         ],
     copts = ["-DLDAP_LIBRARY"],
-    includes = ["include"],
     deps = [
             "//external:openssl-hdr-latest",
         ],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libldap_r.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "libraries/libldap/bind.c",
             "libraries/libldap/open.c",
             "libraries/libldap/result.c",
@@ -219,7 +214,7 @@ cc_binary(
             "//external:openssl-so-latest",
         ],
     copts = ["-DLDAP_R_COMPILE"],
-    includes = ["include", "libraries/libldap"],
+    includes = ["libraries/libldap"],
     deps = [
                 "//external:openssl-hdr-latest",
                 ],

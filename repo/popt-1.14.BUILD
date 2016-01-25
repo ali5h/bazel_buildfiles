@@ -8,19 +8,16 @@ pkg_outs(
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libpopt.so",
-        srcs = ALL_HDRS + [
+        srcs = [
             "popt.c",
             "poptconfig.c",
             "popthelp.c",
             "poptint.c",
             "poptparse.c",
             ],
-        includes = ["."],
         copts = [
-                "-DHAVE_CONFIG_H",
                 "-D_GNU_SOURCE",
                 "-D_REENTRANT",
                 "-Wno-unused-but-set-variable",

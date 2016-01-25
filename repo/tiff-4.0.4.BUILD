@@ -15,10 +15,9 @@ pkg_outs(
             )
 
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libtiff.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "port/dummy.c",
             "libtiff/tif_aux.c",
             "libtiff/tif_close.c",
@@ -62,9 +61,6 @@ cc_binary(
             "//external:zlib-so-latest",
             "//external:jpeg-so-latest",
     ],
-    # hdrs = EXTERNAL_HDRS,
-    # includes = [],
-    copts = ["-DHAVE_CONFIG_H", "-w"],
     deps = [
             "//external:zlib-hdr-latest",
             "//external:jpeg-hdr-latest",

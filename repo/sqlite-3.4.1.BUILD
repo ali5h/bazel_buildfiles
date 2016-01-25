@@ -10,16 +10,59 @@ pkg_outs(
             hdrs = EXTERNAL_HDRS,
             )
 
-cc_binary(
-        linkshared = 1,
+qnap_cc_library(
         name = "libsqlite3.so",
-        srcs = glob(["src/*.c"], exclude = ["src/test*.c", "src/tclsqlite.c"]) + 
-             ALL_HDRS + 
+        srcs =  [
+        
+              "src/alter.c",
+              "src/analyze.c",
+              "src/attach.c",
+              "src/auth.c",
+              "src/btree.c",
+              "src/build.c",
+              "src/callback.c",
+              "src/complete.c",
+              "src/date.c",
+              "src/delete.c",
+              "src/expr.c",
+              "src/func.c",
+              "src/hash.c",
+              "src/insert.c",
+              "src/legacy.c",
+              "src/loadext.c",
+              "src/main.c",
+              "src/malloc.c",
+              "src/os.c",
+              "src/os_unix.c",
+              "src/os_win.c",
+              "src/os_os2.c",
+              "src/pager.c",
+              "src/pragma.c",
+              "src/prepare.c",
+              "src/printf.c",
+              "src/random.c",
+              "src/select.c",
+              "src/shell.c",
+              "src/table.c",
+              "src/tokenize.c",
+              "src/trigger.c",
+              "src/utf.c",
+              "src/update.c",
+              "src/util.c",
+              "src/vacuum.c",
+              "src/vdbe.c",
+              "src/vdbeapi.c",
+              "src/vdbeaux.c",
+              "src/vdbeblob.c",
+              "src/vdbefifo.c",
+              "src/vdbemem.c",
+              "src/vtab.c",
+              "src/where.c",
+                ] +
              [":sqlite3.h"] +
              [":opcodes.h"] + 
              [":keywordhash.h"] + 
              [":parse.h"],
-        includes = ["."],
         copts = [
               "-Wno-int-to-pointer-cast",
               "-Wno-pointer-to-int-cast",

@@ -107,22 +107,20 @@ genrule(
     """,
 )
 
-cc_binary(
+qnap_cc_binary(
     name = "mount.ntfs-3g",
-    srcs = ALL_HDRS + [
+    srcs = [
             "src/ntfs-3g.c",
             "src/utils.c",
             "libntfs-3g.so",
             ],
-    includes = [".", "include/ntfs-3g", "include/fuse-lite"],
-    copts = ["-DHAVE_CONFIG_H"],
+    includes = ["include/ntfs-3g", "include/fuse-lite"],
     linkopts = ["-lrt", "-lpthread"],
 )
 
-cc_binary(
-    linkshared = 1,
+qnap_cc_library(
     name = "libntfs-3g.so",
-    srcs = ALL_HDRS + [
+    srcs = [
             "libfuse-lite/fuse.c",
             "libfuse-lite/fuse_kern_chan.c",
             "libfuse-lite/fuse_loop.c",
@@ -163,6 +161,5 @@ cc_binary(
             "libntfs-3g/volume.c",
 
     ],
-    includes = [".", "include/ntfs-3g", "include/fuse-lite"],
-    copts = ["-DHAVE_CONFIG_H"],
+    includes = ["include/ntfs-3g", "include/fuse-lite"],
 )
