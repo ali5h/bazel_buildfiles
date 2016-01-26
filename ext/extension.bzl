@@ -74,8 +74,8 @@ def qnap_cc_library( name="", deps = [], srcs =[] , copts = [], defines = [], in
         copts = copts + ["-DHAVE_CONFIG_H"],
         defines = defines,
         includes = [".", "include"] + includes + select({
-                                                "//target:x86_64": ["qnap_cfg_inc/x86_64"],
-                                                "//target:arm":    ["qnap_cfg_inc/arm"],
+                                                "@//target:x86_64": ["qnap_cfg_inc/x86_64"],
+                                                "@//target:arm":    ["qnap_cfg_inc/arm"],
                                             }),
         linkopts = linkopts,
         linkshared = 1,
@@ -89,8 +89,8 @@ def qnap_cc_binary( name="", deps = [], srcs =[] , copts = [], defines = [], inc
         copts = copts + ["-DHAVE_CONFIG_H"],
         defines = defines,
         includes = [".", "include"] + includes + select({
-                                                "//target:x86_64": ["qnap_cfg_inc/x86_64"],
-                                                "//target:arm":    ["qnap_cfg_inc/arm"],
+                                                "@//target:x86_64": ["qnap_cfg_inc/x86_64"],
+                                                "@//target:arm":    ["qnap_cfg_inc/arm"],
                                             }),
         linkopts = linkopts,
     )
