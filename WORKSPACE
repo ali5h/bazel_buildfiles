@@ -1,5 +1,13 @@
 load("/ext/extension", "add_package", "add_package_http", "REPO_ROOT", "SANDBOX_ROOT")
 
+new_http_archive(
+    name = "CT",
+    url = "http://172.17.23.195:81/yihu/CT_gold.tgz",
+    sha256 = "9d35d9c2807c53f8eb22049becc1d78ee6a6c3e38ea12a34313fc1d931317c8c",
+    build_file = "repo/CT.BUILD",
+    strip_prefix = "CT_gold",
+)
+
 add_package( SANDBOX_ROOT + "xmlrpc-c-1.25.28", "xmlrpc-c")
 add_package( SANDBOX_ROOT + "libnl-1.1.4", "libnl")
 # FIX: ---------TMPDIR is absolute path due to original Makefile symlink-------
